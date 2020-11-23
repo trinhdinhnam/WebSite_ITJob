@@ -12,5 +12,11 @@
 */
 
 Route::prefix('admin')->group(function() {
-    Route::get('/', 'AdminController@index');
+    Route::get('/', 'AdminController@index')->name('admin.dashboard');
+
+    Route::group(['prefix' => 'job'], function(){
+        Route::get('/','AdminJobController@index')->name('admin.get.list.job');
+        Route::get('/create','AdminJobController@createJob')->name('admin.add.job');
+
+    });
 });
