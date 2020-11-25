@@ -16,7 +16,15 @@ Route::prefix('admin')->group(function() {
 
     Route::group(['prefix' => 'job'], function(){
         Route::get('/','AdminJobController@index')->name('admin.get.list.job');
-        Route::get('/create','AdminJobController@createJob')->name('admin.add.job');
+        Route::get('/detail/{id}','AdminJobController@getDetailJob')->name('admin.get.detail.job');
+        Route::get('/{action}/{id}','AdminJobController@action')->name('admin.get.action.job');
 
+    });
+
+    Route::group(['prefix' => 'recruiter'], function(){
+        Route::get('/','AdminRecruiterController@index')->name('admin.get.list.recruiter');
+        Route::get('/detail/{id}','AdminRecruiterController@getDetailRecruiter')->name('admin.get.detail.recruiter');
+
+        Route::get('/{action}/{id}','AdminRecruiterController@action')->name('admin.get.action.recruiter');
     });
 });

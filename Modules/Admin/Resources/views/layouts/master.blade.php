@@ -8,6 +8,9 @@
         <meta name="author" content="" />
         <title>ITJob - Admin</title>
         <link href="{{asset('theme-admin/css/styles.css')}}" rel="stylesheet" />
+        <link href="{{asset('theme-admin/css/job_detail.css')}}" rel="stylesheet" />
+        <link href="{{asset('theme-admin/css/recruiter_detail.css')}}" rel="stylesheet" />
+
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -88,12 +91,16 @@
                                     </div>
                                 </nav>
                             </div>
+                            <a class="nav-link" href="{{route('admin.get.list.recruiter')}}">
+                                <div class="sb-nav-link-icon"><i class="fa fa-chart-area"></i></div>
+                                Quản lý nhà tuyển dụng
+                            </a>
                             <a class="nav-link" href="{{route('admin.get.list.job')}}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa fa-chart-area"></i></div>
                                 Quản lý thông tin đăng tuyển
                             </a>
                             <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa fa-chart-area"></i></div>
                                 Quản lý báo cáo thống kê
                             </a>
                         </div>
@@ -130,7 +137,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="{{asset('theme-admin/assets/demo/chart-area-demo.js')}}"></script>
         <script src="{{asset('theme-admin/assets/demo/chart-bar-demo.js')}}"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <!-- <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script> -->
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/datatables-demo.js"></script>
     </body>

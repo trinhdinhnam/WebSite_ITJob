@@ -5,7 +5,7 @@ namespace Modules\Admin\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-
+use App\Models\Job;
 class AdminJobController extends Controller
 {
     /**
@@ -14,66 +14,40 @@ class AdminJobController extends Controller
      */
     public function index()
     {
-        return view('admin::job.index');
+        $jobs = Job::with('language:LanguageId,LanguageName')->get();
+        $viewData = [
+             'jobs' => $jobs
+        ];
+        return view('admin::job.index',$viewData);
+        // return $jobs;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Renderable
-     */
-    public function createJob()
+
+    public function action($action,$id)
     {
-        return view('admin::job.createJob');
+        $job = Job::find($id);
+
+        if($action){
+            switch($action)
+            {
+                case 'active':
+                    $job->Status = $job->Status ? 0 : 1;
+                    $job->save();
+                break;
+            }
+        }
+        return redirect()->back();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
-     */
-    public function store(Request $request)
-    {
-        //
+    public function getDetailJob($id){
+        $jobDetail = Job::with('language:LanguageId,LanguageName')
+                    ->with('company:CompanyId,CompanyName,Introduction,TypeBussiness,CompanySize,Address,StartDateWorking,EndDateWorking')
+                    ->where('JobId',$id)->first();
+                    $viewData = [
+                        'jobDetail' =>$jobDetail
+                    ];
+        return view('admin::job.job_detail',$viewData);
+
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('admin::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function edit($id)
-    {
-        return view('admin::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

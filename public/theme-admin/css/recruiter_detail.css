@@ -1,0 +1,71 @@
+
+.recruiter-avatar{
+    height: 400px;
+    width: 250px;
+    background-color: #afafaf;
+}
+
+.recruiter-info{
+    padding-left: 60px;
+}
+/* REcruiter name */
+.recruiter-info .recruiter-name{
+    display: flex;
+}
+.recruiter-info .recruiter-name .recruiter-name-value{
+    margin-left: 30px;
+ }
+/* Recruiter Position */
+.recruiter-info .recruiter-position{
+    margin-top: 15px;
+    display: flex;
+}
+.recruiter-info .recruiter-position .recruiter-position-value{
+    margin-left: 34px;
+}
+/* Recruiter Gender */
+.recruiter-info .recruiter-gender{
+    margin-top: 35px;
+    display: flex;
+}
+.recruiter-info .recruiter-gender .recruiter-gender-value{
+    margin-left: 40px;
+}
+/* Recruiter Phone */
+.recruiter-info .recruiter-phone{
+    margin-top: 15px;
+    display: flex;
+}
+.recruiter-info .recruiter-phone .recruiter-phone-value{
+    margin-left: 38px;
+}
+ /* Recruiter Date of birth */
+.recruiter-info .recruiter-dateofbirth{
+    display: flex;
+    margin-top: 15px;
+
+}
+.recruiter-info .recruiter-dateofbirth .recruiter-dateofbirth-value{
+    margin-left: 38px;
+}
+
+/* Recruiter Email */
+.recruiter-info .recruiter-email{
+    display: flex;
+    margin-top: 15px;
+
+}
+.recruiter-info .recruiter-email .recruiter-email-value{
+    margin-left: 36px;
+}
+
+/* Recruiter Address */
+.recruiter-info .recruiter-address{
+    display: flex;
+    margin-top: 15px;
+
+}
+.recruiter-info .recruiter-address .recruiter-address-value{
+    margin-left: 40px;
+}
+
