@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Job;
+
 class AdminJobController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class AdminJobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::with('language:LanguageId,LanguageName')->get();
+        $jobs = Job::with('position:PositionId,PositionName')->get();
         $viewData = [
              'jobs' => $jobs
         ];
@@ -40,8 +41,7 @@ class AdminJobController extends Controller
     }
 
     public function getDetailJob($id){
-        $jobDetail = Job::with('language:LanguageId,LanguageName')
-                    ->with('company:CompanyId,CompanyName,Introduction,TypeBussiness,CompanySize,Address,StartDateWorking,EndDateWorking')
+        $jobDetail = Job::with('recruiter:id,CompanyName,Introduction,TypeBusiness,CompanySize,Address,TimeWork,WorkDay')
                     ->where('JobId',$id)->first();
                     $viewData = [
                         'jobDetail' =>$jobDetail

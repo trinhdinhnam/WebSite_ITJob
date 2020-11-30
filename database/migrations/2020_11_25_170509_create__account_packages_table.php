@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLanguagesTable extends Migration
+class CreateAccountPackagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateLanguagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('languages', function (Blueprint $table) {
-            $table->bigIncrements('LanguageId');
-            $table->string('LanguageName');
-            $table->string('Description')->nullable();
+        Schema::create('account_packages', function (Blueprint $table) {
+            $table->bigIncrements('AccountPackageId');
+            $table->string('AccountPackageName');
+            $table->double('Price')->default(0)->index();
+            $table->integer('PostNumber')->default(0)->index();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateLanguagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('languages');
+        Schema::dropIfExists('account_packages');
     }
 }

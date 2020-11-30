@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Recruiter;
+use App\Models\Pay;
 
 class AdminRecruiterController extends Controller
 {
@@ -15,8 +16,7 @@ class AdminRecruiterController extends Controller
      */
     public function index()
     {
-        $recruiters = Recruiter::with('recruiterLevel:RecruiterLevelId,RecruiterLevelName')
-                                 ->where('IsDelete',1)
+        $recruiters = Recruiter::where('IsDelete',1)
                                  ->get();
         $viewData = [
              'recruiters' => $recruiters
@@ -25,14 +25,20 @@ class AdminRecruiterController extends Controller
     }
 
     public function getDetailRecruiter($id){
-        $recruiterDetail = Recruiter::with('recruiterLevel:RecruiterLevelId,RecruiterLevelName')
-        ->where('id',$id)->first();
+        $recruiterDetail = Recruiter::where('id',$id)->first();
         $viewData = [
             'recruiterDetail' =>$recruiterDetail
         ];
         return view('admin::recruiter.recruiter_detail',$viewData);
     }
-    
+    public function getDetailTransaction($id){
+        $transactionDetail = Pay::with('accountPackage:AccountPackageId,AccountPackageName,Price')
+                                ->where('RecruiterId',$id)->get();
+        $viewData = [
+            'transactionDetail' =>$transactionDetail
+        ];
+        return view('admin::recruiter.transaction_detail',$viewData);
+    }
     public function action($action,$id)
     {
         $recruiter = Recruiter::find($id);
@@ -51,5 +57,21 @@ class AdminRecruiterController extends Controller
             }
         }
         return redirect()->back();
+    }
+
+    public function actionTransaction($actiontran,$id)
+    {
+        $tran = Pay::find($id);
+        if($actiontran){
+            switch($actiontran)
+            {
+                case 'status':
+                    $tran->Status = $tran->Status ? 0 : 1;
+                    $tran->save();
+                break;
+            }
+        }
+        return redirect()->back();
+
     }
 }

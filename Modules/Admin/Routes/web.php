@@ -24,7 +24,8 @@ Route::prefix('admin')->group(function() {
     Route::group(['prefix' => 'recruiter'], function(){
         Route::get('/','AdminRecruiterController@index')->name('admin.get.list.recruiter');
         Route::get('/detail/{id}','AdminRecruiterController@getDetailRecruiter')->name('admin.get.detail.recruiter');
-
+        Route::get('/transaction/{id}','AdminRecruiterController@getDetailTransaction')->name('admin.get.detail.transaction');
         Route::get('/{action}/{id}','AdminRecruiterController@action')->name('admin.get.action.recruiter');
+        Route::get('/{actiontran}/{id}','AdminRecruiterController@actionTransaction')->name('admin.get.action.transaction');
     });
 });

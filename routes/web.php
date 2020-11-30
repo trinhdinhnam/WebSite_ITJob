@@ -12,5 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+Route::group(['prefix' => 'job'], function(){
+    Route::get('/','HomeController@getJobs')->name('client.get.list.job');
+    Route::get('/detail/{id}','HomeController@getDetailJob')->name('client.get.detail.job');
+    Route::get('/job-by-company/{id}','HomeController@getJobByCompany')->name('client.get.job.bycompany');
+
 });

@@ -1,7 +1,7 @@
-@extends('admin::layouts.master')
+@extends('recruiter::layouts.master')
 
 @section('content')
-<h2 class="mt-4">Thông tin đăng tuyển </h2>
+<h2 class="mt-4">Thông tin đăng tuyển <a href="{{route('recruiter.get.create.job')}}"  class="btn btn-primary" style=" float: right;">Thêm mới</a></h2>
 <ol class="breadcrumb mb-4 ">
     <li class="breadcrumb-item">Trang chủ</li>
     <li class="breadcrumb-item active">Thông tin đăng tuyển</li>
@@ -17,6 +17,7 @@
                 <th scope="col">Kỹ năng</th>
                 <th scope="col">Địa chỉ</th>
                 <th scope="col">Trạng thái</th>
+                <!-- <th scope="col">Số ứng viên</th> -->
                 <th scope="col">Thao tác</th>
             </tr>
         </thead>
@@ -31,11 +32,12 @@
                 <td>{{$job->Skill}}</td>
                 <td>{{$job->Address}}</td>
                 <td>
-                    <a href="{{route('admin.get.action.job',['active',$job->JobId])}}"
-                        class="badge {{$job->getStatus($job->Status)['class']}}">{{$job->getStatus($job->Status)['name']}}</a>
+                    <a class="badge {{$job->getStatus($job->Status)['class']}}">{{$job->getStatus($job->Status)['name']}}</a>
                 </td>
-                <td>
-                    <a href="{{route('admin.get.detail.job',$job->JobId)}}" class="btn btn-primary">Xem</a>
+                <td style="width: 200px;">
+                    <a href="{{route('recruiter.get.detail.job',$job->JobId)}}" class="btn btn-primary">Xem</a>
+                    <a href="{{route('recruiter.get.edit.job',$job->JobId)}}" class="btn btn-success">Sửa</a>
+                    <a href="{{route('recruiter.get.delete.job',$job->JobId)}}" class="btn btn-danger">Xóa</a>
                 </td>
             </tr>
             @endforeach

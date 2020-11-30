@@ -16,7 +16,7 @@ class CreateJobsTable extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->bigIncrements('JobId');
             $table->string('JobName');
-            $table->string('Possition');
+            $table->unsignedBigInteger('PositionId');
             $table->unsignedBigInteger('LanguageId');
             $table->longText('Require')->nullable();
             $table->longText('Description')->nullable();
@@ -24,20 +24,18 @@ class CreateJobsTable extends Migration
             $table->string('Address')->nullable();
             $table->date('StartDateApply');
             $table->date('EndDateApply');
+            $table->string('Image')->nullable();
             $table->tinyInteger('Status')->index()->default(1);
-            $table->unsignedBigInteger('CompanyId');
             $table->unsignedBigInteger('AdminId');
             $table->unsignedBigInteger('RecruiterId');
-            $table->string('CreatedBy')->index()->default('TDNAM');
-            $table->string('UpdatedBy')->nullable();
             $table->timestamps();
+            $table->foreign('PositionId')
+            ->references('PositionId')
+            ->on('positions')
+            ->onDelete('cascade');
             $table->foreign('LanguageId')
             ->references('LanguageId')
             ->on('languages')
-            ->onDelete('cascade');
-            $table->foreign('CompanyId')
-            ->references('CompanyId')
-            ->on('companies')
             ->onDelete('cascade');
             $table->foreign('AdminId')
             ->references('id')

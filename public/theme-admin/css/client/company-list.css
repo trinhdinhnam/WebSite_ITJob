@@ -1,0 +1,47 @@
+.content-container .content-title{
+    font-size: 35px;
+}
+
+.content-container .content-list-company{
+    width: 100%;
+    height: auto;
+}
+
+.content-list-company .company-item{
+    height: 400px;
+    width: 100%;
+    background-color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 30px;
+
+}
+
+/* Company item */
+.company-item .company-item-logo{
+   background-color: thistle;
+   height: 220px;
+   width: 70%;
+   margin: auto;
+}
+
+.company-item .company-item-name{
+    font-size: 27px;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.company-item .company-item-info{
+    display: flex;
+    padding-left: 80px;
+    margin-top: 40px;
+}
+
+.company-item .company-item-info .job-number{
+    font-size: 16px;
+}
+
+.company-item .company-item-info .company-address{
+    font-size: 16px;
+}

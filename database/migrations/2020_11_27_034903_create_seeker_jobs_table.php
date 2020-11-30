@@ -14,8 +14,9 @@ class CreateSeekerJobsTable extends Migration
     public function up()
     {
         Schema::create('seeker_jobs', function (Blueprint $table) {
-            $table->unsignedBigInteger('SeekerId');
+            $table->bigIncrements('SeekerJobId');
             $table->unsignedBigInteger('JobId');
+            $table->unsignedBigInteger('SeekerId');
             $table->string('CVLink')->nullable();
             $table->tinyInteger('Status')->index()->default(1);
             $table->foreign('SeekerId')
@@ -26,8 +27,6 @@ class CreateSeekerJobsTable extends Migration
             ->references('JobId')
             ->on('jobs')
             ->onDelete('cascade');
-            $table->string('CreatedBy')->index()->default('TDNAM');
-            $table->string('UpdatedBy')->nullable();
             $table->timestamps();
         });
     }

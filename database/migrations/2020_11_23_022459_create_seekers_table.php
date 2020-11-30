@@ -24,8 +24,6 @@ class CreateSeekersTable extends Migration
             $table->string('Password');
             $table->string('Avatar')->nullable();
             $table->tinyInteger('Active')->default(1)->index();
-            $table->string('CreatedBy')->index()->default('TDNAM');
-            $table->string('UpdatedBy')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

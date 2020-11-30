@@ -16,22 +16,21 @@ class CreateRecruitersTable extends Migration
         Schema::create('recruiters', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('RecruiterName');
-            $table->string('Email')->unique();
-            $table->char('Phone')->nullable();
-            $table->date('DateOfBirth');
-            $table->tinyInteger('Gender')->default(1)->index();
-            $table->string('Address')->nullable();
-            $table->string('Password');
             $table->string('Avatar')->nullable();
+            $table->string('Email')->unique();
+            $table->char('Phone');
+            $table->string('Password');
+            $table->string('CompanyName');
+            $table->string('Address');
+            $table->string('City');
+            $table->string('Introduction')->nullable();
+            $table->string('Image')->nullable();
+            $table->string('TimeWork');
+            $table->string('WorkDay');
+            $table->string('CompanySize');
+            $table->string('TypeBusiness')->nullable();
             $table->tinyInteger('Active')->default(1)->index();
-            $table->unsignedBigInteger('RecruiterLevelId');
-            $table->foreign('RecruiterLevelId')
-            ->references('RecruiterLevelId')
-            ->on('recruiter_levels')
-            ->onDelete('cascade');
             $table->rememberToken();
-            $table->string('CreatedBy')->index()->default('TDNAM');
-            $table->string('UpdatedBy')->nullable();
             $table->timestamps();
         });
     }

@@ -1,22 +1,21 @@
 <?php
 
 namespace App\Models;
-use App\Models\Language;
 use App\Models\Recruiter;
-use App\Models\Position;
+use App\Models\AccountPackage;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Job extends Model
+class Pay extends Model
 {
     //
-    protected $table = 'jobs';
-    protected $primaryKey = 'JobId';
+    protected $table = 'pays';
+    protected $primaryKey = 'PayId';
     protected $guarded=[''];
 
     protected $status = [
         1 => [
-            'name' => 'Đã duyệt',
+            'name' => 'Xác nhận',
             'class' => 'badge-success'
         ],
         0 => [
@@ -25,16 +24,13 @@ class Job extends Model
         ]
         ];
     public function getStatus(){
-        return array_get($this->status,$this->Status,'[N\A]');
+       return array_get($this->status,$this->Status,'[N\A]');
     }
-
-    public function language(){
-        return $this->belongsTo(Language::class,'LanguageId');
-    }
-    public function position(){
-        return $this->belongsTo(Position::class,'PositionId');
-    }
+    
     public function recruiter(){
         return $this->belongsTo(Recruiter::class,'RecruiterId');
+    }
+    public function accountPackage(){
+        return $this->belongsTo(AccountPackage::class,'AccountPackageId');
     }
 }

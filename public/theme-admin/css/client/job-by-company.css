@@ -1,0 +1,31 @@
+.page-header{
+    background-color: white;
+    height: 200px;
+    width: 100%;
+    display: flex;
+}
+/* company logo */
+.page-header .company-logo{
+    height: 100%;
+    width: 20%;
+}
+
+.company-logo .logo{
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    background-color: brown;
+    margin-top: 10%;
+}
+/* company info */
+.page-header .company-info{
+    height: 100%;
+    width: 60%;
+    background-color: yellowgreen;
+}
+/* company event */
+.page-header .company-event{
+    height: 100%;
+    width: 20%;
+    background-color: aquamarine;
+}
