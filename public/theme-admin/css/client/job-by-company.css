@@ -18,10 +18,42 @@
     margin-top: 10%;
 }
 /* company info */
+
 .page-header .company-info{
     height: 100%;
     width: 60%;
-    background-color: yellowgreen;
+}
+
+.company-info .company-name{
+    font-size: 32px;
+}
+
+.company-info .company-address{
+    display: flex;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+.company-address .fa-map-marker-alt{
+    color: #aaaaaa; 
+    margin-top: 5px; 
+    font-size: 18px;
+}
+.company-address .address-value{
+    margin-left: 10px;
+    font-size: 18px;
+}
+.company-info .company-type{
+    display: flex;
+    margin-bottom: 10px;
+}
+.company-type .type-business{
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.company-info .company-date-work{
+    display: flex;
+    margin-bottom: 10px;
 }
 /* company event */
 .page-header .company-event{

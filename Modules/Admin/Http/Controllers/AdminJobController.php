@@ -6,6 +6,8 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Job;
+use App\Models\Recruiter;
+
 
 class AdminJobController extends Controller
 {
@@ -13,11 +15,19 @@ class AdminJobController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $jobs = Job::with('position:PositionId,PositionName')->get();
+        $recruiters = Recruiter::all();
+
+        $jobs = Job::with('position:PositionId,PositionName');
+
+        if($request->jobname) $jobs->where('JobName', 'like', '%'.$request->jobname.'%');
+        if($request->recruiter) $jobs->where('RecruiterId',$request->recruiter);
+
+        $jobs = $jobs->orderByDesc('JobId')->get();
         $viewData = [
-             'jobs' => $jobs
+             'jobs' => $jobs,
+            'recruiters' => $recruiters
         ];
         return view('admin::job.index',$viewData);
         // return $jobs;

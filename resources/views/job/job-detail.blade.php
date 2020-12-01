@@ -56,6 +56,7 @@
             <i class="fa fa-calendar-alt" style="color: #000;"></i>
             <div class="date-up-job-value">{{$jobDetail->created_at}}</div>
         </div>
+        <a href="" class="btn-apply btn btn-danger">Ứng tuyển</a>
         <h2 class="description-title">Chi tiết công việc</h2>
         <div>{{$jobDetail->Description}}</div>
 

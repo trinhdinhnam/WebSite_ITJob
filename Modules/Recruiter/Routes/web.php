@@ -12,6 +12,11 @@
 */
 
 Route::prefix('recruiter')->group(function() {
+    Route::group(['prefix' => 'authenticate'], function(){
+        Route::get('/login','RecruiterAuthController@getLogin')->name('recruiter.login');
+        Route::get('/signup','RecruiterAuthController@getSignUp')->name('recruiter.signup');
+    });
+
     Route::get('/', 'RecruiterController@index')->name('recruiter.home');
 
     Route::group(['prefix' => 'job'], function(){

@@ -11,6 +11,7 @@ use App\Models\Language;
 use App\Models\SeekerJob;
 
 use App\Http\Requests\RequestJob;
+use Illuminate\Support\Facades\Log;
 
 class RecruiterJobController extends Controller
 {
@@ -22,6 +23,7 @@ class RecruiterJobController extends Controller
     {
         $jobs = Job::with('position:PositionId,PositionName')
                     ->where('RecruiterId',6)
+                    ->where('IsDelete',1)
                     ->get();
         // $seekerNumber = SeekerJob::select(SeekerJob::raw('COUNT(SeekerJobId) AS seekerNumber, JobId'))
         //             ->groupBy('JobId')->get();
@@ -48,21 +50,47 @@ class RecruiterJobController extends Controller
         return view('recruiter::job.create',$viewData);
     } 
 
+    public function save($request, $id=''){
+        $code = 1;
+        try{
+            $job = new Job();
+
+            if($id){
+                $job = Job::find($id);
+            }
+            $job->JobName = $request->JobName;
+            $job->Require = $request->Require;
+            $job->Description = $request->Description;
+            $job->Address = $request->Address;
+            $job->City = $request->City;
+            $job->StartDateApply = $request->StartDateApply;
+            $job->EndDateApply = $request->EndDateApply;
+            $job->PositionId = $request->PositionId;
+            $job->Skill = $request->Skill;
+            $job->Salary = $request->Salary;
+            $job->AdminID = 1;
+            $job->RecruiterId = 6;
+
+            //if( $request->hasFile('Image'))
+            //{
+                //foreach ($request->file('Image') as $fileImg)
+                //{
+                    //$fileImg = $request->file('Image');
+                   // $file = upload_image('Image');
+                    //dd($fileImg);
+                //}
+           // }
+            $job->save();
+
+        }catch(\Exception $exception)
+        {
+            $code=0;
+            Log::error("[Error save Job ]".$exception);
+        }
+        return $code;
+    }
     public function createpost(RequestJob $request){
-         $job = new Job();
-         $job->JobName = $request->JobName;
-         $job->Require = $request->Require;
-         $job->Description = $request->Description;
-         $job->Address = $request->Address;
-         $job->City = $request->City;
-         $job->StartDateApply = $request->StartDateApply;
-         $job->EndDateApply = $request->EndDateApply;
-         $job->PositionId = $request->PositionId;
-         $job->Skill = $request->Skill;
-         $job->Salary = $request->Salary;
-         $job->AdminID = 1;
-         $job->RecruiterId = 6;
-         $job->save();
+        $this->save($request);
          return redirect()->route('recruiter.get.list.job')->with(['flash-message'=>'Success ! Thêm mới thành công !','flash-level'=>'success']);
 
     }
@@ -76,20 +104,7 @@ class RecruiterJobController extends Controller
 
     public function update(RequestJob $request,$id)
     {
-        $job = Job::find($id);
-        $job->JobName = $request->JobName;
-        $job->Require = $request->Require;
-        $job->Description = $request->Description;
-        $job->Address = $request->Address;
-        $job->City = $request->City;
-        $job->StartDateApply = $request->StartDateApply;
-        $job->EndDateApply = $request->EndDateApply;
-        $job->PositionId = $request->PositionId;
-        $job->Skill = $request->Skill;
-        $job->Salary = $request->Salary;
-        $job->AdminID = 1;
-        $job->RecruiterId = 6;
-        $job->save();
+        $this->save($request,$id);
         return redirect()->route('recruiter.get.list.job')->with(['flash-message'=>'Success ! Thêm mới thành công !','flash-level'=>'success']);
     }
 

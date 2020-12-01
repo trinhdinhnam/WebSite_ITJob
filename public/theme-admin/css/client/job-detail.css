@@ -119,3 +119,8 @@
 .col-8 .require-title{
     margin-top: 40px;
 }
+
+.btn-apply.btn.btn-danger{
+    margin-top: 30px;
+    width: 100%;
+}

@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 @section('content')
-
+    <link href="{{asset('theme-admin/css/job_detail.css')}}" rel="stylesheet" />
 <h2 class="mt-4">Chi tiết thông tin đăng tuyển</h2>
 <ol class="breadcrumb mb-4 ">
     <li class="breadcrumb-item">Trang chủ</li>

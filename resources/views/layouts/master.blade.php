@@ -22,7 +22,7 @@
             <a href="{{route('client.get.list.job')}}" type="button" class="btn-alljob btn btn-dark">Việc làm IT</a>
             <a href="" type="button" class="btn-company btn btn-dark">Công ty IT</a>
             <a href="" type="button" class="btn-login btn btn-dark">Đăng nhập</a>
-            <a href="" type="button" class="btn-recruiter btn btn-dark">Nhà tuyển dụng</a>
+            <a href="{{route('recruiter.login')}}" type="button" class="btn-recruiter btn btn-dark">Nhà tuyển dụng</a>
         </div>
     </div>
     <div class="main">
