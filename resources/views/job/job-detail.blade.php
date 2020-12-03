@@ -2,19 +2,21 @@
 @section('main')
 <link href="{{asset('theme-admin/css/client/job-detail.css')}}" rel="stylesheet" />
 <div class='row'>
+    @if (isset($imageCompanies))
+        @foreach($imageCompanies as $image)
     <div class="col-4">
-        <div class="job-image"></div>
+        <div class="job-image">
+            <img height="100%" width="100%" src="{{asset( pare_url_file($image->Image)) }}" class="thumbnail">
+        </div>
     </div>
-    <div class="col-4">
-        <div class="job-image"></div>
-    </div>
-    <div class="col-4">
-        <div class="job-image"></div>
-    </div>
+        @endforeach
+    @endif
+
 </div>
 <div class="row">
     <div class="col-4">
         <div class="company-logo">
+            <img height="100%" width="100%" src="{{asset( pare_url_file($jobDetail->recruiter->CompanyLogo)) }}" class="thumbnail">
         </div>
         <div class="company-detail">
             <h4 class="company-name">{{$jobDetail->recruiter->CompanyName}}</h4>

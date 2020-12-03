@@ -7,12 +7,12 @@ if (!function_exists('upload_image'))
      * @param array $extend [ định dạng file có thể upload được]
      * @return array|int [ tham số trả về là 1 mảng - nếu lỗi trả về int ]
      */
-    function upload_image($file , $folder = '',array $extend  = array() )
+    function upload_image($file,$name , $folder = '', array $extend  = array() )
     {
         $code = 1;
 
         // lay duong dan anh
-        $baseFilename = public_path() . '/uploads/' . $_FILES[$file]['name'];
+        $baseFilename = public_path() . '/uploads/' . $name;
 
         // thong tin file
         $info = new SplFileInfo($baseFilename);
@@ -48,7 +48,9 @@ if (!function_exists('upload_image'))
         }
 
         // di chuyen file vao thu muc uploads
-            move_uploaded_file($_FILES[$file]['tmp_name'], $path. $filename);
+
+            //move_uploaded_file($file, $path. $filename);
+        $file->move(public_path().'/uploads'.$folder.'/'.date('Y/m/d/'),$filename);
 
         $data = [
             'name'              => $filename,

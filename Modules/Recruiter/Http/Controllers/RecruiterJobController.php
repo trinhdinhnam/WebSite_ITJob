@@ -11,6 +11,7 @@ use App\Models\Language;
 use App\Models\SeekerJob;
 
 use App\Http\Requests\RequestJob;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class RecruiterJobController extends Controller
@@ -21,15 +22,27 @@ class RecruiterJobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::with('position:PositionId,PositionName')
-                    ->where('RecruiterId',6)
-                    ->where('IsDelete',1)
-                    ->get();
-        // $seekerNumber = SeekerJob::select(SeekerJob::raw('COUNT(SeekerJobId) AS seekerNumber, JobId'))
-        //             ->groupBy('JobId')->get();
+        $jobs = DB::table('jobs')
+               ->select(DB::raw('count(SeekerJobId) as seekerNumber, jobs.JobId as JobId, JobName, PositionName, Skill, jobs.Status as Status, Address'))
+               ->leftJoin('seeker_jobs','jobs.JobId','=','seeker_jobs.JobId')
+               ->leftJoin('positions','jobs.PositionId','=','positions.PositionId')
+            ->where('RecruiterId',6)
+            ->where('jobs.IsDelete',1)
+            ->groupBy('JobId','JobName','PositionName','Skill','jobs.Status','Address')
+            ->get();
+
+
+        //$jobs = Job::with('position:PositionId,PositionName')
+        //            ->where('RecruiterId',6)
+          //          ->where('IsDelete',1)
+            //        ->get();
+        //$seekerNumber = DB::table('seeker_jobs')
+              //          ->select(DB::raw('count(*) as seekerNumber, JobId'))
+                //        ->groupBy('JobId')
+                  //      ->get();
         $viewData = [
              'jobs' => $jobs
-            //  'seekerNumber' => $seekerNumber
+
         ];
         return view('recruiter::job.index',$viewData);    
     }
@@ -70,16 +83,6 @@ class RecruiterJobController extends Controller
             $job->Salary = $request->Salary;
             $job->AdminID = 1;
             $job->RecruiterId = 6;
-
-            //if( $request->hasFile('Image'))
-            //{
-                //foreach ($request->file('Image') as $fileImg)
-                //{
-                    //$fileImg = $request->file('Image');
-                   // $file = upload_image('Image');
-                    //dd($fileImg);
-                //}
-           // }
             $job->save();
 
         }catch(\Exception $exception)
@@ -113,6 +116,16 @@ class RecruiterJobController extends Controller
         $job->IsDelete = $job->IsDelete ? 0 : 1;
         $job->save(); 
         return redirect()->back();   
+    }
+
+    public function getSeekerByJob($id){
+        $seekerByJob = SeekerJob::with('seeker:id,SeekerName,Education,Email,Phone,Gender,Avatar')
+                     ->where('JobId',$id)
+                     ->get();
+        $viewData = [
+            'seekerByJobs' => $seekerByJob
+        ];
+        return view('recruiter::seeker.index',$viewData);
     }
 
 }

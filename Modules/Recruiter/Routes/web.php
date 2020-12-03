@@ -15,6 +15,7 @@ Route::prefix('recruiter')->group(function() {
     Route::group(['prefix' => 'authenticate'], function(){
         Route::get('/login','RecruiterAuthController@getLogin')->name('recruiter.login');
         Route::get('/signup','RecruiterAuthController@getSignUp')->name('recruiter.signup');
+        Route::post('/signup','RecruiterAuthController@submitRegister');
     });
 
     Route::get('/', 'RecruiterController@index')->name('recruiter.home');
@@ -27,5 +28,10 @@ Route::prefix('recruiter')->group(function() {
         Route::get('/update/{id}','RecruiterJobController@edit')->name('recruiter.get.edit.job');
         Route::post('/update/{id}','RecruiterJobController@update');
         Route::get('/delete/{id}','RecruiterJobController@delete')->name('recruiter.get.delete.job');
+
+        Route::get('/seeker-by-job/{id}','RecruiterJobController@getSeekerByJob')->name('recruiter.get.seeker.by.job');
+        Route::get('/seeker-by-job/detail/{id}','RecruiterJobController@getSeekerDetail')->name('recruiter.get.seeker.detail');
+
+
     });
 });

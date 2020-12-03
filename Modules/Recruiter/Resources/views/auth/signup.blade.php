@@ -1,143 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="{{asset('form-signup/css/signup.css')}}" rel="stylesheet" />
 
-<head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Colorlib Templates">
-    <meta name="author" content="Colorlib">
-    <meta name="keywords" content="Colorlib Templates">
+<!------ Include the above in your HEAD tag ---------->
 
-    <!-- Title Page-->
-    <title>Au Register Forms by Colorlib</title>
-
-    <!-- Icons font CSS-->
-    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-
-    <!-- Vendor CSS-->
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
-
-    <!-- Main CSS-->
-    <link href="css/main.css" rel="stylesheet" media="all">
-</head>
-
-<body>
-<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-    <div class="wrapper wrapper--w790">
-        <div class="card card-5">
-            <div class="card-heading">
-                <h2 class="title">Event Registration Form</h2>
+<div class="signup-layout" style="background-image: url('{{asset('form-login/images/bg-01.jpg')}}');  background-repeat: no-repeat; width: 100%; height: 100%;">
+    <div class="container register-form" >
+        <div class="form">
+            <div class="note">
+                <h3 >Đăng ký</h3>
             </div>
-            <div class="card-body">
-                <form method="POST">
-                    <div class="form-row m-b-55">
-                        <div class="name">Name</div>
-                        <div class="value">
-                            <div class="row row-space">
-                                <div class="col-2">
-                                    <div class="input-group-desc">
-                                        <input class="input--style-5" type="text" name="first_name">
-                                        <label class="label--desc">first name</label>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="input-group-desc">
-                                        <input class="input--style-5" type="text" name="last_name">
-                                        <label class="label--desc">last name</label>
-                                    </div>
-                                </div>
+            <form method="POST" enctype="multipart/form-data">
+                @csrf
+            <div class="form-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="title"><h5> Nhà tuyển dụng</h5></div>
+                        <div class="form-group">
+                            <label><h6>Tên nhà tuyển dụng<span>*</span></h6></label>
+                            <input type="text" name="RecruiterName" class="form-control" placeholder="Nhập tên nhà tuyển dụng..." value=""/>
+                            @if($errors->has('RecruiterName'))
+                                <span class="text-danger">{{ $errors->first('RecruiterName') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Vị trí</h6></label>
+                            <input type="text" name="Position" class="form-control" placeholder="Nhập vị trí..." value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Email<span>*</span></h6></label>
+                            <input type="email" name="Email" class="form-control" placeholder="Nhập email..." value=""/>
+                            @if($errors->has('Email'))
+                                <span class="text-danger">{{ $errors->first('Email') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Số điện thoại<span>*</span></h6></label>
+                            <input type="tel" name="Phone" class="form-control" placeholder="Nhập số điện thoại..." value=""/>
+                            @if($errors->has('Phone'))
+                                <span class="text-danger">{{ $errors->first('Phone') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Password<span>*</span></h6></label>
+                            <input type="password" name="Password" class="form-control" placeholder="Nhập password..." value=""/>
+                            @if($errors->has('Password'))
+                                <span class="text-danger">{{ $errors->first('Password') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="title"><h5>Công ty</h5></div>
+
+                        <div class="form-group">
+                            <label><h6>Tên công ty<span>*</span></h6></label>
+                            <input type="text" name="CompanyName" class="form-control" placeholder="Nhập tên công ty..." value=""/>
+                            @if($errors->has('CompanyName'))
+                                <span class="text-danger">{{ $errors->first('CompanyName') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Địa chỉ<span>*</span></h6></label>
+                            <input type="text" name="Address" class="form-control" placeholder="Nhập địa chỉ..." value=""/>
+                            @if($errors->has('Address'))
+                                <span class="text-danger">{{ $errors->first('Address') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Thành phố</h6></label>
+                            <input type="text" name="City" class="form-control" placeholder="Nhập thành phố..." value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Giới thiệu về công ty</h6></label>
+                            <textarea type="text" name="Introduction" class="form-control" cols="30" rows="3"
+                                      placeholder="Nhập giới thiệu ..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Logo công ty<span>*</span></h6></label>
+                            <input  type="file" name="CompanyLogo" class="form-control" value="" />
+                            @if($errors->has('CompanyLogo'))
+                                <span class="text-danger">{{ $errors->first('CompanyLogo') }}</span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Ảnh công ty</h6></label>
+                            <div class="row">
+                                @for( $i=1;$i<=3;$i++)
+                                <input  type="file" name="Image[]" class="form-control col-4" value="" multiple="multiple" />
+                                @endfor
                             </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Company</div>
-                        <div class="value">
-                            <div class="input-group">
-                                <input class="input--style-5" type="text" name="company">
-                            </div>
+                        <div class="form-group">
+                            <label><h6>Ngày làm việc</h6></label>
+                            <input  type="text" name="WorkDay" class="form-control" value="" placeholder="Nhập ngày làm việc ..." />
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Thời gian làm việc</h6></label>
+                            <input  type="text" name="TimeWork" class="form-control" value="" placeholder="Nhập thời gian làm việc ..." />
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Quy mô công ty</h6></label>
+                            <input  type="number" name="CompanySize" class="form-control" value="" placeholder="Nhập quy mô ..." />
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Hình thức kinh doanh</h6></label>
+                            <input  type="text" name="TypeBusiness" class="form-control" value="" placeholder="Nhập hình thức kinh doanh ..." />
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="name">Email</div>
-                        <div class="value">
-                            <div class="input-group">
-                                <input class="input--style-5" type="email" name="email">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row m-b-55">
-                        <div class="name">Phone</div>
-                        <div class="value">
-                            <div class="row row-refine">
-                                <div class="col-3">
-                                    <div class="input-group-desc">
-                                        <input class="input--style-5" type="text" name="area_code">
-                                        <label class="label--desc">Area Code</label>
-                                    </div>
-                                </div>
-                                <div class="col-9">
-                                    <div class="input-group-desc">
-                                        <input class="input--style-5" type="text" name="phone">
-                                        <label class="label--desc">Phone Number</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="name">Subject</div>
-                        <div class="value">
-                            <div class="input-group">
-                                <div class="rs-select2 js-select-simple select--no-search">
-                                    <select name="subject">
-                                        <option disabled="disabled" selected="selected">Choose option</option>
-                                        <option>Subject 1</option>
-                                        <option>Subject 2</option>
-                                        <option>Subject 3</option>
-                                    </select>
-                                    <div class="select-dropdown"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row p-t-20">
-                        <label class="label label--block">Are you an existing customer?</label>
-                        <div class="p-t-15">
-                            <label class="radio-container m-r-55">Yes
-                                <input type="radio" checked="checked" name="exist">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="radio-container">No
-                                <input type="radio" name="exist">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div>
-                        <button class="btn btn--radius-2 btn--red" type="submit">Register</button>
-                    </div>
-                </form>
+                </div>
+                <button type="submit" class="btnSubmit btn btn-success">Submit</button>
             </div>
+                {{csrf_field()}}
+            </form>
         </div>
     </div>
 </div>
-
-<!-- Jquery JS-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<!-- Vendor JS-->
-<script src="vendor/select2/select2.min.js"></script>
-<script src="vendor/datepicker/moment.min.js"></script>
-<script src="vendor/datepicker/daterangepicker.js"></script>
-
-<!-- Main JS-->
-<script src="js/global.js"></script>
-
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-
-</html>
-<!-- end document-->
