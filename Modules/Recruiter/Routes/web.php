@@ -29,9 +29,12 @@ Route::prefix('recruiter')->group(function() {
         Route::post('/update/{id}','RecruiterJobController@update');
         Route::get('/delete/{id}','RecruiterJobController@delete')->name('recruiter.get.delete.job');
 
-        Route::get('/seeker-by-job/{id}','RecruiterJobController@getSeekerByJob')->name('recruiter.get.seeker.by.job');
-        Route::get('/seeker-by-job/detail/{id}','RecruiterJobController@getSeekerDetail')->name('recruiter.get.seeker.detail');
 
+    });
 
+    Route::group(['prefix' => 'seeker'], function(){
+        Route::get('/seeker-by-job/{id}','RecruiterSeekerController@getSeekerByJob')->name('recruiter.get.seeker.by.job');
+        Route::get('/seeker-by-job/detail/{id}','RecruiterSeekerController@getSeekerDetail')->name('recruiter.get.seeker.detail');
+        Route::get('/{action}/{id}','RecruiterSeekerController@action')->name('recruiter.get.action.seeker.by.job');
     });
 });

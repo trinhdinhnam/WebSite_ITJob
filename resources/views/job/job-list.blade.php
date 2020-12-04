@@ -13,7 +13,7 @@
                 </div>
                 <div class="job-info">
                     <div class="job-name">
-                        <h3><a href="{{route('client.get.detail.job')}}">Tên việc làm</a></h3>
+                        <h3><a href="">Tên việc làm</a></h3>
                     </div>
                     <div class="job-salary">
                         <h6> 13.000.000</h6>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="job-info">
                     <div class="job-name">
-                        <h3><a href="{{route('client.get.detail.job')}}">Tên việc làm</a></h3>
+                        <h3><a href="">Tên việc làm</a></h3>
                     </div>
                     <div class="job-salary">
                         <h6> 13.000.000</h6>

@@ -22,7 +22,7 @@ class Pay extends Model
             'name' => 'Đang chờ',
             'class' => 'badge-danger'
         ]
-        ];
+    ];
     public function getStatus(){
        return array_get($this->status,$this->Status,'[N\A]');
     }

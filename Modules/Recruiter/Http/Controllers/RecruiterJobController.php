@@ -118,14 +118,5 @@ class RecruiterJobController extends Controller
         return redirect()->back();   
     }
 
-    public function getSeekerByJob($id){
-        $seekerByJob = SeekerJob::with('seeker:id,SeekerName,Education,Email,Phone,Gender,Avatar')
-                     ->where('JobId',$id)
-                     ->get();
-        $viewData = [
-            'seekerByJobs' => $seekerByJob
-        ];
-        return view('recruiter::seeker.index',$viewData);
-    }
 
 }

@@ -21,6 +21,7 @@
         <div class="seeker-info col-8">
             <div class="seeker-name">
                 <h2>{{$seekerByJob->seeker->SeekerName}}</h2>
+                <a style="height: 20px; margin-left: 5px;" class="badge {{$seekerByJob->getStatus($seekerByJob->Status)['class']}}">{{$seekerByJob->getStatus($seekerByJob->Status)['name']}}</a>
             </div>
             <div class="seeker-gender"><i class="fa fa-transgender"></i>{{$seekerByJob->seeker->getGender($seekerByJob->seeker->Gender)['name']}}</div>
             <div class="seeker-email"><i class="fa fa-envelope"></i>{{$seekerByJob->seeker->Email}}</div>
@@ -29,11 +30,11 @@
             <div class="date-apply"><i class="fa fa-calendar-alt"></i>{{$seekerByJob->created_at}}</div>
         </div>
         <div class="button col-2">
-            <a href="" class="btn btn-success"><i class="fa fa-check"></i></a>
-            <a href="" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-
-            <a href="" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
-
+            <a href="{{route('recruiter.get.action.seeker.by.job',['status',$seekerByJob->SeekerJobId])}}"
+               class="btn btn-success @if($seekerByJob->Status==1) disabled @endif"><i class="fa fa-check"></i></a>
+            <a href="{{route('recruiter.get.seeker.detail', $seekerByJob->seeker->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+            <a href="{{route('recruiter.get.action.seeker.by.job',['delete',$seekerByJob->SeekerJobId])}}"
+               class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
         </div>
 
     </div>

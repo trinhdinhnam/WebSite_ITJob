@@ -1,0 +1,108 @@
+.seeker-detail{
+    width: 100%;
+    height: auto;
+}
+
+.seeker-detail .seeker-info{
+    height: auto;
+    padding-top: 30px;
+    background-color: #feefde;
+    border: 1px solid #dfdfdf;
+}
+
+.seeker-info .seeker-logo{
+    height: 200px;
+    width: 160px;
+    background-color: chartreuse;
+    margin: auto;
+}
+
+.seeker-detail .seeker-cv{
+    height: auto;
+    width: 100%;
+}
+
+.seeker-gender{
+    color: #555;
+    margin-top: 20px;
+    font-size: 14px;
+}
+.fa-transgender{
+    margin-right: 18px;
+    margin-left: 15px;
+    font-size: 15px;
+}
+
+.seeker-dateofbirth{
+    color: #555;
+    font-size: 14px;
+}
+
+.fa-birthday-cake{
+    margin-right: 14px;
+    margin-left: 15px;
+    font-size: 15px;
+}
+.seeker-email{
+    color: #555;
+    font-size: 14px;
+
+}
+.fa-envelope{
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.seeker-phone{
+    color: #555;
+    font-size: 14px;
+
+
+}
+.fa-phone-volume{
+    margin-right: 18px;
+    margin-left: 15px;
+}
+
+.seeker-address{
+    color: #555;
+    font-size: 14px;
+    display: flex;
+}
+
+.seeker-address .fa-map-marker-alt{
+    margin-right: -4px;
+    margin-left: 15px;
+    font-size: 15px;
+}
+.seeker-address .address-value{
+    height: 60px;
+}
+.seeker-education{
+    color: #555;
+    font-size: 14px;
+}
+.fa-graduation-cap{
+    margin-right: 11px;
+    margin-left: 15px;
+}
+
+.date-apply{
+    color: rgb(39, 55, 143);
+    font-size: 14px;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.fa-calendar-alt{
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.btn-accept{
+    width: 100%;
+    padding-left: 50px;
+    padding-top: 20px;
+}
+.btn-accept .btn-success{
+    margin: auto;
+}
