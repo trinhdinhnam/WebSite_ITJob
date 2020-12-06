@@ -13,8 +13,9 @@
     background-color: white;
     margin-top: 20px;
     margin-bottom: 20px;
+    padding: 10px;
     padding-top: 30px;
-
+    position: relative;
 }
 
 /* Company item */
@@ -22,20 +23,33 @@
    background-color: thistle;
    height: 220px;
    width: 70%;
-   margin: auto;
+   position: absolute;
+   left: 15%;
+   right: 15%;
+
 }
 
 .company-item .company-item-name{
-    font-size: 27px;
-    width: 100%;
+    font-size: 21px;
+    width: 90%;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 230px;
+    position: absolute;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+    left: 5%;
+   right: 5%;
 }
 
 .company-item .company-item-info{
     display: flex;
-    padding-left: 80px;
-    margin-top: 40px;
+    margin-top: 280px;
+    width: 100%;
+    position: absolute;
+    height: 50px;
+    padding-left: 20%;
 }
 
 .company-item .company-item-info .job-number{
@@ -44,4 +58,6 @@
 
 .company-item .company-item-info .company-address{
     font-size: 16px;
+    margin-top: 40px;
+    margin-left: 5px;
 }

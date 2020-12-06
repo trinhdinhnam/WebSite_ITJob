@@ -32,7 +32,7 @@
         <div class="button col-2">
             <a href="{{route('recruiter.get.action.seeker.by.job',['status',$seekerByJob->SeekerJobId])}}"
                class="btn btn-success @if($seekerByJob->Status==1) disabled @endif"><i class="fa fa-check"></i></a>
-            <a href="{{route('recruiter.get.seeker.detail', $seekerByJob->seeker->id)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+            <a href="{{route('recruiter.get.seeker.detail', $seekerByJob->SeekerJobId)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
             <a href="{{route('recruiter.get.action.seeker.by.job',['delete',$seekerByJob->SeekerJobId])}}"
                class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
         </div>

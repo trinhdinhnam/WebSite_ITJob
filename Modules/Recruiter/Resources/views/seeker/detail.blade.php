@@ -18,19 +18,18 @@
             <img height="100%" width="100%" src="{{asset('images/ky21.JPG')}}" class="thumbnail">
         </div>
         <div class="seeker-name">
-            <h2>{{$seekerDetail->SeekerName}}</h2>
+            <h2>{{$seekerDetail->seeker->SeekerName}}</h2>
         </div>
         <div class="seeker-gender"><i
-                class="fa fa-transgender"></i>{{$seekerDetail->getGender($seekerDetail->Gender)['name']}}</div>
-        <div class="seeker-dateofbirth"><i class="fa fa-birthday-cake"></i>{{$seekerDetail->DateOfBirth}}</div>    
-        <div class="seeker-email"><i class="fa fa-envelope"></i>{{$seekerDetail->Email}}</div>
-        <div class="seeker-phone"><i class="fa fa-phone-volume"></i>{{$seekerDetail->Phone}}</div>
-        <div class="seeker-address"><i class="fa fa-map-marker-alt"></i><div class="address-value">{{$seekerDetail->Address}}</div></div>
+                class="fa fa-transgender"></i>{{$seekerDetail->seeker->getGender($seekerDetail->seeker->Gender)['name']}}</div>
+        <div class="seeker-dateofbirth"><i class="fa fa-birthday-cake"></i>{{$seekerDetail->seeker->DateOfBirth}}</div>
+        <div class="seeker-email"><i class="fa fa-envelope"></i>{{$seekerDetail->seeker->Email}}</div>
+        <div class="seeker-phone"><i class="fa fa-phone-volume"></i>{{$seekerDetail->seeker->Phone}}</div>
+        <div class="seeker-address"><i class="fa fa-map-marker-alt"></i><div class="address-value">{{$seekerDetail->seeker->Address}}</div></div>
         <div class="seeker-education"><i
-                class="fa fa-graduation-cap"></i>{{$seekerDetail->getEducation($seekerDetail->Education)['name']}}</div>
+                class="fa fa-graduation-cap"></i>{{$seekerDetail->seeker->getEducation($seekerDetail->seeker->Education)['name']}}</div>
         <div class="date-apply"><i class="fa fa-calendar-alt"></i>{{$seekerDetail->created_at}}</div>
-        <div class="btn-accept"><a href="" class="btn btn-success"><i class="fa fa-check"></i> Duyệt hồ sơ</a></div>
-
+        <div class="btn-accept"><a href="" class="btn btn-success @if($seekerDetail->Status==1) disabled @endif"><i class="fa fa-check"></i> Duyệt hồ sơ</a></div>
 
     </div>
 

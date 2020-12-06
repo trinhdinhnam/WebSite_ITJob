@@ -16,13 +16,19 @@
 .job-list .job-title{
     font-size: 35px;
     margin-left: 10px;
+    margin-bottom: 10px;
 }
 .job-list .job-item{
     display: flex;
     width: 100%;
-    height: 275px;
-    background-color: rgb(235, 219, 235);
+    height: auto;
+    background-color: #eee;
     margin-bottom: 10px;
+    padding-bottom: 20px;
+}
+.job-list .job-item:hover{
+    border: 1px solid #ccc;
+    cursor: pointer;
 }
 .job-list .job-item .company-logo{
     width: 15%;
@@ -42,7 +48,8 @@
     padding: 10px;
     padding-top: 30px;
 }
-.job-info .job-name{
+.job-info .job-name h3 a{
+    color: black;
     
 }
 .job-info .job-salary{
@@ -64,13 +71,16 @@
     display: flex;
 }
 .job-info .job-skill .skill-item{
-    width: 50px;
+    width: auto;
     height: 24px;
-    border: 1px solid #bbb;
+    border: 1px solid #555;
     margin-right: 13px;
-    color: #666;
+    color: #555;
     text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
     font-size: 14px;
+    font-weight: bold;
 }
 /* job status css */
 .job-list .job-item .job-status{
@@ -111,23 +121,86 @@
     height: auto;
     margin-left: 10px;
     margin-top: 10px;
-    position: relative;
 }
 .company-hot .company-hot-title{
-    font-size: 25px;
+    font-size: 23px;
+    margin: auto;
+    margin-left: 15px;
 }
 .company-hot .company-image{
-    height: 150px;
+    height: 130px;
     width: 90%;
     background-color: yellow;
     margin: auto;
     margin-top: 20px;
+    padding-top: 90px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
 .company-hot .company-logo{
-    position: absolute;
-    width: 70px;
-    height: 70px;
-    top: 19%;
-    background-color: aqua;
-    left: 37%;
+    width: 75px;
+    height: 75px;
+    background-color: #1b4b72;
+    margin: auto;
+    border: 1px solid #ddd;
+
+}
+
+.company-hot .company-name{
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+}
+
+.company-hot .company-city{
+    width: 100%;
+    text-align: center;
+    color: #888;
+    margin-top: 0px;
+    font-size: 15px;
+}
+
+.company-hot .company-introduction{
+    width: 100%;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+    text-align: center;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.company-hot .job-item{
+    width: 100%;
+    height: 90px;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    padding-top: 25px;
+}
+
+.company-hot .job-item .job-name{
+    font-family: "Courier New", Courier, monospace;
+    font-size: 18px;
+
+}
+
+.company-hot .job-number{
+    width: 100%;
+    text-align: center;
+    height: 20px;
+    margin-top: 0;
+}
+.job-number a{
+    color: #f22;
+    font-size: 15px;
+    height: 20px;
+    
 }

@@ -23,10 +23,10 @@ class RecruiterSeekerController extends Controller
     }
 
     public function getSeekerDetail($id){
-        $seekerDetail = SeekerJob::with('seekers:id,SeekerName,Education,Email,Phone,Gender,Avatar,Address,DateOfBirth')
-                        ->get();
-        $seekerDetail = Seeker::where('id',$id)
+        $seekerDetail = SeekerJob::with('seeker:id,SeekerName,Education,Email,Phone,Gender,Avatar,Address,DateOfBirth')
+                        ->where('SeekerJobId',$id)
                         ->first();
+
         $viewData = [
             'seekerDetail' => $seekerDetail
         ];

@@ -29,30 +29,32 @@
         <div class="header">
             <div class="header-container">
                 <div class="job-number">
-                    1,094 việc làm cho lập trình viên
+                    {{$jobNumber->jobNumber}} việc làm cho lập trình viên
                 </div>
-
-                <form class="form-inline header-search" action="" style="margin-bottom: 20px">
+                <form class="form-inline header-search" action="{{route('client.search.job')}}" method="GET" style="margin-bottom: 20px">
                     <div class="skill-search">
                         <i class="fa fa-search"></i>
-                        <input type="text" class="search-input" placeholder="Tìm kiếm theo kỹ năng" value=""
-                            name="search">
+                        <input type="text" class="search-input" name="skillname" placeholder="Tìm kiếm theo kỹ năng" value="{{\Request::get('skillname')}}">
                     </div>
                     <div class="city-search">
                         <i class="fa fa-map-marker-alt"></i>
                         <select name="City" id="city-select">
-                            <option value="">Thành phố</option>
+                            <option >Thành phố</option>
                             <option value="">Hà Nội</option>
                             <option value="">TP Hồ Chí Minh</option>
                             <option value="">Đà Nẵng</option>
                         </select>
                     </div>
-                    <a href="" type="button" class="btn-search btn btn-danger">
+                    <button type="submit" class="btn-search btn btn-danger">
                         <h4>Tìm kiếm</h4>
-                    </a>
+                    </button>
                 </form>
                 <div class="position">
-                    <a href="" type="button" class=" btn btn-dark">Tester</a>
+                    @if(isset($positions))
+                        @foreach($positions as $position)
+                             <a href="{{route('client.get.job.by.position',$position->PositionId)}}" type="button" class=" btn btn-dark" id="position">{{$position->PositionName}}</a>
+                        @endforeach
+                    @endif
                 </div>
 
             </div>
@@ -60,7 +62,6 @@
         </div>
         <div class="content">
             <div class="content-container">
-
                 @yield('main')
             </div>
         </div>
