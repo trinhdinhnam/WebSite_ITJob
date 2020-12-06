@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,13 +11,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous">
     </script>
 </head>
-
-<body class="sb-nav-fixed">
+<body>
     <div class="toolbar">
         <div class="toolbar-content">
-            <div class="logo">
-                ITJob
-            </div>
+            <a href="{{route('client.get.home.page')}}">
+                <div class="logo" style="background-image: url({{asset('/images/logowebsite.png')}})">
+                </div>
+            </a>
             <a href="{{route('client.get.list.job')}}" type="button" class="btn-alljob btn btn-dark">Việc làm IT</a>
             <a href="" type="button" class="btn-company btn btn-dark">Công ty IT</a>
             <a href="" type="button" class="btn-login btn btn-dark">Đăng nhập</a>
@@ -26,47 +25,9 @@
         </div>
     </div>
     <div class="main">
-        <div class="header">
-            <div class="header-container">
-                <div class="job-number">
-                    {{$jobNumber->jobNumber}} việc làm cho lập trình viên
-                </div>
-                <form class="form-inline header-search" action="{{route('client.search.job')}}" method="GET" style="margin-bottom: 20px">
-                    <div class="skill-search">
-                        <i class="fa fa-search"></i>
-                        <input type="text" class="search-input" name="skillname" placeholder="Tìm kiếm theo kỹ năng" value="{{\Request::get('skillname')}}">
-                    </div>
-                    <div class="city-search">
-                        <i class="fa fa-map-marker-alt"></i>
-                        <select name="City" id="city-select">
-                            <option >Thành phố</option>
-                            <option value="">Hà Nội</option>
-                            <option value="">TP Hồ Chí Minh</option>
-                            <option value="">Đà Nẵng</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn-search btn btn-danger">
-                        <h4>Tìm kiếm</h4>
-                    </button>
-                </form>
-                <div class="position">
-                    @if(isset($positions))
-                        @foreach($positions as $position)
-                             <a href="{{route('client.get.job.by.position',$position->PositionId)}}" type="button" class=" btn btn-dark" id="position">{{$position->PositionName}}</a>
-                        @endforeach
-                    @endif
-                </div>
-
-            </div>
-
-        </div>
-        <div class="content">
-            <div class="content-container">
-                @yield('main')
-            </div>
-        </div>
-        <div class="footer">
-        </div>
+        @yield('main')
+    </div>
+    <div class="footer">
     </div>
     <!-- Thư viện jquery đã nén phục vụ cho bootstrap.min.js  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

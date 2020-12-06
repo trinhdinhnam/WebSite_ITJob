@@ -4,6 +4,7 @@
     width: 100%;
     background-color:#222;
     position: fixed;
+
 }
 .toolbar-content{
     width: 78%;
@@ -14,9 +15,12 @@
 }
 
 .toolbar-content .logo{
-    height: 50px;
+    height: 40px;
     width: 140px;
-    background-color: olive;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    margin-right: 20px;
 }
 
 .toolbar-content .btn-alljob{
@@ -34,7 +38,7 @@
 .toolbar-content .btn-login{
     height: 40px;
     width: 100px;
-    margin-left: 400px;
+    margin-left: 360px;
 
 
 
@@ -53,103 +57,13 @@
 
 /* Main */
 .main{
-    height: calc(100% - 60px);
-    width: 100%;
-}
-
-/* Header Main */
-.header{
-    width: 100%;
-    height: 350px;
-    background-color:#222;
-}
-.header-container{
-    width: 78%;
-    height: 100%;
-    margin: auto;
-    padding-top: 40px;
-}
-.job-number{
-    color: white;
-    font-size: 40px;
-    margin-top: 40px;
-}
-.header-search{
-    width: 100%;
-    height: 60px;
-    margin-top: 30px;
-}
-.header-search .skill-search{
-    height: 100%;
-    width: 580px;
-    background-color: white;
-}
-.skill-search .fa-search{
-    font-size: 20px;
-    margin-top: 20px;
-    margin-left: 10px;
-    color: #999;
-}
-.skill-search .search-input{
-    margin-left: 10px;
-    height: calc(100% - 2px);
-    margin-top: 0;
-    width: 512px;
-    font-size: 20px;
-    border: none;
-    outline: none;
-    
-}
-.header-search .city-search{
-    height: 100%;
-    width: 250px;
-    margin-left: 10px;
-    background-color: white;
-}
-.city-search .fa-map-marker-alt{
-    font-size: 20px;
-    margin-top: 20px;
-    margin-left: 10px;
-    color: #999;
-}
-.city-search #city-select{
-    height: calc(100% - 2px);
-    width: 210px;
-    font-size: 20px;
-    outline: none;
-    border: none;
-
-}
-.header-search .btn-search{
-    height: 100%;
-    width: 160px;
-    margin-left: 10px;
-    padding-top: 12px;
-}
-
-.position{
-    display: flex;
-    margin-top: 60px;
-}
-.position #position{
-    margin-right: 5px;
-}
-/* Content */
-.content{
-    width: 100%;
     height: auto;
-    background-color: rgb(219, 219, 241);
+    width: 100%;
 }
-.content-container{
-    height: calc(100% - 60px);
-    width: 78%;
-    margin: auto;
-    padding-top: 20px;
 
-}
 /* Footer */
 .footer{
     width: 100%;
     height: 300px;
-    background-color: #eee;
+    background-color: rgb(255, 255, 255);
 }

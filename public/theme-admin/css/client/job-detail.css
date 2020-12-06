@@ -1,7 +1,23 @@
 .fa{
     color: #aaaaaa;
 }
-
+.content{
+    width: 100%;
+    height: auto;
+    background-color: rgb(219, 219, 241);
+}
+.content-container{
+    height: auto;
+    width: 78%;
+    margin: auto;
+    padding-top: 90px;
+    background-color: white;
+}
+.content-container .job-detail-content{
+    width: 90%;
+    height: auto;
+    margin: auto;
+}
 .job-image{
     height: 200px;
     width: 94%;
