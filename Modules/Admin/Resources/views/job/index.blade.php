@@ -17,7 +17,7 @@
         <div class="form-group">
             <select name="recruiter" id="recruiter-name" class="form-control" style="width: 200px">
                 <option value="" selected>--Tên công ty--</option>
-            @if(isset($recruiters))
+                @if(isset($recruiters))
                     @foreach($recruiters as $recruiter)
                         <option value="{{$recruiter->id}}" {{ \Request::get('recruiter') == $recruiter->id ? "selected='selected'" : ""}}>{{$recruiter->CompanyName}}</option>
                     @endforeach

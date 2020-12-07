@@ -1,15 +1,28 @@
 @extends('admin::layouts.master')
 @section('content')
-    <link href="{{asset('theme-admin/css/job_detail.css')}}" rel="stylesheet" />
+<link href="{{asset('theme-admin/css/job_detail.css')}}" rel="stylesheet" />
 <h2 class="mt-4">Chi tiết thông tin đăng tuyển</h2>
 <ol class="breadcrumb mb-4 ">
     <li class="breadcrumb-item">Trang chủ</li>
     <li class="breadcrumb-item">Thông tin đăng tuyển</li>
     <li class="breadcrumb-item active">Chi tiết</li>
 </ol>
+<div class='row'>
+    @if (isset($imageCompanies))
+    @foreach($imageCompanies as $image)
+    <div class="col-4">
+        <div class="company-image">
+            <img height="100%" width="100%" src="{{asset( pare_url_file($image->Image)) }}" class="thumbnail">
+        </div>
+    </div>
+    @endforeach
+    @endif
+</div>
 <div class="row">
     <div class="col-4">
         <div class="company-logo">
+        <img height="100%" width="100%"
+                            src="{{asset( pare_url_file($jobDetail->recruiter->CompanyLogo)) }}" class="thumbnail">
         </div>
         <div class="company-detail">
             <h4 class="company-name">{{$jobDetail->recruiter->CompanyName}}</h4>

@@ -23,6 +23,7 @@ class ApplyController extends Controller
     }
 
     public function getApply($id){
+
         return view('apply.index');
 
     }

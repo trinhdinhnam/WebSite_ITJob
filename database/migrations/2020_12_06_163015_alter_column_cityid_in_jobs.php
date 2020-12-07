@@ -30,7 +30,6 @@ class AlterColumnCityidInJobs extends Migration
         Schema::table('jobs', function (Blueprint $table) {
             //
             $table->dropColumn('CityId');
-
         });
     }
 }

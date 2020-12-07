@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\CompanyImage;
 use App\Models\Position;
 use App\Models\Recruiter;
@@ -25,6 +26,9 @@ class HomeController extends Controller
             ->first();
         View::share('jobNumber',$jobNumber);
 
+        $cities = City::all();
+        View::share('cities',$cities);
+
     }
     
     public function getHomePage(){
@@ -44,6 +48,7 @@ class HomeController extends Controller
     {
         $jobs = Job::with('recruiter:id,CompanyLogo');
         if($request->skillname) $jobs->where('Skill', 'like', '%'.$request->skillname.'%');
+        if($request->City) $jobs->where('CityId',$request->City);
         $jobs = $jobs->orderByDesc('JobId')->get();
 
         $companyHot = DB::table('recruiters')

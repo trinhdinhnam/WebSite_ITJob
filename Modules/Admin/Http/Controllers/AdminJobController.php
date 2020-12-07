@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Job;
 use App\Models\Recruiter;
+use App\Models\CompanyImage;
 
 
 class AdminJobController extends Controller
@@ -51,10 +52,13 @@ class AdminJobController extends Controller
     }
 
     public function getDetailJob($id){
-        $jobDetail = Job::with('recruiter:id,CompanyName,Introduction,TypeBusiness,CompanySize,Address,TimeWork,WorkDay')
+        $jobDetail = Job::with('recruiter:id,CompanyName,Introduction,TypeBusiness,CompanySize,Address,TimeWork,WorkDay,CompanyLogo')
                     ->where('JobId',$id)->first();
+                    $imageCompanies = CompanyImage::where('RecruiterId', $jobDetail->recruiter->id)
+                        ->get();
                     $viewData = [
-                        'jobDetail' =>$jobDetail
+                        'jobDetail' =>$jobDetail,
+                        'imageCompanies' => $imageCompanies
                     ];
         return view('admin::job.job_detail',$viewData);
 

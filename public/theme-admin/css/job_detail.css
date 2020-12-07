@@ -1,6 +1,14 @@
 .fa{
     color: #aaaaaa;
 }
+
+.company-image{
+    height: 200px;
+    width: 94%;
+    margin: auto;
+    background-color: rgb(80, 104, 104);
+    margin-bottom: 40px;
+}
 .col-4 .company-logo{
    height: 180px;
    width: 100%;

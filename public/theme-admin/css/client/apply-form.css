@@ -1,0 +1,27 @@
+.apply-container{
+    width: 78%;
+    margin: auto;
+    height: 540px;
+    background-color: #eed;
+    padding-top: 30px;
+}
+
+.apply-container .apply-content{
+    width: 90%;
+    height: calc(100% - 40px);
+    margin: auto;
+}
+.apply-container .apply-content .title{
+    margin-bottom: 40px;
+}
+.apply-container .apply-content .title h3{
+    font-size: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.form-group{
+    margin-top: 30px;
+}
+
+.btn-danger{
+    width: 100%;
+}

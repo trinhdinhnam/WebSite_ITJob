@@ -13,10 +13,12 @@
             <div class="city-search">
                 <i class="fa fa-map-marker-alt"></i>
                 <select name="City" id="city-select">
-                    <option>Thành phố</option>
-                    <option value="">Hà Nội</option>
-                    <option value="">TP Hồ Chí Minh</option>
-                    <option value="">Đà Nẵng</option>
+                    <option disabled selected>Thành phố</option>
+                    @if(isset($cities))
+                        @foreach($cities as $city)
+                            <option value="{{$city->CityId}}" {{ \Request::get('City') == $city->CityId ? "selected='selected'" : ""}}>{{$city->CityName}}</option>
+                        @endforeach
+                    @endif
                 </select>
             </div>
             <button type="submit" class="btn-search btn btn-danger">
@@ -50,7 +52,7 @@
                         </div>
                         <div class="job-info">
                             <div class="job-name">
-                                <h3><a href="">{{$job->JobName}}</a></h3>
+                                <h3><a href="{{route('client.get.detail.job',$job->JobId)}}">{{$job->JobName}}</a></h3>
                             </div>
                             <div class="job-salary">
                                 <h6> Up to {{number_format($job->Salary,0,',','.')}} VNĐ</h6>

@@ -34,8 +34,7 @@
                 </td>
                 <td>
                     <a href="{{route('admin.get.detail.recruiter',$recruiter->id)}}" class="btn btn-primary">Xem</a>
-                    <a href="{{route('admin.get.detail.transaction',$recruiter->id)}}" class="btn btn-primary">Xem lịch sử GD</a>
-
+                    <a href="{{route('admin.get.detail.transaction',$recruiter->id)}}" class="btn btn-warning">Lịch sử GD</a>
                     <a href="{{route('admin.get.action.recruiter',['delete',$recruiter->id])}}" class="btn btn-danger">Xóa</a>
                 </td>
             </tr>
