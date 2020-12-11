@@ -3,6 +3,8 @@
 namespace Modules\Recruiter\Http\Controllers;
 
 use App\Http\Requests\RequestRegisterRecruiter;
+use App\Models\AccountPackage;
+use App\Models\City;
 use App\Models\CompanyImage;
 use App\Models\Job;
 use App\Models\Recruiter;
@@ -13,15 +15,43 @@ use Illuminate\Routing\Controller;
 class RecruiterAuthController extends Controller
 {
 
+    public function getLoginUser(Request $request)
+    {
+        if($request->ajax()) {
+            $html = view('recruiter::auth.login_modal')->render();
+            return \response()->json($html);
+        }
+    }
+
     public function getLogin()
     {
         return view('recruiter::auth.login');
+
+    }
+
+    public function getAccountPackage(Request $request){
+        $acPackages = AccountPackage::all();
+        $viewData = [
+            'acPackages' => $acPackages
+
+        ];
+        if($request->ajax()) {
+            $html = view('recruiter::auth.account_package',$viewData)->render();
+            return \response()->json($html);
+        }
     }
 
 
     public function getSignUp()
     {
-        return view('recruiter::auth.signup');
+        $cities = City::all();
+        $acPackages = AccountPackage::all();
+        $viewData = [
+            'cities' => $cities,
+            'acPackages' => $acPackages
+        ];
+        return view('recruiter::auth.signup',$viewData);
+
     }
 
     public function submitRegister( RequestRegisterRecruiter $request){
@@ -33,7 +63,8 @@ class RecruiterAuthController extends Controller
         $recruiter->Password = bcrypt($request->Password);
         $recruiter->CompanyName = $request->CompanyName;
         $recruiter->Address = $request->Address;
-        $recruiter->City = $request->City;
+        $recruiter->CityId = $request->City;
+        $recruiter->Country = $request->Country;
         $recruiter->Introduction = $request->Introduction;
         $recruiter->WorkDay = $request->WorkDay;
         $recruiter->TimeWork = $request->TimeWork;
@@ -61,7 +92,7 @@ class RecruiterAuthController extends Controller
                }
            }
         }
-        return redirect()->route('recruiter.login')->with(['flash-message'=>'Success ! Đăng ký thành công !','flash-level'=>'success']);
+        return redirect()->route('recruiter.account.package')->with(['flash-message'=>'Success ! Đăng ký thành công !','flash-level'=>'success']);
     }
 
 

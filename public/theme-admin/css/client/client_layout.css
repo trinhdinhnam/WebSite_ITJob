@@ -4,6 +4,7 @@
     width: 100%;
     background-color:#222;
     position: fixed;
+    z-index: 3;
 
 }
 .toolbar-content{
@@ -60,6 +61,7 @@
     height: auto;
     width: 100%;
     padding-top: 60px;
+    z-index: 2;
 }
 
 /* Footer */
@@ -67,4 +69,6 @@
     width: 100%;
     height: 300px;
     background-color: rgb(255, 255, 255);
+    z-index: 1;
+
 }

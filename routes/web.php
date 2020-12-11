@@ -13,7 +13,10 @@
 Route::get('/','HomeController@getHomePage')->name('client.get.home.page');
 
 Route::get('search','HomeController@getJobs')->name('client.search.job');
-
+Route::get('confirm-recruiter','HomeController@getConfirm')->name('client.confirm.recruiter');
+Route::group(['namespace' => 'Auth'],function(){
+    Route::get('login','LoginController@getLogin')->name('seeker.get.login');
+});
 Route::group(['prefix' => 'job'], function(){
     Route::get('/','HomeController@getJobs')->name('client.get.list.job');
     Route::get('/detail/{id}','HomeController@getDetailJob')->name('client.get.detail.job');

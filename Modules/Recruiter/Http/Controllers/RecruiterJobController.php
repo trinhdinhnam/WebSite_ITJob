@@ -31,15 +31,6 @@ class RecruiterJobController extends Controller
             ->groupBy('JobId','JobName','PositionName','Skill','jobs.Status','Address')
             ->get();
 
-
-        //$jobs = Job::with('position:PositionId,PositionName')
-        //            ->where('RecruiterId',6)
-          //          ->where('IsDelete',1)
-            //        ->get();
-        //$seekerNumber = DB::table('seeker_jobs')
-              //          ->select(DB::raw('count(*) as seekerNumber, JobId'))
-                //        ->groupBy('JobId')
-                  //      ->get();
         $viewData = [
              'jobs' => $jobs
 
@@ -48,8 +39,7 @@ class RecruiterJobController extends Controller
     }
 
     public function getDetailJob(){
-        return view('recruiter::job.index');    
-
+        return view('recruiter::job.index');
     }
 
     public function create(){

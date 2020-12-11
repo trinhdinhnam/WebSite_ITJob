@@ -32,8 +32,11 @@ class Recruiter extends Model
             ],
             0 => [
                 'name' => 'Nữ',
+            ],
+            2 => [
+                'name' => 'Giới tính khác'
             ]
-            ];
+        ];
     public function getActive(){
         return array_get($this->active,$this->Active,'[N\A]');
     }

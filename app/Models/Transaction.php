@@ -6,11 +6,11 @@ use App\Models\AccountPackage;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pay extends Model
+class Transaction extends Model
 {
     //
-    protected $table = 'pays';
-    protected $primaryKey = 'PayId';
+    protected $table = 'transactions';
+    protected $primaryKey = 'TransactionId';
     protected $guarded=[''];
 
     protected $status = [

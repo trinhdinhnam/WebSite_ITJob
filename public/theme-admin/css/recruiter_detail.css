@@ -1,30 +1,131 @@
+/* Thông tin công ty */
+.fa{
+    color: #aaaaaa;
+}
 
+.company-image{
+    height: 200px;
+    width: 94%;
+    margin: auto;
+    background-color: rgb(80, 104, 104);
+    margin-bottom: 40px;
+}
+.col-4 .company-logo{
+    height: 180px;
+    width: 100%;
+    background-color: brown;
+}
+.col-4 .company-detail{
+    height: 500px;
+    width: 100%;
+}
+.col-4 .company-detail .company-name{
+    width: 100%;
+    text-align: center;
+}
+.col-4 .company-detail .company-introduction{
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+}
+.col-4 .company-detail .company-typebusiness{
+    margin-bottom: 10px;
+    display: flex;
+}
+.typbusiness-name{
+    margin-left: 15px;
+    font-size: small;
+
+}
+.col-4 .company-detail .company-size{
+    display: flex;
+    margin-bottom: 10px;
+
+}
+.size-value{
+    margin-left: 10px;
+    font-size: small;
+
+}
+.col-4 .company-detail .company-address{
+    display: flex;
+    margin-bottom: 10px;
+
+}
+.address-value{
+    margin-left: 20px;
+    font-size: small;
+}
+
+.col-4 .company-detail .company-workday{
+    display: flex;
+    margin-bottom: 10px;
+
+}
+.workday-value{
+    margin-left: 17px;
+    font-size: small;
+}
+.col-4 .company-detail .company-worktime{
+    display: flex;
+    margin-bottom: 10px;
+
+}
+.worktime-value{
+    margin-left: 17px;
+    font-size: small;
+}
+
+
+/* Thông tin của người tuyển dụng */
+.recruiter-profile{
+    width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+    border: 1px solid #ececec;
+    padding-top: 30px;
+    background-color: #fafafa;
+}
 .recruiter-avatar{
-    height: 400px;
-    width: 250px;
+    height: 200px;
+    width: 160px;
     background-color: #afafaf;
+    margin: auto;
 }
 
 .recruiter-info{
-    padding-left: 60px;
+    width: 100%;
 }
-/* REcruiter name */
+/* Recruiter name */
 .recruiter-info .recruiter-name{
     display: flex;
+    width: 100%;
 }
 .recruiter-info .recruiter-name .recruiter-name-value{
-    margin-left: 30px;
+    width: auto;
+    margin: auto;
  }
+.person-info{
+    width: 32%;
+    margin: auto;
+}
 /* Recruiter Position */
 .recruiter-info .recruiter-position{
-    margin-top: 15px;
     display: flex;
+    width: 400px;
+    margin: auto;
+    margin-top: 35px;
+    color: #666;
+
 }
 .recruiter-info .recruiter-position .recruiter-position-value{
     margin-left: 34px;
 }
 /* Recruiter Gender */
 .recruiter-info .recruiter-gender{
+    width: 400px;
+    margin: auto;
     margin-top: 35px;
     display: flex;
 }
@@ -33,14 +134,20 @@
 }
 /* Recruiter Phone */
 .recruiter-info .recruiter-phone{
+    width: 400px;
+    margin: auto;
     margin-top: 15px;
     display: flex;
+    color: #666;
+
 }
 .recruiter-info .recruiter-phone .recruiter-phone-value{
     margin-left: 38px;
 }
  /* Recruiter Date of birth */
 .recruiter-info .recruiter-dateofbirth{
+    width: 400px;
+    margin: auto;
     display: flex;
     margin-top: 15px;
 
@@ -51,8 +158,12 @@
 
 /* Recruiter Email */
 .recruiter-info .recruiter-email{
+    width: 400px;
+    margin: auto;
     display: flex;
     margin-top: 15px;
+    color: #666;
+
 
 }
 .recruiter-info .recruiter-email .recruiter-email-value{
@@ -61,6 +172,8 @@
 
 /* Recruiter Address */
 .recruiter-info .recruiter-address{
+    width: 400px;
+    margin: auto;
     display: flex;
     margin-top: 15px;
 

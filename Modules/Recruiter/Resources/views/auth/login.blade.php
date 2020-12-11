@@ -1,122 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Login V4</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="{{asset('form-login/images/icons/favicon.ico')}}"/>
-    <!--===============================================================================================-->
+@extends('layouts.master')
+@section('main')
+    <link rel="icon" type="image/png" href="{{asset('form-login/images/icons/favicon.ico')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('form-login/vendor/bootstrap/css/bootstrap.min.css')}}">
-    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{{asset('form-login/fonts/iconic/css/material-design-iconic-font.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('form-login/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{asset('form-login/fonts/iconic/css/material-design-iconic-font.min.css')}}">
-    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{asset('form-login/vendor/animate/animate.css')}}">
-    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{asset('form-login/vendor/css-hamburgers/hamburgers.min.css')}}">
-    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{asset('form-login/vendor/animsition/css/animsition.min.css')}}">
-    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{asset('form-login/vendor/select2/select2.min.css')}}">
-    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{asset('form-login/vendor/daterangepicker/daterangepicker.css')}}">
-    <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{asset('form-login/css/util.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('form-login/css/main.css')}}">
-    <!--===============================================================================================-->
-</head>
-<body>
+    <link href="{{asset('form-login/css/login.css')}}" rel="stylesheet" />
 
-<div class="limiter">
-    <div class="container-login100" style="background-image: url('{{asset('form-login/images/bg-01.jpg')}}');">
-        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-            <form class="login100-form validate-form">
-					<span class="login100-form-title p-b-49">
-						Login
-					</span>
+    <div class="content">
+    <div class="wrap-login100" id="modalLogin">
+        <form class="login100-form validate-form">
+        <span class="login100-form-logo">
+            <i class="zmdi zmdi-landscape"></i>
+        </span>
 
-                <div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
-                    <span class="label-input100">Email</span>
-                    <input class="input100" type="email" name="username" placeholder="Input type email">
-                    <span class="focus-input100" data-symbol="&#xf206;"></span>
-                </div>
+            <span class="login100-form-title p-b-34 p-t-27" style="font-family: Arial, Helvetica, sans-serif;">Đăng nhập</span>
 
-                <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    <span class="label-input100">Password</span>
-                    <input class="input100" type="password" name="pass" placeholder="Input type password">
-                    <span class="focus-input100" data-symbol="&#xf190;"></span>
-                </div>
+            <div class="wrap-input100 validate-input" data-validate="Enter username">
+                <input class="input100" type="email" name="username" placeholder="Email">
+                <span class="focus-input100" data-placeholder="&#xf207;"></span>
+            </div>
 
-                <div class="text-right p-t-8 p-b-31">
-                    <a href="#">
-                        Quân mật khẩu
-                    </a>
-                </div>
+            <div class="wrap-input100 validate-input" data-validate="Enter password">
+                <input class="input100" type="password" name="pass" placeholder="Password">
+                <span class="focus-input100" data-placeholder="&#xf191;"></span>
+            </div>
 
-                <div class="container-login100-form-btn">
-                    <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn"></div>
-                        <button class="login100-form-btn">
-                            Login
-                        </button>
-                    </div>
-                </div>
+            <div class="contact100-form-checkbox">
+                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                <label class="label-checkbox100" for="ckb1">
+                    Remember me
+                </label>
+            </div>
 
-                <div class="txt1 text-center p-t-54 p-b-20">
-						<span>
-							Or Sign Up Using
-						</span>
-                </div>
+            <div class="container-login100-form-btn">
+                <button class="login100-form-btn" type="submit" style="font-family: Arial, Helvetica, sans-serif;">
+                    Đăng nhập
+                </button>
+            </div>
 
-                <div class="flex-c-m">
-                    <a href="#" class="login100-social-item bg1">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-
-                    <a href="#" class="login100-social-item bg2">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-
-                    <a href="#" class="login100-social-item bg3">
-                        <i class="fa fa-google"></i>
-                    </a>
-                </div>
-
-                <div class="flex-col-c p-t-155">
-						<span class="txt1 p-b-17">
-							Or Sign Up Using
-						</span>
-
-                    <a href="{{route('recruiter.signup')}}" class="txt2">
-                        Sign Up
-                    </a>
-                </div>
-            </form>
-        </div>
+            <div class="text-center p-t-90">
+                <a class="txt1 btn-signup" href="{{route('recruiter.signup')}}">
+                    Đăng ký
+                </a>
+            </div>
+        </form>
     </div>
-</div>
+    </div>
+    <!--===============================================================================================-->
+    <script src="{{asset('form-login/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+    <!--===============================================================================================-->
+    <script src="{{asset('form-login/vendor/animsition/js/animsition.min.js')}}"></script>
+    <!--===============================================================================================-->
+    <script src="{{asset('form-login/vendor/bootstrap/js/popper.js')}}"></script>
+    <script src="{{asset('form-login/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+    <!--===============================================================================================-->
+    <script src="{{asset('form-login/vendor/select2/select2.min.js')}}"></script>
+    <!--===============================================================================================-->
+    <script src="{{asset('form-login/vendor/daterangepicker/moment.min.js')}}"></script>
+    <script src="{{asset('form-login/vendor/daterangepicker/daterangepicker.js')}}"></script>
+    <!--===============================================================================================-->
+    <script src="{{asset('form-login/vendor/countdowntime/countdowntime.js')}}"></script>
+    <!--===============================================================================================-->
+    <script src="{{asset('form-login/js/main.js')}}"></script>
 
-
-<div id="dropDownSelect1"></div>
-
-<!--===============================================================================================-->
-<script src="{{asset('form-login/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
-<!--===============================================================================================-->
-<script src="{{asset('form-login/vendor/animsition/js/animsition.min.js')}}"></script>
-<!--===============================================================================================-->
-<script src="{{asset('form-login/vendor/bootstrap/js/popper.js')}}"></script>
-<script src="{{asset('form-login/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
-<!--===============================================================================================-->
-<script src="{{asset('form-login/vendor/select2/select2.min.js')}}"></script>
-<!--===============================================================================================-->
-<script src="{{asset('form-login/vendor/daterangepicker/moment.min.js')}}"></script>
-<script src="{{asset('form-login/vendor/daterangepicker/daterangepicker.js')}}"></script>
-<!--===============================================================================================-->
-<script src="{{asset('form-login/vendor/countdowntime/countdowntime.js')}}"></script>
-<!--===============================================================================================-->
-<script src="{{asset('form-login/js/main.js')}}"></script>
-
-</body>
-</html>
+@endsection

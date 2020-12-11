@@ -21,14 +21,13 @@
                     @endif
                 </select>
             </div>
-            <button type="submit" class="btn-search btn btn-danger">
+            <button type="submit" class="btn-search btn btn-danger" >
                 <h4>Tìm kiếm</h4>
             </button>
         </form>
         <div class="title-item">
             <div class="list-job-title">
                 <div class="job-title">Danh sách việc làm</div>
-                
             </div>
             <div class="company-title">
                 <div class="company-hot-title">Nhà tuyển dụng nổi bật</div>

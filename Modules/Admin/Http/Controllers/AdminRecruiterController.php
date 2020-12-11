@@ -2,11 +2,13 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Models\CompanyImage;
+use App\Models\Job;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Recruiter;
-use App\Models\Pay;
+use App\Models\Transaction;
 
 class AdminRecruiterController extends Controller
 {
@@ -16,8 +18,7 @@ class AdminRecruiterController extends Controller
      */
     public function index()
     {
-        $recruiters = Recruiter::where('IsDelete',1)
-                                 ->get();
+        $recruiters = Recruiter::where('IsDelete',1)->get();
         $viewData = [
              'recruiters' => $recruiters
         ];
@@ -25,20 +26,18 @@ class AdminRecruiterController extends Controller
     }
 
     public function getDetailRecruiter($id){
+
+        $imageCompanies = CompanyImage::where('RecruiterId', $id)
+            ->get();
+
         $recruiterDetail = Recruiter::where('id',$id)->first();
         $viewData = [
-            'recruiterDetail' =>$recruiterDetail
+            'recruiterDetail' =>$recruiterDetail,
+            'imageCompanies' => $imageCompanies
         ];
-        return view('admin::recruiter.recruiter_detail',$viewData);
+        return view('admin::recruiter.detail',$viewData);
     }
-    public function getDetailTransaction($id){
-        $transactionDetail = Pay::with('accountPackage:AccountPackageId,AccountPackageName,Price')
-                                ->where('RecruiterId',$id)->get();
-        $viewData = [
-            'transactionDetail' =>$transactionDetail
-        ];
-        return view('admin::recruiter.transaction_detail',$viewData);
-    }
+    
     public function action($action,$id)
     {
         $recruiter = Recruiter::find($id);
@@ -61,7 +60,7 @@ class AdminRecruiterController extends Controller
 
     public function actionTransaction($actiontran,$id)
     {
-        $tran = Pay::find($id);
+        $tran = Transaction::find($id);
         if($actiontran){
             switch($actiontran)
             {

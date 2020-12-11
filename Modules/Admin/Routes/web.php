@@ -12,6 +12,7 @@
 */
 
 Route::prefix('admin')->group(function() {
+    
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
 
     Route::group(['prefix' => 'job'], function(){
@@ -20,12 +21,15 @@ Route::prefix('admin')->group(function() {
         Route::get('/{action}/{id}','AdminJobController@action')->name('admin.get.action.job');
 
     });
-
     Route::group(['prefix' => 'recruiter'], function(){
         Route::get('/','AdminRecruiterController@index')->name('admin.get.list.recruiter');
         Route::get('/detail/{id}','AdminRecruiterController@getDetailRecruiter')->name('admin.get.detail.recruiter');
-        Route::get('/transaction/{id}','AdminRecruiterController@getDetailTransaction')->name('admin.get.detail.transaction');
         Route::get('/{action}/{id}','AdminRecruiterController@action')->name('admin.get.action.recruiter');
         Route::get('/{actiontran}/{id}','AdminRecruiterController@actionTransaction')->name('admin.get.action.transaction');
     });
+
+    Route::group(['prefix' => 'transaction'], function(){
+        Route::get('/recruiter/{id}','AdminTransactionController@getTransactions')->name('admin.get.transaction');
+    });
+
 });

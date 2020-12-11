@@ -64,11 +64,18 @@
             <i class="fa fa-calendar-alt" style="color: #000;"></i>
             <div class="date-up-job-value">{{$jobDetail->created_at}}</div>
         </div>
-        <h2 class="description-title">Chi tiết công việc</h2>
+        <h3 class="description-title">Chi tiết công việc</h3>
         <div>{{$jobDetail->Description}}</div>
 
-        <h2 class="require-title">Yêu cầu</h2>
+        <h3 class="require-title">Yêu cầu</h3>
         <div>{{$jobDetail->Require}}</div>
+
+        @if(isset($jobDetail->Benifit))
+            <h3 class="benifit-title">Lợi ích</h3>
+            @foreach(explode(". ",$jobDetail->Benifit) as $benifit)
+                <div>* {{$benifit}}</div>
+            @endforeach
+        @endif
     </div>
 </div>
 @endsection

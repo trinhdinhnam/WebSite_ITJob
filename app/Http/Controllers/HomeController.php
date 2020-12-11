@@ -44,6 +44,15 @@ class HomeController extends Controller
 
     }
 
+    public function getConfirm(){
+        $companies = Recruiter::paginate(5);
+        $viewData = [
+            'companies' =>$companies
+        ];
+        return view('confirm.recruiter_confirm',$viewData);
+
+    }
+
     public function getJobs(Request $request)
     {
         $jobs = Job::with('recruiter:id,CompanyLogo');

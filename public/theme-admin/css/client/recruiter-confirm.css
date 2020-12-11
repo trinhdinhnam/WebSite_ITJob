@@ -1,0 +1,68 @@
+.content{
+    width: 100%;
+    height: auto;
+    background-color: rgb(219, 219, 241);
+    padding-bottom: 30px;
+
+}
+.content-container{
+    height: auto;
+    width: 78%;
+    margin: auto;
+    padding-top: 90px;
+    background-color: white;
+}
+.content-container .confirm-detail-content{
+    width: 90%;
+    height: auto;
+    margin: auto;
+}
+.confirm-detail-content .title{
+    font-size: 32px;
+    font-family: Florence, cursive;
+}
+
+.confirm-detail-content .title2{
+    font-size: 20px;
+    margin-top: 20px;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.confirm-detail-content .btn-danger{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #f23;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 30px;
+}
+
+.confirm-detail-content .title-contact{
+    font-size: 30px;
+    margin-top: 40px;
+    font-weight: 500;
+}
+
+.confirm-detail-content .title-company{
+    font-size: 30px;
+    margin-top: 30px;
+    font-weight: 500;
+}
+
+.confirm-detail-content .company{
+    width: 100%;
+    height: auto;
+    display: flex;
+
+}
+
+.company .company-item{
+    width: 650px;
+    height: 180px;
+    padding-top: 30px;
+}
+.company .company-item .company-logo{
+    width: 90%;
+    height: 120px;
+    background-color: white;
+}
+

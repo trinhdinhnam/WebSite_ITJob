@@ -41,10 +41,8 @@ class RequestRegisterRecruiter extends FormRequest
             'Email.required'=>'Bạn phải nhập email!',
             'Email.unique'=>'Email của bạn đã được sử dụng, vui lòng nhập email khác!',
             'Phone.required'=>'Bạn phải nhập số điện thoại!',
-
             'Password.required'=>'Bạn phải nhập mật khẩu!',
             'CompanyName.required'=>'Bạn phải nhập tên công ty!',
-
             'Address.required'=>'Bạn phải nhập địa chỉ công ty!',
             'CompanyLogo.required'=>'Bạn phải chọn ảnh logo của công ty!'
         ];
