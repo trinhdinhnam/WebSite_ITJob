@@ -16,20 +16,21 @@
 
     <div class="content">
     <div class="wrap-login100" id="modalLogin">
-        <form class="login100-form validate-form">
-        <span class="login100-form-logo">
+        <form class="login100-form validate-form" method="POST" enctype="multipart/form-data" action="{{route('seeker.post.login')}}">
+            @csrf
+            <span class="login100-form-logo">
             <i class="zmdi zmdi-landscape"></i>
         </span>
 
             <span class="login100-form-title p-b-34 p-t-27" style="font-family: Arial, Helvetica, sans-serif;">Đăng nhập</span>
 
             <div class="wrap-input100 validate-input" data-validate="Enter username">
-                <input class="input100" type="email" name="username" placeholder="Email">
+                <input class="input100" type="email" name="email" placeholder="Email">
                 <span class="focus-input100" data-placeholder="&#xf207;"></span>
             </div>
 
             <div class="wrap-input100 validate-input" data-validate="Enter password">
-                <input class="input100" type="password" name="pass" placeholder="Password">
+                <input class="input100" type="password" name="password" placeholder="Password">
                 <span class="focus-input100" data-placeholder="&#xf191;"></span>
             </div>
 

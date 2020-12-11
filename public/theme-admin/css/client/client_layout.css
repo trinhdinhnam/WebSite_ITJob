@@ -41,8 +41,6 @@
     width: 100px;
     margin-left: 360px;
 
-
-
 }
 .toolbar-content .btn-recruiter{
     height: 40px;
@@ -56,6 +54,86 @@
     border: none;
 }
 
+.toolbar-content .message-apply{
+    float: right;
+    position: relative;
+    left: 310px;
+}
+.fa-globe-americas{
+    font-size: 23px;
+    margin-top: 5px;
+}
+.message-apply .message-number{
+    position: absolute;
+    width: 13px;
+    height: 14px;
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    padding-top: -16px;
+    padding-left: 4px;
+    top: 3px;
+    left: 14px;
+}
+.toolbar-content .seeker-avatar{
+    float: right;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background-color: white;
+    position: relative;
+    left: 340px;
+}
+
+.toolbar-content .seeker-avatar img{
+    border-radius: 50%;
+}
+.toolbar-content .seeker-name{
+    color: white;
+    position: relative;
+    left: 350px;
+    margin-top: 5px;
+}
+.toolbar-content .btn-logout{
+    float: right;
+}
+/* Tạo dropdown menu cho user */
+.dropdown-user{
+    position: relative;
+    display: inline-block;
+    left: 355px;
+}
+.dropdown-user .dropdown-item{
+    background-color: white;
+    border-bottom: 1px solid #eee;
+    height: 40px;
+    font-weight: 600;
+    width: 238px;
+}
+.dropdown-user .dropdown-item:last-child{
+    color: red;
+}
+.dropdown-user .dropdown-item:hover{
+    background-color: #eee;
+}
+.dropdown-user .navbarDropdown{
+}
+.fa-chevron-circle-down{
+    color: white;
+    font-size: 17px;
+}
+.dropdown-content{
+    display: none;
+    z-index: 1;
+    list-style: none;
+}
+
+.dropdown-user:hover .dropdown-content{
+    display: block;
+}
+.fa-caret-down{
+    font-size: 23px;
+}
 /* Main */
 .main{
     height: auto;
@@ -68,7 +146,6 @@
 .footer{
     width: 100%;
     height: 300px;
-    background-color: rgb(255, 255, 255);
+    background-color:#222;
     z-index: 1;
-
 }

@@ -3,13 +3,13 @@
 namespace App\Http\Middleware;
 use Closure;
 
-class CheckLoginAdmin
+class CheckLoginSeeker
 {
     public function handle($request, Closure $next)
     {
-        if(!get_data_user('admins'))
+        if(!get_data_user('seekers'))
         {
-            return redirect()->route('admin.get.login');
+            return redirect()->route('seeker.get.login');
         }
         return $next($request);
     }

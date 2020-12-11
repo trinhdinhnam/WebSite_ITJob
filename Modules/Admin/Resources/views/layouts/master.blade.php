@@ -39,12 +39,12 @@
         <ul class="navbar-nav ml-auto ml-md-0">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i>@if(\Illuminate\Support\Facades\Auth::guard('admins')->check()){{\Illuminate\Support\Facades\Auth::guard('admins')->user()->AdminName}}@endif</a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">Thay đổi mật khẩu</a>
                     <a class="dropdown-item" href="#">Cập nhật thông tin cá nhân</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="">Đăng xuất</a>
+                    <a class="dropdown-item" href="{{route('get.logout.admin')}}">Đăng xuất</a>
                 </div>
             </li>
         </ul>

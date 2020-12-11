@@ -16,6 +16,8 @@ Route::get('search','HomeController@getJobs')->name('client.search.job');
 Route::get('confirm-recruiter','HomeController@getConfirm')->name('client.confirm.recruiter');
 Route::group(['namespace' => 'Auth'],function(){
     Route::get('login','LoginController@getLogin')->name('seeker.get.login');
+    Route::post('login','LoginController@postLogin')->name('seeker.post.login');
+    Route::get('logout','LoginController@getLogout')->name('seeker.get.logout');
 });
 Route::group(['prefix' => 'job'], function(){
     Route::get('/','HomeController@getJobs')->name('client.get.list.job');

@@ -1,0 +1,102 @@
+h1 {
+    color: blue;
+}
+
+.hidden {
+    display: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+#stepProgressBar {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.step {
+    text-align: center;
+    width: 300px;
+}
+
+.step-text {
+    margin-top: 10px;
+    color: rgb(0, 0, 0);
+}
+
+.bullet {
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+    border: 3px solid #28a745;
+    color: #626964;
+    display: inline-block;
+    position: relative;
+}
+
+.bullet i {
+    margin-top: 15px;
+}
+
+.bullet.completed {
+    color: white;
+    background-color: #28a745;
+}
+
+.bullet::after {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 5px;
+    color: #626964;
+    background-color: #626964;
+    right: -170px;
+    bottom: 30px;
+}
+
+.bullet.completed::after {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 5px;
+    background-color: #28a745;
+    border-color: #28a745;
+    right: -170px;
+    bottom: 30px;
+}
+
+.last::after {
+    content: none;
+}
+
+.bullet.last.completed::after {
+    content: none;
+}
+
+.order-card {
+    width: 100%;
+    height: auto;
+    color: black;
+    margin-bottom: 30px;
+}
+
+.order-card .order-product {
+    width: 100%;
+    height: auto;
+}
+
+.order-card .order-detail {
+    width: 100%;
+    height: 50px;
+}
+
+.order-card .order-product img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}

@@ -25,7 +25,6 @@ class HomeController extends Controller
             ->select(DB::raw('count(JobId) as jobNumber'))
             ->first();
         View::share('jobNumber',$jobNumber);
-
         $cities = City::all();
         View::share('cities',$cities);
 

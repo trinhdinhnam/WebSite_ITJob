@@ -85,6 +85,6 @@ if (!function_exists('get_data_user'))
 {
     function get_data_user($type,$field = 'id')
     {
-        return Auth::guard($type)->user() ? Auth::guard($type)->user()->$field : '';
+        return \Illuminate\Support\Facades\Auth::guard($type)->user() ? \Illuminate\Support\Facades\Auth::guard($type)->user()->$field : '';
     }
 }

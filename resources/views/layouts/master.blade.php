@@ -9,7 +9,6 @@
     <meta name="author" content="" />
     <link href="{{asset('theme-admin/css/client/client_layout.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -26,10 +25,29 @@
             </a>
             <a href="{{route('client.get.list.job')}}" type="button" class="btn-alljob btn btn-dark">Việc làm IT</a>
             <a href="" type="button" class="btn-company btn btn-dark">Công ty IT</a>
-            @if(!\Illuminate\Support\Facades\Auth::check())
+            @if(!\Illuminate\Support\Facades\Auth::guard('seekers')->check())
             <a href="{{route('seeker.get.login')}}" type="button" class="btn-login btn btn-dark">Đăng nhập</a>
-            <a href="{{route('client.confirm.recruiter')}}" type="button" class="btn-recruiter btn btn-dark">Nhà tuyển dụng</a>
-                @else
+            <a href="{{route('client.confirm.recruiter')}}" type="button" class="btn-recruiter btn btn-dark">Nhà tuyển
+                dụng</a>
+            @else
+            <a href="" class="message-apply"><i style="color: white;" class="fa fa-globe-americas"></i><div class="message-number">6</div></a>
+            <div class="seeker-avatar">
+                <img height="100%" width="100%"
+                    src="{{asset( pare_url_file(\Illuminate\Support\Facades\Auth::guard('seekers')->user()->Avatar)) }}"
+                    class="thumbnail">
+            </div>
+            <div class="seeker-name">
+                @if(\Illuminate\Support\Facades\Auth::guard('seekers')->check()){{\Illuminate\Support\Facades\Auth::guard('seekers')->user()->SeekerName}}@endif
+            </div>
+            <div class="nav-item dropdown dropdown-user">
+                <a class="nav-link" href="#" id="navbarDropdown"><i class="fa fa-chevron-circle-down"></i></a>
+                <div class="dropdown-content">
+                    <a class="dropdown-item" href="#">Xem đơn ứng tuyển</a>
+                    <a class="dropdown-item" href="#">Thay đổi thông tin cá nhân</a>
+                    <a class="dropdown-item" href="#">Cập nhật mật khẩu</a>
+                    <a class="dropdown-item" href="{{route('seeker.get.logout')}}">Đăng xuất</a>
+                </div>
+            </div>
             @endif
         </div>
     </div>
@@ -37,6 +55,13 @@
         @yield('main')
     </div>
     <div class="footer">
+        <div class="footter-container" style="width: 78%; height: 100%; margin: auto; padding-top: 20px;">
+            <div style="color: white; font-weight: bold; ">Liên hệ để đăng tin tuyển dụng tại: </div>
+            <ul style="color: white;">
+                <li>Hồ Chí Minh: (+84)0395699933 - Hà Nội: (+84)0395699933 - Email: nam162661@nuce.edu.vn</li>
+            </ul>
+        </div>
+
     </div>
     <div class="modal fade" id="myModalLogin" role="dialog" style="width: auto; height: auto;">
         <div class="modal-dialog">
@@ -45,13 +70,7 @@
             </div>
         </div>
     </div>
-    <!-- <div class="modal fade" id="myModalSignup" role="dialog" >
-        <div class="modal-dialog">
-            <div class="modal-content modal-lg" id="md_content_signup" style="border-radius: 15px; ">
-            </div>
-        </div>
-    </div> -->
-                <!-- Thư viện jquery đã nén phục vụ cho bootstrap.min.js  -->
+    <!-- Thư viện jquery đã nén phục vụ cho bootstrap.min.js  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Thư viện popper đã nén phục vụ cho bootstrap.min.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
@@ -75,28 +94,9 @@
             $("#myModalLogin").modal('show');
         });
 
-        $('#myModalLogin').on('hidden.bs.modal', function (e) {
+        $('#myModalLogin').on('hidden.bs.modal', function(e) {
             location.reload();
         });
-        /* Modal Signup */
-        // $(".btn-signup").on('click', function(e) {
-        //     e.preventDefault();
-        //     $("#myModalLogin").modal('hide');
-        //     let $this = $(this);
-        //     let url = $this.attr('href');
-        //     $.ajax({
-        //         url: url,
-        //     }).done(function(result) {
-        //         if (result) {
-        //             $("#md_content_signup").append(result);
-        //         }
-        //     });
-
-        //     $("#myModalSignup").modal('show');
-        // });
-        // $('#myModalSignup').on('hidden.bs.modal', function(e) {
-        //     location.reload();
-        // });
     })
     </script>
 </body>

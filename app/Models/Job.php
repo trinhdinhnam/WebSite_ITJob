@@ -7,7 +7,7 @@ use App\Models\Position;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ssJob extends Model
+class Job extends Model
 {
     //
     protected $table = 'jobs';

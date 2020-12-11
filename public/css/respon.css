@@ -1,0 +1,13 @@
+.desc{
+        white-space: nowrap;
+        width: 240px;
+        height: 60px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+}
+.nameinline{
+    text-overflows: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+}
