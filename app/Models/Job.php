@@ -6,6 +6,7 @@ use App\Models\Recruiter;
 use App\Models\Position;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Job extends Model
 {
@@ -36,5 +37,10 @@ class Job extends Model
     }
     public function recruiter(){
         return $this->belongsTo(Recruiter::class,'RecruiterId');
+    }
+
+    public function formatDate($date){
+        Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
+        return Carbon::parse($date)->diffForHumans(Carbon::now());
     }
 }

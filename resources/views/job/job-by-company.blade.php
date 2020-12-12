@@ -64,10 +64,10 @@
                         </div>
                         <div class="job-info">
                             <div class="job-name">
-                                <h3><a href="">{{$job->JobName}}</a></h3>
+                                <h3><a href="{{route('client.get.detail.job',$job->JobId)}}">{{$job->JobName}}</a></h3>
                             </div>
                             <div class="job-salary">
-                                <h6>{{$job->Salary}}</h6>
+                                <h6>{{number_format($job->Salary)}} VNĐ</h6>
                             </div>
 
                             <div class="job-description">{{$job->Description}}</div>
@@ -82,7 +82,7 @@
                         <div class="job-status">
                             <div class="hot-title ">Hot job</div>
                             <div class="job-city ">{{$job->City}}</div>
-                            <div class="job-created ">5 giờ trước</div>
+                            <div class="job-created ">{{$job->formatDate($job->created_at)}}</div>
                         </div>
                     </div>
                     @endforeach

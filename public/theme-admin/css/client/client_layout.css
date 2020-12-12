@@ -149,3 +149,29 @@
     background-color:#222;
     z-index: 1;
 }
+
+.footer .footer-container{
+    width: 78%; 
+    height: 100%; 
+    margin: auto; 
+    padding-top: 20px;
+    font-weight: 500;
+}
+.footer-container .contact-title{
+    color: white;
+}
+.footer-container ul li{
+    color: white;
+    font-weight: 300;
+}
+
+.footer-container .row{
+    margin-top: 40px;
+}
+.footer-container .row .col-md-4{
+    color: white;
+}
+.footer-container .row .col-md-4 a{
+    color: white;
+    font-weight: 300;
+}

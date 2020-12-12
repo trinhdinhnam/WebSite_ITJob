@@ -8,9 +8,9 @@ use App\Models\Position;
 use App\Models\Recruiter;
 use Illuminate\Http\Request;
 use App\Models\Job;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Carbon;
 
 class HomeController extends Controller
 {

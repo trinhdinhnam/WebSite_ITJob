@@ -30,7 +30,9 @@
             <a href="{{route('client.confirm.recruiter')}}" type="button" class="btn-recruiter btn btn-dark">Nhà tuyển
                 dụng</a>
             @else
-            <a href="" class="message-apply"><i style="color: white;" class="fa fa-globe-americas"></i><div class="message-number">6</div></a>
+            <a href="" class="message-apply"><i style="color: white;" class="fa fa-globe-americas"></i>
+                <div class="message-number">6</div>
+            </a>
             <div class="seeker-avatar">
                 <img height="100%" width="100%"
                     src="{{asset( pare_url_file(\Illuminate\Support\Facades\Auth::guard('seekers')->user()->Avatar)) }}"
@@ -55,11 +57,43 @@
         @yield('main')
     </div>
     <div class="footer">
-        <div class="footter-container" style="width: 78%; height: 100%; margin: auto; padding-top: 20px;">
-            <div style="color: white; font-weight: bold; ">Liên hệ để đăng tin tuyển dụng tại: </div>
-            <ul style="color: white;">
+        <div class="footer-container">
+            <div class='contact-title'>Liên hệ để đăng tin tuyển dụng tại: </div>
+            <ul>
                 <li>Hồ Chí Minh: (+84)0395699933 - Hà Nội: (+84)0395699933 - Email: nam162661@nuce.edu.vn</li>
             </ul>
+            <div class="row">
+                <div class="col-md-4">
+                    <div>Về PhuongNam Recruiment</div>
+                    <a href="">Trang chủ</a>
+                    </br>
+                    <a href="">Việc làm it</a>
+                    </br>
+                    <a href="">Liên hệ</a>
+                    </br>
+                    <a href="">Câu hỏi thường gặp</a>
+                </div>
+                <div class="col-md-4">
+                <div>Điều khoản chung</div>
+                    <a href="">Quy định bảo mật</a>
+                    </br>
+                    <a href="">Quy chế hoạt động</a>
+                    </br>
+                    <a href="">Giải quyết khiếu nại</a>
+                    </br>
+                    <a href="">Thỏa thuẩn sử dụng</a>
+                    </br>
+                    <a href="">Thông cáo báo chí</a>
+                </div>
+                <div class="col-md-4">
+                <a href="">MST: 093884888553</a>
+                    </br>
+                    <a href="">Điện thoại: 0941870894</a>
+                    </br>
+                    <a href="">Địa chỉ: Tòa nhà Handico 6, Khu tập thể Trung Hòa Nhân Chính,Hà Nội</a>
+                    </br>
+                </div>
+            </div>
         </div>
 
     </div>

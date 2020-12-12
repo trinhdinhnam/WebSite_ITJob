@@ -73,7 +73,7 @@
                         <div class="job-status">
                             <div class="hot-title">Hot job</div>
                             <div class="job-city">{{$job->City}}</div>
-                            <div class="job-created">5 giờ trước</div>
+                            <div class="job-created">{{$job->formatDate($job->created_at)}}</div>
                         </div>
                     </div>
                     @endforeach
