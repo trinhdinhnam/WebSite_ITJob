@@ -4,9 +4,9 @@ namespace App\Models;
 use App\Models\Language;
 use App\Models\Recruiter;
 use App\Models\Position;
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class Job extends Model
 {
@@ -38,7 +38,9 @@ class Job extends Model
     public function recruiter(){
         return $this->belongsTo(Recruiter::class,'RecruiterId');
     }
-
+    public function seekerJob(){
+            return $this->hasMany(SeekerJob::class,'JobId');
+    }
     public function formatDate($date){
         Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
         return Carbon::parse($date)->diffForHumans(Carbon::now());

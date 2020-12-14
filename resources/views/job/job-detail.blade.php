@@ -62,10 +62,10 @@
                         <i class="fa fa-calendar-alt" style="color: #000;"></i>
                         <div class="date-up-job-value">{{$jobDetail->created_at}}</div>
                     </div>
-                    <a disabled href="{{route('client.get.apply',$jobDetail->JobId)}}" class="btn-apply btn btn-danger @if(!\Illuminate\Support\Facades\Auth::guard('seekers')->check()) dis @else @endif" >Ứng tuyển</a>
+                    <a disabled href="{{route('client.get.apply',$jobDetail->JobId)}}" class="btn-apply btn btn-danger @if(!\Illuminate\Support\Facades\Auth::guard('seekers')->check()) dis @else @endif
+                    @if($jobDetail->SeekerId==\Illuminate\Support\Facades\Auth::guard('seekers')->user()->id && $jobDetail->JobId==$jobDetail->seekerJob->JobId) dis @endif" >Ứng tuyển</a>
                     <h2 class="description-title">Chi tiết công việc</h2>
                     <div>{{$jobDetail->Description}}</div>
-
                     <h2 class="require-title">Yêu cầu</h2>
                     <div>{{$jobDetail->Require}}</div>
                 </div>

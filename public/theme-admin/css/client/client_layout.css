@@ -22,30 +22,35 @@
     background-position: center center;
     background-size: cover;
     margin-right: 20px;
+    position: absolute;
 }
 
 .toolbar-content .btn-alljob{
     height: 40px;
-    width: 100px;
+    width: 110px;
+    left: 160px;
+    position: absolute;
 
 }
 .toolbar-content .btn-company{
     height: 40px;
     width: 120px;
-    margin-left: 20px;
-
+    left: 430px;
+    position: absolute;
 
 }
 .toolbar-content .btn-login{
     height: 40px;
     width: 100px;
-    margin-left: 360px;
+    left: 890px;
+    position: absolute;
 
 }
 .toolbar-content .btn-recruiter{
     height: 40px;
     width: 135px;
-    margin-left: 10px;
+    left: 1000px;
+    position: absolute;
 
 
 }
@@ -56,8 +61,8 @@
 
 .toolbar-content .message-apply{
     float: right;
-    position: relative;
-    left: 310px;
+    position: absolute;
+    left: 760px;
 }
 .fa-globe-americas{
     font-size: 23px;
@@ -81,8 +86,8 @@
     height: 33px;
     border-radius: 50%;
     background-color: white;
-    position: relative;
-    left: 340px;
+    position: absolute;
+    left: 950px;
 }
 
 .toolbar-content .seeker-avatar img{
@@ -90,18 +95,16 @@
 }
 .toolbar-content .seeker-name{
     color: white;
-    position: relative;
-    left: 350px;
+    position: absolute;
+    left: 990px;
     margin-top: 5px;
 }
-.toolbar-content .btn-logout{
-    float: right;
-}
+
 /* Tạo dropdown menu cho user */
 .dropdown-user{
-    position: relative;
+    position: absolute;
     display: inline-block;
-    left: 355px;
+    left: 970px;
 }
 .dropdown-user .dropdown-item{
     background-color: white;
@@ -122,10 +125,12 @@
     color: white;
     font-size: 17px;
 }
-.dropdown-content{
+.dropdown-user .dropdown-content{
     display: none;
     z-index: 1;
     list-style: none;
+    position: absolute;
+    left: -50px;
 }
 
 .dropdown-user:hover .dropdown-content{
@@ -133,6 +138,167 @@
 }
 .fa-caret-down{
     font-size: 23px;
+}
+
+/* Tạo dropdown cho việc làm */
+.dropdown-job{
+    position: relative;
+    display: inline-block;
+    left: 5px;
+}
+
+.dropdown-job .dropdown-content .dropdown-item{
+    background-color: #444;
+    border-bottom: 1px solid #eee;
+    height: 40px;
+    font-weight: 600;
+    width: 238px;
+    color: white;
+    font-size: 13px;
+    padding-top: 10px;
+    position: relative;
+}
+.dropdown-job .dropdown-content .dropdown-item .fa-chevron-right{
+    position: absolute;
+    left: 220px;
+} 
+.dropdown-job .dropdown-content .dropdown-item:hover{
+    background-color: #aaa;
+}
+
+.dropdown-job .dropdown-content{
+    display: none;
+    z-index: 1;
+    list-style: none;
+    position: absolute;
+    top: 41px;
+    left: 170px;
+}
+
+.dropdown-job:hover .dropdown-content{
+    display: block;
+}
+
+/* Tạo dropdown cho việc làm theo kỹ năng */
+.dropdown-content-skill.row{
+    z-index: 1;
+    position: absolute;
+    left: 252px;
+    top: 0;
+    width: 340px;
+    display: none;
+}
+.dropdown-content-skill .dropdown-item.dropdown-item-skill.col-md-3{
+    height: 40px;
+    border: none;
+    font-size: 13px;
+    padding-left: 10px;
+}
+.job-by-skill-menu:hover .dropdown-content-skill.row{
+    display: flex;
+}
+/* Tạo dropdown cho việc làm theo vị trí */
+.dropdown-content-position.row{
+    z-index: 1;
+    position: absolute;
+    left: 252px;
+    top: 0;
+    width: 520px;
+    display: none;
+}
+.dropdown-content-position .dropdown-item.dropdown-item-position.col-md-3{
+    height: 40px;
+    border: none;
+    font-size: 13px;
+    padding-left: 10px;
+}
+.job-by-position-menu:hover .dropdown-content-position.row{
+    display: flex;
+}
+/* Tạo dropdown cho việc làm theo thành phố */
+.dropdown-content-city.row{
+    z-index: 1;
+    position: absolute;
+    left: 252px;
+    top: 0;
+    display: none;
+    width: 440px;
+}
+.dropdown-content-city .dropdown-item.dropdown-item-city.col-md-3{
+    height: 40px;
+    border: none;
+    font-size: 13px;
+    padding-left: 10px;
+}
+.job-by-city-menu:hover .dropdown-content-city.row{
+    display: block;
+}
+/* Tạo dropdown cho việc làm theo công ty */
+.dropdown-content-company.row{
+    z-index: 1;
+    position: absolute;
+    left: 252px;
+    top: 0;
+    width: 400px;
+    display: none;
+}
+.dropdown-content-company .dropdown-item.dropdown-item-company.col-md-3{
+    height: 40px;
+    border: none;
+    font-size: 13px;
+    padding-left: 10px;
+    width: auto;
+}
+.job-by-company-menu:hover .dropdown-content-company.row{
+    display: block;
+}
+/* Tạo dropdown cho thông báo */
+.dropdown-content-message.dropdown-menu{
+    z-index: 1;
+    position: absolute;
+    left: 892px;
+    top: 40px;
+    width: 260px;
+    height: auto;
+    background-color: white;
+}
+
+.dropdown-content-message.dropdown-menu .dropdown-item.dropdown-item-message{
+    height: auto;
+    border-bottom: 1px solid #aaa;
+    font-size: 13px;
+    width: 100%;
+    margin-left: 0px;
+    display: flex;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.active{
+    background-color: rgb(235, 45, 57);
+}
+.notactive{
+    background-color: white;
+}
+.message-company-logo{
+    padding: 0px;
+    width: 20%;
+}
+.message-info{
+    padding-right: 0px;
+    padding-left: 0px;
+    width: 80%;
+    height: auto;
+
+}
+.message-info .message-job-name{
+    width: 200px;
+    height: auto;
+    display: flex;
+}
+
+.message-info .message-date{
+   color: rgb(43, 53, 192);
+   font-weight: 700;
 }
 /* Main */
 .main{

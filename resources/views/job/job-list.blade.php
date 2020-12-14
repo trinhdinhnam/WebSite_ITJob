@@ -77,6 +77,8 @@
                         </div>
                     </div>
                     @endforeach
+                    @else
+                    <h3>Không có việc làm nào!</h3>
                     @endif
                 </div>
                 <div class="company-hot">
@@ -99,7 +101,7 @@
                     @if(isset($jobsByCompanyHot))
                     @foreach($jobsByCompanyHot as $job)
                     <div class="job-item">
-                        <a href="" class="job-name">{{$job->JobName}}</a>
+                        <a href="{{route('client.get.detail.job',$job->JobId)}}" class="job-name">{{$job->JobName}}</a>
                     </div>
                     @endforeach
                     @endif

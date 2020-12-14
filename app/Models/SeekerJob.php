@@ -5,6 +5,7 @@ use App\Models\Job;
 use App\Models\Seeker;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class SeekerJob extends Model
 {
@@ -32,5 +33,10 @@ class SeekerJob extends Model
     ];
     public function getStatus(){
         return array_get($this->status,$this->Status,'[N\A]');
+    }
+
+    public function formatDate($date){
+        Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
+        return Carbon::parse($date)->diffForHumans(Carbon::now());
     }
 }

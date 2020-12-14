@@ -24,9 +24,13 @@ Route::group(['prefix' => 'job'], function(){
     Route::get('/detail/{id}','HomeController@getDetailJob')->name('client.get.detail.job');
     Route::get('/job-by-company/{id}','HomeController@getJobByCompany')->name('client.get.job.by.company');
     Route::get('/job-by-position/{id}','HomeController@getJobByPosition')->name('client.get.job.by.position');
+    Route::get('/job-by-city/{id}','HomeController@getJobByCity')->name('client.get.job.by.city');
+    Route::get('/job-by-position/{id}','HomeController@getJobByPosition')->name('client.get.job.by.position');
+
 });
 
 Route::group(['prefix' => 'apply'], function(){
     Route::get('/apply-job/{id}','ApplyController@getApply')->name('client.get.apply');
+    Route::post('/apply-job/{id}','ApplyController@postApply');
 
 });

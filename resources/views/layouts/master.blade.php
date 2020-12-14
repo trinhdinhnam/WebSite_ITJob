@@ -23,16 +23,102 @@
                 <div class="logo" style="background-image: url({{asset('/images/logowebsite.png')}})">
                 </div>
             </a>
-            <a href="{{route('client.get.list.job')}}" type="button" class="btn-alljob btn btn-dark">Việc làm IT</a>
+            <div class="nav-item dropdown dropdown-job">
+                <a href="{{route('client.get.list.job')}}" type="button" id="navbarDropdown"
+                    class="nav-link btn-alljob btn btn-dark">Việc làm IT</a>
+                <div class="dropdown-content">
+                    <div class="job-by-skill-menu">
+                        <a class="dropdown-item nav-link" id="jobBySkill" href="#">Việc làm IT theo kỹ năng<i
+                                class="fa fa-chevron-right"></i></a>
+                        <div class="dropdown-content-skill row">
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">CSS</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">Java Script</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">Python</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">C#</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">HTML</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">CSS</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">Java Script</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">Python</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">C#</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">HTML</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">CSS</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">Java Script</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">Python</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">C#</a>
+                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">HTML</a>
+                        </div>
+                    </div>
+                    <div class="job-by-position-menu">
+                        <a class="dropdown-item nav-link" id="jobByPosition" href="#">Việc làm IT theo vị trí<i
+                                class="fa fa-chevron-right"></i></a>
+                        <div class="dropdown-content-position row">
+                            @if(isset($positions))
+                            @foreach($positions as $position)
+                            <a class="dropdown-item dropdown-item-position col-md-3"
+                                href="{{route('client.get.job.by.position',$position->PositionId)}}">{{$position->PositionName}}</a>
+                            @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    <div class="job-by-city-menu">
+                        <a class="dropdown-item nav-link" id="jobByCity" href="">Việc làm IT theo thành phố<i
+                                class="fa fa-chevron-right"></i></a>
+                        <div class="dropdown-content-city row">
+                            @if(isset($cities))
+                            @foreach($cities as $city)
+                            <a class="dropdown-item dropdown-item-city col-md-3"
+                                href="{{route('client.get.job.by.city',$city->CityId)}}">{{$city->CityName}}</a>
+                            @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    <div class="job-by-company-menu">
+                        <a class="dropdown-item nav-link" id="jobByCompany" href="">Việc làm IT theo công ty<i
+                                class="fa fa-chevron-right"></i></a>
+                        <div class="dropdown-content-company row">
+                            @if(isset($companyList))
+                            @foreach($companyList as $company)
+                            <a class="dropdown-item dropdown-item-company col-md-3"
+                                href="{{route('client.get.job.by.company',$company->id)}}">{{$company->CompanyName}}</a>
+                            @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
             <a href="" type="button" class="btn-company btn btn-dark">Công ty IT</a>
             @if(!\Illuminate\Support\Facades\Auth::guard('seekers')->check())
             <a href="{{route('seeker.get.login')}}" type="button" class="btn-login btn btn-dark">Đăng nhập</a>
             <a href="{{route('client.confirm.recruiter')}}" type="button" class="btn-recruiter btn btn-dark">Nhà tuyển
                 dụng</a>
             @else
-            <a href="" class="message-apply"><i style="color: white;" class="fa fa-globe-americas"></i>
-                <div class="message-number">6</div>
-            </a>
+            <div class="job-by-message-menu dropdown">
+                <a href="" class="message-apply" data-toggle="dropdown"><i style="color: white;"
+                        class="fa fa-globe-americas"></i>
+                    <div class="message-number">{{$messageNumber->jobNumber}}</div>
+                </a>
+                <div class="dropdown-content-message dropdown-menu">
+                    @if(isset($messageInfos))
+                    @foreach($messageInfos as $messageInfo)
+                    <a class="dropdown-item dropdown-item-message @if($messageInfo->MessageStatus==1) active @else notactive @endif" href="{{route('client.get.detail.job',$messageInfo->JobId)}}">
+                        <div class="message-company-logo">
+                            <img height="40px" width="40px" src="{{asset( pare_url_file($messageInfo->CompanyLogo)) }}"
+                                style="border-radius: 50%; background-color: red;" class="thumbnail">
+                        </div>
+                        <div class="message-info">
+                            <div class="message-job-name">
+                                <div style="font-weight: 700;">{{$messageInfo->CompanyName}} </div> đã duyệt hồ sơ của bạn.
+                            </div>
+                            <div class="message-date">
+                                {{$messageInfo->MessageDate}}
+                            </div>
+                        </div>
+                    </a>
+                    @endforeach
+                    @endif
+
+                </div>
+            </div>
             <div class="seeker-avatar">
                 <img height="100%" width="100%"
                     src="{{asset( pare_url_file(\Illuminate\Support\Facades\Auth::guard('seekers')->user()->Avatar)) }}"
@@ -74,7 +160,7 @@
                     <a href="">Câu hỏi thường gặp</a>
                 </div>
                 <div class="col-md-4">
-                <div>Điều khoản chung</div>
+                    <div>Điều khoản chung</div>
                     <a href="">Quy định bảo mật</a>
                     </br>
                     <a href="">Quy chế hoạt động</a>
@@ -86,7 +172,7 @@
                     <a href="">Thông cáo báo chí</a>
                 </div>
                 <div class="col-md-4">
-                <a href="">MST: 093884888553</a>
+                    <a href="">MST: 093884888553</a>
                     </br>
                     <a href="">Điện thoại: 0941870894</a>
                     </br>
@@ -114,6 +200,7 @@
 
     <script type="text/javascript">
     $(function() {
+        var click = 1;
         $(".btn-login").click(function(event) {
             event.preventDefault();
             let $this = $(this);
@@ -131,6 +218,19 @@
         $('#myModalLogin').on('hidden.bs.modal', function(e) {
             location.reload();
         });
+
+        // $('.message-apply').click( function (event) {
+        //     event.preventDefault();
+        //     //$('.dropdown-content-message').addClass('show');
+        //     if(click==1){
+        //         $('.dropdown-content-message').addClass('show');
+        //         click = 0;
+        //     }else if(click==0){
+        //         $('.dropdown-content-message').addClass('hide');
+        //         click = 1;
+        //     }
+        // })
+
     })
     </script>
 </body>

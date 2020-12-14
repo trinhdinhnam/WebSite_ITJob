@@ -67,7 +67,7 @@
                                 <h3><a href="{{route('client.get.detail.job',$job->JobId)}}">{{$job->JobName}}</a></h3>
                             </div>
                             <div class="job-salary">
-                                <h6>{{number_format($job->Salary)}} VNĐ</h6>
+                                <h6>Lương up to: {{number_format($job->Salary)}} VNĐ</h6>
                             </div>
 
                             <div class="job-description">{{$job->Description}}</div>
