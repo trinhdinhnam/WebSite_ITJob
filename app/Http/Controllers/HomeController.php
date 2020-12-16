@@ -14,40 +14,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     //
     use AuthenticatesUsers;
 
-    public function __construct()
-    {
-        $positions = Position::all();
-        View::share('positions',$positions);
-        $jobNumber = DB::table('jobs')
-            ->select(DB::raw('count(JobId) as jobNumber'))
-            ->first();
-        View::share('jobNumber',$jobNumber);
-        $cities = City::all();
-        View::share('cities',$cities);
-        $companies = Recruiter::all();
-        View::share('companyList',$companies);
-        $messageNumber = DB::table('seeker_jobs')
-            ->select(DB::raw('count(JobId) as jobNumber, SeekerId'))
-            ->where('SeekerId', 1)
-            ->where('MessageStatus',1)
-            ->groupBy('SeekerId')
-            ->first();
 
-        View::share('messageNumber',$messageNumber);
-        $messageInfos = DB::table('seeker_jobs')->select(DB::raw('jobs.JobName as JobName, seeker_jobs.updated_at as MessageDate, seeker_jobs.JobId as JobId, recruiters.CompanyLogo as CompanyLogo, recruiters.CompanyName as CompanyName, seeker_jobs.MessageStatus as MessageStatus'))
-                                ->leftJoin('jobs','seeker_jobs.JobId','=','jobs.JobId')
-                                ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
-                                ->where('SeekerId', 1)
-                                ->where('seeker_jobs.Status',1)
-                                ->get();
-        View::share('messageInfos',$messageInfos);
-    }
-    
     public function getHomePage(){
         $companies =  DB::table('recruiters')
             ->select(DB::raw('count(JobId) as jobNumber, recruiters.id as RecruiterId, CompanyLogo, CompanyName, recruiters.City as City'))
@@ -58,7 +30,6 @@ class HomeController extends Controller
             'companies' =>$companies
         ];
         return view('index',$viewData);
-
     }
 
     public function getConfirm(){
@@ -113,6 +84,7 @@ class HomeController extends Controller
                         ->with('seekerJob:SeekerJobId,JobId,SeekerId');
         //$jobDetail = $jobDetail->select('jobs.JobId as JobId, seeker_jobs.JobId as JobIdApply')
         $jobDetail = $jobDetail->where('jobs.JobId',$id)->first();
+
         //$jobDetailApply = $jobDetail->select('jobs.JobId as JobId, seeker_jobs.JobId as JobIdApply')->first();
         $imageCompanies = CompanyImage::where('RecruiterId', $jobDetail->RecruiterId)
                         ->get();

@@ -11,6 +11,7 @@ use App\Models\Language;
 use App\Models\SeekerJob;
 
 use App\Http\Requests\RequestJob;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -71,7 +72,7 @@ class RecruiterJobController extends Controller
             $job->PositionId = $request->PositionId;
             $job->Skill = $request->Skill;
             $job->Salary = $request->Salary;
-            $job->AdminID = 1;
+            $job->AdminID = Auth::guard('admins')->user()->id;
             $job->RecruiterId = 6;
             $job->save();
 

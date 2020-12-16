@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Seeker extends Authenticatable
+class Seeker extends Authenticatable implements HasMedia
 {
     //
+    use HasMediaTrait;
     protected $table = 'seekers';
     protected $primaryKey = 'id';
     protected $guarded=[''];

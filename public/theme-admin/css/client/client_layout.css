@@ -104,14 +104,18 @@
 .dropdown-user{
     position: absolute;
     display: inline-block;
-    left: 970px;
+    left: 1110px;
 }
 .dropdown-user .dropdown-item{
-    background-color: white;
+    background-color: #ffd0c6;
     border-bottom: 1px solid #eee;
     height: 40px;
     font-weight: 600;
     width: 238px;
+    padding-left: 10px;
+}
+.nav-item.dropdown.dropdown-user .dropdown-content .dropdown-item .fa.fa-edit{
+    margin-left: 15px;
 }
 .dropdown-user .dropdown-item:last-child{
     color: red;
@@ -234,22 +238,22 @@
     display: block;
 }
 /* Tạo dropdown cho việc làm theo công ty */
-.dropdown-content-company.row{
+.dropdown-content-company{
     z-index: 1;
     position: absolute;
-    left: 252px;
+    left: 238px;
     top: 0;
-    width: 400px;
+    width: auto;
     display: none;
 }
-.dropdown-content-company .dropdown-item.dropdown-item-company.col-md-3{
+.dropdown-content-company .dropdown-item.dropdown-item-company{
     height: 40px;
     border: none;
     font-size: 13px;
     padding-left: 10px;
     width: auto;
 }
-.job-by-company-menu:hover .dropdown-content-company.row{
+.job-by-company-menu:hover .dropdown-content-company{
     display: block;
 }
 /* Tạo dropdown cho thông báo */
@@ -258,26 +262,34 @@
     position: absolute;
     left: 892px;
     top: 40px;
-    width: 260px;
+    width: 360px;
     height: auto;
     background-color: white;
 }
-
+.seen{
+    background-color: white;
+}
+.notseen{
+    background-color: #d7e1f3;
+}
+.text-grey{
+    color: rgb(95, 87, 87);
+}
+.text-black{
+    color: rgb(0, 0, 0);
+}
+.text-blue{
+    color: rgb(43, 53, 192);
+}
 .dropdown-content-message.dropdown-menu .dropdown-item.dropdown-item-message{
     height: auto;
     border-bottom: 1px solid #aaa;
     font-size: 13px;
     width: 100%;
     margin-left: 0px;
-    display: flex;
     padding-left: 5px;
     padding-right: 5px;
-}
-.active{
-    background-color: rgb(235, 45, 57);
-}
-.notactive{
-    background-color: white;
+    display: flex;
 }
 .message-company-logo{
     padding: 0px;
@@ -288,23 +300,20 @@
     padding-left: 0px;
     width: 80%;
     height: auto;
-
 }
 .message-info .message-job-name{
-    width: 200px;
+    width: auto;
     height: auto;
-    display: flex;
 }
 
 .message-info .message-date{
-   color: rgb(43, 53, 192);
    font-weight: 700;
 }
 /* Main */
 .main{
     height: auto;
     width: 100%;
-    padding-top: 60px;
+    padding-top: 0px;
     z-index: 2;
 }
 

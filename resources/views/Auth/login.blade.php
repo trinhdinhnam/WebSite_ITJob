@@ -43,7 +43,7 @@
         </div>
 
         <div class="text-center p-t-90">
-            <a class="txt1 btn-signup" href="">
+            <a class="txt1 btn-signup" href="{{route('seeker.get.register')}}">
                 Đăng ký
             </a>
         </div>

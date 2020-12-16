@@ -4,7 +4,6 @@
 <link href="{{asset('form-signup/css/signup.css')}}" rel="stylesheet" />
 <link href="{{asset('css/account-package.css')}}" rel="stylesheet" />
 
-
 <!------ Include the above in your HEAD tag ---------->
 <div class="content">
  <div class="container register-form" >

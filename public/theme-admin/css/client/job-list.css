@@ -61,6 +61,8 @@
     width: 160px;
     margin-left: 10px;
     padding-top: 12px;
+    background-color: #ff263a;
+
 }
 
 .position{
@@ -174,6 +176,10 @@
     color: #555;
     font-size: 14px;
     margin-top: 15px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
 }
 .job-info .job-skill{
     margin-top: 15px;
