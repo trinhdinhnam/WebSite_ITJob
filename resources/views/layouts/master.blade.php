@@ -95,7 +95,7 @@
                 <a href="" class="message-apply" data-toggle="dropdown"><i style="color: white;"
                         class="fa fa-globe-americas"></i>
                     @if(isset($messageNumber))
-                    <div class="message-number">{{$messageNumber->messageNumber}}</div>
+                    <div class="message-number">{{$messageNumber}}</div>
                     @endif
                 </a>
                 <div class="dropdown-content-message dropdown-menu">

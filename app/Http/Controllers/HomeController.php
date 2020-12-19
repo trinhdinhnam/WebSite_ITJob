@@ -7,6 +7,12 @@ use App\Models\CompanyImage;
 use App\Models\Position;
 use App\Models\Recruiter;
 use App\Models\SeekerJob;
+use App\Repository\City\ICityRepository;
+use App\Repository\CompanyImage\ICompanyImageRepository;
+use App\Repository\Job\IJobRepository;
+use App\Repository\Position\IPositionRepository;
+use App\Repository\Recruiter\IRecruiterRepository;
+use App\Repository\SeekerJob\ISeekerJobRepository;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\Job;
@@ -19,13 +25,19 @@ class HomeController extends BaseController
     //
     use AuthenticatesUsers;
 
+    public $recruiterRepository;
+    public $jobRepository;
+    public $companyImageRepository;
+    public function __construct(ISeekerJobRepository $seekerJobRepository, IPositionRepository $positionRepository, IJobRepository $jobRepository, ICityRepository $cityRepository, IRecruiterRepository $recruiterRepository,ICompanyImageRepository $companyImageRepository)
+    {
+        parent::__construct($seekerJobRepository, $positionRepository, $jobRepository, $cityRepository, $recruiterRepository);
+        $this->recruiterRepository = $recruiterRepository;
+        $this->jobRepository = $jobRepository;
+        $this->companyImageRepository = $companyImageRepository;
+    }
 
     public function getHomePage(){
-        $companies =  DB::table('recruiters')
-            ->select(DB::raw('count(JobId) as jobNumber, recruiters.id as RecruiterId, CompanyLogo, CompanyName, recruiters.City as City'))
-            ->leftJoin('jobs','recruiters.id','=','jobs.RecruiterId')
-            ->groupBy('recruiters.id','CompanyLogo','CompanyName','City')
-            ->get();
+        $companies = $this->recruiterRepository->getListRecruiters();
         $viewData = [
             'companies' =>$companies
         ];
@@ -43,35 +55,15 @@ class HomeController extends BaseController
 
     public function getJobs(Request $request)
     {
-        $jobs = Job::with('recruiter:id,CompanyLogo');
-        if($request->skillname) $jobs->where('Skill', 'like', '%'.$request->skillname.'%');
-        if($request->City) $jobs->where('CityId',$request->City);
-        $jobs = $jobs->orderByDesc('JobId')->get();
-        $companyHot = DB::table('recruiters')
-                               ->join('transactions','recruiters.id','=','transactions.RecruiterId')
-                               ->join('account_packages','transactions.AccountPackageId','=','account_packages.AccountPackageId')
-                               ->orderBy('transactions.PayDate','desc')
-                               ->orderBy('account_packages.Price','desc')
-                               ->first();
-        $jobnumberByCompanyHot = DB::table('jobs')
-            ->select(DB::raw('count(JobId) as jobNumber'))
-            ->where('RecruiterId',$companyHot->id)
-            ->first();
-        
-        $jobsByCompanyHot = DB::table('jobs')
-            ->select('JobName','JobId')
-            ->where('RecruiterId',$companyHot->id)
-            ->limit(3)
-            ->orderBy('created_at','desc')
-            ->get();
-            $imageCompany = DB::table('company_images')
-                        ->select('Image')
-                        ->where('RecruiterId',$companyHot->id)
-                        ->first();
+        $jobs = $this->jobRepository->getListJobs($request,'client');
+        $companyHot = $this->recruiterRepository->getRecruiterHot();
+        $jobNumberByCompanyHot = count($this->jobRepository->getJobsByCompanyHot($companyHot->id,''));
+        $jobsByCompanyHot = $this->jobRepository->getJobsByCompanyHot($companyHot->id,3);
+        $imageCompany = $this->companyImageRepository->getCompanyImageById($companyHot->id,1);
         $viewData = [
             'jobs' => $jobs,
             'companyHot' => $companyHot,
-            'jobnumberByCompanyHot' => $jobnumberByCompanyHot,
+            'jobNumberByCompanyHot' => $jobNumberByCompanyHot,
             'jobsByCompanyHot' => $jobsByCompanyHot,
             'imageCompany' => $imageCompany
         ];
@@ -80,17 +72,16 @@ class HomeController extends BaseController
 
     public function getDetailJob($id){
 
-        $jobDetail = Job::with('recruiter:id,CompanyName,Introduction,TypeBusiness,CompanySize,Address,TimeWork,WorkDay,CompanyLogo')
-                        ->with('seekerJob:SeekerJobId,JobId,SeekerId');
-        //$jobDetail = $jobDetail->select('jobs.JobId as JobId, seeker_jobs.JobId as JobIdApply')
-        $jobDetail = $jobDetail->where('jobs.JobId',$id)->first();
+        $jobDetail = $this->jobRepository->getJobById($id);
+        $jobApplies = '';
+        if(Auth::guard('seekers')->check()){
+            $jobApplies = $this->jobRepository->getJobApplies(Auth::guard('seekers')->user()->id);
+        }
+        $imageCompanies = $this->companyImageRepository->getCompanyImageById($jobDetail->RecruiterId,'');
 
-        //$jobDetailApply = $jobDetail->select('jobs.JobId as JobId, seeker_jobs.JobId as JobIdApply')->first();
-        $imageCompanies = CompanyImage::where('RecruiterId', $jobDetail->RecruiterId)
-                        ->get();
         $viewData = [
             'jobDetail' =>$jobDetail,
-            //'jobDetailApply' => $jobDetailApply,
+            'jobApplies' => $jobApplies,
             'imageCompanies'=>$imageCompanies
         ];
         return view('job.job-detail',$viewData);
@@ -98,9 +89,7 @@ class HomeController extends BaseController
 
     public function getJobByCompany($id){
 
-        $company = DB::table('recruiters')
-            ->where('id',$id)
-            ->first();
+        $company = $this->recruiterRepository->getRecruiterById($id);
 
         $jobByCompanys = Job::with('recruiter:id,CompanyLogo')
                                 ->where('RecruiterId',$id)
@@ -113,38 +102,20 @@ class HomeController extends BaseController
     }
 
     public function getJobByPosition($id){
-        $jobByPositions = Job::with('recruiter:id,CompanyLogo')
-            ->where('PositionId',$id)
-            ->get();
+        $jobByPositions = $this->jobRepository->getJobByPositions($id);
 
-        $companyHot = DB::table('recruiters')
-            ->join('transactions','recruiters.id','=','transactions.RecruiterId')
-            ->join('account_packages','transactions.AccountPackageId','=','account_packages.AccountPackageId')
-            ->orderBy('transactions.PayDate','desc')
-            ->orderBy('account_packages.Price','desc')
-            ->first();
+        $companyHot = $this->recruiterRepository->getRecruiterHot();
 
-        $jobnumberByCompanyHot = DB::table('jobs')
-            ->select(DB::raw('count(JobId) as jobNumber'))
-            ->where('RecruiterId',$companyHot->id)
-            ->groupBy('RecruiterId')
-            ->first();
+        $jobNumberByCompanyHot = count($this->jobRepository->getJobsByCompanyHot($companyHot->id,''));
 
-        $jobsByCompanyHot = DB::table('jobs')
-            ->select('JobName','JobId')
-            ->where('RecruiterId',$companyHot->id)
-            ->limit(3)
-            ->orderBy('created_at','desc')
-            ->get();
+        $jobsByCompanyHot = $this->jobRepository->getJobsByCompanyHot($companyHot->id,3);
 
-        $imageCompany = DB::table('company_images')
-                        ->select('Image')
-                        ->where('RecruiterId',$companyHot->id)
-                        ->first();
+        $imageCompany = $this->companyImageRepository->getCompanyImageById($companyHot->id,1);
+
         $viewData = [
             'jobs' => $jobByPositions,
             'companyHot' => $companyHot,
-            'jobnumberByCompanyHot' => $jobnumberByCompanyHot,
+            'jobNumberByCompanyHot' => $jobNumberByCompanyHot,
             'jobsByCompanyHot' => $jobsByCompanyHot,
             'imageCompany' => $imageCompany
 
@@ -154,38 +125,19 @@ class HomeController extends BaseController
 
     public function getJobByCity($id){
 
-        $jobByCities = Job::with('recruiter:id,CompanyLogo')
-            ->where('CityId',$id)
-            ->get();
+        $jobByCities = $this->jobRepository->getJobByCities($id);
 
-        $companyHot = DB::table('recruiters')
-            ->join('transactions','recruiters.id','=','transactions.RecruiterId')
-            ->join('account_packages','transactions.AccountPackageId','=','account_packages.AccountPackageId')
-            ->orderBy('transactions.PayDate','desc')
-            ->orderBy('account_packages.Price','desc')
-            ->first();
+        $companyHot = $this->recruiterRepository->getRecruiterHot();
 
-        $jobnumberByCompanyHot = DB::table('jobs')
-            ->select(DB::raw('count(JobId) as jobNumber'))
-            ->where('RecruiterId',$companyHot->id)
-            ->groupBy('RecruiterId')
-            ->first();
+        $jobNumberByCompanyHot = count($this->jobRepository->getJobsByCompanyHot($companyHot->id,''));
 
-        $jobsByCompanyHot = DB::table('jobs')
-            ->select('JobName','JobId')
-            ->where('RecruiterId',$companyHot->id)
-            ->limit(3)
-            ->orderBy('created_at','desc')
-            ->get();
+        $jobsByCompanyHot = $this->jobRepository->getJobsByCompanyHot($companyHot->id,3);
 
-        $imageCompany = DB::table('company_images')
-            ->select('Image')
-            ->where('RecruiterId',$companyHot->id)
-            ->first();
+        $imageCompany = $this->companyImageRepository->getCompanyImageById($companyHot->id,1);
         $viewData = [
             'jobs' => $jobByCities,
             'companyHot' => $companyHot,
-            'jobnumberByCompanyHot' => $jobnumberByCompanyHot,
+            'jobNumberByCompanyHot' => $jobNumberByCompanyHot,
             'jobsByCompanyHot' => $jobsByCompanyHot,
             'imageCompany' => $imageCompany
 

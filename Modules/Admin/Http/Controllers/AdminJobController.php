@@ -2,6 +2,9 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Repository\CompanyImage\ICompanyImageRepository;
+use App\Repository\Job\IJobRepository;
+use App\Repository\Recruiter\IRecruiterRepository;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -12,20 +15,26 @@ use App\Models\CompanyImage;
 
 class AdminJobController extends Controller
 {
+    public $recruiterRepository;
+    public $jobRepository;
+    public $companyImageRepository;
+    public function __construct(IRecruiterRepository $recruiterRepository,IJobRepository $jobRepository,ICompanyImageRepository $companyImageRepository)
+    {
+        $this->recruiterRepository = $recruiterRepository;
+        $this->jobRepository = $jobRepository;
+        $this->companyImageRepository = $companyImageRepository;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index(Request $request)
     {
-        $recruiters = Recruiter::all();
+        $recruiters = $this->recruiterRepository->getListRecruiters();
 
-        $jobs = Job::with('position:PositionId,PositionName');
+        $jobs = $this->jobRepository->getListJobs($request,'admin');
 
-        if($request->jobname) $jobs->where('JobName', 'like', '%'.$request->jobname.'%');
-        if($request->recruiter) $jobs->where('RecruiterId',$request->recruiter);
-
-        $jobs = $jobs->orderByDesc('JobId')->get();
         $viewData = [
              'jobs' => $jobs,
             'recruiters' => $recruiters
@@ -52,10 +61,8 @@ class AdminJobController extends Controller
     }
 
     public function getDetailJob($id){
-        $jobDetail = Job::with('recruiter:id,CompanyName,Introduction,TypeBusiness,CompanySize,Address,TimeWork,WorkDay,CompanyLogo')
-                    ->where('JobId',$id)->first();
-                    $imageCompanies = CompanyImage::where('RecruiterId', $jobDetail->recruiter->id)
-                        ->get();
+        $jobDetail = $this->jobRepository->getJobById($id);
+                    $imageCompanies = $this->companyImageRepository->getCompanyImageById($jobDetail->recruiter->id,'');
                     $viewData = [
                         'jobDetail' =>$jobDetail,
                         'imageCompanies' => $imageCompanies

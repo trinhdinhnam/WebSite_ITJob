@@ -31,7 +31,7 @@
                 <td>{{$job->Skill}}</td>
                 <td>{{$job->Address}}</td>
                 <td>
-
+                    <label class="badge {{$job->getStatus($job->Status)['class']}}">{{$job->getStatus($job->Status)['name']}}</label>
                 </td>
                 <td style="width: 100px; text-align: center;">
                     <a href="{{route('recruiter.get.seeker.by.job',$job->JobId)}}" class="btn btn-primary"

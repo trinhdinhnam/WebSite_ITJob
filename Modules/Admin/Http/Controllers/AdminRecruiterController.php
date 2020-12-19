@@ -4,6 +4,8 @@ namespace Modules\Admin\Http\Controllers;
 
 use App\Models\CompanyImage;
 use App\Models\Job;
+use App\Repository\CompanyImage\ICompanyImageRepository;
+use App\Repository\Recruiter\IRecruiterRepository;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -12,13 +14,24 @@ use App\Models\Transaction;
 
 class AdminRecruiterController extends Controller
 {
+
+
+    public $recruiterRepository;
+    public $companyImageRepository;
+    public function __construct(IRecruiterRepository $recruiterRepository, ICompanyImageRepository $companyImageRepository)
+    {
+        $this->recruiterRepository = $recruiterRepository;
+        $this->companyImageRepository = $companyImageRepository;
+
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-        $recruiters = Recruiter::where('IsDelete',1)->get();
+        $recruiters = $this->recruiterRepository->getAllRecruiter();
         $viewData = [
              'recruiters' => $recruiters
         ];
@@ -27,10 +40,8 @@ class AdminRecruiterController extends Controller
 
     public function getDetailRecruiter($id){
 
-        $imageCompanies = CompanyImage::where('RecruiterId', $id)
-            ->get();
-
-        $recruiterDetail = Recruiter::where('id',$id)->first();
+        $imageCompanies = $this->companyImageRepository->getCompanyImageById($id,'');
+        $recruiterDetail = $this->recruiterRepository->getRecruiterById($id);
         $viewData = [
             'recruiterDetail' =>$recruiterDetail,
             'imageCompanies' => $imageCompanies
@@ -40,37 +51,20 @@ class AdminRecruiterController extends Controller
     
     public function action($action,$id)
     {
-        $recruiter = Recruiter::find($id);
 
         if($action){
             switch($action)
             {
                 case 'active':
-                    $recruiter->Active = $recruiter->Active ? 0 : 1;
-                    $recruiter->save();
+                    $this->recruiterRepository->changeActive($id);
                 break;
                 case 'delete':
-                    $recruiter->is_delete = $recruiter->is_delete ? 0 : 1;
-                    $recruiter->save();                    
+                    $this->recruiterRepository->deleteRecruiter($id);
                 break;
             }
         }
         return redirect()->back();
     }
 
-    public function actionTransaction($actiontran,$id)
-    {
-        $tran = Transaction::find($id);
-        if($actiontran){
-            switch($actiontran)
-            {
-                case 'status':
-                    $tran->Status = $tran->Status ? 0 : 1;
-                    $tran->save();
-                break;
-            }
-        }
-        return redirect()->back();
 
-    }
 }

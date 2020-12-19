@@ -65,7 +65,7 @@
                                     <div class="post-number"><div class="postnumber-label">Số lượt đăng:</div><div id="package-select-postnumber"></div></div>
                                     <input style="display: none;" value="" name="accountPackageId" id="package-select-id" />
                                 </div>
-                                <div class="btn btn-success form-control btn-payment">Thanh toán</div>
+                                <a class="btn btn-success form-control btn-payment" href="{{route('recruiter.get.bill')}}">Thanh toán</a>
                             </div>
                         </div>
                     </div>
@@ -205,6 +205,15 @@
 
         $(".btn-payment").click(function(event) {
             event.preventDefault();
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.ajax({
+                url: url,
+            }).done(function(result) {
+                if (result) {
+                    $("#md_content").append(result);
+                }
+            });
             $("#ModalBill").modal('show');
         });
     })

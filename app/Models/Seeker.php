@@ -53,4 +53,8 @@ class Seeker extends Authenticatable implements HasMedia
     public function getEducation(){
         return array_get($this->education,$this->Education,'[N\A]');
     }
+
+    public function seekerJob(){
+        return $this->hasMany(SeekerJob::class,'id','SeekerId');
+    }
 }

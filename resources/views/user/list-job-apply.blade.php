@@ -5,8 +5,8 @@
         <div class="title">
             Danh sách công việc đã ứng tuyển
         </div>
-        @if(isset($jobs))
-            @foreach($jobs as $job)
+        @if(isset($jobApplies))
+            @foreach($jobApplies as $job)
                 <div class="job-item">
                     <div class="company-logo">
                         <div class="logo">

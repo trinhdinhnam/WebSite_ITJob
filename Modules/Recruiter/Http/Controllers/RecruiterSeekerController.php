@@ -5,17 +5,24 @@ namespace Modules\Recruiter\Http\Controllers;
 use App\Models\SeekerJob;
 use App\Models\Seeker;
 
+use App\Repository\SeekerJob\ISeekerJobRepository;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class RecruiterSeekerController extends Controller
 {
+
+    public $seekerJobRepository;
+    public function __construct(ISeekerJobRepository $seekerJobRepository)
+    {
+        $this->seekerJobRepository = $seekerJobRepository;
+
+    }
+
     public function getSeekerByJob($id){
-        $seekerByJob = SeekerJob::with('seeker:id,SeekerName,Education,Email,Phone,Gender,Avatar')
-            ->where('JobId',$id)
-            ->where('IsDelete',1)
-            ->get();
+
+        $seekerByJob = $this->seekerJobRepository->getSeekerByJob($id);
         $viewData = [
             'seekerByJobs' => $seekerByJob
         ];
@@ -23,9 +30,7 @@ class RecruiterSeekerController extends Controller
     }
 
     public function getSeekerDetail($id){
-        $seekerDetail = SeekerJob::with('seeker:id,SeekerName,Education,Email,Phone,Gender,Avatar,Address,DateOfBirth')
-                        ->where('SeekerJobId',$id)
-                        ->first();
+        $seekerDetail = $this->seekerJobRepository->getSeekerDetail($id);
 
         $viewData = [
             'seekerDetail' => $seekerDetail
@@ -36,17 +41,14 @@ class RecruiterSeekerController extends Controller
 
     public function action($action,$id)
     {
-        $seekerJob = SeekerJob::find($id);
         if($action){
             switch($action)
             {
                 case 'status':
-                    $seekerJob->Status = $seekerJob->Status ? 0 : 1;
-                    $seekerJob->save();
+                    $this->seekerJobRepository->changeStatusById($id);
                     break;
                 case 'delete':
-                    $seekerJob->IsDelete = $seekerJob->IsDelete ? 0 : 1;
-                    $seekerJob->save();
+                    $this->seekerJobRepository->deleteSeekerJobById($id);
                     break;
             }
         }

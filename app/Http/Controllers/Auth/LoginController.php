@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RequestRegisterSeeker;
 use App\Models\Seeker;
+use App\Repository\Seeker\ISeekerRepository;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,13 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
+    public $seekerRepository;
+
+    public function __construct(ISeekerRepository $seekerRepository)
+    {
+        $this->seekerRepository = $seekerRepository;
+    }
+
     public function getLogin(Request $request){
 
         if($request->ajax()) {
@@ -51,24 +59,7 @@ class LoginController extends Controller
     public function postRegister(RequestRegisterSeeker $request)
     {
         try{
-            $seeker = new Seeker();
-            $seeker->SeekerName = $request->SeekerName;
-            $seeker->Education = $request->Education;
-            $seeker->Gender = $request->Gender;
-            $seeker->email = $request->Email;
-            $seeker->Phone = $request->Phone;
-            $seeker->DateOfBirth = $request->DateOfBirth;
-            $seeker->Address = $request->Address;
-            $seeker->Password = bcrypt($request->Password);
-            if($request->hasFile('Avatar'))
-            {
-                $fileAvatar = $request->file('Avatar');
-                $file = upload_image($fileAvatar,$fileAvatar->getClientOriginalName());
-                if(isset($file['name'])){
-                    $seeker->Avatar = $file['name'];
-                }
-            }
-            $seeker->save();
+            $this->seekerRepository->addSeeker($request);
             return redirect()->route('seeker.get.login');
 
         }catch (\Exception $e){

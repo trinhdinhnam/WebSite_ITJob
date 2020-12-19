@@ -11,7 +11,7 @@
 |
 */
 
-Route::prefix('recruiter')->group(function() {
+Route::prefix('recruiters')->group(function() {
     Route::group(['prefix' => 'authenticate'], function(){
         Route::get('/login','RecruiterAuthController@getLogin')->name('recruiter.login');
         Route::get('/signup','RecruiterAuthController@getSignUp')->name('recruiter.signup');
@@ -37,5 +37,10 @@ Route::prefix('recruiter')->group(function() {
         Route::get('/seeker-by-job/{id}','RecruiterSeekerController@getSeekerByJob')->name('recruiter.get.seeker.by.job');
         Route::get('/seeker-by-job/detail/{id}','RecruiterSeekerController@getSeekerDetail')->name('recruiter.get.seeker.detail');
         Route::get('/{action}/{id}','RecruiterSeekerController@action')->name('recruiter.get.action.seeker.by.job');
+    });
+
+    Route::group(['prefix' => 'transaction'], function(){
+        Route::get('bill','RecruiterTransactionController@getBill')->name('recruiter.get.bill');
+
     });
 });

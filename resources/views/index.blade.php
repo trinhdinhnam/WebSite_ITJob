@@ -4,7 +4,7 @@
 <div class="header">
     <div class="header-container">
         <div class="job-number">
-            {{$jobNumber->jobNumber}} việc làm cho lập trình viên
+            {{$jobNumber}} việc làm cho lập trình viên
         </div>
         <form class="form-inline header-search" action="{{route('client.search.job')}}" method="GET"
             style="margin-bottom: 20px">

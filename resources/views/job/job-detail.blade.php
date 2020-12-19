@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('main')
 <link href="{{asset('theme-admin/css/client/job-detail.css')}}" rel="stylesheet" />
+@if(isset($jobDetail))
 <div class="content">
     <div class="content-container">
         <div class="job-detail-content">
@@ -62,8 +63,15 @@
                         <i class="fa fa-calendar-alt" style="color: #000;"></i>
                         <div class="date-up-job-value">{{$jobDetail->created_at}}</div>
                     </div>
-                    <a disabled href="{{route('client.get.apply',$jobDetail->JobId)}}" class="btn-apply btn btn-danger @if(!\Illuminate\Support\Facades\Auth::guard('seekers')->check()) dis @else @if(isset($jobDetail->seekerJob->JobId) && $jobDetail->seekerJob->SeekerId == \Illuminate\Support\Facades\Auth::guard('seekers')->user()->id) dis @endif @endif
-                    " >Ứng tuyển</a>
+                    <a disabled href="{{route('client.get.apply',$jobDetail->JobId)}}" class="btn-apply btn btn-danger
+                    @if(\Illuminate\Support\Facades\Auth::guard('seekers')->check())
+                            @foreach($jobApplies as $jobApply)
+                                   @if($jobDetail->JobId == $jobApply->JobId)
+                                       dis
+                                   @endif
+                            @endforeach
+                    @else dis @endif
+                    ">Ứng tuyển</a>
                     <h2 class="description-title">Chi tiết công việc</h2>
                     <div>{{$jobDetail->Description}}</div>
                     <h2 class="require-title">Yêu cầu</h2>
@@ -73,4 +81,5 @@
         </div>
     </div>
 </div>
+@endif
 @endsection

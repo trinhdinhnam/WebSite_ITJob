@@ -7,6 +7,12 @@ use App\Http\Requests\RequestChangePass;
 use App\Http\Requests\RequestRegisterSeeker;
 use App\Models\Job;
 use App\Models\Seeker;
+use App\Repository\City\ICityRepository;
+use App\Repository\Job\IJobRepository;
+use App\Repository\Position\IPositionRepository;
+use App\Repository\Recruiter\IRecruiterRepository;
+use App\Repository\Seeker\ISeekerRepository;
+use App\Repository\SeekerJob\ISeekerJobRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,16 +21,22 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends BaseController
 {
     //
-    public function getJobApply(Request $request,$id)
+    public $jobRepository;
+    public $seekerRepository;
+    public function __construct(ISeekerJobRepository $seekerJobRepository, IPositionRepository $positionRepository, IJobRepository $jobRepository, ICityRepository $cityRepository, IRecruiterRepository $recruiterRepository, ISeekerRepository $seekerRepository)
     {
-        $jobs = Job::with('recruiter:id,CompanyLogo')
-                    ->join('seeker_jobs','jobs.JobId','=','seeker_jobs.JobId')
-                    ->where('seeker_jobs.SeekerId','=',Auth::guard('seekers')->user()->id);
+        parent::__construct($seekerJobRepository, $positionRepository, $jobRepository, $cityRepository, $recruiterRepository);
 
-        $jobs = $jobs->orderByDesc('jobs.JobId')->get();
+        $this->jobRepository = $jobRepository;
+        $this->seekerRepository = $seekerRepository;
+    }
+
+    public function getJobApply($id)
+    {
+        $jobApplies = $this->jobRepository->getJobApplies($id);
 
         $viewData = [
-            'jobs' => $jobs
+            'jobApplies' => $jobApplies
         ];
         return view('user.list-job-apply',$viewData);
     }
@@ -36,26 +48,8 @@ class UserController extends BaseController
 
     public function postChangeInfo(RequestChangeInfo $registerSeeker,$id)
     {
-        dd($registerSeeker->all());
-        $seekerEdit = Seeker::find($id);
-        $seekerEdit->SeekerName = $registerSeeker->SeekerName;
-        $seekerEdit->Education = $registerSeeker->Education;
-        $seekerEdit->email = $registerSeeker->Email;
-        $seekerEdit->Address = $registerSeeker->Address;
-        $seekerEdit->Phone = $registerSeeker->Phone;
-        $seekerEdit->DateOfBirth = $registerSeeker->DateOfBirth;
 
-        if(isset($registerSeeker->Avatar)){
-            if($registerSeeker->hasFile('Avatar'))
-            {
-                $fileAvatar = $registerSeeker->file('Avatar');
-                $file = upload_image($fileAvatar,$fileAvatar->getClientOriginalName());
-                if(isset($file['name'])){
-                    $seekerEdit->Avatar = $file['name'];
-                }
-            }
-        }
-        $seekerEdit->save();
+        $this->seekerRepository->changeInfoSeeker($registerSeeker,$id);
 
         return redirect()->route('client.get.home.page');
     }
@@ -69,9 +63,6 @@ class UserController extends BaseController
     {
         if(Hash::check($registerSeeker->pass_old,get_data_user('seekers','password')))
         {
-            $seekerChangePass = Seeker::find($id);
-            $seekerChangePass->password = bcrypt($registerSeeker->pass_new);
-            $seekerChangePass->save();
             Auth::guard('seekers')->logout();
             return redirect()->route('client.get.home.page');
 

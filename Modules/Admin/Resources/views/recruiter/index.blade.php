@@ -1,7 +1,7 @@
 @extends('admin::layouts.master')
 @section('content')
 
-<h2 class="mt-4">Nhà tuyển dụng</h2>
+<h2 class="mt-4">Danh sách nhà tuyển dụng</h2>
 <ol class="breadcrumb mb-4 ">
     <li class="breadcrumb-item">Trang chủ</li>
     <li class="breadcrumb-item active">Nhà tuyển dụng</li>
@@ -37,7 +37,7 @@
                 <td style="width: 260px;">
                     <a href="{{route('admin.get.detail.recruiter',$recruiter->id)}}" class="btn btn-primary">Xem</a>
                     <a href="{{route('admin.get.transaction',$recruiter->id)}}"
-                        class="btn btn-warning js_transaction_history" style="color: #eee;" data-toggle="modal" data-id="{{$recruiter->RecruiterName}}">Lịch sử GD</a>
+                        class="btn btn-success js_transaction_history" style="color: #eee;" data-toggle="modal" data-id="{{$recruiter->RecruiterName}}">Lịch sử GD</a>
                     <a href="{{route('admin.get.action.recruiter',['delete',$recruiter->id])}}"
                         class="btn btn-danger">Xóa</a>
                 </td>

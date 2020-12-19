@@ -1,2 +1,5 @@
+@extends('recruiter::layouts.master')
+@section('content')
 
-    <h1>Xin chào bạn hãy thành toán hóa đơn của mình</h1>
+
+@endsection

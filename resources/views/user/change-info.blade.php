@@ -12,7 +12,7 @@
                     <br>
                     <br>
                     <div class="card-body">
-                        <form method="POST" action="{{route('client.post.change.info',\Illuminate\Support\Facades\Auth::guard('seekers')->user()->id)}}" enctype="multipart/form-data">
+                        <form method="POST" action="" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label for="name" class="col-md-3 col-form-label text-md-right">Họ và tên</label>

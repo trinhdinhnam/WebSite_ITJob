@@ -2,6 +2,10 @@
 
 namespace Modules\Recruiter\Http\Controllers;
 
+use App\Repository\CompanyImage\ICompanyImageRepository;
+use App\Repository\Job\IJobRepository;
+use App\Repository\Job\JobRepository;
+use App\Repository\Position\IPositionRepository;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -21,30 +25,39 @@ class RecruiterJobController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
+
+    public $jobRepository;
+    public $positionRepository;
+    public $companyImageRepository;
+    public function __construct(IJobRepository $jobRepository, IPositionRepository $positionRepository, ICompanyImageRepository $companyImageRepository)
+    {
+          $this->jobRepository = $jobRepository;
+          $this->positionRepository = $positionRepository;
+          $this->companyImageRepository = $companyImageRepository;
+    }
+
     public function index()
     {
-        $jobs = DB::table('jobs')
-               ->select(DB::raw('count(SeekerJobId) as seekerNumber, jobs.JobId as JobId, JobName, PositionName, Skill, jobs.Status as Status, Address'))
-               ->leftJoin('seeker_jobs','jobs.JobId','=','seeker_jobs.JobId')
-               ->leftJoin('positions','jobs.PositionId','=','positions.PositionId')
-            ->where('RecruiterId',6)
-            ->where('jobs.IsDelete',1)
-            ->groupBy('JobId','JobName','PositionName','Skill','jobs.Status','Address')
-            ->get();
-
+        $jobs = $this->jobRepository->getJobByRecruiterId(6);
         $viewData = [
              'jobs' => $jobs
-
         ];
         return view('recruiter::job.index',$viewData);    
     }
 
-    public function getDetailJob(){
-        return view('recruiter::job.index');
+    public function getDetailJob($id){
+
+        $jobDetail = $this->jobRepository->getJobById($id);
+        $imageCompanies = $this->companyImageRepository->getCompanyImageById($jobDetail->recruiter->id,'');
+        $viewData = [
+            'jobDetail' =>$jobDetail,
+            'imageCompanies' => $imageCompanies
+        ];
+        return view('recruiter::job.detail',$viewData);
     }
 
     public function create(){
-        $positions = Position::all();
+        $positions = $this->positionRepository->getListPositions();
         $title = "Thêm mới";
         $viewData = [
             'positions' => $positions,
@@ -57,24 +70,7 @@ class RecruiterJobController extends Controller
     public function save($request, $id=''){
         $code = 1;
         try{
-            $job = new Job();
-
-            if($id){
-                $job = Job::find($id);
-            }
-            $job->JobName = $request->JobName;
-            $job->Require = $request->Require;
-            $job->Description = $request->Description;
-            $job->Address = $request->Address;
-            $job->City = $request->City;
-            $job->StartDateApply = $request->StartDateApply;
-            $job->EndDateApply = $request->EndDateApply;
-            $job->PositionId = $request->PositionId;
-            $job->Skill = $request->Skill;
-            $job->Salary = $request->Salary;
-            $job->AdminID = Auth::guard('admins')->user()->id;
-            $job->RecruiterId = 6;
-            $job->save();
+             $this->jobRepository->saveJob($request,$id);
 
         }catch(\Exception $exception)
         {
@@ -90,9 +86,9 @@ class RecruiterJobController extends Controller
     }
 
     public function edit($id){
-        $data['positions'] = Position::all();
+        $data['positions'] = $this->positionRepository->getListPositions();
         $data['title'] = "Cập nhật";
-        $data['job'] = Job::find($id);
+        $data['job'] = $this->jobRepository->getJobById($id);
         return view('recruiter::job.edit',$data);
     }
 
@@ -103,9 +99,7 @@ class RecruiterJobController extends Controller
     }
 
     public function delete($id){
-        $job = Job::find($id);
-        $job->IsDelete = $job->IsDelete ? 0 : 1;
-        $job->save(); 
+        $this->jobRepository->deleteJobById($id);
         return redirect()->back();   
     }
 

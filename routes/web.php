@@ -20,7 +20,6 @@ Route::group(['namespace' => 'Auth'],function(){
     Route::get('logout','LoginController@getLogout')->name('seeker.get.logout');
     Route::get('register','LoginController@getRegister')->name('seeker.get.register');
     Route::post('register','LoginController@postRegister')->name('seeker.post.register');
-
 });
 
 Route::group(['prefix' => 'job'], function(){
@@ -49,3 +48,6 @@ Route::group(['prefix' => 'user'], function(){
     Route::post('/change-password/{id}','UserController@postChangePassword')->name('client.post.change.info');
 
 });
+
+
+

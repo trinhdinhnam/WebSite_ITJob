@@ -106,7 +106,7 @@
                     @endforeach
                     @endif
                     <div class="job-number">
-                        <a href="">{{$jobnumberByCompanyHot->jobNumber}} công việc <i class="fa fa-caret-right"></i></a>
+                        <a href="">{{$jobNumberByCompanyHot}} công việc <i class="fa fa-caret-right"></i></a>
                     </div>
                 </div>
             </div>
