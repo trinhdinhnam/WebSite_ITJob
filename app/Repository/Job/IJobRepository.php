@@ -10,7 +10,7 @@ interface IJobRepository
 {
     public function getListJobs($request,$actor);
 
-    public function getJobByRecruiterId($id);
+    public function getJobByRecruiterId($request,$id);
 
     public function getJobById($id);
 

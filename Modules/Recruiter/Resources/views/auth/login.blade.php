@@ -16,7 +16,7 @@
 
     <div class="content">
     <div class="wrap-login100" id="modalLogin">
-        <form class="login100-form validate-form" method="POST" enctype="multipart/form-data" action="{{route('seeker.post.login')}}">
+        <form class="login100-form validate-form" method="POST" enctype="multipart/form-data" action="">
             @csrf
             <span class="login100-form-logo">
             <i class="zmdi zmdi-landscape"></i>

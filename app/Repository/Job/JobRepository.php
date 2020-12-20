@@ -16,15 +16,17 @@ class JobRepository extends BaseRepository implements IJobRepository
         return Job::class;
     }
 
-    public function getJobByRecruiterId($id){
+    public function getJobByRecruiterId($request,$id){
         $query = $this->model
             ->select(DB::raw('count(SeekerJobId) as seekerNumber, jobs.JobId as JobId, JobName, PositionName, Skill, jobs.Status as Status, Address'))
             ->leftJoin('seeker_jobs','jobs.JobId','=','seeker_jobs.JobId')
             ->leftJoin('positions','jobs.PositionId','=','positions.PositionId')
             ->where('RecruiterId',$id)
             ->where('jobs.IsDelete',1)
-            ->groupBy('JobId','JobName','PositionName','Skill','jobs.Status','Address')
-            ->get();
+            ->groupBy('JobId','JobName','PositionName','Skill','jobs.Status','Address');
+            if($request->jobname) $query->where('JobName', 'like', '%'.$request->jobname.'%');
+            if($request->position) $query->where('jobs.PositionId',$request->position);
+            $query = $query->get();
             return $query;
     }
 

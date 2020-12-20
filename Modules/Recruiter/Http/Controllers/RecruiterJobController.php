@@ -36,11 +36,13 @@ class RecruiterJobController extends Controller
           $this->companyImageRepository = $companyImageRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $jobs = $this->jobRepository->getJobByRecruiterId(6);
+        $jobs = $this->jobRepository->getJobByRecruiterId($request,Auth::guard('recruiters')->user()->id);
+        $positions = $this->positionRepository->getListPositions();
         $viewData = [
-             'jobs' => $jobs
+             'jobs' => $jobs,
+            'positions' => $positions
         ];
         return view('recruiter::job.index',$viewData);    
     }

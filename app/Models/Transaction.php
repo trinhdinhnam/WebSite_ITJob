@@ -15,7 +15,7 @@ class Transaction extends Model
 
     protected $status = [
         1 => [
-            'name' => 'Xác nhận',
+            'name' => 'Đã xác nhận',
             'class' => 'badge-success'
         ],
         0 => [

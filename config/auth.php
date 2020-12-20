@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin;
+use App\Models\Seeker;
 
 return [
 
@@ -50,6 +51,10 @@ return [
             'driver' => 'session',
             'provider' => 'seekers',
         ],
+        'recruiters' => [
+            'driver' => 'session',
+            'provider' => 'recruiters',
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -89,6 +94,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Seeker::class,
         ],
+        'recruiters' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Recruiter::class,
+        ],
     ],
 
     /*
@@ -119,6 +128,11 @@ return [
         ],
         'seekers' => [
             'provider' => 'seekers',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'recruiters' => [
+            'provider' => 'recruiters',
             'table' => 'password_resets',
             'expire' => 60,
         ],

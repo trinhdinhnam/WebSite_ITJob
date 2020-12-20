@@ -1,11 +1,28 @@
 @extends('recruiter::layouts.master')
 
 @section('content')
-<h2 class="mt-4">Thông tin đăng tuyển <a href="{{route('recruiter.get.create.job')}}"  class="btn btn-primary" style=" float: right;">Thêm mới</a></h2>
+<h2 class="mt-4">Thông tin đăng tuyển <a href="{{route('recruiter.get.create.job')}}"  class="btn btn-primary" style=" float: right;">Đăng bài</a></h2>
 <ol class="breadcrumb mb-4 ">
     <li class="breadcrumb-item"><a href="{{route('recruiter.home')}}">Trang chủ</a></li>
     <li class="breadcrumb-item active">Thông tin đăng tuyển</li>
 </ol>
+<form class="form-inline">
+    <div class="form-group mx-sm-3 mb-2">
+        <input type="text" class="form-control" id="jobname" name="jobname" placeholder="Nhập tên việc làm..." value="{{ \Request::get('jobname')}}">
+    </div>
+    <div class="form-group">
+        <select name="position" id="position-name" class="form-control" style="width: 200px; margin-top: -8px; margin-right: 15px">
+            <option value="" selected>Vị trí công việc</option>
+            @if(isset($positions))
+                @foreach($positions as $position)
+                    <option value="{{$position->PositionId}}" {{ \Request::get('position') == $position->PositionId ? "selected='selected'" : ""}}>{{$position->PositionName}}</option>
+                @endforeach
+            @endif
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i></button>
+</form>
 <div class="card mb-4">
     <table class="table">
         <thead class="thead-light">

@@ -123,7 +123,7 @@
     width: 90%;
     margin: auto;
     margin-top: 50px;
-    background-color: #ff263a;
+    background-color: #ec1b30;
 
 }
 .company-event .btn-follow{
@@ -144,51 +144,98 @@
 }
 
 /* job list */
-.page-content .item-list{
+.page-content .item-list.active{
     width: 100%;
     height: auto;
     padding: 10px;
+    display: block;
 }
 
 .item-list .navigation-item{
     width: 100%;
     height: 60px;
-    background-color:  white;
-    padding-bottom: 5px;
-    background-color: #f5fff8;
+    background-color: rgb(233, 230, 233);
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    margin-bottom: 0px;
 
 }
 
-.item-list .job-list{
+.navigation-item .btn-job-item.active{
+    width: 160px;
+    height: 60px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    color: #f44;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border-top: 5px solid #f44;
+
+}
+.navigation-item .btn-job-item.active:hover{
+    cursor: pointer;
+    background-color: rgb(250, 201, 201);
+}
+.navigation-item .btn-review-item{
+    width: 160px;
+    height: 60px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    color: #ffffff;
+    padding: 10px;
+    margin-left: 0px;
+    border: none;
+    background-color: rgb(233, 230, 233);
+}
+
+.active{
+    display: block;
+}
+/* item list css */
+ul#tabs{
+    list-style-type: none;
+    padding: 0;
+}
+ul#tabs li {
+    width: 160px;
+    height: 60px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    color: #555;
+    padding: 10px;
+    margin-left: 0px;
+    border: none;
+    background-color: rgb(233, 230, 233);
+}
+ul#tabs li:hover{
+    cursor: pointer;
+    background-color: rgb(250, 201, 201);
+}
+ul#tabs li.active {
+    background-color: #fff;
+    border-top: 5px solid #f44;
+    color: #f44;
+}
+ul#tab{
+    list-style-type: none;
+    padding: 0;
+}
+ul#tab li{
+    display: none;
+}
+ul#tab li.active{
+    display: block;
+}
+#tab .job-list{
     background-color: white;
     height: auto;
     width: 100%;
 }
-.navigation-item .btn-job-item{
-    width: 160px;
-    height: 100%;
-    font-weight: bold;
-    font-size: 20px;
-    text-align: center;
-    color: red;
-    padding: 10px;
-    background-color: #f5fff8;
-
-}
-.navigation-item .btn-review-item{
-    width: 160px;
-    height: 100%;
-    font-weight: bold;
-    font-size: 20px;
-    text-align: center;
-    color: red;
-    padding: 10px;
-    margin-left: 0px;
-    background-color: #f5fff8;
-
-
-}
-
 .job-list .company-name-title{
     font-size: 29px;
     margin-left: 20px;
@@ -205,16 +252,15 @@
 .job-list .job-item{
     width: 100%;
     height: auto;
-    background-color: rgb(233, 230, 233);
+    background-color:#eee;
     display: flex;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    border: 1px solid #ccc;
     margin-bottom: 10px;
 
 }
 .job-list .job-item:hover{
     cursor: pointer;
-    border: 2px solid #bbb;
+    background-color: #fff;
 }
 .job-list .job-item .company-logo{
     width: 15%;
@@ -302,9 +348,232 @@
     float: right;
     width: 80px;
 }
+
+/* review list */
+   .item-list .review-page{
+       background-color: rgb(219, 219, 241);
+       height: auto;
+       width: 100%;
+   }
+
+   .review-page .medium-score-review{
+       width: 100%;
+       height: 120px;
+       background-color: white;
+       display: flex;
+       padding-top: 30px;
+       padding-left: 40px;
+   }
+
+   .medium-score-review .score-number{
+      font-size: 38px;
+      font-weight: bold;
+      color: yellowgreen;
+      margin-right: 20px;
+   }
+   .medium-score-review .fa-star{
+       color: white;
+       background-color: yellowgreen;
+       margin-left: 10px;
+       font-size: 35px;
+       padding: 5px;
+       margin-top: 13px;
+       border-radius: 4px;
+
+   }
+
+   .medium-score-review .score_text{
+    font-size: 34px;
+    font-weight: bold;
+    color: #222;
+    margin-left: 20px;
+    margin-top: 4px;
+   }
+
+   .review-page .review-list{
+       width: 100%;
+       height: auto;
+       margin-top: 20px;
+       background-color: white;
+       padding: 15px;
+   }
+
+    .review-list .review-number{
+       font-size: 25px;
+       font-weight: bold;
+       width: 100%;
+       height: 60px;
+       border-bottom: 1px solid #bbb;
+       font-family: Arial, Helvetica, sans-serif;
+       color: #444;
+       padding-top: 5px;
+   }
+
+   .review-page .review-list .review-item{
+       width: 100%;
+       height: auto;
+       background-color: #fff;
+       padding-top: 15px;
+       border-bottom: 1px solid #bbb;
+       padding-bottom: 20px;
+   }
+
+   .review-item .fa-star{
+    color: white;
+    background-color: yellowgreen;
+    margin-left: 3px;
+    font-size: 22px;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 4px;
+    float: left;
+
+   }
+   .review-item .score_text{
+       float: left;
+       font-size: 17px;
+       font-weight: bold;
+       color: #222;
+       margin-left: 10px;
+       margin-top: 10px;
+       font-family: Arial, Helvetica, sans-serif;
+   }
+
+   .review-item .review-date{
+       font-size: 14px;
+       clear: both;
+       margin-top: 5px;
+       margin-left: 5px;
+       color: #444;
+   }
+
+   .review-item .good-review-title{
+       font-size: 20px;
+       font-weight: 500;
+       color: #666;
+       margin-top: 15px;
+   }
+   .review-item .good-review-content{
+    font-size: 15px;
+    font-weight: 400;
+    margin-left: 10px;
+    color: #666;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+   }
+    .review-item .notgood-review-title{
+        font-size: 20px;
+        font-weight: 500;
+        color: #666;
+        margin-top: 10px;
+    }
+
+    .review-item .notgood-review-content{
+        font-size: 15px;
+        font-weight: 400;
+        margin-left: 10px;
+        color: #666;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        display: -webkit-box;
+       }
+
+
+       /* review form */
+     .review-form{
+         width: 100%;
+         height: auto;
+         background-color: #fff;
+         margin: 0px;
+     }
+
+     .review-form .review-form-title{
+         font-size: 25px;
+         font-family: Arial, Helvetica, sans-serif;
+         font-weight: 600;
+     }
+
+     .review-form .fa-star{
+        color: white;
+        background-color: #999;
+        margin-left: 3px;
+        font-size: 22px;
+        padding: 5px;
+        margin-top: 5px;
+        border-radius: 4px;
+        float: left;
+        /* background-color: yellowgreen; */
+
+    
+       }
+       .review-form .fa-star:hover
+        {
+            cursor: pointer;
+        }
+       .review-form .score_text{
+           float: left;
+           font-size: 17px;
+           font-weight: bold;
+           color: #222;
+           margin-left: 10px;
+           margin-top: 5px;
+           font-family: Arial, Helvetica, sans-serif;
+       }
+       .rating_active{
+        background-color: yellowgreen;
+       }
+
+
 /* review hot  */
 .page-content .review-hot{
     width: 100%;
     height: 400px;
     padding: 10px;
+    padding-right: 0px;
+    padding-top: 0px;
+}
+
+.review-hot .review-banner{
+    background-color: #fff;
+    width: 100%;
+    height: 220px;
+    padding: 15px;
+}
+
+.review-banner .review-title{
+    color: black;
+    font-size: 25px;
+    margin: auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.review-banner .review-label{
+    color: black;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 30px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+
+}
+
+.review-banner .btn-review2{
+    background-color: #ec1b30;
+    margin: auto;
+    width: 100%;
+    margin-top: 25px;
+    height: 48px;
+    font-size: 22px;
+}
+
+.review-hot .review-hot-list{
+    margin-top: 20px;
+    background-color: #fff;
+    width: 100%;
+    height: 520px;
+    padding: 15px;    
 }

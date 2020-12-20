@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\CheckLoginAdmin;
+use App\Http\Middleware\CheckLoginRecruiter;
 use App\Http\Middleware\CheckLoginSeeker;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -64,7 +65,9 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'CheckLoginAdmin' => CheckLoginAdmin::class,
-        'CheckLoginSeeker' => CheckLoginSeeker::class
+        'CheckLoginSeeker' => CheckLoginSeeker::class,
+        'CheckLoginRecruiter' => CheckLoginRecruiter::class,
+
 
     ];
 

@@ -10,17 +10,18 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::prefix('authenticate')->group(function(){
+    Route::get('/login','RecruiterAuthController@getLogin')->name('recruiter.get.login');
+    Route::post('/login','RecruiterAuthController@postLogin');
+    Route::get('/signup','RecruiterAuthController@getSignUp')->name('recruiter.signup');
+    Route::post('/sinup','RecruiterAuthController@submitRegister');
+    Route::get('/account-package','RecruiterAuthController@getAccountPackage')->name('recruiter.account.package');
+});
 
-Route::prefix('recruiters')->group(function() {
-    Route::group(['prefix' => 'authenticate'], function(){
-        Route::get('/login','RecruiterAuthController@getLogin')->name('recruiter.login');
-        Route::get('/signup','RecruiterAuthController@getSignUp')->name('recruiter.signup');
-        Route::post('/signup','RecruiterAuthController@submitRegister');
-        Route::get('/account-package','RecruiterAuthController@getAccountPackage')->name('recruiter.account.package');
-
-    });
-
+Route::prefix('recruiters')->middleware('CheckLoginRecruiter')->group(function() {
     Route::get('/', 'RecruiterController@index')->name('recruiter.home');
+    Route::get('/logout','RecruiterAuthController@getLogout')->name('get.logout.recruiter');
+
 
     Route::group(['prefix' => 'job'], function(){
         Route::get('/','RecruiterJobController@index')->name('recruiter.get.list.job');
@@ -40,6 +41,8 @@ Route::prefix('recruiters')->group(function() {
     });
 
     Route::group(['prefix' => 'transaction'], function(){
+
+        Route::get('/','RecruiterTransactionController@getTransactions')->name('recruiter.get.transaction');
         Route::get('bill','RecruiterTransactionController@getBill')->name('recruiter.get.bill');
 
     });

@@ -2,56 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6ad850b-e60d-4907-af7a-a2df79d69303" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Modules/Recruiter/Resources/views/job/detail.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/AccountPackage/AccountPackageRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/AccountPackage/IAccountPackageRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/City/CityRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/City/ICityRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/CompanyImage/CompanyImageRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/CompanyImage/ICompanyImageRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/IBaseRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/Job/IJobRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/Position/IPositionRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/Position/PositionRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/Recruiter/IRecruiterRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/Recruiter/RecruiterRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/Seeker/ISeekerRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/Seeker/SeekerRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/SeekerJob/ISeekerJobRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/SeekerJob/SeekerJobRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/Transaction/ITransactionRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repository/Transaction/TransactionRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Recruiter/Resources/views/transaction/account-package.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Modules/Recruiter/Resources/views/transaction/transaction-history.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckLoginRecruiter.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminJobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminJobController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminRecruiterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminRecruiterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminTransactionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminTransactionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Admin/Resources/views/recruiter/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Admin/Resources/views/recruiter/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminAuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminAuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Modules/Admin/Routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Admin/Routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterAuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterAuthController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterJobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterJobController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterSeekerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterSeekerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Recruiter/Resources/views/auth/signup.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Recruiter/Resources/views/auth/signup.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterTransactionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterTransactionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Recruiter/Resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Recruiter/Resources/views/auth/login.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Modules/Recruiter/Resources/views/job/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Recruiter/Resources/views/job/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Recruiter/Resources/views/payment/bill.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Recruiter/Resources/views/payment/bill.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Recruiter/Resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Recruiter/Resources/views/layouts/master.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Modules/Recruiter/Routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Recruiter/Routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ApplyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApplyController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Position.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Position.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Seeker.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Seeker.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repository/BaseRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repository/BaseRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repository/JobRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repository/Job/JobRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/job/job-detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/job/job-detail.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/job/job-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/job/job-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Recruiter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Recruiter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Transaction.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Transaction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repository/Job/IJobRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repository/Job/IJobRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repository/Job/JobRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repository/Job/JobRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repository/Recruiter/RecruiterRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repository/Recruiter/RecruiterRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repository/Transaction/ITransactionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repository/Transaction/ITransactionRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repository/Transaction/TransactionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repository/Transaction/TransactionRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/theme-admin/css/client/client_layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/theme-admin/css/client/client_layout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/theme-admin/css/client/job-by-company.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/theme-admin/css/client/job-by-company.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/confirm/recruiter_confirm.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/confirm/recruiter_confirm.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/job/job-by-company.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/job/job-by-company.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/change-info.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/change-info.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/list-job-apply.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/list-job-apply.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,13 +43,60 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterTransactionController.php">
+        <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/transaction/transaction-history.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="373">
+              <caret line="43" selection-start-line="43" selection-end-line="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/job/job-by-company.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="240" column="6" selection-start-line="240" selection-start-column="6" selection-end-line="240" selection-end-column="6" />
               <folding>
-                <element signature="e#54#98#0#PHP" expanded="true" />
+                <element signature="e#10735#10763#0#HTML" expanded="true" />
+                <element signature="e#10822#10844#0#HTML" expanded="true" />
+                <element signature="e#11305#11343#0#HTML" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2020_12_19_154235_create_reviews_table.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="22" column="39" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2020_12_06_161052_create_cities_table.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2020_11_27_034903_create_seeker_jobs_table.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2020_11_27_034429_create_jobs_table.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="731">
+              <caret line="45" column="28" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -79,95 +104,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/auth/signup.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="21" column="66" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="66" />
+            <state relative-caret-position="901">
+              <caret line="53" column="93" selection-start-line="53" selection-start-column="74" selection-end-line="53" selection-end-column="93" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/payment/bill.blade.php">
+        <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/job/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterAuthController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="75" column="253" selection-start-line="75" selection-start-column="72" selection-end-line="75" selection-end-column="253" />
-              <folding>
-                <element signature="e#54#101#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="51">
+              <caret line="3" column="146" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="146" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Repository/CompanyImage/CompanyImageRepository.php">
+        <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/transaction/account-package.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
-              <folding>
-                <element signature="e#49#77#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Repository/Recruiter/RecruiterRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="63" selection-start-line="63" selection-end-line="63" />
-              <folding>
-                <element signature="e#46#71#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminTransactionController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="23" column="95" selection-start-line="23" selection-start-column="95" selection-end-line="23" selection-end-column="95" />
-              <folding>
-                <element signature="e#50#104#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/job/job-list.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="75" column="91" selection-start-line="75" selection-start-column="53" selection-end-line="75" selection-end-column="91" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminJobController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1037">
-              <caret line="69" column="55" selection-start-line="63" selection-start-column="8" selection-end-line="69" selection-end-column="55" />
-              <folding>
-                <element signature="e#50#106#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="51">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -204,26 +160,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Modules/Recruiter/Routes/web.php" />
-        <option value="$PROJECT_DIR$/app/Repository/IBaseRepository.php" />
-        <option value="$PROJECT_DIR$/app/Providers/RepositoryServiceProvider.php" />
-        <option value="$PROJECT_DIR$/app/Repository/BaseRepository.php" />
-        <option value="$PROJECT_DIR$/app/Models/Job.php" />
-        <option value="$PROJECT_DIR$/app/Repository/Position/IPositionRepository.php" />
-        <option value="$PROJECT_DIR$/app/Models/Position.php" />
-        <option value="$PROJECT_DIR$/app/Repository/Position/PositionRepository.php" />
-        <option value="$PROJECT_DIR$/app/Repository/AccountPackage/IAccountPackageRepository.php" />
-        <option value="$PROJECT_DIR$/app/Repository/AccountPackage/AccountPackageRepository.php" />
-        <option value="$PROJECT_DIR$/app/Repository/City/ICityRepository.php" />
-        <option value="$PROJECT_DIR$/app/Repository/City/CityRepository.php" />
-        <option value="$PROJECT_DIR$/app/Models/Seeker.php" />
-        <option value="$PROJECT_DIR$/Modules/Recruiter/Resources/views/seeker/index.blade.php" />
-        <option value="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterSeekerController.php" />
         <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
-        <option value="$PROJECT_DIR$/Modules/Admin/Routes/web.php" />
-        <option value="$PROJECT_DIR$/app/Repository/Transaction/ITransactionRepository.php" />
         <option value="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminTransactionController.php" />
-        <option value="$PROJECT_DIR$/app/Repository/Transaction/TransactionRepository.php" />
         <option value="$PROJECT_DIR$/Modules/Admin/Resources/views/recruiter/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" />
         <option value="$PROJECT_DIR$/resources/views/index.blade.php" />
@@ -235,7 +173,6 @@
         <option value="$PROJECT_DIR$/app/Repository/CompanyImage/CompanyImageRepository.php" />
         <option value="$PROJECT_DIR$/resources/views/job/job-detail.blade.php" />
         <option value="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminJobController.php" />
-        <option value="$PROJECT_DIR$/app/Repository/Job/IJobRepository.php" />
         <option value="$PROJECT_DIR$/app/Repository/SeekerJob/ISeekerJobRepository.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
@@ -247,14 +184,33 @@
         <option value="$PROJECT_DIR$/app/Repository/SeekerJob/SeekerJobRepository.php" />
         <option value="$PROJECT_DIR$/app/Repository/Recruiter/IRecruiterRepository.php" />
         <option value="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminRecruiterController.php" />
-        <option value="$PROJECT_DIR$/Modules/Recruiter/Resources/views/job/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Repository/Job/JobRepository.php" />
-        <option value="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterJobController.php" />
         <option value="$PROJECT_DIR$/Modules/Recruiter/Resources/views/job/detail.blade.php" />
-        <option value="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterTransactionController.php" />
         <option value="$PROJECT_DIR$/Modules/Recruiter/Resources/views/payment/bill.blade.php" />
         <option value="$PROJECT_DIR$/app/Repository/Recruiter/RecruiterRepository.php" />
+        <option value="$PROJECT_DIR$/config/auth.php" />
+        <option value="$PROJECT_DIR$/app/Models/Recruiter.php" />
+        <option value="$PROJECT_DIR$/Modules/Admin/Routes/web.php" />
+        <option value="$PROJECT_DIR$/resources/views/confirm/recruiter_confirm.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Middleware/CheckLoginRecruiter.php" />
+        <option value="$PROJECT_DIR$/app/Http/Kernel.php" />
+        <option value="$PROJECT_DIR$/Modules/Recruiter/Resources/views/auth/login.blade.php" />
+        <option value="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminAuthController.php" />
         <option value="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterAuthController.php" />
+        <option value="$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminController.php" />
+        <option value="$PROJECT_DIR$/Modules/Recruiter/Resources/views/job/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Repository/Job/IJobRepository.php" />
+        <option value="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterJobController.php" />
+        <option value="$PROJECT_DIR$/app/Repository/Job/JobRepository.php" />
+        <option value="$PROJECT_DIR$/Modules/Recruiter/Routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Repository/Transaction/ITransactionRepository.php" />
+        <option value="$PROJECT_DIR$/app/Repository/Transaction/TransactionRepository.php" />
+        <option value="$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterTransactionController.php" />
+        <option value="$PROJECT_DIR$/app/Models/Transaction.php" />
+        <option value="$PROJECT_DIR$/Modules/Recruiter/Resources/views/layouts/master.blade.php" />
+        <option value="$PROJECT_DIR$/Modules/Recruiter/Resources/views/transaction/account-package.blade.php" />
+        <option value="$PROJECT_DIR$/Modules/Recruiter/Resources/views/transaction/transaction-history.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2020_12_19_154235_create_reviews_table.php" />
+        <option value="$PROJECT_DIR$/resources/views/job/job-by-company.blade.php" />
       </list>
     </option>
   </component>
@@ -365,16 +321,16 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="676" />
-    <option name="width" value="697" />
-    <option name="height" value="735" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="699" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -418,6 +374,20 @@
               <item name="WebSite_ITJob" type="b2602c69:ProjectViewProjectNode" />
               <item name="WebSite_ITJob" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Middleware" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WebSite_ITJob" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WebSite_ITJob" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Requests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WebSite_ITJob" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WebSite_ITJob" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -431,41 +401,6 @@
               <item name="WebSite_ITJob" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WebSite_ITJob" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WebSite_ITJob" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
-              <item name="CompanyImage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WebSite_ITJob" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WebSite_ITJob" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
-              <item name="Job" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WebSite_ITJob" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WebSite_ITJob" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
-              <item name="Recruiter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WebSite_ITJob" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WebSite_ITJob" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
-              <item name="Seeker" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WebSite_ITJob" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WebSite_ITJob" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
-              <item name="SeekerJob" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WebSite_ITJob" type="b2602c69:ProjectViewProjectNode" />
@@ -675,7 +610,23 @@
               <item name="WebSite_ITJob" type="462c0819:PsiDirectoryNode" />
               <item name="Modules" type="462c0819:PsiDirectoryNode" />
               <item name="Recruiter" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="transaction" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WebSite_ITJob" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WebSite_ITJob" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Recruiter" type="462c0819:PsiDirectoryNode" />
               <item name="Routes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WebSite_ITJob" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WebSite_ITJob" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Recruiter" type="462c0819:PsiDirectoryNode" />
+              <item name="Tests" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WebSite_ITJob" type="b2602c69:ProjectViewProjectNode" />
@@ -782,6 +733,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -791,11 +743,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\Đồ án tốt nghiệp\WebSite_ITJob\app\Repository\Job" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\Đồ án tốt nghiệp\WebSite_ITJob\app\Http\Middleware" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\Đồ án tốt nghiệp\WebSite_ITJob\app\Repository\Job" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -846,18 +798,20 @@
       <workItem from="1608088632552" duration="26960000" />
       <workItem from="1608172934232" duration="17299000" />
       <workItem from="1608260771803" duration="26704000" />
-      <workItem from="1608343099551" duration="5215000" />
+      <workItem from="1608343099551" duration="19684000" />
+      <workItem from="1608434053225" duration="3101000" />
+      <workItem from="1608470110575" duration="4870000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="383459000" />
+    <option name="totallyTimeSpent" value="405899000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25869894" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.5070422" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -872,7 +826,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.19667171" side_tool="true" weight="0.3289689" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.8033283" visible="true" weight="0.23567921" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.8033283" visible="true" weight="0.25531915" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -905,75 +859,10 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Models/Seeker.php">
+    <entry file="file://$PROJECT_DIR$/app/Helpers/function.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="56" column="32" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/seeker/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="28" column="118" selection-start-line="28" selection-start-column="118" selection-end-line="28" selection-end-column="118" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
-          <folding>
-            <element signature="e#33#69#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Admin/Routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="37" column="102" selection-start-line="37" selection-start-column="102" selection-end-line="37" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repository/Transaction/ITransactionRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="38" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repository/Transaction/TransactionRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="e#48#75#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repository/City/CityRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="28" column="33" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="33" />
-          <folding>
-            <element signature="e#41#61#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        <state relative-caret-position="-306">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -984,219 +873,239 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repository/Position/PositionRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
-          <folding>
-            <element signature="e#45#69#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repository/BaseRepository.php">
+    <entry file="file://$PROJECT_DIR$/app/Repository/CompanyImage/CompanyImageRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
-          <caret line="35" column="7" lean-forward="true" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
+          <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
           <folding>
-            <element signature="e#38#63#0#PHP" expanded="true" />
+            <element signature="e#49#77#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/JobListController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/confirm/recruiter_confirm.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApplyController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+        <state relative-caret-position="153">
+          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
           <folding>
-            <element signature="e#40#60#0#PHP" expanded="true" />
+            <element signature="e#382#444#0#HTML" expanded="true" />
+            <element signature="e#485#504#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/job/job-detail.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Kernel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="65" column="75" selection-start-line="65" selection-start-column="65" selection-end-line="65" selection-end-column="75" />
+        <state relative-caret-position="238">
+          <caret line="68" column="60" selection-start-line="68" selection-start-column="60" selection-end-line="68" selection-end-column="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/master.blade.php">
+    <entry file="file://$PROJECT_DIR$/config/auth.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-187">
-          <caret line="112" column="65" lean-forward="true" selection-start-line="112" selection-start-column="65" selection-end-line="112" selection-end-column="65" />
+        <state relative-caret-position="1218">
+          <caret line="134" column="37" selection-start-line="134" selection-start-column="37" selection-end-line="134" selection-end-column="37" />
+          <folding>
+            <element signature="e#7#28#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Seeker.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+          <folding>
+            <element signature="e#30#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/auth/login_modal.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CheckLoginAdmin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/RecruiterSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="33" column="46" lean-forward="true" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CheckLoginRecruiter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/auth/login.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="103" selection-start-line="18" selection-start-column="103" selection-end-line="18" selection-end-column="103" />
+          <folding>
+            <element signature="e#2754#2804#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Admin/Resources/views/layouts/master.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="48" column="17" lean-forward="true" selection-start-line="39" selection-start-column="12" selection-end-line="48" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="43" column="30" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
+        <state relative-caret-position="204">
+          <caret line="12" column="72" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="72" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/user/list-job-apply.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-32">
-          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+        <state relative-caret-position="408">
+          <caret line="58" column="76" selection-start-line="58" selection-start-column="67" selection-end-line="58" selection-end-column="76" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MessageController.php">
+    <entry file="file://$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminAuthController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+        <state relative-caret-position="249">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Admin/Routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="14" column="84" lean-forward="true" selection-start-line="14" selection-start-column="69" selection-end-line="14" selection-end-column="84" />
           <folding>
-            <element signature="e#40#68#0#PHP" expanded="true" />
+            <element signature="e#7#389#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repository/Seeker/ISeekerRepository.php">
+    <entry file="file://$PROJECT_DIR$/Modules/Admin/Resources/views/auth/login.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="64" selection-start-line="16" selection-start-column="64" selection-end-line="16" selection-end-column="64" />
+        <state relative-caret-position="153">
+          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
+    <entry file="file://$PROJECT_DIR$/app/Repository/Recruiter/RecruiterRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="64" column="9" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
-          <folding>
-            <element signature="e#40#80#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repository/Seeker/SeekerRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="41" column="20" lean-forward="true" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
-          <folding>
-            <element signature="e#43#65#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BaseController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="34" column="57" selection-start-line="34" selection-start-column="57" selection-end-line="34" selection-end-column="57" />
-          <folding>
-            <element signature="e#40#60#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repository/SeekerJob/ISeekerJobRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repository/SeekerJob/SeekerJobRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="97" column="53" lean-forward="true" selection-start-line="97" selection-start-column="53" selection-end-line="97" selection-end-column="53" />
+        <state relative-caret-position="731">
+          <caret line="63" column="42" lean-forward="true" selection-start-line="63" selection-start-column="42" selection-end-line="63" selection-end-column="42" />
           <folding>
             <element signature="e#46#71#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php">
+    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterAuthController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="58" column="76" selection-start-line="58" selection-start-column="67" selection-end-line="58" selection-end-column="76" />
+        <state relative-caret-position="167">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
+          <folding>
+            <element signature="e#54#101#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
+    <entry file="file://$PROJECT_DIR$/public/theme-admin/css/job_list_by_admin.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="39" column="58" selection-start-line="39" selection-start-column="58" selection-end-line="39" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repository/Recruiter/IRecruiterRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminRecruiterController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="34" column="21" lean-forward="true" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+        <state relative-caret-position="170">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Modules/Admin/Resources/views/job/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="54" column="126" lean-forward="true" selection-start-line="53" selection-start-column="20" selection-end-line="54" selection-end-column="126" />
+        <state relative-caret-position="323">
+          <caret line="25" column="14" selection-start-line="16" selection-start-column="8" selection-end-line="25" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="19" column="49" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminJobController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
+          <folding>
+            <element signature="e#50#106#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Repository/Job/IJobRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
+        <state relative-caret-position="147">
+          <caret line="12" column="49" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Repository/Job/JobRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="255">
+          <caret line="24" column="38" lean-forward="true" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
           <folding>
             <element signature="e#39#58#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterSeekerController.php">
+    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/seeker/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="53" column="9" lean-forward="true" selection-start-line="53" selection-start-column="9" selection-end-line="53" selection-end-column="9" />
-          <folding>
-            <element signature="e#54#79#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="303">
+          <caret line="44" column="5" lean-forward="true" selection-start-line="44" selection-end-line="44" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/job/index.blade.php">
+    <entry file="file://$PROJECT_DIR$/Modules/Admin/Resources/views/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Admin/Resources/views/transaction/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="33" column="58" lean-forward="true" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="58" />
-          <folding>
-            <element signature="e#1318#1359#0#HTML" expanded="true" />
-            <element signature="e#1491#1569#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Admin/Resources/views/job/job_detail.blade.php">
+    <entry file="file://$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminTransactionController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="10" lean-forward="true" selection-end-line="80" selection-end-column="11" />
+        <state relative-caret-position="136">
+          <caret line="23" column="19" lean-forward="true" selection-start-line="23" selection-end-line="24" />
+          <folding>
+            <element signature="e#50#104#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterJobController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
+        <state relative-caret-position="255">
+          <caret line="66" column="9" lean-forward="true" selection-start-line="63" selection-start-column="8" selection-end-line="66" selection-end-column="9" />
           <folding>
             <element signature="e#54#110#0#PHP" expanded="true" />
           </folding>
@@ -1204,53 +1113,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Routes/web.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/layouts/master.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/seeker/detail.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="6" selection-start-line="39" selection-end-line="39" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/job/detail.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" column="46" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminJobController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="69" column="55" selection-start-line="63" selection-start-column="8" selection-end-line="69" selection-end-column="55" />
-          <folding>
-            <element signature="e#50#106#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/job/job-list.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="75" column="91" selection-start-line="75" selection-start-column="53" selection-end-line="75" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Admin/Resources/views/recruiter/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
-          <caret line="34" column="36" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="36" />
+          <caret line="44" column="105" selection-start-line="44" selection-start-column="80" selection-end-line="44" selection-end-column="105" />
         </state>
       </provider>
     </entry>
@@ -1261,59 +1126,132 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/seeker/detail.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Repository/Transaction/ITransactionRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterTransactionController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="275">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
           <folding>
-            <element signature="e#54#98#0#PHP" expanded="true" />
+            <element signature="e#54#108#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Admin/Http/Controllers/AdminTransactionController.php">
+    <entry file="file://$PROJECT_DIR$/app/Repository/Transaction/TransactionRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="23" column="95" selection-start-line="23" selection-start-column="95" selection-end-line="23" selection-end-column="95" />
+        <state relative-caret-position="249">
+          <caret line="51" column="37" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Recruiter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
           <folding>
-            <element signature="e#50#104#0#PHP" expanded="true" />
+            <element signature="e#29#59#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Transaction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/layouts/master.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1139">
+          <caret line="67" column="90" selection-start-line="67" selection-start-column="90" selection-end-line="67" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Review.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_12_19_154235_create_reviews_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="22" column="39" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_12_06_161052_create_cities_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_11_27_034903_create_seeker_jobs_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_11_27_034429_create_jobs_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="45" column="28" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/auth/signup.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="21" column="66" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="66" />
+        <state relative-caret-position="901">
+          <caret line="53" column="93" selection-start-line="53" selection-start-column="74" selection-end-line="53" selection-end-column="93" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repository/CompanyImage/CompanyImageRepository.php">
+    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/job/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
-          <folding>
-            <element signature="e#49#77#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="51">
+          <caret line="3" column="146" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="146" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Repository/Recruiter/RecruiterRepository.php">
+    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/transaction/account-package.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
-          <folding>
-            <element signature="e#46#71#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Http/Controllers/RecruiterAuthController.php">
+    <entry file="file://$PROJECT_DIR$/Modules/Recruiter/Resources/views/transaction/transaction-history.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="75" column="253" selection-start-line="75" selection-start-column="72" selection-end-line="75" selection-end-column="253" />
+        <state relative-caret-position="373">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/job/job-by-company.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="240" column="6" selection-start-line="240" selection-start-column="6" selection-end-line="240" selection-end-column="6" />
           <folding>
-            <element signature="e#54#101#0#PHP" expanded="true" />
+            <element signature="e#10735#10763#0#HTML" expanded="true" />
+            <element signature="e#10822#10844#0#HTML" expanded="true" />
+            <element signature="e#11305#11343#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

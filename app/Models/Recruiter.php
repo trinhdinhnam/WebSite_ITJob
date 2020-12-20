@@ -4,8 +4,12 @@ namespace App\Models;
 use App\Models\RecruiterLevel;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\MediaLibrary\Conversion\Conversion;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\Models\Media;
 
-class Recruiter extends Model
+class Recruiter extends Authenticatable
 {
     //
     protected $table = 'recruiters';

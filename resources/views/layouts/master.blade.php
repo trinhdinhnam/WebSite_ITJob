@@ -198,6 +198,7 @@
     <!-- Bản js đã nén của bootstrap 4, đặt dưới cùng trước thẻ đóng body-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
+    @yield('script')
 
     <script type="text/javascript">
     $(function() {

@@ -13,4 +13,6 @@ interface ITransactionRepository
 
     public function changeStatus($id);
 
+    public function getTransactionNew($id);
+
 }

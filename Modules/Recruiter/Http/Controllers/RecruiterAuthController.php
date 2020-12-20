@@ -15,6 +15,7 @@ use App\Repository\Recruiter\IRecruiterRepository;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class RecruiterAuthController extends Controller
 {
@@ -42,8 +43,22 @@ class RecruiterAuthController extends Controller
 
     public function getLogin()
     {
-        return view('recruiter::auth.login');
+        if(Auth::guard('recruiters')->check())
+        {
+            return redirect()->route('recruiter.home');
 
+        }else{
+            return view('recruiter::auth.login');
+
+        }
+    }
+
+    public function postLogin(Request $request){
+        $credentials = $request->only('email','password');
+        if(Auth::guard('recruiters')->attempt($credentials)){
+            return redirect()->route('recruiter.home');
+        }
+        return redirect()->back();
     }
 
     public function getAccountPackage(Request $request){
@@ -73,11 +88,16 @@ class RecruiterAuthController extends Controller
 
     public function submitRegister( RequestRegisterRecruiter $request){
 
-        $recruiterId = $this->recruiterRepository->addRecruiter($request->only('RecruiterName','Position','Email','Phone','Password','CompanyName','Address','City','Country','Introduction','WorkDay','TimeWork','CompanySize','TypeBusiness','CompanyLogo'));
+        $recruiterId = $this->recruiterRepository->addRecruiter($request);
 
-        $this->companyImageRepository->addCompanyImage($request->only('Image'),$recruiterId);
+        $this->companyImageRepository->addCompanyImage($request,$recruiterId);
 
-        return redirect()->route('recruiter.account.package')->with(['flash-message'=>'Success ! Đăng ký thành công !','flash-level'=>'success']);
+        return view('recruiter::auth.login');
+    }
+
+    public function getLogout(){
+        Auth::guard('recruiters')->logout();
+        return redirect()->route('client.get.home.page');
     }
 
 

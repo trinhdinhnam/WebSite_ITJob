@@ -46,24 +46,24 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
         // TODO: Implement addRecruiter() method.
 
         $recruiter = new $this->model;
-        $recruiter->RecruiterName = $input['RecruiterName'];
-        $recruiter->Position = $input['Position'];
-        $recruiter->Email = $input['Email'];
-        $recruiter->Phone = $input['Phone'];
-        $recruiter->Password = bcrypt($input['Password']);
-        $recruiter->CompanyName = $input['CompanyName'];
-        $recruiter->Address = $input['Address'];
-        $recruiter->CityId = $input['City'];
-        $recruiter->Country = $input['Country'];
-        $recruiter->Introduction = $input['Introduction'];
-        $recruiter->WorkDay = $input['WorkDay'];
-        $recruiter->TimeWork = $input['TimeWork'];
-        $recruiter->CompanySize = $input['CompanySize'];
-        $recruiter->TypeBusiness = $input['TypeBusiness'];
+        $recruiter->RecruiterName = $input->RecruiterName;
+        $recruiter->Position = $input->Position;
+        $recruiter->Email = $input->Email;
+        $recruiter->Phone = $input->Phone;
+        $recruiter->Password = bcrypt($input->Password);
+        $recruiter->CompanyName = $input->CompanyName;
+        $recruiter->Address = $input->Address;
+        $recruiter->CityId = $input->City;
+        $recruiter->Country = $input->Country;
+        $recruiter->Introduction = $input->Introduction;
+        $recruiter->WorkDay = $input->WorkDay;
+        $recruiter->TimeWork = $input->TimeWork;
+        $recruiter->CompanySize = $input->CompanySize;
+        $recruiter->TypeBusiness = $input->TypeBusiness;
 
         if($input->hasFile('CompanyLogo'))
         {
-            $fileCompanyLogo = $input['CompanyLogo']->file();
+            $fileCompanyLogo = $input->file('CompanyLogo');
             $fileLogo = upload_image($fileCompanyLogo,$fileCompanyLogo->getClientOriginalName());
             if(isset($fileLogo['name'])){
                 $recruiter->CompanyLogo = $fileLogo['name'];

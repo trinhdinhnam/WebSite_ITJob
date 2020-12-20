@@ -48,4 +48,13 @@ class TransactionRepository extends BaseRepository implements ITransactionReposi
         $tran->save();
         return true;
     }
+
+    public function getTransactionNew($id)
+    {
+        // TODO: Implement getExpiryDateCurrent() method.
+        return $this->model
+            ->where('RecruiterId',$id)
+            ->orderBy('ExpiryDate','desc')
+            ->limit(1);
+    }
 }

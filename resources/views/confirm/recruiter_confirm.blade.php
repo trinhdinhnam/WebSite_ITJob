@@ -6,7 +6,7 @@
         <div class="confirm-detail-content">
             <div style="display: flex;">
                 <div class="title">Bạn muốn có những ứng viên IT tuyện vời?</div>
-                <div style="margin-left: 220px; font-size: 14px; margin-top: 10px;"> <a href="{{route('recruiter.login')}}" style="color: red;"><i class="fa fa-caret-right"></i> Đăng nhập</a> </div>
+                <div style="margin-left: 220px; font-size: 14px; margin-top: 10px;"> <a href="{{route('recruiter.get.login')}}" style="color: red;"><i class="fa fa-caret-right"></i> Đăng nhập</a> </div>
             </div>
             <div class="title2">Cung cấp cho chúng tôi thông tin chi tiết của bạn và nhân viên của chúng tôi sẽ liên hệ
                 với bạn về dịch vụ của chúng tôi!

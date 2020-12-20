@@ -14,7 +14,6 @@
 Route::prefix('authenticate')->group(function(){
     Route::get('/admin-login','AdminAuthController@getLogin')->name('admin.get.login');
     Route::post('/admin-login','AdminAuthController@postLogin');
-
 });
 
 Route::prefix('admin-manager')->middleware('CheckLoginAdmin')->group(function (){
