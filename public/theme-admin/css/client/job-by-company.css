@@ -124,7 +124,14 @@
     margin: auto;
     margin-top: 50px;
     background-color: #ec1b30;
-
+    color: white;
+}
+.company-event .btn-review-nologin{
+    width: 90%;
+    margin: auto;
+    margin-top: 50px;
+    background-color: #ec1b30;
+    color: white;
 }
 .company-event .btn-follow{
     width: 90%;
@@ -373,7 +380,7 @@ ul#tab li.active{
    }
    .medium-score-review .fa-star{
        color: white;
-       background-color: yellowgreen;
+       background-color: #999;
        margin-left: 10px;
        font-size: 35px;
        padding: 5px;
@@ -385,11 +392,16 @@ ul#tab li.active{
    .medium-score-review .score_text{
     font-size: 34px;
     font-weight: bold;
-    color: #222;
+       color: #fff;
     margin-left: 20px;
     margin-top: 4px;
+       height: 50px;
    }
 
+   .medium-score-review .active{
+       background-color: yellowgreen;
+   }
+   /* review page */
    .review-page .review-list{
        width: 100%;
        height: auto;
@@ -420,20 +432,25 @@ ul#tab li.active{
 
    .review-item .fa-star{
     color: white;
-    background-color: yellowgreen;
-    margin-left: 3px;
+       background-color: #999;
+       margin-left: 3px;
     font-size: 22px;
     padding: 5px;
     margin-top: 10px;
     border-radius: 4px;
     float: left;
+       margin-bottom: 5px;
+
+   }
+   .review-item .active{
+       background-color: yellowgreen;
 
    }
    .review-item .score_text{
        float: left;
        font-size: 17px;
        font-weight: bold;
-       color: #222;
+       color: #fff;
        margin-left: 10px;
        margin-top: 10px;
        font-family: Arial, Helvetica, sans-serif;
@@ -442,9 +459,8 @@ ul#tab li.active{
    .review-item .review-date{
        font-size: 14px;
        clear: both;
-       margin-top: 5px;
        margin-left: 5px;
-       color: #444;
+       color: #44f;
    }
 
    .review-item .good-review-title{
@@ -517,15 +533,44 @@ ul#tab li.active{
            float: left;
            font-size: 17px;
            font-weight: bold;
-           color: #222;
            margin-left: 10px;
+           color: #fff;
            margin-top: 5px;
            font-family: Arial, Helvetica, sans-serif;
        }
-       .rating_active{
+       .list_star .rating_active{
         background-color: yellowgreen;
        }
+.score_text{
+    display: inline-block;
+    margin-left: 10px;
+    position: relative;
+    background: #52b858;
+    color: #fff;
+    padding: 2px 8px;
+    box-sizing: border-box;
+    font-size: 12px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    display: none;
 
+}
+
+.score_text:after
+{
+    right: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(82,184,88,0);
+    border-right-color: #52b858;
+    border-width: 6px;
+    margin-top: -6px;
+}
 
 /* review hot  */
 .page-content .review-hot{
@@ -569,11 +614,64 @@ ul#tab li.active{
     height: 48px;
     font-size: 22px;
 }
+.review-banner .btn-review2-nologin{
+    background-color: #ec1b30;
+    margin: auto;
+    width: 100%;
+    margin-top: 25px;
+    height: 48px;
+    font-size: 22px;
+}
 
+/* Review hot */
 .review-hot .review-hot-list{
     margin-top: 20px;
     background-color: #fff;
     width: 100%;
-    height: 520px;
+    height: auto;
     padding: 15px;    
+}
+
+.review-hot .review-hot-list .review-hot-item{
+    width: 100%;
+    height: 200px;
+    margin-top: 40px;
+    border-bottom: 1px solid #ddd;
+}
+
+.review-hot-list .review-hot-label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+}
+
+.review-hot-item .review-hot-title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.review-hot-item .fa-star{
+    color: white;
+    background-color: #999;
+    margin-left: 0px;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 4px;
+    font-size: 20px;
+    /* background-color: yellowgreen; */
+}
+.review-hot-item .good-review{
+    margin-top: 10px;
+}
+
+.review-hot.list_star .active{
+    background-color: yellowgreen;
+}
+
+.hide{
+    display: none;
+}
+.show{
+    display: block;
 }

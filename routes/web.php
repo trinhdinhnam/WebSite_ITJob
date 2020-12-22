@@ -31,16 +31,16 @@ Route::group(['prefix' => 'job'], function(){
     Route::get('/job-by-position/{id}','HomeController@getJobByPosition')->name('client.get.job.by.position');
 });
 
-Route::group(['prefix' => 'apply'], function(){
+Route::group(['prefix' => 'apply','middleware' => 'CheckLoginSeeker'], function(){
     Route::get('/apply-job/{id}','ApplyController@getApply')->name('client.get.apply');
     Route::post('/apply-job/{id}','ApplyController@postApply');
 });
 
-Route::group(['prefix' => 'message'], function(){
+Route::group(['prefix' => 'message','middleware' => 'CheckLoginSeeker'], function(){
     Route::get('/job/{id}','MessageController@getJobByMessage')->name('client.get.job.by.message');
 });
 
-Route::group(['prefix' => 'user'], function(){
+Route::group(['prefix' => 'user', 'middleware' => 'CheckLoginSeeker'], function(){
     Route::get('/jobApply/{id}','UserController@getJobApply')->name('client.get.job.apply');
     Route::get('/change-info/{id}','UserController@getChangeInfo')->name('client.get.change.info');
     Route::post('/change-info/{id}','UserController@postChangeInfo')->name('client.post.change.info');
@@ -48,6 +48,8 @@ Route::group(['prefix' => 'user'], function(){
     Route::post('/change-password/{id}','UserController@postChangePassword')->name('client.post.change.info');
 
 });
-
+Route::group(['prefix' => 'review', 'middleware' => 'CheckLoginSeeker'], function(){
+    Route::post('/recruiter/{id}','ReviewController@saveReview')->name('client.post.review');
+});
 
 

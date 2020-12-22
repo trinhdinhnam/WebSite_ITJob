@@ -16,6 +16,8 @@ use App\Repository\Position\IPositionRepository;
 use App\Repository\Position\PositionRepository;
 use App\Repository\Recruiter\IRecruiterRepository;
 use App\Repository\Recruiter\RecruiterRepository;
+use App\Repository\Review\IReviewRepository;
+use App\Repository\Review\ReviewRepository;
 use App\Repository\Seeker\ISeekerRepository;
 use App\Repository\Seeker\SeekerRepository;
 use App\Repository\SeekerJob\ISeekerJobRepository;
@@ -46,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ICompanyImageRepository::class,CompanyImageRepository::class);
         $this->app->bind(ISeekerJobRepository::class,SeekerJobRepository::class);
         $this->app->bind(ITransactionRepository::class,TransactionRepository::class);
+        $this->app->bind(IReviewRepository::class,ReviewRepository::class);
 
     }
 

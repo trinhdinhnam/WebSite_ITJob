@@ -12,6 +12,7 @@ use App\Repository\CompanyImage\ICompanyImageRepository;
 use App\Repository\Job\IJobRepository;
 use App\Repository\Position\IPositionRepository;
 use App\Repository\Recruiter\IRecruiterRepository;
+use App\Repository\Review\IReviewRepository;
 use App\Repository\SeekerJob\ISeekerJobRepository;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -28,12 +29,14 @@ class HomeController extends BaseController
     public $recruiterRepository;
     public $jobRepository;
     public $companyImageRepository;
-    public function __construct(ISeekerJobRepository $seekerJobRepository, IPositionRepository $positionRepository, IJobRepository $jobRepository, ICityRepository $cityRepository, IRecruiterRepository $recruiterRepository,ICompanyImageRepository $companyImageRepository)
+    public $reviewRepository;
+    public function __construct(ISeekerJobRepository $seekerJobRepository, IPositionRepository $positionRepository, IJobRepository $jobRepository, ICityRepository $cityRepository, IRecruiterRepository $recruiterRepository,ICompanyImageRepository $companyImageRepository,IReviewRepository $reviewRepository)
     {
         parent::__construct($seekerJobRepository, $positionRepository, $jobRepository, $cityRepository, $recruiterRepository);
         $this->recruiterRepository = $recruiterRepository;
         $this->jobRepository = $jobRepository;
         $this->companyImageRepository = $companyImageRepository;
+        $this->reviewRepository = $reviewRepository;
     }
 
     public function getHomePage(){
@@ -94,9 +97,13 @@ class HomeController extends BaseController
         $jobByCompanys = Job::with('recruiter:id,CompanyLogo')
                                 ->where('RecruiterId',$id)
                                 ->get();
+        $reviewByRecruiters = $this->reviewRepository->getReviewByRecruiter($id);
+        $reviewHots = $this->reviewRepository->getListReviewHots($id);
         $viewData = [
             'company' => $company,
-            'jobByCompanys' => $jobByCompanys
+            'jobByCompanys' => $jobByCompanys,
+            'reviewByRecruiters' => $reviewByRecruiters,
+            'reviewHots' => $reviewHots
         ];
         return view('job.job-by-company',$viewData);
     }

@@ -7,10 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="{{asset('/js/vendor/jquery-1.11.3.min.js')}}"></script>
     <link href="{{asset('theme-admin/css/client/client_layout.css')}}" rel="stylesheet" />
 </head>
@@ -197,9 +196,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <!-- Bản js đã nén của bootstrap 4, đặt dưới cùng trước thẻ đóng body-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-
     @yield('script')
-
     <script type="text/javascript">
     $(function() {
         var click = 1;
@@ -220,18 +217,6 @@
         $('#myModalLogin').on('hidden.bs.modal', function(e) {
             location.reload();
         });
-
-        // $('.message-apply').click( function (event) {
-        //     event.preventDefault();
-        //     //$('.dropdown-content-message').addClass('show');
-        //     if(click==1){
-        //         $('.dropdown-content-message').addClass('show');
-        //         click = 0;
-        //     }else if(click==0){
-        //         $('.dropdown-content-message').addClass('hide');
-        //         click = 1;
-        //     }
-        // })
 
     })
     </script>

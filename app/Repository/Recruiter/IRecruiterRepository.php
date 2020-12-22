@@ -20,5 +20,5 @@ interface IRecruiterRepository
 
     public function getRecruiterHot();
 
-
+    public function updateReview($recruiterId,$scoreReview);
 }

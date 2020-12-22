@@ -39,20 +39,24 @@
                 </div>
             </div>
             <div class="company-event">
-                <a href="" class="btn btn-danger btn-review">Viết review</a>
-                <a href="" class="btn-follow btn btn-light">Theo dõi</a>
+                @if(\Illuminate\Support\Facades\Auth::guard('seekers')->check())
+                    <button class="btn btn-danger btn-review">Viết review</button>
+                @else
+                    <a href="{{route('seeker.get.login')}}" class="btn btn-danger btn-review-nologin">Viết review</a>
+                @endif
+                <button class="btn-follow btn btn-light">Theo dõi</button>
             </div>
         </div>
         <div class="page-content row">
             <div class="col-md-8 item-list">
                 <ul class="navigation-item" id="tabs">
                     <li class="btn-job-item active">Tuyển dụng</li>
-                    <li class="btn-review-item">14 review</li>
+                    <li class="btn-review-item">{{count($reviewByRecruiters)}} reviews</li>
                 </ul>
                 <ul id="tab">
                     <li class="job-list active">
                         <div class="company-name-title"> {{$company->CompanyName}} tuyển dụng</div>
-                        @if(isset($company))
+                        @if(isset($jobByCompanys))
                         @foreach($jobByCompanys as $job)
 
                         <div class="job-item">
@@ -90,137 +94,88 @@
                         </div>
                         @endforeach
                         @endif
-
                     </li>
                     <li class="review-page">
+
                         <div class="medium-score-review">
-                            <div class="score-number">4.0</div>
-                            @for($i =1 ;$i<=5;$i++) <i class="fa fa-star" data-key="{{$i}}"></i>
+                            <div class="score-number">{{$company->ScoreReview/$company->ReviewNumber}}</div>
+                            @for($i =1 ;$i<=5;$i++) <i
+                                class="fa fa-star {{ $i <= round($company->ScoreReview/$company->ReviewNumber) ? 'active' : '' }}"
+                                data-key="{{$i}}"></i>
                                 @endfor
                                 <span class="score_text">Tốt</span>
                         </div>
 
                         <div class="review-list">
                             <div class="review-number">
-                                30 reviews
+                                {{count($reviewByRecruiters)}} reviews
                             </div>
+                            @if(isset($reviewByRecruiters))
+                            @foreach($reviewByRecruiters as $review)
                             <div class="review-item">
-                                <h5>Môi trường tốt</h5>
-                                @for($i =1 ;$i<=5;$i++) <i class="fa fa-star" data-key="{{$i}}"></i>
+                                <h5>{{$review->Title}}</h5>
+                                @for($i =1 ;$i<=5;$i++) <i
+                                    class="fa fa-star {{ $i <= $review->ScoreReview ? 'active' : '' }}"
+                                    data-key="{{$i}}"></i>
                                     @endfor
                                     <span class="score_text">Rất tốt</span>
-                                    <div class="review-date">Tháng bảy 2020</div>
+                                    <div class="review-date">{{date_format($review->created_at,'d')}} Tháng {{date_format($review->created_at,'m')}} {{date_format($review->created_at,'Y')}}</div>
 
                                     <div class="good-review-title">Điều tôi thích</div>
-                                    <div class="good-review-content">Môi trường tốt, sếp tốt, nhân viên thân thiện. Quy
-                                        trình làm việc rõ ràng. Có thông báo thời gian OT trước và có tiền lương nhân
-                                        đôi.
-                                        Trước khi lập cú đúp vào lưới Elche, Suarez bị chỉ trích rất nhiều do phong độ
-                                        yếu
-                                        kém, đặc biệt ở thất bại 0-2 trước Real Madrid tuần trước. HLV Diego Simeone đã
-                                        phải
-                                        lên tiếng bênh vực cậu học trò trước truyền thông, và may thay Suarez đã nổ súng
-                                        trở
-                                        lại giúp Atletico bỏ túi 3 điểm.
-
-                                        Dĩ nhiên, việc Suarez sa sút khiến Costa hi vọng anh sẽ có nhiều thời gian ra
-                                        sân
-                                        hơn. Thế nhưng, sau những gì mà tuyển thủ Uruguay trình diễn trước Elche, Costa
-                                        có
-                                        lẽ sẽ phải tiếp tục chờ đợi cơ hội, và điều này làm anh chẳng thể nào vui nổi.
-
-                                        Trả lời phóng viên, Costa bông đùa về cú đúp của Suarez: "Lúc tôi chấn thương
-                                        thì
-                                        anh ta tịt ngòi, cái gã con hoang ấy. Còn lúc tôi khỏi chấn thương quay lại thi
-                                        đấu
-                                        thì Suarez ghi 2 bàn". Ngay sau đó, Costa đã bày tỏ sự hạnh phúc khi thấy Suarez
-                                        lập
-                                        cú đúp để mang chiến thắng về cho đội bóng.</div>
+                                    <div class="good-review-content">{{$review->GoodReview}}</div>
 
                                     <div class="notgood-review-title">Đề nghị cải thiện</div>
-                                    <div class="notgood-review-content">Văn phòng làm việc khá cũ, nhà vệ sinh chưa sạch
-                                        sẽ.
-                                    </div>
+                                    <div class="notgood-review-content">{{$review->NotGoodReview}}</div>
                             </div>
-                            <div class="review-item">
-                                <h5>Môi trường tốt</h5>
-                                @for($i =1 ;$i<=5;$i++) <i class="fa fa-star" data-key="{{$i}}"></i>
-                                    @endfor
-                                    <span class="score_text">Rất tốt</span>
-                                    <div class="review-date">Tháng bảy 2020</div>
-
-                                    <div class="good-review-title">Điều tôi thích</div>
-                                    <div class="good-review-content">Môi trường tốt, sếp tốt, nhân viên thân thiện. Quy
-                                        trình làm việc rõ ràng. Có thông báo thời gian OT trước và có tiền lương nhân
-                                        đôi.
-                                        Trước khi lập cú đúp vào lưới Elche, Suarez bị chỉ trích rất nhiều do phong độ
-                                        yếu
-                                        kém, đặc biệt ở thất bại 0-2 trước Real Madrid tuần trước. HLV Diego Simeone đã
-                                        phải
-                                        lên tiếng bênh vực cậu học trò trước truyền thông, và may thay Suarez đã nổ súng
-                                        trở
-                                        lại giúp Atletico bỏ túi 3 điểm.
-
-                                        Dĩ nhiên, việc Suarez sa sút khiến Costa hi vọng anh sẽ có nhiều thời gian ra
-                                        sân
-                                        hơn. Thế nhưng, sau những gì mà tuyển thủ Uruguay trình diễn trước Elche, Costa
-                                        có
-                                        lẽ sẽ phải tiếp tục chờ đợi cơ hội, và điều này làm anh chẳng thể nào vui nổi.
-
-                                        Trả lời phóng viên, Costa bông đùa về cú đúp của Suarez: "Lúc tôi chấn thương
-                                        thì
-                                        anh ta tịt ngòi, cái gã con hoang ấy. Còn lúc tôi khỏi chấn thương quay lại thi
-                                        đấu
-                                        thì Suarez ghi 2 bàn". Ngay sau đó, Costa đã bày tỏ sự hạnh phúc khi thấy Suarez
-                                        lập
-                                        cú đúp để mang chiến thắng về cho đội bóng.</div>
-
-                                    <div class="notgood-review-title">Đề nghị cải thiện</div>
-                                    <div class="notgood-review-content">Văn phòng làm việc khá cũ, nhà vệ sinh chưa sạch
-                                        sẽ.
-                                    </div>
-                            </div>
+                            @endforeach
+                            @endif
 
                         </div>
 
-                        <div class="review-form row">
+                        <div class="review-form row hide">
                             <div class="col-12">
-                                <div class="review-form-title" style="margin-bottom: 20px;">Viết đánh giá</div>
-                                <span style="margin: 0 15px" class="list_star">
-                                    @for($i=1;$i<=5;$i++) 
-                                        <i class="fa fa-star" data-key="{{$i}}"></i>
-                                    @endfor
-                                </span>
-                                <span class="score_text">Rất tốt</span>
-                                <input type="hidden" value="" class="number_rating">
+                                <form action="{{route('client.post.review',$company->id)}}"
+                                    enctype="multipart/form-data" method="POST">
+                                    @csrf
+                                    <div class="review-form-title" style="margin-bottom: 20px;">Viết đánh giá</div>
+                                    <span style="margin: 0 15px" class="list_star">
+                                        @for($i=1;$i<=5;$i++) <i class="fa fa-star" data-key="{{$i}}"></i>
+                                            @endfor
+                                    </span>
+                                    <span class="score_text">Rất tốt</span>
+                                    <input type="hidden" value="" name="score_review" class="score_review">
 
-                                <div class="form-group" style="margin-top: 30px; clear: both;">
-                                    <h6 for="name">Tiêu đề</h6>
-                                    <input require type="text" class="form-control"
-                                        placeholder="Nhập tiêu đề review ..." value="" name="Title" autofocus>
+                                    <div class="form-group" style="margin-top: 30px; clear: both;">
+                                        <h6 for="name">Tiêu đề</h6>
+                                        <input require type="text" class="form-control"
+                                            placeholder="Nhập tiêu đề review ..." value="" name="title_review"
+                                            id="title-review" autofocus>
 
-                                </div>
-                                <div class="form-group">
-                                    <h6>Điểm tốt</h6>
-                                    <textarea require type="text" name="GoodReview" class="form-control" cols="30"
-                                        rows="5" placeholder="Nhập vào những điểm tốt của công ty ..."></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <h6>Điểm tốt</h6>
+                                        <textarea type="text" name="good_review_content" id="good-review-content"
+                                            class="form-control" cols="30" rows="5"
+                                            placeholder="Nhập vào những điểm tốt của công ty ..."></textarea>
 
-                                </div>
-                                <div class="form-group">
-                                    <h6>Điểm cần cải thiện</h6>
-                                    <textarea require type="text" name="NotGoodReview" class="form-control" cols="30"
-                                        rows="5"
-                                        placeholder="Nhập vào những điểm cần cải thiện của công ty ..."></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" name="submit" class="btn btn-primary">Gửi đánh giá</button>
-                                </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h6>Điểm cần cải thiện</h6>
+                                        <textarea type="text" name="notgood_review_content" id="not-good-review-content"
+                                            class="form-control" cols="30" rows="5"
+                                            placeholder="Nhập vào những điểm cần cải thiện của công ty ..."></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" style="margin-bottom: 20px;" class="btn btn-primary" id="js_rating_recruiter">Gửi đánh
+                                            giá</button>
+                                    </div>
+                                </form>
+
                             </div>
-
                         </div>
                     </li>
+                </ul>
             </div>
-            </ul>
 
 
             <div class="col-md-4 review-hot">
@@ -228,12 +183,27 @@
                 <div class="review-banner">
                     <div class="review-title">Hãy chia sẻ ý kiến của bạn</div>
                     <div class="review-label">Review cho {{$company->CompanyName}} ngay</div>
-                    <a href="" class="btn btn-danger btn-review2">Viết Review</a>
+                    @if(\Illuminate\Support\Facades\Auth::guard('seekers')->check())
+                        <button ref="" class="btn btn-danger btn-review2">Viết Review</button>
+                    @else
+                        <a href="{{route('seeker.get.login')}}" class="btn btn-danger btn-review2-nologin">Viết review</a>
+                    @endif
                 </div>
-
+                 @if(isset($reviewHots))
                 <div class="review-hot-list">
-
+                    <div class="review-hot-label">Review "hot"</div>
+                    @foreach($reviewHots as $reviewHot)
+                    <div class="review-hot-item">
+                        <div class="review-hot-title">"{{$reviewHot->Title}}"</div>
+                        <span style="margin: 0 15px; display: flex; height: 40px;" class="review-hot list_star">
+                            @for($i=1;$i<=5;$i++) <i class="fa fa-star {{$i <= $reviewHot->ScoreReview ? 'active' : '' }}" style="margin-right: 5px" ></i>
+                                @endfor
+                        </span>
+                        <div class="good-review">{{$reviewHot->GoodReview}}</div>
+                    </div>
+                    @endforeach
                 </div>
+                @endif
             </div>
 
         </div>
@@ -243,6 +213,7 @@
 @endsection
 
 @section('script')
+
 <script type="text/javascript">
 $("ul#tabs li").click(function(e) {
     if (!$(this).hasClass("active")) {
@@ -253,39 +224,111 @@ $("ul#tabs li").click(function(e) {
         $("ul#tab li.active").removeClass("active");
         $("ul#tab li:nth-child(" + nthChild + ")").addClass("active");
     }
-});
+})
 
-//chọn điểm đánh giá
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+$(".btn.btn-danger.btn-review, .btn-review2").click(function (e) {
+    e.preventDefault();
+
+    $("ul#tabs li.active").removeClass("active");
+        $(".btn-review-item").addClass("active");
+        $(".job-list").removeClass('active');
+        $(".review-page").addClass('active');
+    if($(".review-form").hasClass('hide'))
+    {
+        $(".review-form").addClass('show').removeClass('hide');
+    }else{
+        $(".review-form").addClass('hide').removeClass('show');
+
     }
-});
-        //Xử lý ajax để tạo form đánh giá
-        $(function () {
-            let listStar = $(".review-form .fa-star");
-            listRatingText = {
-                1 : 'Không thích',
-                2 : 'Tạm được',
-                3 : 'Bình thường',
-                4 : 'Rất tốt',
-                5 : 'Tuyệt vời',
+
+
+})
+
+
+
+//Xử lý ajax để tạo form đánh giá
+$(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    let listStar = $(".list_star .fa-star");
+    listRatingText = {
+        1: 'Không thích',
+        2: 'Tạm được',
+        3: 'Bình thường',
+        4: 'Rất tốt',
+        5: 'Tuyệt vời',
+    }
+
+    listStar.click(function() {
+
+        let $this = $(this);
+        let number = $this.attr('data-key');
+        listStar.removeClass('rating_active')
+        $(".score_review").val(number);
+        $.each(listStar, function(key, value) {
+            if (key + 1 <= number) {
+                $(this).addClass('rating_active')
             }
-
-            listStar.mouseover(function () {
-                let $this = $(this);
-                let number = $this.attr('data-key');
-                listStar.removeClass('rating_active');
-                $(".number_rating").val(number);
-                $.each(listStar, function (key,value) {
-                    if( key+1 <= number)
-                    {
-                        $(this).addClass('rating_active');
-                    }
-                })
-                $(".review-form .score_text").text('').text(listRatingText[number]).show();
-            });    
         });
+        $(".review-form .col-12 .score_text").text('').text(listRatingText[number]).show();
+    });
 
+        $(function() {
+            var click = 1;
+            $(".btn-review-nologin, .btn-review2-nologin").click(function(event) {
+                event.preventDefault();
+                let $this = $(this);
+                let url = $this.attr('href');
+                $.ajax({
+                    url: url,
+                }).done(function(result) {
+                    if (result) {
+                        $("#md_content").append(result);
+                    }
+                });
+                $("#myModalLogin").modal('show');
+            });
+
+            $('#myModalLogin').on('hidden.bs.modal', function(e) {
+                location.reload();
+            });
+
+        })
+
+    // $("#js_rating_recruiter").click(function(event) {
+    //     event.preventDefault();
+    //     let $this = $(this);
+    //     let url = $this.attr('href');
+    //     let title_review = $("#title-review").val();
+    //     let good_review_content = $("#good-review-content").val();
+    //     let notgood_review_content = $("#not-good-review-content").val();
+    //     let score_review = $(".score_review").val();
+    //     if (title_review && score_review) {
+    //         $.ajax({
+    //             url: url,
+    //             type: 'POST',
+    //             contentType: 'application/json',
+    //             dataType: 'json',
+    //             data: {
+    //                 'title_review': title_review,
+    //                 'good_review_content': good_review_content,
+    //                 'notgood_review_content': notgood_review_content,
+    //                 'score_review': score_review
+    //             }
+    //         }).done(function(result) {
+    //             if (result) {
+    //                 alert("Bạn đã gửi review thành công");
+    //                 location.reload();
+    //             } else {
+    //                 alert("Bạn chưa gửi được review của mình");
+    //                 //location.reload();
+    //             }
+    //         });
+    //     }
+    // });
+});
 </script>
 @stop

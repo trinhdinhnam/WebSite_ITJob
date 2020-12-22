@@ -116,4 +116,14 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
             ->first();
         return $recruiterHot;
     }
+
+    public function updateReview($recruiterId,$scoreReview)
+    {
+        // TODO: Implement updateReview() method.
+        $recruiter = $this->model->find($recruiterId);
+        $recruiter->ScoreReview += $scoreReview;
+        $recruiter->ReviewNumber += 1;
+        $recruiter->save();
+        return;
+    }
 }
