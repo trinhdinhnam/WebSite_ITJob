@@ -37,4 +37,14 @@ Route::prefix('admin-manager')->middleware('CheckLoginAdmin')->group(function ()
             Route::get('/{action}/{id}','AdminTransactionController@actionTransaction')->name('admin.get.action.transaction');
 
         });
+
+    Route::group(['prefix' => 'statistical'], function(){
+        Route::get('/revenue','AdminStatisticalController@getRevenue')->name('admin.get.statistical.revenue');
+        Route::get('/job','AdminStatisticalController@getJob')->name('admin.get.statistical.job');
+        Route::get('/member','AdminStatisticalController@getMember')->name('admin.get.statistical.member');
+        Route::get('/review','AdminStatisticalController@getReview')->name('admin.get.statistical.review');
+
+    });
+
+
 });

@@ -13,6 +13,7 @@ use App\Repository\Position\IPositionRepository;
 use App\Repository\Recruiter\IRecruiterRepository;
 use App\Repository\Seeker\ISeekerRepository;
 use App\Repository\SeekerJob\ISeekerJobRepository;
+use App\Repository\Skill\ISkillRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,9 +24,9 @@ class UserController extends BaseController
     //
     public $jobRepository;
     public $seekerRepository;
-    public function __construct(ISeekerJobRepository $seekerJobRepository, IPositionRepository $positionRepository, IJobRepository $jobRepository, ICityRepository $cityRepository, IRecruiterRepository $recruiterRepository, ISeekerRepository $seekerRepository)
+    public function __construct(ISeekerJobRepository $seekerJobRepository, IPositionRepository $positionRepository, IJobRepository $jobRepository, ICityRepository $cityRepository, IRecruiterRepository $recruiterRepository, ISeekerRepository $seekerRepository,ISkillRepository $skillRepository)
     {
-        parent::__construct($seekerJobRepository, $positionRepository, $jobRepository, $cityRepository, $recruiterRepository);
+        parent::__construct($seekerJobRepository, $positionRepository, $jobRepository, $cityRepository, $recruiterRepository,$skillRepository);
 
         $this->jobRepository = $jobRepository;
         $this->seekerRepository = $seekerRepository;

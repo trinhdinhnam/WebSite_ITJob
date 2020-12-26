@@ -28,4 +28,7 @@ interface IJobRepository
 
     public function getJobByCities($cityId);
 
+    public function getJobBySkills($skillName);
+
+
 }

@@ -32,4 +32,10 @@ class AccountPackageRepository extends BaseRepository implements IAccountPackage
     {
         // TODO: Implement getAll() method.
     }
+
+    public function getAccountPackageById($accountId)
+    {
+        // TODO: Implement getAccountPackageById() method.
+        return $this->model->where('AccountPackageId',$accountId)->first();
+    }
 }

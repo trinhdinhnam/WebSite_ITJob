@@ -9,6 +9,7 @@ use App\Repository\Position\IPositionRepository;
 use App\Repository\Recruiter\IRecruiterRepository;
 use App\Repository\Review\IReviewRepository;
 use App\Repository\SeekerJob\ISeekerJobRepository;
+use App\Repository\Skill\ISkillRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,9 @@ class ReviewController extends BaseController
     
     public $reviewRepository;
     public $recruiterRepository;
-    public function __construct(ISeekerJobRepository $seekerJobRepository, IPositionRepository $positionRepository, IJobRepository $jobRepository, ICityRepository $cityRepository, IRecruiterRepository $recruiterRepository,IReviewRepository $reviewRepository)
+    public function __construct(ISeekerJobRepository $seekerJobRepository, IPositionRepository $positionRepository, IJobRepository $jobRepository, ICityRepository $cityRepository, IRecruiterRepository $recruiterRepository,IReviewRepository $reviewRepository,ISkillRepository $skillRepository)
     {
-        parent::__construct($seekerJobRepository, $positionRepository, $jobRepository, $cityRepository, $recruiterRepository);
+        parent::__construct($seekerJobRepository, $positionRepository, $jobRepository, $cityRepository, $recruiterRepository,$skillRepository);
         $this->reviewRepository = $reviewRepository;
         $this->recruiterRepository = $recruiterRepository;
     }

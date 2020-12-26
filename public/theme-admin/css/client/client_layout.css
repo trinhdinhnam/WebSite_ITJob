@@ -186,7 +186,7 @@
     position: absolute;
     left: 252px;
     top: 0;
-    width: 340px;
+    min-width: 450px;
     display: none;
 }
 .dropdown-content-skill .dropdown-item.dropdown-item-skill.col-md-3{
@@ -194,6 +194,7 @@
     border: none;
     font-size: 13px;
     padding-left: 10px;
+    width: auto;
 }
 .job-by-skill-menu:hover .dropdown-content-skill.row{
     display: flex;

@@ -10,4 +10,6 @@ interface ICompanyImageRepository
 
     public function getCompanyImageById($recruiterId,$limit);
 
+    public function changeImageCompany($inputImage,$recruiterId);
+
 }

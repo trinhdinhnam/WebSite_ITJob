@@ -16,4 +16,5 @@ interface ISeekerRepository
 
     public function changPasswordSeeker($seekerInput,$seekerId);
 
+
 }

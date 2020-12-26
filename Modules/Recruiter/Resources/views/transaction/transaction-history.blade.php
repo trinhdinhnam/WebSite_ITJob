@@ -1,6 +1,6 @@
 @extends('recruiter::layouts.master')
 @section('content')
-    <h2 class="mt-4">Lịch sử giao dịch<a href="{{route('recruiter.get.create.job')}}"  class="btn btn-primary" style=" float: right;">Chọn gói dịch vụ</a></h2>
+    <h2 class="mt-4">Lịch sử giao dịch<a href="{{route('recruiter.get.register.account.package')}}"  class="btn btn-primary" style=" float: right;">Chọn gói dịch vụ</a></h2>
     <ol class="breadcrumb mb-4 ">
         <li class="breadcrumb-item"><a href="{{route('recruiter.home')}}">Trang chủ</a></li>
         <li class="breadcrumb-item active"><a href="">Danh sách giao dịch</a></li>

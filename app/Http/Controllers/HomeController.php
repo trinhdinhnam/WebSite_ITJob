@@ -14,6 +14,7 @@ use App\Repository\Position\IPositionRepository;
 use App\Repository\Recruiter\IRecruiterRepository;
 use App\Repository\Review\IReviewRepository;
 use App\Repository\SeekerJob\ISeekerJobRepository;
+use App\Repository\Skill\ISkillRepository;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\Job;
@@ -30,9 +31,9 @@ class HomeController extends BaseController
     public $jobRepository;
     public $companyImageRepository;
     public $reviewRepository;
-    public function __construct(ISeekerJobRepository $seekerJobRepository, IPositionRepository $positionRepository, IJobRepository $jobRepository, ICityRepository $cityRepository, IRecruiterRepository $recruiterRepository,ICompanyImageRepository $companyImageRepository,IReviewRepository $reviewRepository)
+    public function __construct(ISeekerJobRepository $seekerJobRepository, IPositionRepository $positionRepository, IJobRepository $jobRepository, ICityRepository $cityRepository, IRecruiterRepository $recruiterRepository,ICompanyImageRepository $companyImageRepository,IReviewRepository $reviewRepository,ISkillRepository $skillRepository)
     {
-        parent::__construct($seekerJobRepository, $positionRepository, $jobRepository, $cityRepository, $recruiterRepository);
+        parent::__construct($seekerJobRepository, $positionRepository, $jobRepository, $cityRepository, $recruiterRepository,$skillRepository);
         $this->recruiterRepository = $recruiterRepository;
         $this->jobRepository = $jobRepository;
         $this->companyImageRepository = $companyImageRepository;
@@ -143,6 +144,28 @@ class HomeController extends BaseController
         $imageCompany = $this->companyImageRepository->getCompanyImageById($companyHot->id,1);
         $viewData = [
             'jobs' => $jobByCities,
+            'companyHot' => $companyHot,
+            'jobNumberByCompanyHot' => $jobNumberByCompanyHot,
+            'jobsByCompanyHot' => $jobsByCompanyHot,
+            'imageCompany' => $imageCompany
+
+        ];
+        return view('job.job-list',$viewData);
+    }
+
+    public function getJobBySkill($skillName){
+
+        $jobBySkills = $this->jobRepository->getJobBySkills($skillName);
+
+        $companyHot = $this->recruiterRepository->getRecruiterHot();
+
+        $jobNumberByCompanyHot = count($this->jobRepository->getJobsByCompanyHot($companyHot->id,''));
+
+        $jobsByCompanyHot = $this->jobRepository->getJobsByCompanyHot($companyHot->id,3);
+
+        $imageCompany = $this->companyImageRepository->getCompanyImageById($companyHot->id,1);
+        $viewData = [
+            'jobs' => $jobBySkills,
             'companyHot' => $companyHot,
             'jobNumberByCompanyHot' => $jobNumberByCompanyHot,
             'jobsByCompanyHot' => $jobsByCompanyHot,

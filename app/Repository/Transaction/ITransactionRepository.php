@@ -15,4 +15,14 @@ interface ITransactionRepository
 
     public function getTransactionNew($id);
 
+    public function getRevenueTransactionMoth();
+
+    public function getRevenueAccountNumber();
+
+    public function getAllTransactions();
+
+    public function deleteTransactionById($id);
+
+    public function addTransaction($inputTransaction,$recruiterId,$accountId);
+
 }

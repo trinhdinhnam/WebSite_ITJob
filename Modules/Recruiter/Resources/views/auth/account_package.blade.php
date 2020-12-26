@@ -1,5 +1,4 @@
-
-    <link href="{{asset('css/account-package.css')}}" rel="stylesheet" />
+ <link href="{{asset('css/account-package.css')}}" rel="stylesheet" />
     <div class="content">
         <div class="container register-form" >
             <div class="form">

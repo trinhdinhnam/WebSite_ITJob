@@ -47,7 +47,7 @@ class ReviewRepository extends BaseRepository implements IReviewRepository
     {
         // TODO: Implement getReviewByRecruiter() method.
         return $this->model->where('RecruiterId',$recruiterId)
-                           ->paginate(6);
+                           ->get();
     }
 
     public function getListReviews()
@@ -64,6 +64,15 @@ class ReviewRepository extends BaseRepository implements IReviewRepository
                            ->where('ScoreReview',5)
                            ->orderBy('created_at','desc')
                            ->limit(5)
+                           ->get();
+    }
+
+    public function getAllReview()
+    {
+        // TODO: Implement getAllReview() method.
+        return $this->model->with('recruiter:id,RecruiterName')
+                           ->with('seeker:id,SeekerName')
+                           ->orderBy('created_at','desc')
                            ->get();
     }
 }

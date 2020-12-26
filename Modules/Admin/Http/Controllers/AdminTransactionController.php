@@ -34,6 +34,7 @@ class AdminTransactionController extends Controller
             {
                 case 'status':
                     $this->transactionRepository->changeStatus($id);
+                    return redirect()->back()->with(['flash-message'=>'Success ! Duyệt giao dịch thành công !','flash-level'=>'success']);
                     break;
             }
         }

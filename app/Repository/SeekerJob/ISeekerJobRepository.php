@@ -24,4 +24,10 @@ interface ISeekerJobRepository
 
     public function getMessageInfo();
 
+    public function getSeekerByRecruiter($recruiterId);
+
+    public function getRevenueProfile($recruiterId);
+
+    public function getRevenueProfileByJob($recruiterId);
+
 }

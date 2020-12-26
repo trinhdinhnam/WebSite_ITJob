@@ -1,0 +1,129 @@
+
+@import 'https://code.highcharts.com/css/highcharts.css';
+.highcharts-figure, .highcharts-data-table table {
+    min-width: 360px;
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #EBEBEB;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+    padding: 0.5em;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+
+/* transaction total css */
+.total-trasaction{
+    display: flex;
+}
+.total-trasaction .total-trasaction-label{
+    background-color: rgb(50, 61, 206); 
+    height: 90px; 
+    width: 34%;
+    text-align: center;
+    color: rgb(241, 238, 238);
+    padding-top: 20px;
+}
+.total-trasaction .total-trasaction-content{
+    background-color: white; 
+    height: 90px; 
+    width: 66%;
+    padding-left: 8px;
+    padding-top: 10px;
+}
+.total-trasaction .total-trasaction-content .title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+/* member total css */
+.total-member{
+    display: flex;
+}
+.total-member .total-member-label{
+    background-color: rgb(245, 66, 66); 
+    height: 90px; 
+    width: 34%;
+    text-align: center;
+    color: rgb(241, 238, 238);
+    padding-top: 20px;
+}
+.total-member .total-member-content{
+    background-color: white; 
+    height: 90px; 
+    width: 66%;
+    padding-left: 8px;
+    padding-top: 10px;
+}
+.total-member .total-member-content .title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+/* job total css */
+.total-job{
+    display: flex;
+}
+.total-job .total-job-label{
+    background-color: rgb(33, 212, 87); 
+    height: 90px; 
+    width: 34%;
+    text-align: center;
+    color: rgb(241, 238, 238);
+    padding-top: 20px;
+}
+.total-job .total-job-content{
+    background-color: white; 
+    height: 90px; 
+    width: 66%;
+    padding-left: 8px;
+    padding-top: 10px;
+}
+.total-job .total-job-content .title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+/* review total css */
+.total-review{
+    display: flex;
+}
+.total-review .total-review-label{
+    background-color: rgb(218, 214, 35);
+    height: 90px; 
+    width: 34%;
+    text-align: center;
+    color: rgb(241, 238, 238);
+    padding-top: 20px;
+}
+.total-review .total-review-content{
+    background-color: white; 
+    height: 90px; 
+    width: 66%;
+    padding-left: 8px;
+    padding-top: 10px;
+}
+.total-review .total-review-content .title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}

@@ -29,21 +29,11 @@
                         <a class="dropdown-item nav-link" id="jobBySkill" href="#">Việc làm IT theo kỹ năng<i
                                 class="fa fa-chevron-right"></i></a>
                         <div class="dropdown-content-skill row">
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">CSS</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">Java Script</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">Python</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">C#</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">HTML</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">CSS</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">Java Script</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">Python</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">C#</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">HTML</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">CSS</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">Java Script</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">Python</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">C#</a>
-                            <a class="dropdown-item dropdown-item-skill col-md-3" href="#">HTML</a>
+                            @if(isset($skills))
+                                @foreach($skills as $skill)
+                                    <a class="dropdown-item dropdown-item-skill col-md-3" href="{{route('client.get.job.by.skill',$skill->SkillName)}}">{{$skill->SkillName}}</a>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <div class="job-by-position-menu">
@@ -85,6 +75,7 @@
                 </div>
             </div>
             <a href="" type="button" class="btn-company btn btn-dark">Công ty IT</a>
+
             @if(!\Illuminate\Support\Facades\Auth::guard('seekers')->check())
             <a href="{{route('seeker.get.login')}}" type="button" class="btn-login btn btn-dark">Đăng nhập</a>
             <a href="{{route('client.confirm.recruiter')}}" type="button" class="btn-recruiter btn btn-dark">Nhà tuyển
@@ -140,6 +131,13 @@
         </div>
     </div>
     <div class="main">
+        <div class="pull-right message-flash" style=" z-index: 1; position: absolute; right: 420px; margin-top: -15px;">
+            @if(\Illuminate\Support\Facades\Session::has('flash-message'))
+                <div class="alert alert-{!! \Illuminate\Support\Facades\Session::get('flash-level') !!}">
+                    {!! \Illuminate\Support\Facades\Session::get('flash-message') !!}
+                </div>
+            @endif
+        </div>
         @yield('main')
     </div>
     <div class="footer">
@@ -151,7 +149,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div>Về PhuongNam Recruiment</div>
-                    <a href="">Trang chủ</a>
+                    <a href="{{route('client.get.home.page')}}">Trang chủ</a>
                     </br>
                     <a href="">Việc làm it</a>
                     </br>
@@ -216,6 +214,12 @@
 
         $('#myModalLogin').on('hidden.bs.modal', function(e) {
             location.reload();
+        });
+        $(".message-flash").ready(function(){
+            setTimeout(function(){
+                $(".message-flash").remove();
+            }, 5000 ); // 5 secs
+
         });
 
     })

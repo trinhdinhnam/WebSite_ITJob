@@ -22,6 +22,8 @@ use App\Repository\Seeker\ISeekerRepository;
 use App\Repository\Seeker\SeekerRepository;
 use App\Repository\SeekerJob\ISeekerJobRepository;
 use App\Repository\SeekerJob\SeekerJobRepository;
+use App\Repository\Skill\ISkillRepository;
+use App\Repository\Skill\SkillRepository;
 use App\Repository\Transaction\ITransactionRepository;
 use App\Repository\Transaction\TransactionRepository;
 use Illuminate\Support\ServiceProvider;
@@ -49,6 +51,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ISeekerJobRepository::class,SeekerJobRepository::class);
         $this->app->bind(ITransactionRepository::class,TransactionRepository::class);
         $this->app->bind(IReviewRepository::class,ReviewRepository::class);
+        $this->app->bind(ISkillRepository::class,SkillRepository::class);
 
     }
 

@@ -26,8 +26,8 @@ class AdminAuthController extends Controller
     {
         $credentials = $request->only('email','password');
         if(Auth::guard('admins')->attempt($credentials)){
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.dashboard')->with(['flash-message'=>'Success ! Đăng nhập thành công !','flash-level'=>'success']);
         }
-        return redirect()->back();
+        return redirect()->back()->with(['flash-message'=>'Error ! Mật khẩu hoặc email của bạn chưa đúng !','flash-level'=>'danger']);
     }
 }

@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('complete','RecruiterTransactionController@complete');
+
 Route::prefix('authenticate')->group(function(){
     Route::get('/login','RecruiterAuthController@getLogin')->name('recruiter.get.login');
     Route::post('/login','RecruiterAuthController@postLogin');
@@ -41,9 +43,25 @@ Route::prefix('recruiters')->middleware('CheckLoginRecruiter')->group(function()
     });
 
     Route::group(['prefix' => 'transaction'], function(){
-
         Route::get('/','RecruiterTransactionController@getTransactions')->name('recruiter.get.transaction');
         Route::get('bill','RecruiterTransactionController@getBill')->name('recruiter.get.bill');
+        Route::get('/register-account-package','RecruiterTransactionController@getRegisterAccountPackage')->name('recruiter.get.register.account.package');
+        Route::get('/pay/order/{accountId}','RecruiterTransactionController@getPay')->name('get.pay.order');
+        Route::post('/pay/order/{accountId}','RecruiterTransactionController@postPay');
 
+    });
+
+    Route::group(['prefix' => 'user'], function(){
+        Route::get('/change-info/{id}','RecruiterUserController@getChangeInfo')->name('recruiter.get.change.info');
+        Route::post('/change-info/{id}','RecruiterUserController@postChangeInfo')->name('recruiter.post.change.info');
+        Route::get('/change-password/{id}','RecruiterUserController@getChangePassword')->name('recruiter.get.change.password');
+        Route::post('/change-password/{id}','RecruiterUserController@postChangePassword')->name('recruiter.post.change.password');
+
+    });
+    Route::group(['prefix' => 'statistical'], function(){
+        Route::get('/transaction/{recruiterId}','RecruiterStatisticalController@getTransaction')->name('recruiter.get.statistical.transaction');
+        Route::get('/job/{recruiterId}','RecruiterStatisticalController@getJob')->name('recruiter.get.statistical.job');
+        Route::get('/seeker/{recruiterId}','RecruiterStatisticalController@getSeeker')->name('recruiter.get.statistical.seeker');
+        Route::get('/review/{recruiterId}','RecruiterStatisticalController@getReview')->name('recruiter.get.statistical.review');
     });
 });

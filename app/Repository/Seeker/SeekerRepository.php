@@ -8,6 +8,7 @@ use App\Models\Seeker;
 use App\Models\SeekerJob;
 use App\Repository\BaseRepository;
 use phpDocumentor\Reflection\Types\This;
+use Illuminate\Support\Facades\DB;
 
 class SeekerRepository extends BaseRepository implements ISeekerRepository
 {
@@ -102,4 +103,6 @@ class SeekerRepository extends BaseRepository implements ISeekerRepository
         $seekerChangePass->save();
         return $seekerChangePass;
     }
+
+
 }

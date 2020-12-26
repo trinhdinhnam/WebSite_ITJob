@@ -29,9 +29,9 @@ class AdminRecruiterController extends Controller
      * Display a listing of the resource.
      * @return Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $recruiters = $this->recruiterRepository->getAllRecruiter();
+        $recruiters = $this->recruiterRepository->getAllRecruiter($request);
         $viewData = [
              'recruiters' => $recruiters
         ];
@@ -57,10 +57,12 @@ class AdminRecruiterController extends Controller
             {
                 case 'active':
                     $this->recruiterRepository->changeActive($id);
-                break;
+                    return redirect()->back()->with(['flash-message'=>'Success ! Cập nhật trạng thái thành công !','flash-level'=>'success']);
+                    break;
                 case 'delete':
                     $this->recruiterRepository->deleteRecruiter($id);
-                break;
+                    return redirect()->back()->with(['flash-message'=>'Success ! Xóa nhà tuyển dụng thành công !','flash-level'=>'success']);
+                    break;
             }
         }
         return redirect()->back();

@@ -18,14 +18,16 @@ class JobRepository extends BaseRepository implements IJobRepository
 
     public function getJobByRecruiterId($request,$id){
         $query = $this->model
-            ->select(DB::raw('count(SeekerJobId) as seekerNumber, jobs.JobId as JobId, JobName, PositionName, Skill, jobs.Status as Status, Address'))
+            ->select(DB::raw('count(SeekerJobId) as seekerNumber, jobs.JobId as JobId, JobName, PositionName, Skill, jobs.Status as Status, Address, jobs.created_at as CreatedDate'))
             ->leftJoin('seeker_jobs','jobs.JobId','=','seeker_jobs.JobId')
             ->leftJoin('positions','jobs.PositionId','=','positions.PositionId')
             ->where('RecruiterId',$id)
             ->where('jobs.IsDelete',1)
-            ->groupBy('JobId','JobName','PositionName','Skill','jobs.Status','Address');
+            ->groupBy('JobId','JobName','PositionName', 'Skill','jobs.Status','Address', 'jobs.created_at');
+        if($request){
             if($request->jobname) $query->where('JobName', 'like', '%'.$request->jobname.'%');
             if($request->position) $query->where('jobs.PositionId',$request->position);
+        }
             $query = $query->get();
             return $query;
     }
@@ -93,8 +95,10 @@ class JobRepository extends BaseRepository implements IJobRepository
         if($actor=='admin')
         {
             $jobs = $this->model->with('position:PositionId,PositionName');
-            if($request->jobname) $jobs->where('JobName', 'like', '%'.$request->jobname.'%');
-            if($request->recruiter) $jobs->where('RecruiterId',$request->recruiter);
+            if($request){
+                if($request->jobname) $jobs->where('JobName', 'like', '%'.$request->jobname.'%');
+                if($request->recruiter) $jobs->where('RecruiterId',$request->recruiter);
+            }
             $jobs = $jobs->orderByDesc('JobId')->get();
         }
         if($actor=='recruiter')
@@ -110,7 +114,7 @@ class JobRepository extends BaseRepository implements IJobRepository
     {
         // TODO: Implement getAllJob() method.
 
-        return $this->model->all();
+        return $this->model->with('recruiter:id,CompanyName')->with('position:PositionId,PositionName')->get();
     }
 
     public function getJobsByCompanyHot($recruiterId, $limit)
@@ -157,5 +161,14 @@ class JobRepository extends BaseRepository implements IJobRepository
             ->where('CityId',$cityId)
             ->get();
         return $jobByCities;
+    }
+
+    public function getJobBySkills($skillName)
+    {
+        // TODO: Implement getJobBySkills() method.
+        $jobBySkills = $this->model->with('recruiter:id,CompanyLogo')
+            ->where('Skill', 'like', '%'.$skillName.'%')
+            ->get();
+        return $jobBySkills;
     }
 }

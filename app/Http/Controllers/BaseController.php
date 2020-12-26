@@ -10,6 +10,7 @@ use App\Repository\Job\IJobRepository;
 use App\Repository\Position\IPositionRepository;
 use App\Repository\Recruiter\IRecruiterRepository;
 use App\Repository\SeekerJob\ISeekerJobRepository;
+use App\Repository\Skill\ISkillRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,7 @@ class BaseController extends Controller
 
 
     public function __construct(ISeekerJobRepository $seekerJobRepository,IPositionRepository $positionRepository, IJobRepository $jobRepository,
-                                ICityRepository $cityRepository,IRecruiterRepository $recruiterRepository)
+                                ICityRepository $cityRepository,IRecruiterRepository $recruiterRepository,ISkillRepository $skillRepository)
     {
 
         $positions = $positionRepository->getListPositions();
@@ -30,11 +31,14 @@ class BaseController extends Controller
         View::share('jobNumber',$jobNumber);
         $cities = $cityRepository->getListCities();
         View::share('cities',$cities);
-        $companies = $recruiterRepository->getAllRecruiter();
+        $companies = $recruiterRepository->getAllRecruiter($request='');
         View::share('companyList',$companies);
         $messageNumber = $seekerJobRepository->getMessageNumber();
         View::share('messageNumber',$messageNumber);
         $messageInfos = $seekerJobRepository->getMessageInfo();
         View::share('messageInfos',$messageInfos);
+        $skills = $skillRepository->getListSkills();
+        View::share('skills',$skills);
+
     }
 }

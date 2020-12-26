@@ -14,4 +14,6 @@ interface IReviewRepository
 
     public function getListReviewHots($recruiterId);
 
+    public function getAllReview();
+
 }

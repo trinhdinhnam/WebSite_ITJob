@@ -14,6 +14,7 @@ Route::get('/','HomeController@getHomePage')->name('client.get.home.page');
 
 Route::get('search','HomeController@getJobs')->name('client.search.job');
 Route::get('confirm-recruiter','HomeController@getConfirm')->name('client.confirm.recruiter');
+
 Route::group(['namespace' => 'Auth'],function(){
     Route::get('login','LoginController@getLogin')->name('seeker.get.login');
     Route::post('login','LoginController@postLogin')->name('seeker.post.login');
@@ -29,11 +30,13 @@ Route::group(['prefix' => 'job'], function(){
     Route::get('/job-by-position/{id}','HomeController@getJobByPosition')->name('client.get.job.by.position');
     Route::get('/job-by-city/{id}','HomeController@getJobByCity')->name('client.get.job.by.city');
     Route::get('/job-by-position/{id}','HomeController@getJobByPosition')->name('client.get.job.by.position');
+    Route::get('/job-by-skill/{skillName}','HomeController@getJobBySkill')->name('client.get.job.by.skill');
+
 });
 
 Route::group(['prefix' => 'apply','middleware' => 'CheckLoginSeeker'], function(){
     Route::get('/apply-job/{id}','ApplyController@getApply')->name('client.get.apply');
-    Route::post('/apply-job/{id}','ApplyController@postApply');
+    Route::post('/apply-job/{id}','ApplyController@postApply')->name('client.post.apply');
 });
 
 Route::group(['prefix' => 'message','middleware' => 'CheckLoginSeeker'], function(){

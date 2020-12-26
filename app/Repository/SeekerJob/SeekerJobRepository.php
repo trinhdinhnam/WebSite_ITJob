@@ -128,4 +128,45 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
         $seekerJob->MessageStatus = 0;
         $seekerJob->save();
     }
+
+    public function getSeekerByRecruiter($recruiterId)
+    {
+        // TODO: Implement getSeekerByRecruiter() method.
+
+        $seeker = $this->model->select('seeker_jobs.SeekerId as SeekerId','seekers.SeekerName as SeekerName','seekers.Email as Email','seekers.Phone as Phone','jobs.JobName as JobName','seeker_jobs.created_at as ApplyDate','seeker_jobs.Introduce as Introduce','seeker_jobs.Status as Status')
+                              ->leftJoin('jobs','seeker_jobs.JobId','=','jobs.JobId')
+                              ->leftJoin('seekers','seeker_jobs.SeekerId','=','seekers.id')
+                              ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
+                              ->where('recruiters.id','=',$recruiterId)
+                              ->get();
+        return $seeker;
+    }
+
+    public function getRevenueProfile($recruiterId)
+    {
+        // TODO: Implement getRevenueProfile() method.
+        $revenueProfile = $this->model
+            ->leftJoin('jobs','seeker_jobs.JobId','=','jobs.JobId')
+            ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
+            ->where('recruiters.id','=',$recruiterId)
+            ->whereYear('seeker_jobs.created_at',date('Y'))
+            ->select(DB::raw('count(seeker_jobs.SeekerJobId) as profileNumber'), DB::raw('month(seeker_jobs.created_at) as month'))
+            ->groupBy('month')
+            ->get()->toArray();
+        return $revenueProfile;
+    }
+
+    public function getRevenueProfileByJob($recruiterId)
+    {
+        // TODO: Implement getRevenueProfileByJob() method.
+        $revenueProfileByJob = $this->model
+            ->leftJoin('jobs','seeker_jobs.JobId','=','jobs.JobId')
+            ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
+            ->where('recruiters.id','=',$recruiterId)
+            ->whereYear('seeker_jobs.created_at',date('Y'))
+            ->select(DB::raw('count(seeker_jobs.SeekerJobId) as profileNumber'), 'jobs.JobId as JobId','jobs.JobName as JobName')
+            ->groupBy('JobId','JobName')
+            ->get()->toArray();
+        return $revenueProfileByJob;
+    }
 }

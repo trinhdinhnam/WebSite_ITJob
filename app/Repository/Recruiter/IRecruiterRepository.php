@@ -6,7 +6,7 @@ namespace App\Repository\Recruiter;
 
 interface IRecruiterRepository
 {
-    public function getAllRecruiter();
+    public function getAllRecruiter($request);
 
     public function getListRecruiters();
 
@@ -21,4 +21,8 @@ interface IRecruiterRepository
     public function getRecruiterHot();
 
     public function updateReview($recruiterId,$scoreReview);
+
+    public function changInfoRecruiter($inputRecruiter,$recruiterId);
+
+    public function changePassRecruiter($password,$recruiterId);
 }

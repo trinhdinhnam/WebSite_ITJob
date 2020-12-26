@@ -46,18 +46,22 @@ class AdminJobController extends Controller
 
     public function action($action,$id)
     {
-        $job = Job::find($id);
-
-        if($action){
-            switch($action)
-            {
-                case 'active':
-                    $job->Status = $job->Status ? 0 : 1;
-                    $job->save();
-                break;
+        try{
+            $job = Job::find($id);
+            if($action){
+                switch($action)
+                {
+                    case 'active':
+                        $job->Status = $job->Status ? 0 : 1;
+                        $job->save();
+                        break;
+                }
             }
+            return redirect()->back()->with(['flash-message'=>'Success ! Duyệt bài viết thành công !','flash-level'=>'success']);
+        }catch (\Exception $e){
+            return redirect()->back()->with(['flash-message'=>'Error ! Duyệt bài viết thất bại !','flash-level'=>'danger']);
         }
-        return redirect()->back();
+
     }
 
     public function getDetailJob($id){

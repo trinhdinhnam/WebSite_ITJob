@@ -57,4 +57,21 @@ class CompanyImageRepository extends BaseRepository implements ICompanyImageRepo
             }
         return $companyImageById;
     }
+
+    public function changeImageCompany($inputImage, $recruiterId)
+    {
+        // TODO: Implement changeImageCompany() method.
+        if ($inputImage->hasFile('Image')){
+            $arrayImage = $inputImage->file('Image');
+            $company_img = $this->model->where('RecruiterId',$recruiterId);
+            foreach ($arrayImage as $file){
+                $fileImage = upload_image($file,$file->getClientOriginalName());
+                if(isset($fileImage['name'])){
+                    $company_img->Image = $fileImage['name'];
+                    $company_img->save();
+                    return true;
+                }
+            }
+        }
+    }
 }

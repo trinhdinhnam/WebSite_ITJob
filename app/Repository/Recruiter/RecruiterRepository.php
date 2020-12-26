@@ -33,8 +33,9 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
     {
         // TODO: Implement getListRecruiters() method.
         $recruiters = $this->model
-            ->select(DB::raw('count(JobId) as jobNumber, recruiters.id as RecruiterId, CompanyLogo, CompanyName, recruiters.City as City'))
+            ->select(DB::raw('count(JobId) as jobNumber, recruiters.id as RecruiterId, CompanyLogo, CompanyName, cities.CityName as City'))
             ->leftJoin('jobs','recruiters.id','=','jobs.RecruiterId')
+            ->leftJoin('cities','recruiters.CityId','=','cities.CityId')
             ->groupBy('recruiters.id','CompanyLogo','CompanyName','City')
             ->get();
 
@@ -98,10 +99,17 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
         return true;
     }
 
-    public function getAllRecruiter()
+    public function getAllRecruiter($request)
     {
         // TODO: Implement getAllRecruiter() method.
-        return $this->model->where('IsDelete',1)->get();
+        $recruiter = $this->model->where('IsDelete',1);
+        if($request)
+        {
+            if($request->RecruiterName) $recruiter->where('RecruiterName', 'like', '%'.$request->RecruiterName.'%');
+            if($request->Company) $recruiter->where('id',$request->Company);
+        }
+        $recruiter = $recruiter->get();
+        return $recruiter;
 
     }
 
@@ -125,5 +133,43 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
         $recruiter->ReviewNumber += 1;
         $recruiter->save();
         return;
+    }
+
+    public function changInfoRecruiter($inputRecruiter, $recruiterId)
+    {
+        // TODO: Implement changInfoRecruiter() method.
+        $recruiter = $this->model->find($recruiterId);
+        $recruiter->RecruiterName = $inputRecruiter->RecruiterName;
+        $recruiter->Position = $inputRecruiter->Position;
+        $recruiter->Email = $inputRecruiter->Email;
+        $recruiter->Phone = $inputRecruiter->Phone;
+        $recruiter->CompanyName = $inputRecruiter->CompanyName;
+        $recruiter->Address = $inputRecruiter->Address;
+        $recruiter->CityId = $inputRecruiter->City;
+        $recruiter->Country = $inputRecruiter->Country;
+        $recruiter->Introduction = $inputRecruiter->Introduction;
+        $recruiter->WorkDay = $inputRecruiter->WorkDay;
+        $recruiter->TimeWork = $inputRecruiter->TimeWork;
+        $recruiter->CompanySize = $inputRecruiter->CompanySize;
+        $recruiter->TypeBusiness = $inputRecruiter->TypeBusiness;
+
+        if($inputRecruiter->hasFile('CompanyLogo'))
+        {
+            $fileCompanyLogo = $inputRecruiter->file('CompanyLogo');
+            $fileLogo = upload_image($fileCompanyLogo,$fileCompanyLogo->getClientOriginalName());
+            if(isset($fileLogo['name'])){
+                $recruiter->CompanyLogo = $fileLogo['name'];
+            }
+        }
+        $recruiter->save();
+        return true;
+    }
+
+    public function changePassRecruiter($input, $recruiterId)
+    {
+        // TODO: Implement changePassRecruiter() method.
+        $recruiter = $this->model->find($recruiterId);
+        $recruiter->password = bcrypt($input['pass_new']);
+        $recruiter->save();
     }
 }

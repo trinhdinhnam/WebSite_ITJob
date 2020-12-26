@@ -88,7 +88,7 @@
             </div>
             <div class="form-group">
                 <h6 for="name">Kỹ năng:</h6>
-                <input require type="text" class="form-control" placeholder="Kỹ năng ..." value="{{ old('Skill', isset($job->Skill) ?$job->Skill : '') }}"
+                <input require type="text" class="form-control" placeholder="Kỹ năng ..." value="{{ old('SkillSeeder', isset($job->Skill) ?$job->Skill : '') }}"
                        name="Skill">
             </div>
             <div class="form-group">

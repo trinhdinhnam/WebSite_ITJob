@@ -56,7 +56,7 @@ class RecruiterAuthController extends Controller
     public function postLogin(Request $request){
         $credentials = $request->only('email','password');
         if(Auth::guard('recruiters')->attempt($credentials)){
-            return redirect()->route('recruiter.home');
+            return redirect()->route('recruiter.home')->with(['flash-message'=>'Success ! Đăng nhập thành công !','flash-level'=>'success']);
         }
         return redirect()->back();
     }
@@ -65,14 +65,12 @@ class RecruiterAuthController extends Controller
         $acPackages = $this->accountPackageRepository->getListAccountPackages();
         $viewData = [
             'acPackages' => $acPackages
-
         ];
         if($request->ajax()) {
             $html = view('recruiter::auth.account_package',$viewData)->render();
             return \response()->json($html);
         }
     }
-
 
     public function getSignUp()
     {

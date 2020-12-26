@@ -98,9 +98,9 @@
                     <li class="review-page">
 
                         <div class="medium-score-review">
-                            <div class="score-number">{{$company->ScoreReview/$company->ReviewNumber}}</div>
+                            <div class="score-number">@if($company->ReviewNumber>0){{$company->ScoreReview/$company->ReviewNumber}} @else 0 @endif</div>
                             @for($i =1 ;$i<=5;$i++) <i
-                                class="fa fa-star {{ $i <= round($company->ScoreReview/$company->ReviewNumber) ? 'active' : '' }}"
+                                class="fa fa-star @if($company->ReviewNumber>0) {{ $i <= round($company->ScoreReview/$company->ReviewNumber) ? 'active' : '' }} @endif"
                                 data-key="{{$i}}"></i>
                                 @endfor
                                 <span class="score_text">Tốt</span>

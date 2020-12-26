@@ -36,8 +36,8 @@
             </label>
         </div>
 
-        <div class="container-login100-form-btn">
-            <button class="login100-form-btn" type="submit" style="font-family: Arial, Helvetica, sans-serif;">
+        <div class="form-group">
+            <button class="col-lg-12" type="submit" style="background-color: #000; color: white; font-family: Arial, Helvetica, sans-serif;">
                 Đăng nhập
             </button>
         </div>

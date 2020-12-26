@@ -3,6 +3,13 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="{{asset('admin/login/css/styles.css')}}" rel="stylesheet" />
 <div class="container">
+    <div class="pull-right message-flash" style="position: absolute; right: 30px; margin-top: -15px;">
+        @if(\Illuminate\Support\Facades\Session::has('flash-message'))
+            <div class="alert alert-{!! \Illuminate\Support\Facades\Session::get('flash-level') !!}">
+                {!! \Illuminate\Support\Facades\Session::get('flash-message') !!}
+            </div>
+        @endif
+    </div>
     <div class="card card-container">
         <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
         <p id="profile-name" class="profile-name-card"></p>
@@ -24,3 +31,11 @@
     </div>
 </div>
 <script src="{{asset('admin/login/js/login.js')}}"></script>
+<script type="text/javascript">
+    $(".message-flash").ready(function(){
+        setTimeout(function(){
+            $(".message-flash").remove();
+        }, 5000 ); // 5 secs
+
+    });
+</script>
