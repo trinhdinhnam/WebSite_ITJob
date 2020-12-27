@@ -43,11 +43,18 @@ class ReviewRepository extends BaseRepository implements IReviewRepository
         return true;
     }
 
-    public function getReviewByRecruiter($recruiterId)
+    public function getReviewByRecruiter($recruiterId,$recordNumber)
     {
         // TODO: Implement getReviewByRecruiter() method.
-        return $this->model->where('RecruiterId',$recruiterId)
-                           ->get();
+        $review = $this->model->where('RecruiterId',$recruiterId);
+        if($recordNumber){
+           $review = $review->paginate($recordNumber);
+        }else{
+           $review = $review->get();
+        }
+
+        return $review;
+
     }
 
     public function getListReviews()
@@ -70,9 +77,18 @@ class ReviewRepository extends BaseRepository implements IReviewRepository
     public function getAllReview()
     {
         // TODO: Implement getAllReview() method.
-        return $this->model->with('recruiter:id,RecruiterName')
+        return $this->model->with('recruiter:id,RecruiterName,CompanyName')
                            ->with('seeker:id,SeekerName')
                            ->orderBy('created_at','desc')
                            ->get();
+    }
+
+    public function getReviewByPage($recordNumber)
+    {
+        // TODO: Implement getReviewByPage() method.
+        return $this->model->with('recruiter:id,RecruiterName,CompanyName')
+            ->with('seeker:id,SeekerName')
+            ->orderBy('created_at','desc')
+            ->paginate(10);
     }
 }

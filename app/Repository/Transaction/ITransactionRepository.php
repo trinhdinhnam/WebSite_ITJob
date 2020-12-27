@@ -25,4 +25,8 @@ interface ITransactionRepository
 
     public function addTransaction($inputTransaction,$recruiterId,$accountId);
 
+    public function getTransactionByPage($recordNumber);
+
+    public function getTransactionRecruiterByPage($recruiterId,$recordNumber);
+
 }

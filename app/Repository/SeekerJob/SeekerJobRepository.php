@@ -129,7 +129,7 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
         $seekerJob->save();
     }
 
-    public function getSeekerByRecruiter($recruiterId)
+    public function getSeekerByRecruiter($recruiterId,$recordNumber)
     {
         // TODO: Implement getSeekerByRecruiter() method.
 
@@ -137,8 +137,14 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
                               ->leftJoin('jobs','seeker_jobs.JobId','=','jobs.JobId')
                               ->leftJoin('seekers','seeker_jobs.SeekerId','=','seekers.id')
                               ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
-                              ->where('recruiters.id','=',$recruiterId)
-                              ->get();
+                              ->where('recruiters.id','=',$recruiterId);
+
+        if($recordNumber){
+           $seeker = $seeker->paginate($recordNumber);
+        }
+        else{
+            $seeker = $seeker->get();
+        }
         return $seeker;
     }
 

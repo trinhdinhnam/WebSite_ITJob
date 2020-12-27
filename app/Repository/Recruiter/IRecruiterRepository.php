@@ -25,4 +25,6 @@ interface IRecruiterRepository
     public function changInfoRecruiter($inputRecruiter,$recruiterId);
 
     public function changePassRecruiter($password,$recruiterId);
+
+    public function getRecruiterByPage($request,$recordNumber);
 }

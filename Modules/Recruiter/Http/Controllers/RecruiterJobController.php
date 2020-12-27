@@ -38,7 +38,7 @@ class RecruiterJobController extends Controller
 
     public function index(Request $request)
     {
-        $jobs = $this->jobRepository->getJobByRecruiterId($request,Auth::guard('recruiters')->user()->id);
+        $jobs = $this->jobRepository->getJobRecruiterByPage($request,Auth::guard('recruiters')->user()->id,5);
         $positions = $this->positionRepository->getListPositions();
         $viewData = [
              'jobs' => $jobs,

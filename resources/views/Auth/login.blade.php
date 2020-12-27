@@ -43,7 +43,7 @@
             </button>
         </div>
         <div class="form-group">
-            <a class="btn-login-facebook" href="{{url('/login-by-facebook/facebook')}}">
+            <a class="btn-login-facebook" type="submit" href="{{url('/login-by-facebook/facebook')}}">
                 <img height="25px" width="35px"
                      src="{{asset('images/logofacebook2.jpg')}}"
                      class="thumbnail">

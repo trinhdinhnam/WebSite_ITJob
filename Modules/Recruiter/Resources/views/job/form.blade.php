@@ -62,8 +62,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <h6>Ảnh công việc</h6>
-                <input  type="file" name="Image[]" class="form-control" value="{{ old('Image[]', isset($job->Image) ?$job->Image : '') }}" multiple="multiple" />
+                <h6>Quyền lợi của ứng viên</h6>
+                <textarea type="text" name="Benefit" class="form-control" cols="30" rows="3"
+                          placeholder="Quyền lợi cho ứng viên ...">{{ old('Benefit', isset($job->Benifit) ?$job->Benifit : '') }}</textarea>
             </div>
             <div class="form-group">
                 <div class="checkbox">

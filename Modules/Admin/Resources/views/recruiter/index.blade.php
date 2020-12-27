@@ -64,6 +64,13 @@
         </tbody>
     </table>
 </div>
+    <div class="card mb-4" style="background-color: #eee; border: none">
+        <nav aria-label="Page navigation" style="margin: auto">
+            {!! $recruiters->links() !!}
+        </nav>
+    </div>
+
+
 <!-- Modal -->
 
 <div class="modal fade" id="myModalTransaction" role="dialog">

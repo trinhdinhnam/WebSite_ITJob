@@ -30,5 +30,9 @@ interface IJobRepository
 
     public function getJobBySkills($skillName);
 
+    public function getJobByPage($request,$recordNumber);
+
+    public function getJobRecruiterByPage($request,$recruiterId,$recordNumber);
+
 
 }

@@ -27,17 +27,27 @@
                 @foreach($reviews as $review)
                     <tr>
                         <th scope="row">{{$i++}}</th>
-                        <td>{{$review->recruiter->RecruiterName}}</td>
+                        <td>{{$review->recruiter->CompanyName}}</td>
                         <td>{{$review->seeker->SeekerName}}</td>
                         <td>{{$review->Title}}</td>
                         <td>{{$review->GoodReview}}</td>
                         <td>{{$review->NotGoodReview}}</td>
-                        <td></td>
+                        <td class="list-star" style="display: flex">
+                            @for($i =1 ;$i<=5;$i++)
+                                <i class="fa fa-star {{ $i <= $review->ScoreReview ? 'active' : '' }}" style="{{$i <= $review->ScoreReview ? 'color: yellowgreen;' : ''}}"
+                                    data-key="{{$i}}"></i>
+                            @endfor
+                        </td>
                         <td>{{$review->created_at}}</td>
                     </tr>
                 @endforeach
             @endif
             </tbody>
         </table>
+    </div>
+    <div class="card mb-4" style="background-color: #eee; border: none">
+        <nav aria-label="Page navigation" style="margin: auto">
+            {!! $reviews->links() !!}
+        </nav>
     </div>
 @stop

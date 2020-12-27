@@ -77,11 +77,11 @@ class RecruiterController extends Controller
         //Tổng số giao dịch
         $totalTran = count($this->transactionRepository->getListTransactionByRecruierId(Auth::guard('recruiters')->user()->id));
         //Tổng số thành viên
-        $totalSeeker = count($this->seekerJobRepository->getSeekerByRecruiter(Auth::guard('recruiters')->user()->id));
+        $totalSeeker = count($this->seekerJobRepository->getSeekerByRecruiter(Auth::guard('recruiters')->user()->id,''));
         //Tổng số việc làm
         $totalJob = count($this->jobRepository->getJobByRecruiterId('',Auth::guard('recruiters')->user()->id));
         //Tổng review
-        $totalReview = count($this->reviewRepository->getReviewByRecruiter(Auth::guard('recruiters')->user()->id));
+        $totalReview = count($this->reviewRepository->getReviewByRecruiter(Auth::guard('recruiters')->user()->id,''));
 
         $viewData = [
             'revenueTransaction' => $revenueTransaction,

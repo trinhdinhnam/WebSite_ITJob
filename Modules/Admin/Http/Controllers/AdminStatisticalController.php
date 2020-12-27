@@ -26,7 +26,7 @@ class AdminStatisticalController extends Controller
     }
 
     public function getRevenue(){
-        $transactions = $this->transactionRepository->getAllTransactions();
+        $transactions = $this->transactionRepository->getTransactionByPage(10);
         $viewData = [
             'transactions' => $transactions,
         ];
@@ -35,7 +35,7 @@ class AdminStatisticalController extends Controller
 
 
    public function getJob(){
-       $jobs = $this->jobRepository->getAllJob();
+       $jobs = $this->jobRepository->getJobByPage('',10);
        $viewData = [
            'jobs' => $jobs,
        ];
@@ -43,7 +43,7 @@ class AdminStatisticalController extends Controller
    }
 
    public function getMember(){
-       $recruiters = $this->recruiterRepository->getAllRecruiter('');
+       $recruiters = $this->recruiterRepository->getRecruiterByPage('',10);
        $viewData = [
            'recruiters' => $recruiters,
        ];
@@ -51,7 +51,7 @@ class AdminStatisticalController extends Controller
    }
 
    public function getReview(){
-       $reviews = $this->reviewRepository->getAllReview();
+       $reviews = $this->reviewRepository->getReviewByPage(10);
        $viewData = [
            'reviews' => $reviews,
        ];

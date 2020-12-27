@@ -29,7 +29,7 @@ class RecruiterStatisticalController extends Controller
     }
 
     public function getTransaction($recruiterId){
-        $transactions = $this->transactionRepository->getTransactionById($recruiterId);
+        $transactions = $this->transactionRepository->getTransactionRecruiterByPage($recruiterId,10);
         $viewData = [
             'transactions' => $transactions,
         ];
@@ -38,7 +38,7 @@ class RecruiterStatisticalController extends Controller
 
 
     public function getJob($recruiterId){
-        $jobs = $this->jobRepository->getJobByRecruiterId('',$recruiterId);
+        $jobs = $this->jobRepository->getJobRecruiterByPage('',$recruiterId,10);
         $viewData = [
             'jobs' => $jobs,
         ];
@@ -46,15 +46,15 @@ class RecruiterStatisticalController extends Controller
     }
 
     public function getSeeker($recruiterId){
-        $seekers = $this->seekerJobRepository->getSeekerByRecruiter($recruiterId);
+        $seekers = $this->seekerJobRepository->getSeekerByRecruiter($recruiterId,10);
         $viewData = [
             'seekers' => $seekers,
         ];
         return view('recruiter::statistical.seeker',$viewData);
     }
 
-    public function getReview(){
-        $reviews = $this->reviewRepository->getAllReview();
+    public function getReview($recruiterId){
+        $reviews = $this->reviewRepository->getReviewByRecruiter($recruiterId,10);
         $viewData = [
             'reviews' => $reviews,
         ];

@@ -110,4 +110,18 @@ class TransactionRepository extends BaseRepository implements ITransactionReposi
         $transaction->save();
         return $transaction->TransactionId;
     }
+
+    public function getTransactionByPage($recordNumber)
+    {
+        // TODO: Implement getTransactionByPage() method.
+        return $this->model->with('recruiter:id,RecruiterName,CompanyName,Position')->paginate($recordNumber);
+
+    }
+
+    public function getTransactionRecruiterByPage($recruiterId,$recordNumber)
+    {
+        // TODO: Implement getTransactionRecruiterByPage() method.
+        return $this->model->with('accountPackage:AccountPackageId,AccountPackageName,Price,PostNumber')
+            ->where('RecruiterId',$recruiterId)->paginate($recordNumber);
+    }
 }

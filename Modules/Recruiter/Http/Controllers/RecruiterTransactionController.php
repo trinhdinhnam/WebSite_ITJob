@@ -34,7 +34,7 @@ class RecruiterTransactionController extends Controller
     public function getTransactions(){
 
         $recruiterId = Auth::guard('recruiters')->user()->id;
-        $transactions  = $this->transactionRepository->getListTransactionByRecruierId($recruiterId);
+        $transactions  = $this->transactionRepository->getTransactionRecruiterByPage($recruiterId,10);
         $transactionNew = $this->transactionRepository->getTransactionNew($recruiterId);
         $viewData = [
             'transactions' => $transactions,

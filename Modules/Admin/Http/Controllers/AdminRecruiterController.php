@@ -31,7 +31,7 @@ class AdminRecruiterController extends Controller
      */
     public function index(Request $request)
     {
-        $recruiters = $this->recruiterRepository->getAllRecruiter($request);
+        $recruiters = $this->recruiterRepository->getRecruiterByPage($request,5);
         $viewData = [
              'recruiters' => $recruiters
         ];

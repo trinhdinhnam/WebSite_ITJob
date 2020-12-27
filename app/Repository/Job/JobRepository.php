@@ -63,8 +63,9 @@ class JobRepository extends BaseRepository implements IJobRepository
         $job->PositionId = $jobInput->PositionId;
         $job->Skill = $jobInput->Skill;
         $job->Salary = $jobInput->Salary;
+        $job->Benifit = $jobInput->Benefit;
         $job->AdminID = 1;
-        $job->RecruiterId = 6;
+        $job->RecruiterId = Auth::guard('recruiters')->user()->id;
         $job->save();
     }
 
@@ -170,5 +171,36 @@ class JobRepository extends BaseRepository implements IJobRepository
             ->where('Skill', 'like', '%'.$skillName.'%')
             ->get();
         return $jobBySkills;
+    }
+
+    public function getJobByPage($request, $recordNumber)
+    {
+        // TODO: Implement getJobByPage() method.
+        $jobs = $this->model->with('position:PositionId,PositionName');
+        if($request){
+            if($request->jobname) $jobs->where('JobName', 'like', '%'.$request->jobname.'%');
+            if($request->recruiter) $jobs->where('RecruiterId',$request->recruiter);
+        }
+        $jobs = $jobs->orderByDesc('JobId')->paginate($recordNumber);
+        return $jobs;
+    }
+
+    public function getJobRecruiterByPage($request, $recruiterId, $recordNumber)
+    {
+        // TODO: Implement getJobRecruiterByPage() method.
+        $query = $this->model
+            ->select(DB::raw('count(SeekerJobId) as seekerNumber, jobs.JobId as JobId, JobName, PositionName, Skill, jobs.Status as Status, Address, jobs.created_at as CreatedDate'))
+            ->leftJoin('seeker_jobs','jobs.JobId','=','seeker_jobs.JobId')
+            ->leftJoin('positions','jobs.PositionId','=','positions.PositionId')
+            ->where('RecruiterId',$recruiterId)
+            ->where('jobs.IsDelete',1)
+            ->groupBy('jobs.JobId','JobName','PositionName', 'Skill','jobs.Status','Address', 'jobs.created_at');
+        if($request){
+            if($request->jobname) $query->where('JobName', 'like', '%'.$request->jobname.'%');
+            if($request->position) $query->where('jobs.PositionId',$request->position);
+        }
+        $query = $query->paginate($recordNumber);
+        return $query;
+
     }
 }

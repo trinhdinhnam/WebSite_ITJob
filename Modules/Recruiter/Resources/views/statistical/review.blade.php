@@ -12,7 +12,6 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tên nhà tuyển dụng</th>
                 <th scope="col">Người đánh giá</th>
                 <th scope="col">Tiêu đề</th>
                 <th scope="col">Điểm tốt</th>
@@ -27,17 +26,26 @@
                 @foreach($reviews as $review)
                     <tr>
                         <th scope="row">{{$i++}}</th>
-                        <td>{{$review->recruiter->RecruiterName}}</td>
                         <td>{{$review->seeker->SeekerName}}</td>
                         <td>{{$review->Title}}</td>
                         <td>{{$review->GoodReview}}</td>
                         <td>{{$review->NotGoodReview}}</td>
-                        <td></td>
+                        <td style="display: flex">
+                            @for($i =1 ;$i<=5;$i++)
+                                <i class="fa fa-star {{ $i <= $review->ScoreReview ? 'active' : '' }}" style="{{$i <= $review->ScoreReview ? 'color: yellowgreen;' : ''}}"
+                                   data-key="{{$i}}"></i>
+                            @endfor
+                        </td>
                         <td>{{$review->created_at}}</td>
                     </tr>
                 @endforeach
             @endif
             </tbody>
         </table>
+    </div>
+    <div class="card mb-4" style="background-color: #eee; border: none">
+        <nav aria-label="Page navigation" style="margin: auto">
+            {!! $reviews->links() !!}
+        </nav>
     </div>
 @stop

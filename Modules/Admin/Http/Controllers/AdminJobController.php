@@ -33,7 +33,7 @@ class AdminJobController extends Controller
     {
         $recruiters = $this->recruiterRepository->getListRecruiters();
 
-        $jobs = $this->jobRepository->getListJobs($request,'admin');
+        $jobs = $this->jobRepository->getJobByPage($request,5);
 
         $viewData = [
              'jobs' => $jobs,

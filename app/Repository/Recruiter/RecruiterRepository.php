@@ -172,4 +172,17 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
         $recruiter->password = bcrypt($input['pass_new']);
         $recruiter->save();
     }
+
+    public function getRecruiterByPage($request,$recordNumber)
+    {
+        // TODO: Implement getRecruiterByPage() method.
+        $recruiter = $this->model->where('IsDelete',1);
+        if($request)
+        {
+            if($request->RecruiterName) $recruiter->where('RecruiterName', 'like', '%'.$request->RecruiterName.'%');
+            if($request->Company) $recruiter->where('id',$request->Company);
+        }
+        $recruiter = $recruiter->paginate($recordNumber);
+        return $recruiter;
+    }
 }
