@@ -10,6 +10,4 @@ class Position extends Model
     protected $table = 'positions';
     protected $primaryKey = 'PositionId';
     protected $guarded=[''];
-
-    protected $fillable = ['PositionId', 'PositionName'];
 }
