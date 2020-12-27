@@ -53,7 +53,6 @@
 
                             <div class="form-group row">
                                 <label for="phone" class="col-md-3 col-form-label text-md-right">Số điện thoại</label>
-
                                 <div class="col-md-8 ">
                                     <input id="phone" type="text" class="form-control " name="Phone" value="{{\Illuminate\Support\Facades\Auth::guard('seekers')->user()->Phone}}" required autocomplete="phone">
 

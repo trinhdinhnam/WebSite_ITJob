@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('form-login/vendor/daterangepicker/daterangepicker.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('form-login/css/util.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('form-login/css/main.css')}}">
+<link href="{{asset('theme-seeker/css/login.css')}}" rel="stylesheet" />
 
 <div class="wrap-login100" id="modalLogin">
     <form class="login100-form validate-form" method="POST" enctype="multipart/form-data" action="{{route('seeker.post.login')}}">
@@ -37,9 +38,17 @@
         </div>
 
         <div class="form-group">
-            <button class="col-lg-12" type="submit" style="background-color: #000; color: white; font-family: Arial, Helvetica, sans-serif;">
+            <button class="btn-login col-lg-12" type="submit">
                 Đăng nhập
             </button>
+        </div>
+        <div class="form-group">
+            <a class="btn-login-facebook" href="{{url('/login-by-facebook/facebook')}}">
+                <img height="25px" width="35px"
+                     src="{{asset('images/logofacebook2.jpg')}}"
+                     class="thumbnail">
+                Đăng nhập bằng Facebook
+            </a>
         </div>
 
         <div class="text-center p-t-90">

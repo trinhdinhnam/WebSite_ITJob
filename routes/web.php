@@ -18,6 +18,9 @@ Route::get('confirm-recruiter','HomeController@getConfirm')->name('client.confir
 Route::group(['namespace' => 'Auth'],function(){
     Route::get('login','LoginController@getLogin')->name('seeker.get.login');
     Route::post('login','LoginController@postLogin')->name('seeker.post.login');
+    Route::get('login-by-facebook/{social}','LoginController@getLoginByFacebook')->name('client.get.login.by.facebook');
+    Route::get('check-login-by-facebook/{social}','LoginController@checkLoginByFacebook');
+
     Route::get('logout','LoginController@getLogout')->name('seeker.get.logout');
     Route::get('register','LoginController@getRegister')->name('seeker.get.register');
     Route::post('register','LoginController@postRegister')->name('seeker.post.register');

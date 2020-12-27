@@ -9,6 +9,7 @@ use App\Repository\Seeker\ISeekerRepository;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -65,5 +66,15 @@ class LoginController extends Controller
         }catch (\Exception $e){
             return redirect()->route('seeker.get.register');
         }
+    }
+
+    public function getLoginByFacebook($social){
+        return Socialite::driver($social)->redirect();
+    }
+
+    public function checkLoginByFacebook($social){
+
+        $info = Socialite::driver($social)->user();
+        dd($info);
     }
 }
