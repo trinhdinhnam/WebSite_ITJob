@@ -2,9 +2,9 @@
 @section('content')
 
     <h2 class="mt-4">Thanh toán hóa đơn giao dịch </h2>
-    <ol class="breadcrumb mb-4 ">
+    <ol class="breadcrumb mb-4 " style="background-color: #ccc;color: #000;">
         <li class="breadcrumb-item"><a href="{{route('recruiter.home')}}">Trang chủ</a></li>
-        <li class="breadcrumb-item active">Thanh toán hóa đơn</li>
+        <li class="breadcrumb-item active" style="color: #fff;">Thanh toán hóa đơn</li>
     </ol>
     <div class="main col-lg-10" style="background-color: #ddd; margin: auto; padding: 30px">
         <div style="text-align: center; font-size: 30px; font-weight: 600;">Xác nhận thông tin hóa đơn</div>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="form-group">
                     <h6 for="phone">Số điện thoại:</h6>
-                    <input required type="text" class="form-control" id="phone" name="phone"
+                    <input required type="tel" class="form-control" id="phone" name="phone"
                            value="@if(\Illuminate\Support\Facades\Auth::guard('recruiters')->check()) {{\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->Phone}}  @endif">
                 </div>
                 <div class="form-group">

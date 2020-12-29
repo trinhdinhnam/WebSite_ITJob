@@ -38,6 +38,7 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
             ->where('IsDelete',1)
             ->get();
         return $seekerByJob;
+
     }
 
     public function getSeekerDetail($seekerJobId)
@@ -122,22 +123,30 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
     public function changeMessageStatusById($jobId,$seekerId)
     {
         // TODO: Implement changeMessageStatusById() method.
-        $seekerJob = $this->model->where('JobId',$jobId)
-            ->where('SeekerId',$seekerId)
-            ->first();
-        $seekerJob->MessageStatus = 0;
-        $seekerJob->save();
+        try{
+            $seekerJob = $this->model
+                              ->where('JobId',$jobId)
+                              ->where('SeekerId',$seekerId)
+                              ->first();
+            $seekerJob->MessageStatus = 0;
+            $seekerJob->save();
+            return true;
+        }catch(\Exception $exception)
+        {
+            return false;
+        }
     }
 
     public function getSeekerByRecruiter($recruiterId,$recordNumber)
     {
         // TODO: Implement getSeekerByRecruiter() method.
 
-        $seeker = $this->model->select('seeker_jobs.SeekerId as SeekerId','seekers.SeekerName as SeekerName','seekers.Email as Email','seekers.Phone as Phone','jobs.JobName as JobName','seeker_jobs.created_at as ApplyDate','seeker_jobs.Introduce as Introduce','seeker_jobs.Status as Status')
+        $seeker = $this->model->select('seeker_jobs.SeekerId as SeekerId','seekers.SeekerName as SeekerName','seekers.Email as Email','seekers.Phone as Phone','jobs.JobName as JobName','jobs.JobId as JobId','seeker_jobs.created_at as ApplyDate','seeker_jobs.Introduce as Introduce','seeker_jobs.Status as Status','seeker_jobs.MessageApplyStatus as MessageApplyStatus','seekers.Avatar as Avatar')
                               ->leftJoin('jobs','seeker_jobs.JobId','=','jobs.JobId')
                               ->leftJoin('seekers','seeker_jobs.SeekerId','=','seekers.id')
                               ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
-                              ->where('recruiters.id','=',$recruiterId);
+                              ->where('recruiters.id','=',$recruiterId)
+                              ->orderBy('seeker_jobs.created_at','desc');
 
         if($recordNumber){
            $seeker = $seeker->paginate($recordNumber);
@@ -174,5 +183,22 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
             ->groupBy('JobId','JobName')
             ->get()->toArray();
         return $revenueProfileByJob;
+    }
+
+    public function changeMessageApplyStatusById($jobId, $seekerId)
+    {
+        // TODO: Implement changeMessageApplyStatusById() method.
+        try{
+            $seekerJob = $this->model
+                ->where('JobId',$jobId)
+                ->where('SeekerId',$seekerId)
+                ->first();
+            $seekerJob->MessageApplyStatus = 1;
+            $seekerJob->save();
+            return true;
+        }catch(\Exception $exception)
+        {
+            return false;
+        }
     }
 }

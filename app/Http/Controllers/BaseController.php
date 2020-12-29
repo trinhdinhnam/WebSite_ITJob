@@ -39,6 +39,5 @@ class BaseController extends Controller
         View::share('messageInfos',$messageInfos);
         $skills = $skillRepository->getListSkills();
         View::share('skills',$skills);
-
     }
 }

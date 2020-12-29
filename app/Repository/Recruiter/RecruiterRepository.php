@@ -1,9 +1,5 @@
 <?php
-
-
 namespace App\Repository\Recruiter;
-
-
 use App\Models\Recruiter;
 use App\Repository\BaseRepository;
 use phpDocumentor\Reflection\Types\This;
@@ -29,15 +25,22 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
         // TODO: Implement getAll() method.
     }
 
-    public function getListRecruiters()
+    public function getListRecruiters($recordNumber='')
     {
         // TODO: Implement getListRecruiters() method.
         $recruiters = $this->model
             ->select(DB::raw('count(JobId) as jobNumber, recruiters.id as RecruiterId, CompanyLogo, CompanyName, cities.CityName as City'))
             ->leftJoin('jobs','recruiters.id','=','jobs.RecruiterId')
             ->leftJoin('cities','recruiters.CityId','=','cities.CityId')
-            ->groupBy('recruiters.id','CompanyLogo','CompanyName','City')
-            ->get();
+            ->where('jobs.IsDelete','=',1)
+            ->groupBy('recruiters.id','CompanyLogo','CompanyName','cities.CityName');
+
+            if($recordNumber){
+                $recruiters = $recruiters->paginate($recordNumber);
+            }
+            else{
+                $recruiters = $recruiters->get();
+            }
 
         return $recruiters;
     }
@@ -117,10 +120,11 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
     {
         // TODO: Implement getRecruierHot() method.
         $recruiterHot = $this->model
+            ->select('recruiters.id as id','recruiters.CompanyLogo as CompanyLogo','recruiters.CompanyName as CompanyName','cities.CityName as City','recruiters.Introduction as Introduction',DB::raw('(ScoreReview/ReviewNumber) as Review'))
             ->join('transactions','recruiters.id','=','transactions.RecruiterId')
             ->join('account_packages','transactions.AccountPackageId','=','account_packages.AccountPackageId')
-            ->orderBy('transactions.PayDate','desc')
-            ->orderBy('account_packages.Price','desc')
+            ->join('cities','recruiters.CityId','=','cities.CityId')
+            ->orderBy('Review','desc')
             ->first();
         return $recruiterHot;
     }
@@ -184,5 +188,21 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
         }
         $recruiter = $recruiter->paginate($recordNumber);
         return $recruiter;
+    }
+
+    public function reducePostNumber($recruiterId)
+    {
+        // TODO: Implement reducePostNumber() method.
+        $code = 1;
+        try{
+        $recruiter = $this->model->find($recruiterId);
+        $recruiter->PostResidual = $recruiter->PostResidual-1;
+        $recruiter->save();
+            return $code;
+        }catch(\Exception $exception)
+        {
+            $code=0;
+            return $code;
+        }
     }
 }

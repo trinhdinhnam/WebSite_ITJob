@@ -10,17 +10,19 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class RecruiterSeekerController extends Controller
+class RecruiterSeekerController extends RecruiterBaseController
 {
 
     public $seekerJobRepository;
     public function __construct(ISeekerJobRepository $seekerJobRepository)
     {
+        parent::__construct($seekerJobRepository);
         $this->seekerJobRepository = $seekerJobRepository;
 
     }
 
     public function getSeekerByJob($id){
+        $this->getDataShared();
 
         $seekerByJob = $this->seekerJobRepository->getSeekerByJob($id);
         $viewData = [
@@ -30,6 +32,8 @@ class RecruiterSeekerController extends Controller
     }
 
     public function getSeekerDetail($id){
+        $this->getDataShared();
+
         $seekerDetail = $this->seekerJobRepository->getSeekerDetail($id);
 
         $viewData = [
@@ -41,6 +45,8 @@ class RecruiterSeekerController extends Controller
 
     public function action($action,$id)
     {
+        $this->getDataShared();
+
         if($action){
             switch($action)
             {

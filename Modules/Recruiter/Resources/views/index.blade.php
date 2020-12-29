@@ -54,48 +54,66 @@
         </figure>
     </div>
 </div>
-<div class="card mb-4">
-    <div class="card-header">
+<div class="row">
+    <div class="col-xl-7">
+<div class="card mb-4" style="border-top: 5px solid #2389d6 ">
+    <div class="card-header" style="font-weight: bold">
         <i class="fas fa-table mr-1"></i>
-        DataTable Example
+        Danh sách đơn ứng tuyển mới nhất
     </div>
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tên ứng viên</th>
+                <th scope="col">Email</th>
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Giới thiệu</th>
+                <th scope="col">Tên việc làm</th>
+                <th scope="col">Ngày ứng tuyển</th>
+                <th scope="col">Trạng thái</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            @if(isset($seekers))
+                <?php $i=1 ?>
+                @foreach($seekers as $seeker)
                     <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th scope="row">{{$i++}}</th>
+                        <td>{{$seeker->SeekerName}}</td>
+                        <td>{{$seeker->Email}}</td>
+                        <td>{{$seeker->Phone}}</td>
+                        <td>{{$seeker->Introduce}}</td>
+                        <td>{{$seeker->JobName}}</td>
+                        <td>{{$seeker->ApplyDate}}</td>
+                        <td>
+                            <label
+                                    class="badge {{$seeker->getStatus($seeker->Status)['class']}}">{{$seeker->getStatus($seeker->Status)['name']}}</label>
+                        </td>
                     </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
-                </tbody>
-            </table>
+                @endforeach
+            @endif
+            </tbody>
+        </table>
+    </div>
+</div>
+    </div>
+    <div class="col-xl-5">
+        <div class="card mb-4" style="border-top: 5px solid #2389d6 ">
+
+        <div class="card-header" style="font-weight: bold">
+            <i class="fas fa-table mr-1"></i>
+            Danh sách việc làm hot nhất
+        </div>
+        <div class="card-body">
+
+        </div>
         </div>
     </div>
 </div>
+
 <script type="text/javascript" src="{{asset('theme-recruiter/js/home-page.js')}}"></script>
 
 @endsection

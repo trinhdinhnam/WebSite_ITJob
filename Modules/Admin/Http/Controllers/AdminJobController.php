@@ -47,13 +47,11 @@ class AdminJobController extends Controller
     public function action($action,$id)
     {
         try{
-            $job = Job::find($id);
             if($action){
                 switch($action)
                 {
                     case 'active':
-                        $job->Status = $job->Status ? 0 : 1;
-                        $job->save();
+                        $this->jobRepository->changeStatus($id);
                         break;
                 }
             }

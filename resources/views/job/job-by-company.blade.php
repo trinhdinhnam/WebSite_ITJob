@@ -176,10 +176,7 @@
                     </li>
                 </ul>
             </div>
-
-
             <div class="col-md-4 review-hot">
-
                 <div class="review-banner">
                     <div class="review-title">Hãy chia sẻ ý kiến của bạn</div>
                     <div class="review-label">Review cho {{$company->CompanyName}} ngay</div>
@@ -240,11 +237,7 @@ $(".btn.btn-danger.btn-review, .btn-review2").click(function (e) {
         $(".review-form").addClass('hide').removeClass('show');
 
     }
-
-
 })
-
-
 
 //Xử lý ajax để tạo form đánh giá
 $(function() {

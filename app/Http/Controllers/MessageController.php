@@ -33,9 +33,7 @@ class MessageController extends BaseController
     public function getJobByMessage($id){
 
         $jobDetail = $this->jobRepository->getJobById($id);
-
         $jobApplies = $this->jobRepository->getJobApplies(Auth::guard('seekers')->user()->id);
-
         $imageCompanies = $this->companyImageRepository->getCompanyImageById($jobDetail->RecruiterId,'');
         $viewData = [
             'jobDetail' =>$jobDetail,

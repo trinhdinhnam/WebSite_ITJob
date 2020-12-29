@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('complete','RecruiterTransactionController@complete');
 
 Route::prefix('authenticate')->group(function(){
     Route::get('/login','RecruiterAuthController@getLogin')->name('recruiter.get.login');
@@ -21,9 +20,10 @@ Route::prefix('authenticate')->group(function(){
 });
 
 Route::prefix('recruiters')->middleware('CheckLoginRecruiter')->group(function() {
+    Route::get('complete','RecruiterTransactionController@complete');
     Route::get('/', 'RecruiterController@index')->name('recruiter.home');
     Route::get('/logout','RecruiterAuthController@getLogout')->name('get.logout.recruiter');
-
+    Route::get('/message/seeker/jobId={jobId}+seekerId={seekerId}','RecruiterController@getSeekerByMessage')->name('recruiter.get.seeker.by.message');
 
     Route::group(['prefix' => 'job'], function(){
         Route::get('/','RecruiterJobController@index')->name('recruiter.get.list.job');
@@ -46,8 +46,8 @@ Route::prefix('recruiters')->middleware('CheckLoginRecruiter')->group(function()
         Route::get('/','RecruiterTransactionController@getTransactions')->name('recruiter.get.transaction');
         Route::get('bill','RecruiterTransactionController@getBill')->name('recruiter.get.bill');
         Route::get('/register-account-package','RecruiterTransactionController@getRegisterAccountPackage')->name('recruiter.get.register.account.package');
-        Route::get('/pay/order/{accountId}','RecruiterTransactionController@getPay')->name('get.pay.order');
-        Route::post('/pay/order/{accountId}','RecruiterTransactionController@postPay');
+        Route::get('/pay/order/accountId={accountId}','RecruiterTransactionController@getPay')->name('get.pay.order');
+        Route::post('/pay/order/accountId={accountId}','RecruiterTransactionController@postPay');
 
     });
 

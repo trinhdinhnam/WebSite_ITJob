@@ -3,29 +3,28 @@
     <link href="{{asset('theme-admin/css/recruiter_list_by_admin.css')}}" rel="stylesheet" />
 
 <h2 class="mt-4">Danh sách nhà tuyển dụng</h2>
-<ol class="breadcrumb mb-4 ">
-    <li class="breadcrumb-item">Trang chủ</li>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Trang chủ</a></li>
     <li class="breadcrumb-item active">Nhà tuyển dụng</li>
 </ol>
 <form class="form-inline">
-    <div class="form-group mx-sm-3 mb-2">
-        <input type="text" class="form-control" id="jobname" name="RecruiterName" placeholder="Nhập tên nhà tuyển dụng..." value="{{ \Request::get('recruiterName')}}">
-    </div>
     <div class="form-group">
-        <select name="Company" id="recruiter-name" class="form-control" style="width: 200px">
-            <option value="" selected>--Tên công ty--</option>
+        <input type="text" class="input-recruitername" id="jobname" name="RecruiterName" placeholder="Nhập tên nhà tuyển dụng..." value="{{ \Request::get('recruiterName')}}">
+        <select name="Company" id="recruiter-name" class="select-company" style="width: 150px; color: black">
+            <option value="" selected>TÊN CÔNG TY</option>
             @if(isset($recruiters))
                 @foreach($recruiters as $recruiter)
                     <option value="{{$recruiter->id}}" {{ \Request::get('Company') == $recruiter->id ? "selected='selected'" : ""}}>{{$recruiter->CompanyName}}</option>
                 @endforeach
             @endif
         </select>
+        <button type="submit" class="btn-search-recruiter">TÌM KIẾM</button>
     </div>
-    <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i></button>
+
 </form>
 <div class="card mb-4">
     <table class="table">
-        <thead class="thead-light">
+        <thead class=" thead-dark" style="text-align: center">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Tên nhà tuyển dụng</th>

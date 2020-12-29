@@ -4,11 +4,10 @@
     <link href="{{asset('theme-recruiter/css/register-account-package.css')}}" rel="stylesheet" />
     <link href="{{asset('css/account-package.css')}}" rel="stylesheet" />
     <h2 class="mt-4">Chọn gói dịch vụ để tiếp tục sử dụng hệ thống</h2>
-    <ol class="breadcrumb mb-4 ">
+    <ol class="breadcrumb mb-4 " style="background-color: #ccc;color: #000;">
         <li class="breadcrumb-item"><a href="{{route('recruiter.home')}}">Trang chủ</a></li>
         <li class="breadcrumb-item"><a href="{{route('recruiter.get.list.job')}}">Lịch sử giao dịch</a></li>
-
-        <li class="breadcrumb-item active">Danh sách các gói dịch vụ</li>
+        <li class="breadcrumb-item active" style="color: #fff;">Danh sách các gói dịch vụ</li>
     </ol>
     <div class="main col-8">
         <div class="form-group" style="margin-top: 50px;">
@@ -84,7 +83,7 @@
             $(".btn-payment").click(function (event) {
                 let accountId = $("#package-select-id").val();
                 let $this = $(this);
-                $this.attr("href", "http://phuongnamrecruiment.com:8000/recruiters/transaction/pay/order/"+accountId);
+                $this.attr("href", "http://phuongnamrecruiment.com:8000/recruiters/transaction/pay/order/accountId="+accountId);
             })
         })
     </script>

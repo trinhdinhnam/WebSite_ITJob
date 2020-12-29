@@ -260,14 +260,11 @@
 
 }
 
-.company-hot .company-name{
+.company-hot .company-name a h5{
     margin-top: 40px;
     width: 100%;
     text-align: center;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    display: -webkit-box;
+    color: black;
 }
 
 .company-hot .company-city{

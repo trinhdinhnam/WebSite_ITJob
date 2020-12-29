@@ -120,7 +120,7 @@
 
 }
 
-.company-item .company-item-name{
+.company-item .company-item-name a{
     font-size: 21px;
     width: 90%;
     text-align: center;
@@ -132,6 +132,7 @@
     display: -webkit-box;
     left: 5%;
     right: 5%;
+    color: black;
 }
 
 .company-item .company-item-info{

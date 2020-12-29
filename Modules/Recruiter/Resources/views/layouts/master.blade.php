@@ -8,20 +8,54 @@
         <meta name="author" content="" />
         <title>Recruiter</title>
         <link href="{{asset('theme-admin/css/styles.css')}}" rel="stylesheet" />
-        <link href="{{asset('theme-admin/css/job_detail.css')}}" rel="stylesheet" />
-
+        <link href="{{asset('theme-recruiter/css/master.css')}}" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="{{asset('/js/vendor/jquery-1.11.3.min.js')}}"></script>
-
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="{{route('recruiter.home')}}">Recruiter</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                <div class="input-group">
+            <div class="job-by-message-menu dropdown">
+                <a href="" class="message-apply" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i style="color: white; font-size: 25px" class="fa fa-globe-americas "></i>
+                    @if(isset($messageNumber))
+                        <div class="message-number">{{$messageNumber}}</div>
+                    @endif
+                </a>
+                <div class="dropdown-content-message dropdown-menu">
+                    <div style="font-weight: bold; margin: 0 0 5px 5px">Thông báo</div>
+                    @if(isset($messageApply))
+                        @foreach($messageApply as $message)
+                            <a class="dropdown-item dropdown-item-message @if($message->MessageApplyStatus==1) seen @endif @if($message->MessageApplyStatus==0) notseen @endif"
+                               href="{{route('recruiter.get.seeker.by.message',[$message->JobId,$message->SeekerId])}}">
+                                <div class="message-company-logo">
+                                    <img height="40px" width="40px"
+                                         src="{{asset( pare_url_file($message->Avatar)) }}"
+                                         style="border-radius: 50%;" class="thumbnail">
+                                </div>
+                                <div class="message-info">
+                                    <div
+                                            class="message-job-content @if($message->MessageApplyStatus==1) text-grey @endif @if($message->MessageApplyStatus==0) text-black @endif">
+                                        <div class="name" style="word-wrap: break-word;">{{$message->SeekerName}}</div> đã ứng tuyển công việc
+                                        <br>
+                                        <div style="font-weight: bold;">{{$message->JobName}}</div>
+                                    </div>
+                                    <div
+                                            class="message-date @if($message->MessageApplyStatus==1) text-grey @endif @if($message->MessageApplyStatus==0) text-blue @endif" @if($message->MessageApplyStatus==1) style="font-weight: 400" @endif>
+                                        {{$message->ApplyDate}}
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    @endif
+
+                </div>
+            </div>
+
+            <form  class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                <div class="input-group" style="display: none;">
                     <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
@@ -67,10 +101,10 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Thống kê giao dịch</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Thống kê số đơn ứng tuyển</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Thống kê số đánh giá</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Thống kê số việc làm</a>
+                                    <a class="nav-link" href="{{route('recruiter.get.transaction')}}">Thống kê giao dịch</a>
+                                    <a class="nav-link" href="{{route('recruiter.get.statistical.seeker',\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->id)}}">Thống kê số đơn ứng tuyển</a>
+                                    <a class="nav-link" href="{{route('recruiter.get.statistical.review',\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->id)}}">Thống kê số đánh giá</a>
+                                    <a class="nav-link" href="{{route('recruiter.get.statistical.job',\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->id)}}">Thống kê số việc làm</a>
 
                                 </nav>
                             </div>
@@ -80,11 +114,12 @@
                     </div>
                 </nav>
             </div>
-            <div id="layoutSidenav_content">
-                <main>
+            <div id="layoutSidenav_content" style="background-color: #eee;">
+                <main >
 
                 <div class="container-fluid">
-                        <div class="pull-right message-flash" style="position: absolute; right: 30px; margin-top: -15px;">
+
+                    <div class="pull-right message-flash" style="position: absolute; right: 30px; margin-top: -15px;">
                             @if(\Illuminate\Support\Facades\Session::has('flash-message'))
                                 <div class="alert alert-{!! \Illuminate\Support\Facades\Session::get('flash-level') !!}">
                                     {!! \Illuminate\Support\Facades\Session::get('flash-message') !!}
@@ -96,16 +131,6 @@
  
                 </main>
                 <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2020</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
                 </footer>
             </div>
         </div>

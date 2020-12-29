@@ -41,7 +41,7 @@ class HomeController extends BaseController
     }
 
     public function getHomePage(){
-        $companies = $this->recruiterRepository->getListRecruiters();
+        $companies = $this->recruiterRepository->getListRecruiters(6);
         $viewData = [
             'companies' =>$companies
         ];
@@ -98,7 +98,7 @@ class HomeController extends BaseController
         $jobByCompanys = Job::with('recruiter:id,CompanyLogo')
                                 ->where('RecruiterId',$id)
                                 ->get();
-        $reviewByRecruiters = $this->reviewRepository->getReviewByRecruiter($id);
+        $reviewByRecruiters = $this->reviewRepository->getReviewByRecruiter($id,5);
         $reviewHots = $this->reviewRepository->getListReviewHots($id);
         $viewData = [
             'company' => $company,

@@ -7,7 +7,7 @@
             <div class="note">
                 <h3 >Đăng ký</h3>
             </div>
-            <form method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data" onsubmit = "return validateForm()" name="myForm">
                 @csrf
                 <div class="form-content">
                     <div class="row">
@@ -54,8 +54,10 @@
                             </div>
                             <div class="form-group">
                                 <label><h6>Số điện thoại</h6></label>
-                                <input type="tel" name="Phone" class="form-control" placeholder="Nhập số điện thoại..." value=""/>
-
+                                <input type="tel" name="Phone" class="form-control" id="phone" placeholder="Nhập số điện thoại..." value=""/>
+                                @if($errors->has('Phone'))
+                                    <span class="text-danger">{{ $errors->first('Phone') }}</span>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label><h6>Địa chỉ</h6></label>
@@ -105,5 +107,21 @@
                   fileReader.readAsDataURL(fileToLoad);
               }
           }
+          $(document).ready(function() {
+              $('body').on('click','.checkmobile', function() {
+                  var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+                  var mobile = $('#phone').val();
+                  if(mobile !==''){
+                      if (vnf_regex.test(mobile) == false)
+                      {
+                          alert('Số điện thoại của bạn không đúng định dạng!');
+                      }else{
+                          alert('Số điện thoại của bạn hợp lệ!');
+                      }
+                  }else{
+                      alert('Bạn chưa điền số điện thoại!');
+                  }
+              });
+          });
     </script>
 @endsection

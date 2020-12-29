@@ -8,6 +8,7 @@
     height: calc(100% - 60px);
     width: 78%;
     margin: auto;
+    padding-right: 0px;
 }
 .page-header{
     background-color: white;
@@ -206,6 +207,7 @@
 ul#tabs{
     list-style-type: none;
     padding: 0;
+    height: auto;
 }
 ul#tabs li {
     width: 160px;
@@ -234,9 +236,11 @@ ul#tab{
 }
 ul#tab li{
     display: none;
+    height: auto;
 }
 ul#tab li.active{
     display: block;
+    height: auto;
 }
 #tab .job-list{
     background-color: white;
@@ -575,10 +579,10 @@ ul#tab li.active{
 /* review hot  */
 .page-content .review-hot{
     width: 100%;
-    height: 400px;
+    height: auto;
     padding: 10px;
-    padding-right: 0px;
     padding-top: 0px;
+    padding-right: 0;
 }
 
 .review-hot .review-banner{

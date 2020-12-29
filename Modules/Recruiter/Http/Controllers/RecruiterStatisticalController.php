@@ -12,7 +12,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class RecruiterStatisticalController extends Controller
+class RecruiterStatisticalController extends RecruiterBaseController
 {
     public $transactionRepository;
     public $jobRepository;
@@ -21,6 +21,7 @@ class RecruiterStatisticalController extends Controller
     public $seekerJobRepository;
     public function __construct(ITransactionRepository $transactionRepository,IJobRepository $jobRepository,IRecruiterRepository $recruiterRepository,IReviewRepository $reviewRepository,ISeekerJobRepository $seekerJobRepository)
     {
+        parent::__construct($seekerJobRepository);
         $this->transactionRepository = $transactionRepository;
         $this->jobRepository = $jobRepository;
         $this->recruiterRepository = $recruiterRepository;
@@ -29,6 +30,7 @@ class RecruiterStatisticalController extends Controller
     }
 
     public function getTransaction($recruiterId){
+        $this->getDataShared();
         $transactions = $this->transactionRepository->getTransactionRecruiterByPage($recruiterId,10);
         $viewData = [
             'transactions' => $transactions,
@@ -38,6 +40,7 @@ class RecruiterStatisticalController extends Controller
 
 
     public function getJob($recruiterId){
+        $this->getDataShared();
         $jobs = $this->jobRepository->getJobRecruiterByPage('',$recruiterId,10);
         $viewData = [
             'jobs' => $jobs,
@@ -46,6 +49,7 @@ class RecruiterStatisticalController extends Controller
     }
 
     public function getSeeker($recruiterId){
+        $this->getDataShared();
         $seekers = $this->seekerJobRepository->getSeekerByRecruiter($recruiterId,10);
         $viewData = [
             'seekers' => $seekers,
@@ -54,6 +58,7 @@ class RecruiterStatisticalController extends Controller
     }
 
     public function getReview($recruiterId){
+        $this->getDataShared();
         $reviews = $this->reviewRepository->getReviewByRecruiter($recruiterId,10);
         $viewData = [
             'reviews' => $reviews,

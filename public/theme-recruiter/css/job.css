@@ -1,0 +1,41 @@
+.dis{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.5;
+}
+.form-inline{
+    margin-left: 50%;
+}
+
+.card.mb-4{
+    margin-top: 20px;
+}
+
+.breadcrumb.mb-4{
+    background-color: #ccc;
+    color: #000;
+}
+
+.breadcrumb.mb-4 .active{
+    color: #fff;
+}
+.btn-search-job{
+    height: 40px;
+    width: 100px;
+    background-color: #2c5ef9;
+    color: white;
+    border: none;
+    float: left;
+}
+.select-position{
+    height: 40px;
+    border: none;
+    float: left;
+    border-left: 1px solid #ccc;
+}
+.input-jobname{
+    height: 40px;
+    width: 260px;
+    border: none;
+    float: left;
+}

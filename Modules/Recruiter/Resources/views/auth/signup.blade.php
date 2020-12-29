@@ -49,25 +49,6 @@
                                 <span class="text-danger">{{ $errors->first('Password') }}</span>
                             @endif
                         </div>
-
-                        <div class="form-group" style="margin-top: 50px;">
-                            <a href="" class="form-control btn btn-danger btn-account-package">Chọn gói dịch vụ <i class="fa fa-caret-right" style="font-size: 20px; margin-left: 5px; margin-bottom: -3px;"></i></a>
-                        </div>
-
-                        <div class="form-group" style="margin-top: 50px; display: none;">
-                            <input type="text" name="AccountPackage" class="form-control AccountPackage" placeholder="" value=""/>
-                        </div>
-                        <div id="package-select" class="form-group">
-                            <div class="form-content" style="border: none;">
-                                <div class="account-item-select">
-                                    <h3 class="package-name" id="package-select-name">NONE</h3>
-                                    <div class="price"><div class="price-label">Giá:</div><div id="package-select-price"></div></div>
-                                    <div class="post-number"><div class="postnumber-label">Số lượt đăng:</div><div id="package-select-postnumber"></div></div>
-                                    <input style="display: none;" value="" name="accountPackageId" id="package-select-id" />
-                                </div>
-                                <a class="btn btn-success form-control btn-payment" href="{{route('recruiter.get.bill')}}">Thanh toán</a>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="title"><h5>Công ty</h5></div>

@@ -26,8 +26,10 @@ class RequestRegisterSeeker extends FormRequest
         return [
             //
             'SeekerName'=>'required',
-            'Email'=>'required|unique:seekers,email',
+            'Email'=>'required|email|unique:seekers,email',
             'Password'=>'required',
+            'Phone' => 'required|min:11|numeric',
+
         ];
     }
     public function messages()
@@ -36,7 +38,12 @@ class RequestRegisterSeeker extends FormRequest
             'SeekerName.required'=>'Bạn phải nhập họ và tên!',
             'Email.required'=>'Bạn phải nhập email!',
             'Email.unique'=>'Email của bạn đã được sử dụng, vui lòng nhập email khác!',
+            'Email.email'=>'Email của bạn không đúng định dạng. Vui lòng nhập lại!',
             'Password.required'=>'Bạn phải nhập mật khẩu!',
+            'Phone.required'=>'Bạn không được bỏ trống số điện thoại',
+            'Phone.numeric'=>'Số điện thoại không đúng định dạng! Vui lòng nhập lại',
+            'Phone.min'=>'Số điện thoại quá ngắn, yêu cầu nhập lại',
+
         ];
     }
 }

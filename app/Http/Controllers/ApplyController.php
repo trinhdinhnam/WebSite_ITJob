@@ -11,6 +11,7 @@ use App\Repository\Job\IJobRepository;
 use App\Repository\Position\IPositionRepository;
 use App\Repository\Recruiter\IRecruiterRepository;
 use App\Repository\SeekerJob\ISeekerJobRepository;
+use App\Repository\Skill\ISkillRepository;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,9 +23,10 @@ class ApplyController extends BaseController
     //
 
     public $seekerJobRepository;
-    public function __construct(ISeekerJobRepository $seekerJobRepository, IPositionRepository $positionRepository, IJobRepository $jobRepository, ICityRepository $cityRepository, IRecruiterRepository $recruiterRepository)
+    public function __construct(ISeekerJobRepository $seekerJobRepository,IPositionRepository $positionRepository, IJobRepository $jobRepository,
+                                ICityRepository $cityRepository,IRecruiterRepository $recruiterRepository,ISkillRepository $skillRepository)
     {
-        parent::__construct($seekerJobRepository, $positionRepository, $jobRepository, $cityRepository, $recruiterRepository);
+        parent::__construct($seekerJobRepository, $positionRepository, $jobRepository, $cityRepository, $recruiterRepository,$skillRepository);
 
         $this->seekerJobRepository = $seekerJobRepository;
     }

@@ -5,6 +5,7 @@ namespace Modules\Recruiter\Http\Controllers;
 use App\Helpers\Account;
 use App\Helpers\Date;
 use App\Helpers\Job;
+use App\Http\Controllers\BaseController;
 use App\Repository\Job\IJobRepository;
 use App\Repository\Recruiter\IRecruiterRepository;
 use App\Repository\Review\IReviewRepository;
@@ -14,8 +15,9 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
-class RecruiterController extends Controller
+class RecruiterController extends RecruiterBaseController
 {
     /**
      * Display a listing of the resource.
@@ -28,6 +30,7 @@ class RecruiterController extends Controller
     public $seekerJobRepository;
     public function __construct(ITransactionRepository $transactionRepository,IRecruiterRepository $recruiterRepository,IReviewRepository $reviewRepository,IJobRepository $jobRepository,ISeekerJobRepository $seekerJobRepository)
     {
+        parent::__construct($seekerJobRepository);
         $this->transactionRepository = $transactionRepository;
         $this->recruiterRepository = $recruiterRepository;
         $this->reviewRepository = $reviewRepository;
@@ -35,8 +38,10 @@ class RecruiterController extends Controller
         $this->seekerJobRepository = $seekerJobRepository;
 
     }
+
     public function index()
     {
+        $this->getDataShared();
         $listMonth = Date::getListMonthInYear();
         $revenueTransaction = $this->transactionRepository->getRevenueTransactionMoth();
 
@@ -95,6 +100,19 @@ class RecruiterController extends Controller
             'totalReview' => $totalReview
         ];
         return view('recruiter::index',$viewData);
+    }
+
+    public function getSeekerByMessage($jobId,$seekerId){
+
+        $this->getDataShared();
+        $seekerByJob='';
+        if($this->seekerJobRepository->getSeekerByJob($jobId) && $this->seekerJobRepository->changeMessageApplyStatusById($jobId,$seekerId)){
+            $seekerByJob = $this->seekerJobRepository->getSeekerByJob($jobId);
+        }
+        $viewData = [
+            'seekerByJobs' => $seekerByJob
+        ];
+        return view('recruiter::seeker.index',$viewData);
     }
 
 }

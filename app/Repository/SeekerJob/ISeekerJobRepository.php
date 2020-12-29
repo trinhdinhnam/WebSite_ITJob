@@ -18,6 +18,8 @@ interface ISeekerJobRepository
 
     public function changeMessageStatusById($jobId,$seekerId);
 
+    public function changeMessageApplyStatusById($jobId,$seekerId);
+
     public function addCVApply($seekerJobInput,$jobId);
 
     public function getMessageNumber();
@@ -29,5 +31,6 @@ interface ISeekerJobRepository
     public function getRevenueProfile($recruiterId);
 
     public function getRevenueProfileByJob($recruiterId);
+
 
 }

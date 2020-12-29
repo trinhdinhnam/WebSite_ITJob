@@ -1,17 +1,22 @@
 @extends('recruiter::layouts.master')
-
 @section('content')
-<h2 class="mt-4">Thông tin đăng tuyển <a href="{{route('recruiter.get.create.job')}}"  class="btn btn-primary" style=" float: right;">Đăng bài</a></h2>
+    <link href="{{asset('theme-recruiter/css/job.css')}}" rel="stylesheet" />
+    <div class="pull-right message-warning" style="position: absolute; right: 22px; margin-top: -10px; z-index: 1;">
+        @if($transactionNew->ExipryDate<now())
+            <div class="alert alert-warning">
+                Warning! Tài khoản của bạn đã hết hạn, yêu cầu đăng ký để tiếp tục sử dụng.
+            </div>
+        @endif
+    </div>
+<h2 class="mt-4">Thông tin đăng tuyển <a href="{{route('recruiter.get.create.job')}}"  class="btn btn-primary @if($transactionNew->ExipryDate<now()) dis @else @endif" style=" float: right;">Đăng bài</a></h2>
 <ol class="breadcrumb mb-4 ">
     <li class="breadcrumb-item"><a href="{{route('recruiter.home')}}">Trang chủ</a></li>
     <li class="breadcrumb-item active">Thông tin đăng tuyển</li>
 </ol>
 <form class="form-inline">
-    <div class="form-group mx-sm-3 mb-2">
-        <input type="text" class="form-control" id="jobname" name="jobname" placeholder="Nhập tên việc làm..." value="{{ \Request::get('jobname')}}">
-    </div>
     <div class="form-group">
-        <select name="position" id="position-name" class="form-control" style="width: 200px; margin-top: -8px; margin-right: 15px">
+        <input type="text" class="input-jobname" id="jobname" name="jobname" placeholder="Nhập tên việc làm..." value="{{ \Request::get('jobname')}}">
+        <select name="position" id="position-name" class="select-position" style="width: 150px;">
             <option value="" selected>Vị trí công việc</option>
             @if(isset($positions))
                 @foreach($positions as $position)
@@ -19,13 +24,13 @@
                 @endforeach
             @endif
         </select>
+        <button type="submit" class="btn-search-job">TÌM KIẾM</button>
     </div>
 
-    <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i></button>
 </form>
 <div class="card mb-4">
     <table class="table">
-        <thead class="thead-light">
+        <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Tên công việc</th>
@@ -57,8 +62,8 @@
                 </td>
                 <td style="width: 200px;">
                     <a href="{{route('recruiter.get.detail.job',$job->JobId)}}" class="btn btn-primary">Xem</a>
-                    <a href="{{route('recruiter.get.edit.job',$job->JobId)}}" class="btn btn-success">Sửa</a>
-                    <a href="{{route('recruiter.get.delete.job',$job->JobId)}}" class="btn btn-danger">Xóa</a>
+                    <a href="{{route('recruiter.get.edit.job',$job->JobId)}}" class="btn btn-success @if($transactionNew->ExipryDate<now()) dis @else @endif">Sửa</a>
+                    <a href="{{route('recruiter.get.delete.job',$job->JobId)}}" class="btn btn-danger @if($transactionNew->ExipryDate<now()) dis @else @endif">Xóa</a>
                 </td>
             </tr>
             <?php $i++ ?>

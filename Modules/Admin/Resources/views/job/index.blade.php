@@ -7,31 +7,28 @@
 
 </h2>
 <ol class="breadcrumb mb-4 ">
-    <li class="breadcrumb-item">Trang chủ</li>
+    <li class="breadcrumb-item"><a href="">Trang chủ</a></li>
     <li class="breadcrumb-item active">Thông tin đăng tuyển</li>
 </ol>
     <form class="form-inline">
-        <div class="form-group mx-sm-3 mb-2">
-            <input type="text" class="form-control" id="jobname" name="jobname" placeholder="Nhập tên việc làm..." value="{{ \Request::get('jobname')}}">
-        </div>
         <div class="form-group">
-            <select name="recruiter" id="recruiter-name" class="form-control" style="width: 200px">
-                <option value="" selected>--Tên công ty--</option>
+            <input type="text" class="input-jobname" id="jobname" name="jobname" placeholder="Nhập tên việc làm..." value="{{ \Request::get('jobname')}}">
+            <select name="recruiter" id="recruiter-name" class="select-company" style="width: 150px">
+                <option value="" selected>TÊN CÔNG TY</option>
                 @if(isset($recruiters))
                     @foreach($recruiters as $recruiter)
                         <option value="{{$recruiter->id}}" {{ \Request::get('recruiter') == $recruiter->id ? "selected='selected'" : ""}}>{{$recruiter->CompanyName}}</option>
                     @endforeach
                 @endif
             </select>
+            <button type="submit" class="btn-search-job">TÌM KIẾM</button>
         </div>
-        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i></button>
     </form>
 <div class="card mb-4">
     <table class="table">
-        <thead class="thead-light">
+        <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-
                 <th scope="col">Tên công việc</th>
                 <th scope="col">Vị trí</th>
                 <th scope="col">Kỹ năng</th>

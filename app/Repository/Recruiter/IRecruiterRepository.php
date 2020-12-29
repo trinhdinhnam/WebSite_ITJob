@@ -8,7 +8,7 @@ interface IRecruiterRepository
 {
     public function getAllRecruiter($request);
 
-    public function getListRecruiters();
+    public function getListRecruiters($recordNumber='');
 
     public function addRecruiter($input);
 
@@ -27,4 +27,6 @@ interface IRecruiterRepository
     public function changePassRecruiter($password,$recruiterId);
 
     public function getRecruiterByPage($request,$recordNumber);
+
+    public function reducePostNumber($recruiterId);
 }

@@ -54,8 +54,6 @@
 
 
 }
-
-
 .toolbar-content .message-apply{
     float: right;
     position: absolute;
@@ -120,8 +118,7 @@
 .dropdown-user .dropdown-item:hover{
     background-color: #eee;
 }
-.dropdown-user .navbarDropdown{
-}
+
 .fa-chevron-circle-down{
     color: white;
     font-size: 17px;
@@ -255,9 +252,8 @@
     display: block;
 }
 /* Tạo dropdown cho thông báo */
+
 .dropdown-content-message.dropdown-menu{
-    z-index: 1;
-    position: absolute;
     left: 892px;
     top: 40px;
     width: 360px;
@@ -271,7 +267,8 @@
     background-color: #d7e1f3;
 }
 .text-grey{
-    color: rgb(95, 87, 87);
+    color: rgb(110, 104, 104);
+
 }
 .text-black{
     color: rgb(0, 0, 0);
@@ -283,25 +280,29 @@
     height: auto;
     border-bottom: 1px solid #aaa;
     font-size: 13px;
-    width: 100%;
+    width: 358px;
     margin-left: 0px;
-    padding-left: 5px;
+    padding-left: 10px;
     padding-right: 5px;
     display: flex;
+
 }
 .message-company-logo{
     padding: 0px;
-    width: 20%;
+    width: 50px;
 }
 .message-info{
     padding-right: 0px;
     padding-left: 0px;
-    width: 80%;
+    width: 100px;
     height: auto;
+
 }
-.message-info .message-job-name{
-    width: auto;
+.message-job-content .name{
+    width: 250px;
     height: auto;
+    font-weight: 700; 
+    margin-right: 5px;
 }
 
 .message-info .message-date{

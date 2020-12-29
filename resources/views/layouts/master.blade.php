@@ -8,8 +8,10 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous">
+    </script>
     <script src="{{asset('/js/vendor/jquery-1.11.3.min.js')}}"></script>
     <link href="{{asset('theme-admin/css/client/client_layout.css')}}" rel="stylesheet" />
 </head>
@@ -30,9 +32,10 @@
                                 class="fa fa-chevron-right"></i></a>
                         <div class="dropdown-content-skill row">
                             @if(isset($skills))
-                                @foreach($skills as $skill)
-                                    <a class="dropdown-item dropdown-item-skill col-md-3" href="{{route('client.get.job.by.skill',$skill->SkillName)}}">{{$skill->SkillName}}</a>
-                                @endforeach
+                            @foreach($skills as $skill)
+                            <a class="dropdown-item dropdown-item-skill col-md-3"
+                                href="{{route('client.get.job.by.skill',$skill->SkillName)}}">{{$skill->SkillName}}</a>
+                            @endforeach
                             @endif
                         </div>
                     </div>
@@ -82,31 +85,36 @@
                 dụng</a>
             @else
             <div class="job-by-message-menu dropdown">
-                <a href="" class="message-apply" data-toggle="dropdown"><i style="color: white;"
+                <a href="" class="message-apply" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i style="color: white;"
                         class="fa fa-globe-americas"></i>
                     @if(isset($messageNumber))
                     <div class="message-number">{{$messageNumber}}</div>
                     @endif
                 </a>
                 <div class="dropdown-content-message dropdown-menu">
+                
                     @if(isset($messageInfos))
                     @foreach($messageInfos as $messageInfo)
-                    <a class="dropdown-item dropdown-item-message @if($messageInfo->MessageStatus==0) seen @endif @if($messageInfo->MessageStatus==1) notseen @endif" href="{{route('client.get.job.by.message',$messageInfo->JobId)}}">
-                        <div class="message-company-logo">
-                            <img height="40px" width="40px" src="{{asset( pare_url_file($messageInfo->CompanyLogo)) }}"
-                                style="border-radius: 50%; background-color: red;" class="thumbnail">
-                        </div>
-                        <div class="message-info">
-                            <div class="message-job-name @if($messageInfo->MessageStatus==0) text-grey @endif @if($messageInfo->MessageStatus==1) text-black @endif">
-                                <div style="font-weight: 700; margin-right: 5px;">{{$messageInfo->CompanyName}} </div> đã duyệt hồ sơ của bạn.
+                        <a class="dropdown-item dropdown-item-message @if($messageInfo->MessageStatus==0) seen @endif @if($messageInfo->MessageStatus==1) notseen @endif"
+                            href="{{route('client.get.job.by.message',$messageInfo->JobId)}}">
+                            <div class="message-company-logo">
+                                <img height="40px" width="40px"
+                                    src="{{asset( pare_url_file($messageInfo->CompanyLogo)) }}"
+                                    style="border-radius: 50%;" class="thumbnail">
                             </div>
-                            <div class="message-date @if($messageInfo->MessageStatus==0) text-grey @endif @if($messageInfo->MessageStatus==1) text-blue @endif">
-                                {{$messageInfo->MessageDate}}
+                            <div class="message-info">
+                                <div
+                                    class="message-job-content @if($messageInfo->MessageStatus==0) text-grey @endif @if($messageInfo->MessageStatus==1) text-black @endif">
+                                    <div class="name" style="word-wrap: break-word;">{{$messageInfo->CompanyName}}</div> đã duyệt hồ sơ của bạn.
+                                </div>
+                                <div
+                                    class="message-date @if($messageInfo->MessageStatus==0) text-grey @endif @if($messageInfo->MessageStatus==1) text-blue @endif" @if($messageInfo->MessageStatus==0) style="font-weight: 400" @endif>
+                                    {{$messageInfo->MessageDate}}
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                    @endforeach
-                    @endif
+                         </a>
+                     @endforeach
+                    @endif 
 
                 </div>
             </div>
@@ -118,13 +126,21 @@
             <div class="seeker-name">
                 @if(\Illuminate\Support\Facades\Auth::guard('seekers')->check()){{\Illuminate\Support\Facades\Auth::guard('seekers')->user()->SeekerName}}@endif
             </div>
+
             <div class="nav-item dropdown dropdown-user">
                 <a class="nav-link" href="#" id="navbarDropdown"><i class="fa fa-chevron-circle-down"></i></a>
                 <div class="dropdown-content">
-                    <a class="dropdown-item" href="{{route('client.get.job.apply',\Illuminate\Support\Facades\Auth::guard('seekers')->user()->id)}}"><i class="fa fa-eye" style="margin-right: 5px;"></i> Xem đơn ứng tuyển</a>
-                    <a class="dropdown-item" href="{{route('client.get.change.info',\Illuminate\Support\Facades\Auth::guard('seekers')->user()->id)}}"><i class="fa fa-edit" style="margin-right: 8px;"></i>Thay đổi thông tin cá nhân</a>
-                    <a class="dropdown-item" href="{{route('client.get.change.password',\Illuminate\Support\Facades\Auth::guard('seekers')->user()->id)}}"><i class="fa fa-unlock-alt" style="margin-right: 13px;"></i>Cập nhật mật khẩu</a>
-                    <a class="dropdown-item" href="{{route('seeker.get.logout')}}"><i class="fa fa-sign-in-alt" style="margin-right: 8px;"></i> Đăng xuất</a>
+                    <a class="dropdown-item"
+                        href="{{route('client.get.job.apply',\Illuminate\Support\Facades\Auth::guard('seekers')->user()->id)}}"><i
+                            class="fa fa-eye" style="margin-right: 5px;"></i> Xem đơn ứng tuyển</a>
+                    <a class="dropdown-item"
+                        href="{{route('client.get.change.info',\Illuminate\Support\Facades\Auth::guard('seekers')->user()->id)}}"><i
+                            class="fa fa-edit" style="margin-right: 8px;"></i>Thay đổi thông tin cá nhân</a>
+                    <a class="dropdown-item"
+                        href="{{route('client.get.change.password',\Illuminate\Support\Facades\Auth::guard('seekers')->user()->id)}}"><i
+                            class="fa fa-unlock-alt" style="margin-right: 13px;"></i>Cập nhật mật khẩu</a>
+                    <a class="dropdown-item" href="{{route('seeker.get.logout')}}"><i class="fa fa-sign-in-alt"
+                            style="margin-right: 8px;"></i> Đăng xuất</a>
                 </div>
             </div>
             @endif
@@ -133,9 +149,9 @@
     <div class="main">
         <div class="pull-right message-flash" style=" z-index: 1; position: absolute; right: 420px; margin-top: -15px;">
             @if(\Illuminate\Support\Facades\Session::has('flash-message'))
-                <div class="alert alert-{!! \Illuminate\Support\Facades\Session::get('flash-level') !!}">
-                    {!! \Illuminate\Support\Facades\Session::get('flash-message') !!}
-                </div>
+            <div class="alert alert-{!! \Illuminate\Support\Facades\Session::get('flash-level') !!}">
+                {!! \Illuminate\Support\Facades\Session::get('flash-message') !!}
+            </div>
             @endif
         </div>
         @yield('main')
@@ -215,10 +231,10 @@
         $('#myModalLogin').on('hidden.bs.modal', function(e) {
             location.reload();
         });
-        $(".message-flash").ready(function(){
-            setTimeout(function(){
+        $(".message-flash").ready(function() {
+            setTimeout(function() {
                 $(".message-flash").remove();
-            }, 5000 ); // 5 secs
+            }, 5000); // 5 secs
 
         });
 

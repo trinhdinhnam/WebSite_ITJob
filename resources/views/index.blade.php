@@ -51,7 +51,7 @@
                             class="thumbnail">
                     </div>
                     <div class="company-item-name">
-                        {{$company->CompanyName}}
+                        <a href="{{route('client.get.job.by.company',$company->RecruiterId)}}">{{$company->CompanyName}}</a>
                     </div>
                     <div class="company-item-info">
                         <div class="job-number">
@@ -69,5 +69,9 @@
         </div>
     </div>
 </div>
-
+<div class="card mb-4" style="background-color: rgb(219, 219, 241); border: none">
+    <nav aria-label="Page navigation" style="margin: auto">
+        {!! $companies->links() !!}
+    </nav>
+</div>
 @endsection

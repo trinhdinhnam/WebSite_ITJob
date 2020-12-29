@@ -61,10 +61,9 @@ class LoginController extends Controller
     {
         try{
             $this->seekerRepository->addSeeker($request);
-            return redirect()->route('seeker.get.login');
-
+            return redirect()->route('client.get.home.page')->with(['flash-message' => 'Success ! Đăng ký thành công !', 'flash-level' => 'success']);
         }catch (\Exception $e){
-            return redirect()->route('seeker.get.register');
+            return redirect()->route('seeker.get.register')->with(['flash-message' => 'Success ! Đăng ký thành công !', 'flash-level' => 'success']);
         }
     }
 

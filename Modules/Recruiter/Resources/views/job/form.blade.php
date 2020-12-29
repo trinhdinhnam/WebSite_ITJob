@@ -33,8 +33,14 @@
             </div>
             <div class="form-group">
                 <h6 for="name">Thành phố</h6>
-                <input require type="text" class="form-control" placeholder="Thành phố ..." value="{{ old('City', isset($job->City) ?$job->City : '') }}"
-                       name="City">
+                <select require name="City" class="form-control" id="">
+                    @if (isset($cities))
+                        @foreach($cities as $city)
+                            <option value="{{$city->CityId}}" @if(isset($job->CityId)) @if($job->CityId==$city->CityId) selected
+                                    @endif @endif>{{$city->CityName}}</option>
+                        @endforeach
+                    @endif
+                </select>
             <!-- @if($errors->has('prod_name'))
                 <span class="text-danger">{{ $errors->first('prod_name') }}</span>
                     @endif -->

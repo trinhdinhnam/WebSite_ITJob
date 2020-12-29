@@ -14,7 +14,7 @@ interface IJobRepository
 
     public function getJobById($id);
 
-    public function saveJob($jobInput, $id='');
+    public function saveJob($jobInput, $id);
 
     public function deleteJobById($id);
 
@@ -34,5 +34,10 @@ interface IJobRepository
 
     public function getJobRecruiterByPage($request,$recruiterId,$recordNumber);
 
+    public function changeStatus($jobId);
+
+    public function createJob($inputJob);
+
+    public function updateJob($inputJob, $jobId);
 
 }

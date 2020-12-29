@@ -1,7 +1,7 @@
 @extends('recruiter::layouts.master')
 @section('content')
     <h2 class="mt-4">Thay đổi thông tin cá nhân "{{\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->RecruiterName}}"</h2>
-    <ol class="breadcrumb mb-4 ">
+    <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">Trang chủ</li>
         <li class="breadcrumb-item active">Thay đổi thông tin cá nhân</li>
     </ol>

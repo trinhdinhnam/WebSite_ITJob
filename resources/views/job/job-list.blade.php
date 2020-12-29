@@ -91,7 +91,7 @@
                     </div>
 
                     <div class="company-name">
-                        <h5>{{$companyHot->CompanyName}}</h5>
+                       <a href="{{route('client.get.job.by.company',$companyHot->id)}}"><h5>{{$companyHot->CompanyName}}</h5></a>
                     </div>
                     <div class="company-city">
                         <p>{{$companyHot->City}}</p>

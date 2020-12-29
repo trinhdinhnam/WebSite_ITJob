@@ -55,9 +55,10 @@ class TransactionRepository extends BaseRepository implements ITransactionReposi
     {
         // TODO: Implement getExpiryDateCurrent() method.
         return $this->model
+            ->select('ExipryDate')
             ->where('RecruiterId',$id)
-            ->orderBy('ExpiryDate','desc')
-            ->limit(1);
+            ->orderBy('ExipryDate','desc')
+            ->first();
     }
 
     public function getRevenueTransactionMoth()

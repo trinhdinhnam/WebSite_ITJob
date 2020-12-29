@@ -44,11 +44,10 @@ class JobRepository extends BaseRepository implements IJobRepository
         return $query;
     }
 
-    public function saveJob($jobInput, $id = '')
+    public function saveJob($jobInput, $id)
 
     {
         // TODO: Implement saveJob() method.
-
         $job = new $this->model;
         if($id){
             $job = $this->model::find($id);
@@ -57,7 +56,7 @@ class JobRepository extends BaseRepository implements IJobRepository
         $job->Require = $jobInput->Require;
         $job->Description = $jobInput->Description;
         $job->Address = $jobInput->Address;
-        $job->City = $jobInput->City;
+        $job->CityId = $jobInput->City;
         $job->StartDateApply = $jobInput->StartDateApply;
         $job->EndDateApply = $jobInput->EndDateApply;
         $job->PositionId = $jobInput->PositionId;
@@ -91,7 +90,9 @@ class JobRepository extends BaseRepository implements IJobRepository
             $jobs = $this->model->with('recruiter:id,CompanyLogo');
             if($request->skillname) $jobs->where('Skill', 'like', '%'.$request->skillname.'%');
             if($request->City) $jobs->where('CityId',$request->City);
-            $jobs = $jobs->orderByDesc('JobId')->get();
+            $jobs = $jobs->where('IsDelete','=',1)
+                         -> orderByDesc('JobId')
+                         ->get();
         }
         if($actor=='admin')
         {
@@ -201,6 +202,74 @@ class JobRepository extends BaseRepository implements IJobRepository
         }
         $query = $query->paginate($recordNumber);
         return $query;
+
+    }
+
+    public function changeStatus($jobId)
+    {
+        // TODO: Implement changeStatus() method.
+        $job = $this->getJobById($jobId);
+        $job->Status = $job->Status = 1;
+        $job->save();
+        return true;
+    }
+
+    public function createJob($inputJob)
+    {
+        // TODO: Implement createJob() method.
+        $code = 1;
+        $job = new $this->model;
+
+        try{
+            $job->JobName = $inputJob->JobName;
+            $job->Skill = $inputJob->Skill;
+            $job->PositionId = $inputJob->PositionId;
+            $job->Require = $inputJob->Require;
+            $job->Description = $inputJob->Description;
+            $job->Benifit = $inputJob->Benefit;
+            $job->Salary = $inputJob->Salary;
+            $job->Address = $inputJob->Address;
+            $job->CityId = $inputJob->City;
+            $job->StartDateApply = $inputJob->StartDateApply;
+            $job->EndDateApply = $inputJob->EndDateApply;
+            $job->AdminId = 1;
+            $job->RecruiterId = Auth::guard('recruiters')->user()->id;
+            $job->save();
+            return $code;
+        }catch(\Exception $exception)
+        {
+            $code=0;
+            return $code;
+        }
+
+    }
+
+    public function updateJob($inputJob, $jobId)
+    {
+        // TODO: Implement updateJob() method.
+        $code = 1;
+        $job = $this->model::find($jobId);
+        try{
+        $job->JobName = $inputJob->JobName;
+        $job->Skill = $inputJob->Skill;
+        $job->PositionId = $inputJob->PositionId;
+        $job->Require = $inputJob->Require;
+        $job->Description = $inputJob->Description;
+        $job->Benifit = $inputJob->Benefit;
+        $job->Salary = $inputJob->Salary;
+        $job->Address = $inputJob->Address;
+        $job->CityId = $inputJob->City;
+        $job->StartDateApply = $inputJob->StartDateApply;
+        $job->EndDateApply = $inputJob->EndDateApply;
+        $job->AdminId = 1;
+        $job->RecruiterId = Auth::guard('recruiters')->user()->id;
+        $job->save();
+            return $code;
+        }catch(\Exception $exception)
+        {
+            $code=0;
+            return $code;
+        }
 
     }
 }
