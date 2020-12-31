@@ -33,7 +33,6 @@ class AdminController extends Controller
     {
         $listMonth = Date::getListMonthInYear();
         $revenueTransaction = $this->transactionRepository->getRevenueTransactionMoth();
-
         $arrRevenueTransaction = [];
         foreach ($listMonth as $month){
             $total = 0;
@@ -50,7 +49,7 @@ class AdminController extends Controller
         //Thống kê sử dụng gói dịch vụ
 
         $listAccount = Account::getListAccontId();
-        $revenueAccountNumber = $this->transactionRepository->getRevenueAccountNumber();
+        $revenueAccountNumber = $this->transactionRepository->getRevenueAccountNumber('array');
         $arrRevenueAccountNumber = [];
         foreach ($listAccount as $key1 => $account){
             $count = [];
@@ -75,6 +74,11 @@ class AdminController extends Controller
         //Tổng review
         $totalReview = count($this->reviewRepository->getAllReview());
 
+        //Thống kê danh sách giao dịch mới nhất
+        $transactions = $this->transactionRepository->getTransactionByPage(5);
+
+        //Thống kê các gói dịch vụ hot nhất
+        $accountPackageHot = $this->transactionRepository->getRevenueAccountNumber('');
         $viewData = [
             'revenueTransaction' => $revenueTransaction,
             'listMonth' => json_encode($listMonth),
@@ -83,7 +87,9 @@ class AdminController extends Controller
             'totalTran' => $totalTran,
             'totalMember' => $totalMember,
             'totalJob' => $totalJob,
-            'totalReview' => $totalReview
+            'totalReview' => $totalReview,
+            'transactions' => $transactions,
+            'accountPackageHot' => $accountPackageHot
 
 
 

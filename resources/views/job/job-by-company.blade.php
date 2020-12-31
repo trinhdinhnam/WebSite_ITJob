@@ -40,9 +40,9 @@
             </div>
             <div class="company-event">
                 @if(\Illuminate\Support\Facades\Auth::guard('seekers')->check())
-                    <button class="btn btn-danger btn-review">Viết review</button>
+                <button class="btn btn-danger btn-review">Viết review</button>
                 @else
-                    <a href="{{route('seeker.get.login')}}" class="btn btn-danger btn-review-nologin">Viết review</a>
+                <a href="{{route('seeker.get.login')}}" class="btn btn-danger btn-review-nologin">Viết review</a>
                 @endif
                 <button class="btn-follow btn btn-light">Theo dõi</button>
             </div>
@@ -62,8 +62,7 @@
                         <div class="job-item">
                             <div class="company-logo">
                                 <div class="logo">
-                                    <img height="100%" width="100%"
-                                        src="{{asset( pare_url_file($job->recruiter->CompanyLogo)) }}"
+                                    <img height="100%" width="100%" src="{{asset( pare_url_file($job->CompanyLogo)) }}"
                                         class="thumbnail">
 
                                 </div>
@@ -87,9 +86,25 @@
                                 </div>
                             </div>
                             <div class="job-status">
-                                <div class="hot-title ">Hot job</div>
-                                <div class="job-city ">{{$job->City}}</div>
-                                <div class="job-created ">{{$job->formatDate($job->created_at)}}</div>
+                                @if($job->seekerNumber>=1)
+                                <div style="height: 10%; width: 100%">
+                                    <div class="hot-title">Hot job</div>
+
+                                </div>
+                                @else
+                                <div style="height: 10%; width: 100%">
+                                    <div class="hot-title" style="display: none">Hot job</div>
+
+                                </div>
+                                @endif
+                                <div style="height: 80%; width: 100%">
+                                    <div class="job-city ">{{$job->City}}</div>
+
+                                </div>
+                                <div style="height: 10%; width: 100%">
+                                    <div class="job-created ">{{$job->formatDate($job->CreatedDate)}}</div>
+
+                                </div>
                             </div>
                         </div>
                         @endforeach
@@ -98,7 +113,9 @@
                     <li class="review-page">
 
                         <div class="medium-score-review">
-                            <div class="score-number">@if($company->ReviewNumber>0){{$company->ScoreReview/$company->ReviewNumber}} @else 0 @endif</div>
+                            <div class="score-number">
+                                @if($company->ReviewNumber>0){{$company->ScoreReview/$company->ReviewNumber}} @else 0
+                                @endif</div>
                             @for($i =1 ;$i<=5;$i++) <i
                                 class="fa fa-star @if($company->ReviewNumber>0) {{ $i <= round($company->ScoreReview/$company->ReviewNumber) ? 'active' : '' }} @endif"
                                 data-key="{{$i}}"></i>
@@ -119,7 +136,9 @@
                                     data-key="{{$i}}"></i>
                                     @endfor
                                     <span class="score_text">Rất tốt</span>
-                                    <div class="review-date">{{date_format($review->created_at,'d')}} Tháng {{date_format($review->created_at,'m')}} {{date_format($review->created_at,'Y')}}</div>
+                                    <div class="review-date">{{date_format($review->created_at,'d')}} Tháng
+                                        {{date_format($review->created_at,'m')}}
+                                        {{date_format($review->created_at,'Y')}}</div>
 
                                     <div class="good-review-title">Điều tôi thích</div>
                                     <div class="good-review-content">{{$review->GoodReview}}</div>
@@ -166,7 +185,8 @@
                                             placeholder="Nhập vào những điểm cần cải thiện của công ty ..."></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" style="margin-bottom: 20px;" class="btn btn-primary" id="js_rating_recruiter">Gửi đánh
+                                        <button type="submit" style="margin-bottom: 20px;" class="btn btn-primary"
+                                            id="js_rating_recruiter">Gửi đánh
                                             giá</button>
                                     </div>
                                 </form>
@@ -181,19 +201,21 @@
                     <div class="review-title">Hãy chia sẻ ý kiến của bạn</div>
                     <div class="review-label">Review cho {{$company->CompanyName}} ngay</div>
                     @if(\Illuminate\Support\Facades\Auth::guard('seekers')->check())
-                        <button ref="" class="btn btn-danger btn-review2">Viết Review</button>
+                    <button ref="" class="btn btn-danger btn-review2">Viết Review</button>
                     @else
-                        <a href="{{route('seeker.get.login')}}" class="btn btn-danger btn-review2-nologin">Viết review</a>
+                    <a href="{{route('seeker.get.login')}}" class="btn btn-danger btn-review2-nologin">Viết review</a>
                     @endif
                 </div>
-                 @if(isset($reviewHots))
+                @if(isset($reviewHots))
                 <div class="review-hot-list">
                     <div class="review-hot-label">Review "hot"</div>
                     @foreach($reviewHots as $reviewHot)
                     <div class="review-hot-item">
                         <div class="review-hot-title">"{{$reviewHot->Title}}"</div>
                         <span style="margin: 0 15px; display: flex; height: 40px;" class="review-hot list_star">
-                            @for($i=1;$i<=5;$i++) <i class="fa fa-star {{$i <= $reviewHot->ScoreReview ? 'active' : '' }}" style="margin-right: 5px" ></i>
+                            @for($i=1;$i<=5;$i++) <i
+                                class="fa fa-star {{$i <= $reviewHot->ScoreReview ? 'active' : '' }}"
+                                style="margin-right: 5px"></i>
                                 @endfor
                         </span>
                         <div class="good-review">{{$reviewHot->GoodReview}}</div>
@@ -223,17 +245,16 @@ $("ul#tabs li").click(function(e) {
     }
 })
 
-$(".btn.btn-danger.btn-review, .btn-review2").click(function (e) {
+$(".btn.btn-danger.btn-review, .btn-review2").click(function(e) {
     e.preventDefault();
 
     $("ul#tabs li.active").removeClass("active");
-        $(".btn-review-item").addClass("active");
-        $(".job-list").removeClass('active');
-        $(".review-page").addClass('active');
-    if($(".review-form").hasClass('hide'))
-    {
+    $(".btn-review-item").addClass("active");
+    $(".job-list").removeClass('active');
+    $(".review-page").addClass('active');
+    if ($(".review-form").hasClass('hide')) {
         $(".review-form").addClass('show').removeClass('hide');
-    }else{
+    } else {
         $(".review-form").addClass('hide').removeClass('show');
 
     }
@@ -269,27 +290,27 @@ $(function() {
         $(".review-form .col-12 .score_text").text('').text(listRatingText[number]).show();
     });
 
-        $(function() {
-            var click = 1;
-            $(".btn-review-nologin, .btn-review2-nologin").click(function(event) {
-                event.preventDefault();
-                let $this = $(this);
-                let url = $this.attr('href');
-                $.ajax({
-                    url: url,
-                }).done(function(result) {
-                    if (result) {
-                        $("#md_content").append(result);
-                    }
-                });
-                $("#myModalLogin").modal('show');
+    $(function() {
+        var click = 1;
+        $(".btn-review-nologin, .btn-review2-nologin").click(function(event) {
+            event.preventDefault();
+            let $this = $(this);
+            let url = $this.attr('href');
+            $.ajax({
+                url: url,
+            }).done(function(result) {
+                if (result) {
+                    $("#md_content").append(result);
+                }
             });
+            $("#myModalLogin").modal('show');
+        });
 
-            $('#myModalLogin').on('hidden.bs.modal', function(e) {
-                location.reload();
-            });
+        $('#myModalLogin').on('hidden.bs.modal', function(e) {
+            location.reload();
+        });
 
-        })
+    })
 
     // $("#js_rating_recruiter").click(function(event) {
     //     event.preventDefault();

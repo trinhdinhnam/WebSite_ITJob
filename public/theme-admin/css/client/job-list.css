@@ -202,9 +202,11 @@
 .job-list .job-item .job-status{
     width: 15%;
     height: 100%;
+    position: relative;
 }
 .job-status .hot-title{
     background-color: coral;
+    position: absolute;
     text-align: center;
     width: 60px;
     height: 25px;
@@ -212,24 +214,26 @@
     font-size: 14px;
     color: white;
     margin: auto;
-    margin-top: 40px;
+    top: 40px;
+    right: 20px;
 }
 
 .job-status .job-city{
     margin: auto;
-    margin-top: 60px;
+    position: absolute;
     font-size: 14px;
     color: #555;
-    margin-left: 25px;
-
+    top: 130px;
+    right: 20px;
 }
 
 .job-status .job-created{
+    position: absolute;
     font-size: 14px;
     color: rgb(72, 72, 207);
     margin: auto;
-    margin-top: 90px;
-    margin-left: 25px;
+    top: calc(80% + 200px);
+    right: 20px;
 }
 /* company hot */
 .company-hot{

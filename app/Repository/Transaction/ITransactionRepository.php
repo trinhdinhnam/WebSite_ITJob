@@ -17,7 +17,7 @@ interface ITransactionRepository
 
     public function getRevenueTransactionMoth();
 
-    public function getRevenueAccountNumber();
+    public function getRevenueAccountNumber($type);
 
     public function getAllTransactions();
 

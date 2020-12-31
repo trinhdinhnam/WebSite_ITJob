@@ -54,45 +54,69 @@
         </figure>
     </div>
 </div>
-<div class="card mb-4">
-    <div class="card-header">
-        <i class="fas fa-table mr-1"></i>
-        DataTable Example
+<div class="row">
+    <div class="col-xl-7">
+        <div class="card mb-4" style="border-top: 5px solid #2389d6 ">
+            <div class="card-header" style="font-weight: bold">
+                <i class="fas fa-table mr-1"></i>
+                Danh sách giao dịch mới nhất
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tên nhà tuyển dụng</th>
+                            <th scope="col">Công ty</th>
+                            <th scope="col">Ngày đăng ký</th>
+                            <th scope="col">Gói dịch vụ</th>
+                            <th scope="col">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(isset($transactions))
+                        <?php $i=1 ?>
+                        @foreach($transactions as $transaction)
+                        <tr>
+                            <th scope="row">{{$i++}}</th>
+                            <td>{{$transaction->recruiter->RecruiterName}}</td>
+                            <td>{{$transaction->recruiter->CompanyName}}</td>
+                            <td>{{$transaction->PayDate}}</td>
+                            <td>{{$transaction->accountPackage->AccountPackageName}}</td>
+                            <td>
+                                <label
+                                    class="badge {{$transaction->getStatus($transaction->Status)['class']}}">{{$transaction->getStatus($transaction->Status)['name']}}</label>
+                            </td>
+                        </tr>
+                        @endforeach
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="col-xl-5">
+        <div class="card mb-4" style="border-top: 5px solid #2389d6 ">
+
+            <div class="card-header" style="font-weight: bold">
+                <i class="fas fa-table mr-1"></i>
+                Danh sách gói dịch vụ hot nhất
+            </div>
+            <div class="card-body">
+                @if(isset($accountPackageHot))
+                @foreach($accountPackageHot as $accountPackage)
+                <div class="account-item row">
+                    <div class="col-8">
+                        <div class="account-name">{{$accountPackage['accountName']}}</div>
+                        <div class="register-number">{{$accountPackage['accountNumber']}} lượt đăng ký</div>
+                    </div>
+                    <div class="col-4">
+                        <div class="badge badge-warning total-money">{{number_format($accountPackage['Price']*$accountPackage['accountNumber'])}} VNĐ</div>
+                    </div>
+                </div>
+                @endforeach
+                @endif
+            </div>
         </div>
     </div>
 </div>

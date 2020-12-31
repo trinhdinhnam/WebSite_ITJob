@@ -58,8 +58,6 @@ class RecruiterController extends RecruiterBaseController
             }
             $arrRevenueProfile[] = $count;
         }
-
-
         //Thống kê sử dụng gói dịch vụ
 
         $listJob = Job::getListJobId(Auth::guard('recruiters')->user()->id);
@@ -88,6 +86,12 @@ class RecruiterController extends RecruiterBaseController
         //Tổng review
         $totalReview = count($this->reviewRepository->getReviewByRecruiter(Auth::guard('recruiters')->user()->id,''));
 
+        //Thống kê danh sách ứng viên mới nhất
+        $seekers = $this->seekerJobRepository->getSeekerByRecruiter(Auth::guard('recruiters')->user()->id,5);
+
+        //Thống kê các việc làm hot nhất
+
+        $jobHots = $this->jobRepository->getJobRecruiterByPage('',Auth::guard('recruiters')->user()->id,5);
         $viewData = [
             'revenueTransaction' => $revenueTransaction,
             'listMonth' => json_encode($listMonth),
@@ -97,7 +101,9 @@ class RecruiterController extends RecruiterBaseController
             'totalTran' => $totalTran,
             'totalSeeker' => $totalSeeker,
             'totalJob' => $totalJob,
-            'totalReview' => $totalReview
+            'totalReview' => $totalReview,
+            'seekers' => $seekers,
+            'jobHots'=> $jobHots
         ];
         return view('recruiter::index',$viewData);
     }

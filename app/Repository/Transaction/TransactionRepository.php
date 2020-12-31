@@ -72,13 +72,17 @@ class TransactionRepository extends BaseRepository implements ITransactionReposi
         return $revenueTransactionMonth;
     }
 
-    public function getRevenueAccountNumber()
+    public function getRevenueAccountNumber($type)
     {
         // TODO: Implement getRevenueAccountNumber() method.
         $revenueAccountNumber = $this->model->leftJoin('account_packages','transactions.AccountPackageId','=','account_packages.AccountPackageId')
-                                            ->select('account_packages.AccountPackageId as accountId','account_packages.AccountPackageName as accountName', DB::raw('count(transactions.TransactionId) as accountNumber'))
-                                            ->groupBy('accountId','accountName')
-                                            ->get()->toArray();
+                                            ->select('account_packages.AccountPackageId as accountId','account_packages.AccountPackageName as accountName','account_packages.Price as Price', DB::raw('count(transactions.TransactionId) as accountNumber'))
+                                            ->groupBy('accountId','accountName','Price')
+                                            ->orderBy('accountNumber','desc')
+                                            ->get();
+        if($type=='array'){
+            $revenueAccountNumber = $revenueAccountNumber->toArray();
+        }
         return $revenueAccountNumber;
 
     }
@@ -115,7 +119,11 @@ class TransactionRepository extends BaseRepository implements ITransactionReposi
     public function getTransactionByPage($recordNumber)
     {
         // TODO: Implement getTransactionByPage() method.
-        return $this->model->with('recruiter:id,RecruiterName,CompanyName,Position')->paginate($recordNumber);
+        return $this->model
+            ->with('recruiter:id,RecruiterName,CompanyName,Position')
+            ->with('accountPackage:AccountPackageId,AccountPackageName')
+            ->orderBy('PayDate','desc')
+            ->paginate($recordNumber);
 
     }
 

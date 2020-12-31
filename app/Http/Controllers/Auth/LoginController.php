@@ -71,9 +71,27 @@ class LoginController extends Controller
         return Socialite::driver($social)->redirect();
     }
 
-    public function checkLoginByFacebook($social){
+    public function checkLoginByFacebook($social)
+    {
 
         $info = Socialite::driver($social)->user();
         dd($info);
+        //$user = $this->createUser($info, $social);
+        //\auth()->login($user);
+        //return redirect()->to('/');
+
     }
+
+        public function createUser($getInfo,$provider){
+            $seeker = Seeker::where('provider_id',$getInfo->id)->first();
+            if(!$seeker){
+                $seeker = Seeker::insert([
+                   'SeekerName' => $getInfo->name,
+                    'email' => $getInfo->email,
+                    'provider' => $provider,
+                    'provider_id' => $getInfo->id
+                ]);
+            }
+            return $seeker;
+        }
 }

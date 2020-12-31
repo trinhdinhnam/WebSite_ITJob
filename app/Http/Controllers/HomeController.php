@@ -95,9 +95,7 @@ class HomeController extends BaseController
 
         $company = $this->recruiterRepository->getRecruiterById($id);
 
-        $jobByCompanys = Job::with('recruiter:id,CompanyLogo')
-                                ->where('RecruiterId',$id)
-                                ->get();
+        $jobByCompanys = $this->jobRepository->getJobByRecruiterId('',$id);
         $reviewByRecruiters = $this->reviewRepository->getReviewByRecruiter($id,5);
         $reviewHots = $this->reviewRepository->getListReviewHots($id);
         $viewData = [

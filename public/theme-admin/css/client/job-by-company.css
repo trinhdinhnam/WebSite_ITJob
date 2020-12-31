@@ -336,28 +336,20 @@ ul#tab li.active{
     border: none;
     font-size: 14px;
     color: white;
-    margin: auto;
-    margin-top: 30px;
-    float: right;
+    height: 10%;
+
 }
 
 .job-status .job-city{
-    margin: auto;
-    margin-top: 40px;
     font-size: 14px;
     color: #555;
-    margin-left: 25px;
-    float: right;
+
 }
 
 .job-status .job-created{
     font-size: 14px;
     color: rgb(72, 72, 207);
-    margin: auto;
-    margin-top: 55px;
-    margin-left: 25px;
-    float: right;
-    width: 80px;
+    width: 100px;
 }
 
 /* review list */

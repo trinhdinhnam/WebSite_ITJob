@@ -67,13 +67,10 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Tên ứng viên</th>
-                <th scope="col">Email</th>
-                <th scope="col">Số điện thoại</th>
                 <th scope="col">Giới thiệu</th>
                 <th scope="col">Tên việc làm</th>
                 <th scope="col">Ngày ứng tuyển</th>
                 <th scope="col">Trạng thái</th>
-
             </tr>
             </thead>
             <tbody>
@@ -83,8 +80,6 @@
                     <tr>
                         <th scope="row">{{$i++}}</th>
                         <td>{{$seeker->SeekerName}}</td>
-                        <td>{{$seeker->Email}}</td>
-                        <td>{{$seeker->Phone}}</td>
                         <td>{{$seeker->Introduce}}</td>
                         <td>{{$seeker->JobName}}</td>
                         <td>{{$seeker->ApplyDate}}</td>
@@ -108,7 +103,14 @@
             Danh sách việc làm hot nhất
         </div>
         <div class="card-body">
-
+            @if(isset($jobHots))
+                @foreach($jobHots as $job)
+            <div class="job-item">
+                <div class="job-name">{{$job->JobName}}</div>
+                <div class="badge badge-warning apply-number">{{$job->seekerNumber}} lượt ứng tuyển</div>
+            </div>
+                @endforeach
+            @endif
         </div>
         </div>
     </div>

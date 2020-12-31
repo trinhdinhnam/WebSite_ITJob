@@ -15,6 +15,9 @@ class Seeker extends Authenticatable implements HasMedia
     protected $primaryKey = 'id';
     protected $guarded=[''];
 
+    protected $fillable = [
+        'SeekerName', 'email', 'password','provider','provider_id'
+    ];
     protected $gender = [
         1 => [
             'name' => 'Nam',
