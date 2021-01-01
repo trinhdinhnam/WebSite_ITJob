@@ -18,14 +18,17 @@ class JobRepository extends BaseRepository implements IJobRepository
 
     public function getJobByRecruiterId($request,$id){
         $query = $this->model
-            ->select(DB::raw('COUNT(SeekerJobId) as seekerNumber'), 'jobs.JobId as JobId','jobs.Description as Description', 'JobName', 'PositionName', 'Skill', 'jobs.Status as Status', 'jobs.created_at as CreatedDate', 'recruiters.CompanyLogo as CompanyLogo', 'recruiters.Address as Address','jobs.Benifit as Benifit', 'jobs.Salary as Salary','cities.CityName as City')
+            ->select(DB::raw('COUNT(SeekerJobId) as seekerNumber'), 'jobs.JobId as JobId','jobs.Description as Description',
+                'JobName', 'PositionName', 'Skill', 'jobs.Status as Status', 'jobs.created_at as CreatedDate',
+                'recruiters.CompanyLogo as CompanyLogo', 'recruiters.Address as Address','jobs.Benifit as Benifit',
+                'jobs.Salary as Salary','cities.CityName as City','jobs.StartDateApply as StartDateApply','jobs.EndDateApply as EndDateApply')
             ->leftJoin('seeker_jobs','jobs.JobId','=','seeker_jobs.JobId')
             ->leftJoin('positions','jobs.PositionId','=','positions.PositionId')
             ->leftJoin('cities','jobs.CityId','=','cities.CityId')
             ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
             ->where('RecruiterId',$id)
             ->where('jobs.IsDelete',1)
-            ->groupBy('JobId','JobName','PositionName', 'Skill','jobs.Status','Address', 'jobs.created_at','CompanyLogo','Salary','Benifit','City','Description');
+            ->groupBy('JobId','JobName','PositionName', 'Skill','jobs.Status','Address', 'jobs.created_at','CompanyLogo','Salary','Benifit','City','Description','StartDateApply','EndDateApply');
             if($request){
             if($request->jobname) $query->where('JobName', 'like', '%'.$request->jobname.'%');
             if($request->position) $query->where('jobs.PositionId',$request->position);
@@ -73,9 +76,16 @@ class JobRepository extends BaseRepository implements IJobRepository
     public function deleteJobById($id)
     {
         // TODO: Implement deleteJobById() method.
-        $job = $this->model::find($id);
-        $job->IsDelete = $job->IsDelete ? 0 : 1;
-        $job->save();
+        try{
+            $job = $this->model::find($id);
+            $job->IsDelete = $job->IsDelete ? 0 : 1;
+            $job->save();
+            return true;
+        }catch (\Exception $exception)
+        {
+            return false;
+        }
+
     }
 
     public function getAll(array $columns = ['*'])
@@ -90,14 +100,17 @@ class JobRepository extends BaseRepository implements IJobRepository
         if($actor=='client')
         {
             $jobs = $this->model
-                ->select(DB::raw('COUNT(SeekerJobId) as seekerNumber'), 'jobs.JobId as JobId', 'JobName', 'PositionName', 'Skill', 'jobs.Status as Status', 'jobs.created_at as CreatedDate', 'recruiters.CompanyLogo as CompanyLogo', 'recruiters.Address as Address','jobs.Benifit as Benifit', 'jobs.Salary as Salary','cities.CityName as City')
+                ->select(DB::raw('COUNT(SeekerJobId) as seekerNumber'), 'jobs.JobId as JobId', 'JobName',
+                    'PositionName', 'Skill', 'jobs.Status as Status', 'jobs.created_at as CreatedDate',
+                    'recruiters.CompanyLogo as CompanyLogo', 'recruiters.Address as Address','jobs.Benifit as Benifit',
+                    'jobs.Salary as Salary','cities.CityName as City','jobs.StartDateApply as StartDateApply','jobs.EndDateApply as EndDateApply' )
                 ->leftJoin('seeker_jobs','jobs.JobId','=','seeker_jobs.JobId')
                 ->leftJoin('positions','jobs.PositionId','=','positions.PositionId')
                 ->leftJoin('cities','jobs.CityId','=','cities.CityId')
                 ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id');
             if($request->skillname) $jobs->where('Skill', 'like', '%'.$request->skillname.'%');
             if($request->City) $jobs->where('CityId',$request->City);
-            $jobs = $jobs->groupBy('JobId','JobName','PositionName', 'Skill','jobs.Status','Address', 'jobs.created_at','CompanyLogo','Salary','Benifit','City')
+            $jobs = $jobs->groupBy('JobId','JobName','PositionName', 'Skill','jobs.Status','Address', 'jobs.created_at','CompanyLogo','Salary','Benifit','City','StartDateApply','EndDateApply')
                          ->where('jobs.IsDelete','=',1)
                          -> orderByDesc('JobId')
                          ->get();
@@ -131,7 +144,7 @@ class JobRepository extends BaseRepository implements IJobRepository
     {
         // TODO: Implement getJobNumberByCompanyHot() method.
         $jobByCompanyHot = $this->model
-            ->select('JobName','JobId')
+            ->select('JobName','JobId','StartDateApply','EndDateApply')
             ->where('RecruiterId',$recruiterId);
         if($limit > 0)
         {
@@ -157,8 +170,18 @@ class JobRepository extends BaseRepository implements IJobRepository
     public function getJobByPositions($positionId)
     {
         // TODO: Implement getJobByPositions() method.
-        $jobByPositions = $this->model->with('recruiter:id,CompanyLogo')
-            ->where('PositionId',$positionId)
+        $jobByPositions = $this->model
+            ->select(DB::raw('COUNT(SeekerJobId) as seekerNumber'), 'jobs.JobId as JobId', 'JobName',
+                'PositionName', 'Skill', 'jobs.Status as Status', 'jobs.created_at as CreatedDate',
+                'recruiters.CompanyLogo as CompanyLogo', 'recruiters.Address as Address','jobs.Benifit as Benifit',
+                'jobs.Salary as Salary','cities.CityName as City','jobs.StartDateApply as StartDateApply','jobs.EndDateApply as EndDateApply' )
+            ->leftJoin('seeker_jobs','jobs.JobId','=','seeker_jobs.JobId')
+            ->leftJoin('positions','jobs.PositionId','=','positions.PositionId')
+            ->leftJoin('cities','jobs.CityId','=','cities.CityId')
+            ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
+            ->groupBy('JobId','JobName','PositionName', 'Skill','jobs.Status','Address', 'jobs.created_at','CompanyLogo','Salary','Benifit','City','StartDateApply','EndDateApply')
+            ->where('jobs.IsDelete','=',1)
+            ->where('jobs.PositionId',$positionId)
             ->get();
 
         return $jobByPositions;
@@ -167,8 +190,18 @@ class JobRepository extends BaseRepository implements IJobRepository
     public function getJobByCities($cityId)
     {
         // TODO: Implement getJobByCities() method.
-        $jobByCities = $this->model->with('recruiter:id,CompanyLogo')
-            ->where('CityId',$cityId)
+        $jobByCities = $this->model
+            ->select(DB::raw('COUNT(SeekerJobId) as seekerNumber'), 'jobs.JobId as JobId', 'JobName',
+                'PositionName', 'Skill', 'jobs.Status as Status', 'jobs.created_at as CreatedDate',
+                'recruiters.CompanyLogo as CompanyLogo', 'recruiters.Address as Address','jobs.Benifit as Benifit',
+                'jobs.Salary as Salary','cities.CityName as City','jobs.StartDateApply as StartDateApply','jobs.EndDateApply as EndDateApply' )
+            ->leftJoin('seeker_jobs','jobs.JobId','=','seeker_jobs.JobId')
+            ->leftJoin('positions','jobs.PositionId','=','positions.PositionId')
+            ->leftJoin('cities','jobs.CityId','=','cities.CityId')
+            ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
+            ->groupBy('JobId','JobName','PositionName', 'Skill','jobs.Status','Address', 'jobs.created_at','CompanyLogo','Salary','Benifit','City','StartDateApply','EndDateApply')
+            ->where('jobs.IsDelete','=',1)
+            ->where('jobs.CityId',$cityId)
             ->get();
         return $jobByCities;
     }
@@ -176,8 +209,18 @@ class JobRepository extends BaseRepository implements IJobRepository
     public function getJobBySkills($skillName)
     {
         // TODO: Implement getJobBySkills() method.
-        $jobBySkills = $this->model->with('recruiter:id,CompanyLogo')
-            ->where('Skill', 'like', '%'.$skillName.'%')
+        $jobBySkills = $this->model
+            ->select(DB::raw('COUNT(SeekerJobId) as seekerNumber'), 'jobs.JobId as JobId', 'JobName',
+                'PositionName', 'Skill', 'jobs.Status as Status', 'jobs.created_at as CreatedDate',
+                'recruiters.CompanyLogo as CompanyLogo', 'recruiters.Address as Address','jobs.Benifit as Benifit',
+                'jobs.Salary as Salary','cities.CityName as City','jobs.StartDateApply as StartDateApply','jobs.EndDateApply as EndDateApply' )
+            ->leftJoin('seeker_jobs','jobs.JobId','=','seeker_jobs.JobId')
+            ->leftJoin('positions','jobs.PositionId','=','positions.PositionId')
+            ->leftJoin('cities','jobs.CityId','=','cities.CityId')
+            ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
+            ->groupBy('JobId','JobName','PositionName', 'Skill','jobs.Status','Address', 'jobs.created_at','CompanyLogo','Salary','Benifit','City','StartDateApply','EndDateApply')
+            ->where('jobs.IsDelete','=',1)
+            ->where('jobs.Skill', 'like', '%'.$skillName.'%')
             ->get();
         return $jobBySkills;
     }
@@ -198,12 +241,12 @@ class JobRepository extends BaseRepository implements IJobRepository
     {
         // TODO: Implement getJobRecruiterByPage() method.
         $query = $this->model
-            ->select(DB::raw('count(SeekerJobId) as seekerNumber, jobs.JobId as JobId, JobName, PositionName, Skill, jobs.Status as Status, Address, jobs.created_at as CreatedDate'))
+            ->select(DB::raw('count(SeekerJobId) as seekerNumber, jobs.JobId as JobId, JobName, PositionName, Skill, jobs.Status as Status, Address, jobs.created_at as CreatedDate','jobs.StartDateApply as StartDateApply','jobs.EndDateApply as EndDateApply'))
             ->leftJoin('seeker_jobs','jobs.JobId','=','seeker_jobs.JobId')
             ->leftJoin('positions','jobs.PositionId','=','positions.PositionId')
             ->where('RecruiterId',$recruiterId)
             ->where('jobs.IsDelete',1)
-            ->groupBy('jobs.JobId','JobName','PositionName', 'Skill','jobs.Status','Address', 'jobs.created_at')
+            ->groupBy('jobs.JobId','JobName','PositionName', 'Skill','jobs.Status','Address', 'jobs.created_at','StartDateApply','EndDateApply')
             ->orderBy('seekerNumber','desc');
         if($request){
             if($request->jobname) $query->where('JobName', 'like', '%'.$request->jobname.'%');
@@ -220,7 +263,6 @@ class JobRepository extends BaseRepository implements IJobRepository
         $job = $this->getJobById($jobId);
         $job->Status = $job->Status = 1;
         $job->save();
-        return true;
     }
 
     public function createJob($inputJob)

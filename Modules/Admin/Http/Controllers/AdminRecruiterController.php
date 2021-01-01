@@ -56,12 +56,24 @@ class AdminRecruiterController extends Controller
             switch($action)
             {
                 case 'active':
-                    $this->recruiterRepository->changeActive($id);
-                    return redirect()->back()->with(['flash-message'=>'Success ! Cập nhật trạng thái thành công !','flash-level'=>'success']);
+                    try{
+                        $this->recruiterRepository->changeActive($id);
+                        return redirect()->back()->with(['flash-message'=>'Success ! Cập nhật trạng thái thành công !','flash-level'=>'success']);
+
+                    }catch (\Exception $e)
+                    {
+                        return redirect()->back()->with(['flash-message'=>'Error ! Cập nhật trạng thái thất bại !','flash-level'=>'danger']);
+                    }
                     break;
                 case 'delete':
-                    $this->recruiterRepository->deleteRecruiter($id);
-                    return redirect()->back()->with(['flash-message'=>'Success ! Xóa nhà tuyển dụng thành công !','flash-level'=>'success']);
+                    try{
+                        $this->recruiterRepository->deleteRecruiter($id);
+                        return redirect()->back()->with(['flash-message'=>'Success ! Xóa nhà tuyển dụng thành công !','flash-level'=>'success']);
+
+                    }catch (\Exception $e)
+                    {
+                        return redirect()->back()->with(['flash-message'=>'Error ! Xóa nhà tuyển dụng thất bại !','flash-level'=>'danger']);
+                    }
                     break;
             }
         }

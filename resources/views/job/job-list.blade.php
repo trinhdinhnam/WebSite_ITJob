@@ -41,7 +41,8 @@
             <div class="content-job">
                 <div class="job-list">
                     @if(isset($jobs))
-                    @foreach($jobs as $job)
+                        @foreach($jobs as $job)
+                    @if($job->EndDateApply>=now())
                     <div class="job-item">
                         <div class="company-logo">
                             <div class="logo">
@@ -53,6 +54,8 @@
                             <div class="job-name">
                                 <h3><a href="{{route('client.get.detail.job',$job->JobId)}}">{{$job->JobName}}</a></h3>
                             </div>
+                            <div class="job-date-apply" style="color: #1d79c0; margin-bottom: 5px">Thời gian: {{date_format(date_create($job->StartDateApply),"d/m/Y")}} - {{date_format(date_create($job->EndDateApply),"d/m/Y")}}
+                                </div>
                             <div class="job-salary">
                                 <h6> Up to {{number_format($job->Salary,0,',','.')}} VNĐ</h6>
                             </div>
@@ -80,9 +83,8 @@
                             <div class="job-created">{{$job->formatDate($job->CreatedDate)}}</div>
                         </div>
                     </div>
+                    @endif
                     @endforeach
-                    @else
-                    <h3>Không có việc làm nào!</h3>
                     @endif
                 </div>
                 <div class="company-hot">

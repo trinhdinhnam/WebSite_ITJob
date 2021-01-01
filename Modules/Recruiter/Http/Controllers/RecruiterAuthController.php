@@ -57,8 +57,10 @@ class RecruiterAuthController extends Controller
         $credentials = $request->only('email','password');
         if(Auth::guard('recruiters')->attempt($credentials)){
             return redirect()->route('recruiter.home')->with(['flash-message'=>'Success ! Đăng nhập thành công !','flash-level'=>'success']);
+        }else{
+            return redirect()->back()->with(['flash-message'=>'Error ! Đăng nhập thất bại !','flash-level'=>'danger']);
+
         }
-        return redirect()->back();
     }
 
     public function getAccountPackage(Request $request){

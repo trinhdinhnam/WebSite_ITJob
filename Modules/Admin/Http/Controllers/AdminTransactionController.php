@@ -33,8 +33,14 @@ class AdminTransactionController extends Controller
             switch($actiontran)
             {
                 case 'status':
-                    $this->transactionRepository->changeStatus($id);
-                    return redirect()->back()->with(['flash-message'=>'Success ! Duyệt giao dịch thành công !','flash-level'=>'success']);
+                    try{
+                        $this->transactionRepository->changeStatus($id);
+                        return redirect()->back()->with(['flash-message'=>'Success ! Duyệt giao dịch thành công !','flash-level'=>'success']);
+                    }catch (\Exception $e){
+                        return redirect()->back()->with(['flash-message'=>'Error ! Duyệt giao dịch thất bại !','flash-level'=>'danger']);
+
+                    }
+
                     break;
             }
         }

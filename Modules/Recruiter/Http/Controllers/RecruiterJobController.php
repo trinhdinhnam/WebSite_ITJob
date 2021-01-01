@@ -128,8 +128,11 @@ class RecruiterJobController extends RecruiterBaseController
 
     public function delete($id){
         $this->getDataShared();
-        $this->jobRepository->deleteJobById($id);
-        return redirect()->back();   
+        if($this->jobRepository->deleteJobById($id)==true)
+            return redirect()->back()->with(['flash-message'=>'Success ! Xóa việc làm thành công !','flash-level'=>'success']);
+        else{
+            return redirect()->back()->with(['flash-message'=>'Danger ! Xóa việc làm thất bại !','flash-level'=>'danger']);
+        }
     }
 
 

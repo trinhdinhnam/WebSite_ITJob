@@ -51,10 +51,22 @@ class RecruiterSeekerController extends RecruiterBaseController
             switch($action)
             {
                 case 'status':
-                    $this->seekerJobRepository->changeStatusById($id);
+                    try{
+                        $this->seekerJobRepository->changeStatusById($id);
+                        return redirect()->back()->with(['flash-message'=>'Success ! Duyệt ứng viên thành công !','flash-level'=>'success']);
+
+                    }catch (\Exception $e){
+                        return redirect()->back()->with(['flash-message'=>'Error ! Duyệt ứng viên thất bại !','flash-level'=>'danger']);
+                    }
                     break;
                 case 'delete':
-                    $this->seekerJobRepository->deleteSeekerJobById($id);
+                    try{
+                        $this->seekerJobRepository->deleteSeekerJobById($id);
+                        return redirect()->back()->with(['flash-message'=>'Success ! Xóa ứng viên thành công !','flash-level'=>'success']);
+
+                    }catch (\Exception $e){
+                        return redirect()->back()->with(['flash-message'=>'Error ! Xóa ứng viên thất bại !','flash-level'=>'danger']);
+                    }
                     break;
             }
         }
