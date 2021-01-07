@@ -53,7 +53,9 @@
     <div class="col-8">
         <h2 style="margin-bottom: 40px;">Hồ sơ người tuyển dụng</h2>
         <div class="recruiter-profile">
-            <div class="recruiter-avatar"></div>
+            <div class="recruiter-avatar">
+                <img height="100%" width="100%" src="{{asset( pare_url_file($recruiterDetail->Avatar)) }}" class="thumbnail">
+            </div>
             <div class="recruiter-info ">
                 <h1 class="recruiter-name">
                     <div class="recruiter-name-value">{{$recruiterDetail->RecruiterName}}</div>
@@ -70,7 +72,7 @@
 
                     <h6 class="recruiter-email">
                         <i class="fa fa-envelope"></i>
-                        <div class="recruiter-email-value">{{$recruiterDetail->Email}}</div>
+                        <div class="recruiter-email-value">{{$recruiterDetail->email}}</div>
                     </h6>
 
                 </div>

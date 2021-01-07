@@ -1,6 +1,7 @@
 @extends('recruiter::layouts.master')
 @section('content')
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="{{asset('/css/common.css')}}" rel="stylesheet" />
     <link href="{{asset('theme-recruiter/css/register-account-package.css')}}" rel="stylesheet" />
     <link href="{{asset('css/account-package.css')}}" rel="stylesheet" />
     <h2 class="mt-4">Chọn gói dịch vụ để tiếp tục sử dụng hệ thống</h2>

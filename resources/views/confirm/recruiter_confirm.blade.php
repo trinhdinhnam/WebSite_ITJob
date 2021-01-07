@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('main')
-<link href="{{asset('theme-admin/css/client/recruiter-confirm.css')}}" rel="stylesheet" />
+<link href="{{asset('theme-seeker/css/recruiter-confirm.css')}}" rel="stylesheet" />
 <div class="content">
     <div class="content-container">
         <div class="confirm-detail-content">

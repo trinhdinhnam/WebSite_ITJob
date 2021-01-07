@@ -33,6 +33,7 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
             ->leftJoin('jobs','recruiters.id','=','jobs.RecruiterId')
             ->leftJoin('cities','recruiters.CityId','=','cities.CityId')
             ->where('jobs.IsDelete','=',1)
+            ->where('jobs.EndDateApply','>=',now())
             ->groupBy('recruiters.id','CompanyLogo','CompanyName','cities.CityName');
 
             if($recordNumber){

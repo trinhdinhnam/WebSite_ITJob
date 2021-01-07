@@ -38,7 +38,11 @@ class ApplyController extends BaseController
 
     public function postApply(Request $request,$id){
 
-        $this->seekerJobRepository->addCVApply($request,$id);
-        return redirect()->route('client.get.home.page')->with(['flash-message'=>'Success ! Ứng tuyển công việc thành công !','flash-level'=>'success']);
+        if($this->seekerJobRepository->addCVApply($request,$id)){
+            return redirect()->route('client.get.home.page')->with(['flash-message'=>'Success ! Ứng tuyển việc làm thành công !','flash-level'=>'success']);
+        }
+        else{
+            return redirect()->route('client.get.detail.job',$id)->with(['flash-message'=>'Fail ! Ứng tuyển việc làm thất bại !','flash-level'=>'error']);
+        }
     }
 }

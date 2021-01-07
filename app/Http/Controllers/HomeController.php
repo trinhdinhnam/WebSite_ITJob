@@ -26,7 +26,6 @@ class HomeController extends BaseController
 {
     //
     use AuthenticatesUsers;
-
     public $recruiterRepository;
     public $jobRepository;
     public $companyImageRepository;
@@ -41,10 +40,23 @@ class HomeController extends BaseController
     }
 
     public function getHomePage(){
-        $companies = $this->recruiterRepository->getListRecruiters(6);
+        $companies ='';
+        $message='';
+        $level='';
+        if($this->recruiterRepository->getListRecruiters(6)){
+            $companies = $this->recruiterRepository->getListRecruiters(6);
+            $message='Success ! Lấy danh sách nhà tuyển dụng thành công !';
+            $level ='success';
+        }else{
+            $message='Fail ! Lấy danh sách nhà tuyển dụng thất bại !';
+            $level ='danger';
+        }
         $viewData = [
-            'companies' =>$companies
+            'companies' =>$companies,
+            'flash-message'=>$message,
+            'flash-level'=>$level
         ];
+        //return redirect()->to('/')->with($viewData);
         return view('index',$viewData);
     }
 
@@ -64,12 +76,16 @@ class HomeController extends BaseController
         $jobNumberByCompanyHot = count($this->jobRepository->getJobsByCompanyHot($companyHot->id,''));
         $jobsByCompanyHot = $this->jobRepository->getJobsByCompanyHot($companyHot->id,3);
         $imageCompany = $this->companyImageRepository->getCompanyImageById($companyHot->id,1);
+        $message='Success ! Lấy danh sách nhà tuyển dụng thành công !';
+        $level ='success';
         $viewData = [
             'jobs' => $jobs,
             'companyHot' => $companyHot,
             'jobNumberByCompanyHot' => $jobNumberByCompanyHot,
             'jobsByCompanyHot' => $jobsByCompanyHot,
-            'imageCompany' => $imageCompany
+            'imageCompany' => $imageCompany,
+            'flash-message' => $message,
+            'flash-level' => $level
         ];
         return view('job.job-list', $viewData);
     }
@@ -108,16 +124,12 @@ class HomeController extends BaseController
     }
 
     public function getJobByPosition($id){
+
         $jobByPositions = $this->jobRepository->getJobByPositions($id);
-
         $companyHot = $this->recruiterRepository->getRecruiterHot();
-
         $jobNumberByCompanyHot = count($this->jobRepository->getJobsByCompanyHot($companyHot->id,''));
-
         $jobsByCompanyHot = $this->jobRepository->getJobsByCompanyHot($companyHot->id,3);
-
         $imageCompany = $this->companyImageRepository->getCompanyImageById($companyHot->id,1);
-
         $viewData = [
             'jobs' => $jobByPositions,
             'companyHot' => $companyHot,

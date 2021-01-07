@@ -85,7 +85,7 @@ class RecruiterTransactionController extends RecruiterBaseController
 
     public function postPay(Request $request,$accountId){
         $data['info']=$request->all();
-        $total=$request->amount;
+        $total=$request->totalMoney;
         if (Auth::guard('recruiters')->check()) {
             $recruiter_id = Auth::guard('recruiters')->user()->id;
         }

@@ -77,21 +77,25 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
     public function addCVApply($seekerJobInput,$jobId)
     {
         // TODO: Implement addCVApply() method.
-        $seekerJob = new $this->model;
-        $seekerJob->SeekerId = Auth::guard('seekers')->user()->id;
-        $seekerJob->JobId = $jobId;
-        $seekerJob->Introduce = $seekerJobInput->Introduce;
-        if($seekerJobInput->hasFile('CVLink'))
-        {
-            $fileCV = $seekerJobInput->file('CVLink');
-            $fileCVLink = upload_cv($fileCV,$fileCV->getClientOriginalName());
-            if(isset($fileCVLink['name'])){
-                $seekerJob->CVLink = $fileCVLink['name'];
+        try {
+            $seekerJob = new $this->model;
+            $seekerJob->SeekerId = Auth::guard('seekers')->user()->id;
+            $seekerJob->JobId = $jobId;
+            $seekerJob->Introduce = $seekerJobInput->Introduce;
+            if ($seekerJobInput->hasFile('CVLink')) {
+                $fileCV = $seekerJobInput->file('CVLink');
+                $fileCVLink = upload_cv($fileCV, $fileCV->getClientOriginalName());
+                if (isset($fileCVLink['name'])) {
+                    $seekerJob->CVLink = $fileCVLink['name'];
+                }
             }
+            $seekerJob->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+            $seekerJob->save();
+            return true;
+        }catch (\Exception $e){
+            return false;
         }
-        $seekerJob->created_at = Carbon::now('Asia/Ho_Chi_Minh');
-        $seekerJob->save();
-        return true;
+
     }
 
     public function getMessageNumber()
@@ -164,7 +168,7 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
             ->leftJoin('jobs','seeker_jobs.JobId','=','jobs.JobId')
             ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
             ->where('recruiters.id','=',$recruiterId)
-            ->whereYear('seeker_jobs.created_at',date('Y'))
+            ->whereYear('seeker_jobs.created_at',date('Y')-1)
             ->select(DB::raw('count(seeker_jobs.SeekerJobId) as profileNumber'), DB::raw('month(seeker_jobs.created_at) as month'))
             ->groupBy('month')
             ->get()->toArray();
@@ -178,7 +182,7 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
             ->leftJoin('jobs','seeker_jobs.JobId','=','jobs.JobId')
             ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
             ->where('recruiters.id','=',$recruiterId)
-            ->whereYear('seeker_jobs.created_at',date('Y'))
+            ->whereYear('seeker_jobs.created_at',date('Y')-1)
             ->select(DB::raw('count(seeker_jobs.SeekerJobId) as profileNumber'), 'jobs.JobId as JobId','jobs.JobName as JobName')
             ->groupBy('JobId','JobName')
             ->get()->toArray();

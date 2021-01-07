@@ -78,3 +78,11 @@ body{
 /* button */
 .button{
 }
+.breadcrumb.mb-4{
+    background-color: #ccc;
+    color: #000;
+}
+
+.breadcrumb.mb-4 .active{
+    color: #fff;
+}

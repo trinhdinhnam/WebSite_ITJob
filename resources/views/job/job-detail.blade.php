@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('main')
-<link href="{{asset('theme-admin/css/client/job-detail.css')}}" rel="stylesheet" />
+<link href="{{asset('theme-seeker/css/job-detail.css')}}" rel="stylesheet" />
 @if(isset($jobDetail))
 <div class="content">
     <div class="content-container">

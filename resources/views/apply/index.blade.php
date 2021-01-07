@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('main')
-<link href="{{asset('theme-admin/css/client/apply-form.css')}}" rel="stylesheet" />
+<link href="{{asset('theme-seeker/css/apply-form.css')}}" rel="stylesheet" />
 <form method="POST" enctype="multipart/form-data">
     @csrf
 <div class="apply-container">

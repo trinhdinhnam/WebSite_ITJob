@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous">
     </script>
     <script src="{{asset('/js/vendor/jquery-1.11.3.min.js')}}"></script>
-    <link href="{{asset('theme-admin/css/client/client_layout.css')}}" rel="stylesheet" />
+    <link href="{{asset('theme-seeker/css/client_layout.css')}}" rel="stylesheet" />
 </head>
 
 <body>
@@ -147,7 +147,7 @@
         </div>
     </div>
     <div class="main">
-        <div class="pull-right message-flash" style=" z-index: 1; position: absolute; right: 420px; margin-top: -15px;">
+        <div class="pull-right message-flash" style="position: absolute; right: 220px; margin-top: 65px;">
             @if(\Illuminate\Support\Facades\Session::has('flash-message'))
             <div class="alert alert-{!! \Illuminate\Support\Facades\Session::get('flash-level') !!}">
                 {!! \Illuminate\Support\Facades\Session::get('flash-message') !!}
@@ -231,12 +231,7 @@
         $('#myModalLogin').on('hidden.bs.modal', function(e) {
             location.reload();
         });
-        $(".message-flash").ready(function() {
-            setTimeout(function() {
-                $(".message-flash").remove();
-            }, 5000); // 5 secs
 
-        });
 
     })
     </script>

@@ -64,8 +64,9 @@ class TransactionRepository extends BaseRepository implements ITransactionReposi
     public function getRevenueTransactionMoth()
     {
         // TODO: Implement getRevenueTransactionMoth() method.
-        $revenueTransactionMonth = $this->model->leftJoin('account_packages','transactions.AccountPackageId','=','account_packages.AccountPackageId')
-            ->whereYear('transactions.created_at',date('Y'))
+        $revenueTransactionMonth = $this->model
+            ->leftJoin('account_packages','transactions.AccountPackageId','=','account_packages.AccountPackageId')
+            ->whereYear('transactions.created_at',date('Y')-1)
             ->select(DB::raw('sum(account_packages.Price) as totalMoney'), DB::raw('month(transactions.created_at) as month'))
             ->groupBy('month')
             ->get()->toArray();
@@ -109,8 +110,11 @@ class TransactionRepository extends BaseRepository implements ITransactionReposi
         $transaction->AccountPackageId = $accountId;
         $transaction->PayDate = Carbon::now();
         $transaction->ExipryDate = Carbon::now()->addMonth();
-        $transaction->Total = $inputTransaction->amount;
+        $transaction->Total = $inputTransaction->totalMoney;
         $transaction->Note = $inputTransaction->note;
+        $transaction->Phone = $inputTransaction->phone;
+        $transaction->Email = $inputTransaction->email;
+        $transaction->Language = $inputTransaction->language;
         $transaction->created_at = Carbon::now();
         $transaction->save();
         return $transaction->TransactionId;

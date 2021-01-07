@@ -1,13 +1,14 @@
 @extends('recruiter::layouts.master')
 @section('content')
+    <link href="{{asset('/css/common.css')}}" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="{{asset('form-signup/css/signup.css')}}" rel="stylesheet" />
     <h2 class="mt-4">Thay đổi thông tin cá nhân "{{\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->RecruiterName}}"</h2>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">Trang chủ</li>
         <li class="breadcrumb-item active">Thay đổi thông tin cá nhân</li>
     </ol>
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link href="{{asset('form-signup/css/signup.css')}}" rel="stylesheet" />
     <!------ Include the above in your HEAD tag ---------->
     <div class="content" style="padding-top: 0px; background-color: white">
         <div class="container register-form" style="background-color: white;">

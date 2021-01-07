@@ -31,9 +31,9 @@ class ReviewController extends BaseController
            {
               $this->reviewRepository->addReview($request,$id,Auth::guard('seekers')->user()->id);
               $this->recruiterRepository->updateReview($id,$request->score_review);
-               return redirect()->route('client.get.job.by.company',$id)->with('success','Bạn đã gửi đánh giá thành công!');
+               return redirect()->route('client.get.job.by.company',$id)->with(['flash-message'=>'Success ! Bạn đã gửi đánh giá thành công !','flash-level'=>'success']);
            }
-        return redirect()->back()->with('danger','Bạn chưa gửi được đánh giá!');
+        return redirect()->back()->with(['flash-message'=>'Error ! Đánh giá của bạn chưa được gửi. Vui lòng thực hiện lại sau','flash-level'=>'danger']);
 
     }
 }

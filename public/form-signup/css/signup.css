@@ -72,3 +72,11 @@ h6{
 #avatarSeeker{
     border: 1px solid #aaa;
 }
+.breadcrumb.mb-4{
+    background-color: #ccc;
+    color: #000;
+}
+
+.breadcrumb.mb-4 .active{
+    color: #fff;
+}

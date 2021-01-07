@@ -1,6 +1,6 @@
 @extends('recruiter::layouts.master')
 @section('content')
-
+    <link href="{{asset('/css/common.css')}}" rel="stylesheet" />
     <h2 class="mt-4">Thanh toán hóa đơn giao dịch </h2>
     <ol class="breadcrumb mb-4 " style="background-color: #ccc;color: #000;">
         <li class="breadcrumb-item"><a href="{{route('recruiter.home')}}">Trang chủ</a></li>
@@ -47,19 +47,23 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <h6 for="amount">Số tiền:</h6>
-                    <input class="form-control" name="amount" value="{{$accountPackage->Price}}" />
+                    <h6 for="name">Họ và tên:</h6>
+                    <input disabled required type="text" class="form-control" id="name" name="name"
+                           value="@if(\Illuminate\Support\Facades\Auth::guard('recruiters')->check()) {{\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->RecruiterName}}  @endif">
+                </div>
+                <div class="form-group">
+                    <h6 for="amount">Loại dịch vụ</h6>
+                    <input disabled class="form-control" name="service" value="{{$accountPackage->AccountPackageName}}" />
+                </div>
+                <div class="form-group">
+                    <h6 for="amount">Tổng tiền:</h6>
+                    <input class="form-control" name="totalMoney" value="{{$accountPackage->Price}}" />
                     <input style="display: none" class="form-control" name="id" id="accountId" value="{{$accountPackage->AccountPackageId}}" />
                 </div>
                 <div class="form-group">
                     <h6 for="email">Email:</h6>
                     <input required type="email" class="form-control" id="email" name="email"
                            value="@if(\Illuminate\Support\Facades\Auth::guard('recruiters')->check()) {{\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->email}}  @endif">
-                </div>
-                <div class="form-group">
-                    <h6 for="name">Họ và tên:</h6>
-                    <input required type="text" class="form-control" id="name" name="name"
-                           value="@if(\Illuminate\Support\Facades\Auth::guard('recruiters')->check()) {{\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->RecruiterName}}  @endif">
                 </div>
                 <div class="form-group">
                     <h6 for="phone">Số điện thoại:</h6>

@@ -75,10 +75,9 @@ class LoginController extends Controller
     {
 
         $info = Socialite::driver($social)->user();
-        dd($info);
-        //$user = $this->createUser($info, $social);
-        //\auth()->login($user);
-        //return redirect()->to('/');
+        $user = $this->createUser($info, $social);
+        \auth()->login($user);
+        return redirect()->to('/');
 
     }
 

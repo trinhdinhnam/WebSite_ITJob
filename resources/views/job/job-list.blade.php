@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('main')
-<link href="{{asset('theme-admin/css/client/job-list.css')}}" rel="stylesheet" />
+<link href="{{asset('theme-seeker/css/job-list.css')}}" rel="stylesheet" />
 <div class="header">
     <div class="header-container">
         <form class="form-inline header-search" action="{{route('client.search.job')}}" method="GET"
@@ -54,8 +54,6 @@
                             <div class="job-name">
                                 <h3><a href="{{route('client.get.detail.job',$job->JobId)}}">{{$job->JobName}}</a></h3>
                             </div>
-                            <div class="job-date-apply" style="color: #1d79c0; margin-bottom: 5px">Thời gian: {{date_format(date_create($job->StartDateApply),"d/m/Y")}} - {{date_format(date_create($job->EndDateApply),"d/m/Y")}}
-                                </div>
                             <div class="job-salary">
                                 <h6> Up to {{number_format($job->Salary,0,',','.')}} VNĐ</h6>
                             </div>
@@ -74,13 +72,30 @@
                             </div>
                         </div>
                         <div class="job-status">
-                           @if($job->seekerNumber>=3)
-                               <div class="hot-title">Hot job</div>
+                            @if($job->seekerNumber>=1)
+                                <div >
+                                    <div class="hot-title">Hot job</div>
+                                </div>
+                                <div >
+                                    <div class="job-city ">{{$job->City}}</div>
+                                </div>
+                                <div >
+                                    <div class="job-created ">{{$job->formatDate($job->CreatedDate)}}</div>
+
+                                </div>
                             @else
-                                <div class="hot-title" style="display: none">Hot job</div>
+                                <div >
+                                    <div class="hot-title" style="display: none">Hot job</div>
+                                </div>
+                                <div style="margin-top: 105px">
+                                    <div class="job-city ">{{$job->City}}</div>
+
+                                </div>
+                                <div style="margin-top: 110px">
+                                    <div class="job-created ">{{$job->formatDate($job->CreatedDate)}}</div>
+
+                                </div>
                             @endif
-                            <div class="job-city">{{$job->City}}</div>
-                            <div class="job-created">{{$job->formatDate($job->CreatedDate)}}</div>
                         </div>
                     </div>
                     @endif

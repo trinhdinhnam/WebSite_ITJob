@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('main')
-<link href="{{asset('theme-admin/css/client/company-list.css')}}" rel="stylesheet" />
+<link href="{{asset('theme-seeker/css/company-list.css')}}" rel="stylesheet" />
 <div class="header">
     <div class="header-container">
         <div class="job-number">

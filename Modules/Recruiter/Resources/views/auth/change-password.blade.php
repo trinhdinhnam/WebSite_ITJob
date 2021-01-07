@@ -1,5 +1,7 @@
 @extends('recruiter::layouts.master')
 @section('content')
+    <link href="{{asset('/css/common.css')}}" rel="stylesheet" />
+
     <h2 class="mt-4">Thay đổi mật khẩu"{{\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->RecruiterName}}"</h2>
     <ol class="breadcrumb mb-4 ">
         <li class="breadcrumb-item">Trang chủ</li>
