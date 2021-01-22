@@ -31,6 +31,7 @@ class MessageController extends BaseController
     }
 
     public function getJobByMessage($id){
+        $this->share();
 
         $jobDetail = $this->jobRepository->getJobById($id);
         $jobApplies = $this->jobRepository->getJobApplies(Auth::guard('seekers')->user()->id);

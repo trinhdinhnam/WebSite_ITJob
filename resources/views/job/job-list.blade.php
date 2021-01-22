@@ -42,7 +42,8 @@
                 <div class="job-list">
                     @if(isset($jobs))
                         @foreach($jobs as $job)
-                    @if($job->EndDateApply>=now())
+                            @if($job->Status==1)
+                            @if($job->EndDateApply>=now())
                     <div class="job-item">
                         <div class="company-logo">
                             <div class="logo">
@@ -98,6 +99,7 @@
                             @endif
                         </div>
                     </div>
+                    @endif
                     @endif
                     @endforeach
                     @endif

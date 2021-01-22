@@ -11,15 +11,17 @@
 |
 */
 Route::get('/','HomeController@getHomePage')->name('client.get.home.page');
-
 Route::get('search','HomeController@getJobs')->name('client.search.job');
 Route::get('confirm-recruiter','HomeController@getConfirm')->name('client.confirm.recruiter');
+Route::get('/company','HomeController@getListCompany')->name('client.get.list.company');
 
 Route::group(['namespace' => 'Auth'],function(){
     Route::get('login','LoginController@getLogin')->name('seeker.get.login');
     Route::post('login','LoginController@postLogin')->name('seeker.post.login');
     Route::get('login-by-facebook/{social}','LoginController@getLoginByFacebook')->name('client.get.login.by.facebook');
     Route::get('check-login-by-facebook/{social}','LoginController@checkLoginByFacebook');
+    Route::get('login-by-google/{social}','LoginController@getLoginByGoogle')->name('client.get.login.by.google');
+    Route::get('check-login-by-google/{social}','LoginController@checkLoginByGoogle');
 
     Route::get('logout','LoginController@getLogout')->name('seeker.get.logout');
     Route::get('register','LoginController@getRegister')->name('seeker.get.register');
@@ -40,6 +42,7 @@ Route::group(['prefix' => 'job'], function(){
 Route::group(['prefix' => 'apply','middleware' => 'CheckLoginSeeker'], function(){
     Route::get('/apply-job/{id}','ApplyController@getApply')->name('client.get.apply');
     Route::post('/apply-job/{id}','ApplyController@postApply')->name('client.post.apply');
+    Route::get('/email','ApplyController@getSendMail')->name('client.get.send.mail');
 });
 
 Route::group(['prefix' => 'message','middleware' => 'CheckLoginSeeker'], function(){
@@ -48,6 +51,8 @@ Route::group(['prefix' => 'message','middleware' => 'CheckLoginSeeker'], functio
 
 Route::group(['prefix' => 'user', 'middleware' => 'CheckLoginSeeker'], function(){
     Route::get('/jobApply/{id}','UserController@getJobApply')->name('client.get.job.apply');
+    Route::get('/profile/detail/{id}','UserController@getProfileDetail')->name('client.get.profile.detail');
+
     Route::get('/change-info/{id}','UserController@getChangeInfo')->name('client.get.change.info');
     Route::post('/change-info/{id}','UserController@postChangeInfo')->name('client.post.change.info');
     Route::get('/change-password/{id}','UserController@getChangePassword')->name('client.get.change.password');

@@ -21,11 +21,20 @@
     height: auto;
     width: 100%;
 }
-
+.seeker-name{
+    text-align: center;
+}
+.job-name{
+    font-size: 14px;
+    font-weight: bold;
+    color: red;
+    text-align: center;
+}
 .seeker-gender{
     color: #555;
-    margin-top: 20px;
     font-size: 14px;
+    margin-top: 20px;
+
 }
 .fa-transgender{
     margin-right: 18px;
@@ -76,6 +85,7 @@
 }
 .seeker-address .address-value{
     height: 60px;
+    margin-left: 20px;
 }
 .seeker-education{
     color: #555;

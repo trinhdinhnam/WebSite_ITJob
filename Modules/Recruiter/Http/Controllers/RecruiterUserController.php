@@ -48,8 +48,12 @@ class RecruiterUserController extends RecruiterBaseController
     public function postChangeInfo(Request $request, $id){
 
         $this->getDataShared();
-        $this->recruiterRepository->changInfoRecruiter($request,$id);
-        return redirect()->route('recruiter.home');
+        if($this->recruiterRepository->changInfoRecruiter($request,$id)==true && $this->companyImageRepository->changeImageCompany($request,$id)){
+            return redirect()->route('recruiter.home')->with(['flash-message'=>'Success ! Cập nhật thông tin thành công!','flash-level'=>'success']);
+
+        }else{
+            return redirect()->route('recruiter.get.change.info',get_data_user('recruiters','id'))->with(['flash-message'=>'Error ! Cập nhật thông tin thất bại!','flash-level'=>'danger']);
+        }
     }
 
     public function getChangePassword($id){

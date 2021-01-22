@@ -63,7 +63,6 @@ class RecruiterJobController extends RecruiterBaseController
 
     public function getDetailJob($id){
         $this->getDataShared();
-
         $jobDetail = $this->jobRepository->getJobById($id);
         $imageCompanies = $this->companyImageRepository->getCompanyImageById($jobDetail->recruiter->id,'');
         $viewData = [
@@ -88,20 +87,20 @@ class RecruiterJobController extends RecruiterBaseController
     } 
 
     public function save($request, $id=''){
-        $code = 1;
         try{
-             $this->jobRepository->saveJob($request,$id);
-
+            $job = $this->jobRepository->saveJob($request,$id);
+            return $job;
         }catch(\Exception $exception)
         {
-            $code=0;
             Log::error("[Error save Job ]".$exception);
+            return false;
         }
-        return $code;
     }
     public function createpost(RequestJob $request){
-        if($this->save($request)==1)
-            return redirect()->route('recruiter.get.list.job')->with(['flash-message'=>'Success ! Thêm mới thành công !','flash-level'=>'success']);
+        $job = $this->save($request);
+        if($job){
+            $this->recruiterRepository->reducePostNumber($job->RecruiterId);
+            return redirect()->route('recruiter.get.list.job')->with(['flash-message'=>'Success ! Thêm mới thành công !','flash-level'=>'success']);}
         else{
             return redirect()->route('recruiter.get.list.job')->with(['flash-message'=>'Danger ! Thêm mới thất bại !','flash-level'=>'danger']);
         }

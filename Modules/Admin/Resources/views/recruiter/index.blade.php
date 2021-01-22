@@ -1,6 +1,7 @@
 @extends('admin::layouts.master')
 @section('content')
     <link href="{{asset('theme-admin/css/recruiter_list_by_admin.css')}}" rel="stylesheet" />
+    <link href="{{asset('/css/common.css')}}" rel="stylesheet" />
 
 <h2 class="mt-4">Danh sách nhà tuyển dụng</h2>
 <ol class="breadcrumb mb-4">

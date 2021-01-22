@@ -6,3 +6,8 @@
 .breadcrumb.mb-4 .active{
     color: #fff;
 }
+.dis{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.8;
+}

@@ -40,27 +40,23 @@ class HomeController extends BaseController
     }
 
     public function getHomePage(){
-        $companies ='';
-        $message='';
-        $level='';
-        if($this->recruiterRepository->getListRecruiters(6)){
-            $companies = $this->recruiterRepository->getListRecruiters(6);
-            $message='Success ! Lấy danh sách nhà tuyển dụng thành công !';
-            $level ='success';
-        }else{
-            $message='Fail ! Lấy danh sách nhà tuyển dụng thất bại !';
-            $level ='danger';
-        }
+
+        $this->share();
+        $companies = $this->recruiterRepository->getListRecruiters(6);
+        $jobNumber = count($this->jobRepository->getAllJob());
+        $jobNumberRecruiter = $this->recruiterRepository->getJobNumberByRecruiter();
+
         $viewData = [
             'companies' =>$companies,
-            'flash-message'=>$message,
-            'flash-level'=>$level
+            'jobNumber' => $jobNumber,
+            'jobNumberRecruiter' => $jobNumberRecruiter
         ];
         //return redirect()->to('/')->with($viewData);
         return view('index',$viewData);
     }
 
     public function getConfirm(){
+        $this->share();
         $companies = Recruiter::paginate(5);
         $viewData = [
             'companies' =>$companies
@@ -71,6 +67,7 @@ class HomeController extends BaseController
 
     public function getJobs(Request $request)
     {
+        $this->share();
         $jobs = $this->jobRepository->getListJobs($request,'client');
         $companyHot = $this->recruiterRepository->getRecruiterHot();
         $jobNumberByCompanyHot = count($this->jobRepository->getJobsByCompanyHot($companyHot->id,''));
@@ -91,6 +88,7 @@ class HomeController extends BaseController
     }
 
     public function getDetailJob($id){
+        $this->share();
 
         $jobDetail = $this->jobRepository->getJobById($id);
         $jobApplies = '';
@@ -108,6 +106,7 @@ class HomeController extends BaseController
     }
 
     public function getJobByCompany($id){
+        $this->share();
 
         $company = $this->recruiterRepository->getRecruiterById($id);
 
@@ -124,6 +123,7 @@ class HomeController extends BaseController
     }
 
     public function getJobByPosition($id){
+        $this->share();
 
         $jobByPositions = $this->jobRepository->getJobByPositions($id);
         $companyHot = $this->recruiterRepository->getRecruiterHot();
@@ -142,6 +142,7 @@ class HomeController extends BaseController
     }
 
     public function getJobByCity($id){
+        $this->share();
 
         $jobByCities = $this->jobRepository->getJobByCities($id);
 
@@ -164,6 +165,7 @@ class HomeController extends BaseController
     }
 
     public function getJobBySkill($skillName){
+        $this->share();
 
         $jobBySkills = $this->jobRepository->getJobBySkills($skillName);
 
@@ -184,4 +186,17 @@ class HomeController extends BaseController
         ];
         return view('job.job-list',$viewData);
     }
+
+    public function getListCompany(){
+        $this->share();
+
+        $recruiters = $this->recruiterRepository->getRecruiterByPage('',10);
+        $reviews = $this->recruiterRepository->getReviewHot();
+        $viewData = [
+            'recruiters' => $recruiters
+        ];
+        return view('company.index',$viewData);
+
+    }
+
 }

@@ -2,8 +2,11 @@
     let listMonth = $("#container1").attr("data-list-month");
     let listRevenue = $("#container1").attr("data-list-revenue");
 
+    let listTotalRecruiter = $("#container1").attr("data-list-total-recruiter");
+
     listMon = JSON.parse(listMonth);
     listReven = JSON.parse(listRevenue);
+    listRecuriter = JSON.parse(listTotalRecruiter);
 
     Highcharts.chart('container1', {
         chart: {
@@ -27,16 +30,19 @@
                     enabled: true
                 },
                 enableMouseTracking: false
-            }
+            },
         },
         series: [{
             name: 'Doanh thu năm 2020',
             data: listReven
-        }]
+        },
+        ]
     });
     let listRevenue2 = $("#container2").attr("data-list-revenue");
     listRevenueAccountNumber = JSON.parse(listRevenue2);
 
+    let d = new Date();
+    let yearNow = d.getFullYear() - 1 ;
     Highcharts.chart('container2', {
 
         chart: {
@@ -44,7 +50,7 @@
         },
 
         title: {
-            text: 'Biểu đồ thống kê sử dụng dịch vụ'
+            text: 'Biểu đồ thống kê sử dụng dịch vụ năm ' + yearNow
         },
 
         xAxis: {

@@ -11,37 +11,81 @@
 
     <li class="breadcrumb-item active">Danh sách ứng viên</li>
 </ol>
-
+    <form class="form-inline">
+        <div class="form-group">
+            <input type="text" class="input-seekername" id="seekername" name="seekername" placeholder="Nhập tên ứng viên..." value="{{ \Request::get('jobname')}}">
+            <button type="submit" class="btn-search-seeker"><i class="fa fa-search"></i></button>
+        </div>
+    </form>
 <div class="list-seeker">
-    @if(isset($seekerByJobs))
-        @foreach($seekerByJobs as $seekerByJob)
+    @if(isset($seekers))
+        @foreach($seekers as $seeker)
 
      <div class="seeker-item row">
         <div class="seeker-avatar col-2">
-            <img height="170px" width="140px" src="{{asset('images/ky21.JPG')}}" class="thumbnail">
+            <img height="170px" width="140px" src="{{asset(pare_url_file($seeker->seeker->Avatar))}}" class="thumbnail">
         </div>
         <div class="seeker-info col-8">
             <div class="seeker-name">
-                <h2>{{$seekerByJob->seeker->SeekerName}}</h2>
-                <a style="height: 20px; margin-left: 5px;" class="badge {{$seekerByJob->getStatus($seekerByJob->Status)['class']}}">{{$seekerByJob->getStatus($seekerByJob->Status)['name']}}</a>
+                <h2>{{$seeker->seeker->SeekerName}}</h2>
+                <a style="height: 20px; margin-left: 5px;" class="badge {{$seeker->getStatus($seeker->Status)['class']}}">{{$seeker->getStatus($seeker->Status)['name']}}</a>
             </div>
-            <div class="seeker-gender"><i class="fa fa-transgender"></i>{{$seekerByJob->seeker->getGender($seekerByJob->seeker->Gender)['name']}}</div>
-            <div class="seeker-email"><i class="fa fa-envelope"></i>{{$seekerByJob->seeker->Email}}</div>
-            <div class="seeker-phone"><i class="fa fa-phone-volume"></i>{{$seekerByJob->seeker->Phone}}</div>
-            <div class="seeker-education"><i class="fa fa-graduation-cap"></i>{{$seekerByJob->seeker->getEducation($seekerByJob->seeker->Education)['name']}}</div>
-            <div class="date-apply"><i class="fa fa-calendar-alt"></i>{{$seekerByJob->created_at}}</div>
+            <div class="job-name">Vị trí: {{$seeker->job->JobName}}</div>
+            <div class="seeker-gender"><i class="fa fa-transgender"></i>{{$seeker->seeker->getGender($seeker->seeker->Gender)['name']}}</div>
+            <div class="seeker-email"><i class="fa fa-envelope"></i>{{$seeker->seeker->Email}}</div>
+            <div class="seeker-phone"><i class="fa fa-phone-volume"></i>{{$seeker->seeker->Phone}}</div>
+            <div class="seeker-education"><i class="fa fa-graduation-cap"></i>{{$seeker->seeker->getEducation($seeker->seeker->Education)['name']}}</div>
+            <div class="date-apply"><i class="fa fa-calendar-alt"></i>{{$seeker->created_at}}</div>
         </div>
         <div class="button col-2">
-            <a href="{{route('recruiter.get.action.seeker.by.job',['status',$seekerByJob->SeekerJobId])}}"
-               class="btn btn-success @if($seekerByJob->Status==1) disabled @endif"><i class="fa fa-check"></i></a>
-            <a href="{{route('recruiter.get.seeker.detail', $seekerByJob->SeekerJobId)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-            <a href="{{route('recruiter.get.action.seeker.by.job',['delete',$seekerByJob->SeekerJobId])}}"
-               class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
+            <a href="{{route('recruiter.get.action.seeker.by.job',['status',$seeker->SeekerJobId])}}"
+               class="btn btn-success @if($seeker->Status==1) disabled @endif"><i class="fa fa-check"></i></a>
+            <a href="{{route('recruiter.get.seeker.detail',$seeker->SeekerJobId)}}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+            <a href=""
+               class="btn btn-danger btn-delete"><i class="fa fa-trash-alt"></i></a>
         </div>
 
     </div>
+            <div class="modal fade"  id="confirmDelete" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                    <div class="modal-content" style="height: auto; width: 500px; margin: auto">
+                        <div class="modal-header">
+                            <h6 style="font-size: 20px" class="modal-title"><i style="color: #15289d;" class="fas fa-question-circle"></i>
+                                Thông báo</h6>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <div class="modal-body" id="md_content_message" >
+                            <div style="font-size: 17px; font-weight: 400; text-align: center" class="modal-title">Bạn có muốn xóa ứng viên này?</div>
+                            <div style="margin: auto; margin-top: 40px">
+                                <a href="{{route('recruiter.get.action.seeker.by.job',['delete',$seeker->SeekerJobId])}}" style="margin-left: calc(100% - 150px); margin-right: 5px" id="close" class="btn btn-primary btn-ok" >Đồng ý</a>
+                                <button id="close" type="button" class="btn btn-danger btn-cancle" data-dismiss="modal">Hủy</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endforeach
         @endif
 
 </div>
+    <div class="card mb-4" style="background-color: #eee; border: none">
+        <nav aria-label="Page navigation" style="margin: auto">
+            {!! $seekers->links() !!}
+        </nav>
+    </div>
+    <script type="text/javascript">
+        $(function() {
+            $(".btn-delete").click(function(event) {
+                event.preventDefault();
+                $("#confirmDelete").modal('show');
+            });
+            $('#confirmLogin').on('hidden.bs.modal', function(e) {
+                location.reload();
+            });
+        })
+    </script>
 @endsection

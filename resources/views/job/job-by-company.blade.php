@@ -58,6 +58,7 @@
                         <div class="company-name-title"> {{$company->CompanyName}} tuyển dụng</div>
                         @if(isset($jobByCompanys))
                         @foreach($jobByCompanys as $job)
+                        @if($job->Status==1)
                         @if($job->EndDateApply>=now())
 
                         <div class="job-item">
@@ -120,8 +121,16 @@
                             </div>
                         </div>
                         @endif
+                        @endif
                         @endforeach
                         @endif
+
+                        <div class="company-introduction">
+                            <div class="company-introduction-title">Giới thiệu về công ty {{$company->CompanyName}}</div>
+                            <div class="company-introduction-content">
+                                {{$company->Introduction}}
+                            </div>
+                        </div>
                     </li>
                     <li class="review-page">
 
@@ -242,11 +251,32 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade"  id="confirmLogin" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content" style="height: auto; width: 500px; margin: auto">
+            <div class="modal-header">
+                <h6 style="font-size: 20px" class="modal-title"><i style="color: #15289d;" class="fas fa-question-circle"></i>
+                    Thông báo</h6>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body" id="md_content_message" >
+                <div style="font-size: 17px; font-weight: 400; text-align: center" class="modal-title">Bạn có muốn đăng nhập để tiếp tục viết đánh giá?</div>
+                <div style="margin: auto; margin-top: 40px">
+                    <button style="margin-left: calc(100% - 150px); margin-right: 5px" id="close" type="button" class="btn btn-primary btn-ok" data-dismiss="modal">Đồng ý</button>
+                    <button id="close" type="button" class="btn btn-danger btn-cancle" data-dismiss="modal">Hủy</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
 @endif
 @endsection
-
 @section('script')
-
 <script type="text/javascript">
 $("ul#tabs li").click(function(e) {
     if (!$(this).hasClass("active")) {
@@ -310,53 +340,29 @@ $(function() {
             event.preventDefault();
             let $this = $(this);
             let url = $this.attr('href');
-            $.ajax({
-                url: url,
-            }).done(function(result) {
-                if (result) {
-                    $("#md_content").append(result);
-                }
+            $("#confirmLogin").modal('show');
+            $(".btn-ok").click(function(event) {
+                $.ajax({
+                    url: url,
+                }).done(function(result) {
+                    if (result) {
+                        $("#md_content").append(result);
+
+                    }
+                    $("#myModalLogin").modal('show');
+                    $('#myModalLogin').on('hidden.bs.modal', function(e) {
+                        location.reload();
+                    });
+                });
+
             });
-            $("#myModalLogin").modal('show');
         });
 
-        $('#myModalLogin').on('hidden.bs.modal', function(e) {
-            location.reload();
-        });
+
+
 
     })
 
-    // $("#js_rating_recruiter").click(function(event) {
-    //     event.preventDefault();
-    //     let $this = $(this);
-    //     let url = $this.attr('href');
-    //     let title_review = $("#title-review").val();
-    //     let good_review_content = $("#good-review-content").val();
-    //     let notgood_review_content = $("#not-good-review-content").val();
-    //     let score_review = $(".score_review").val();
-    //     if (title_review && score_review) {
-    //         $.ajax({
-    //             url: url,
-    //             type: 'POST',
-    //             contentType: 'application/json',
-    //             dataType: 'json',
-    //             data: {
-    //                 'title_review': title_review,
-    //                 'good_review_content': good_review_content,
-    //                 'notgood_review_content': notgood_review_content,
-    //                 'score_review': score_review
-    //             }
-    //         }).done(function(result) {
-    //             if (result) {
-    //                 alert("Bạn đã gửi review thành công");
-    //                 location.reload();
-    //             } else {
-    //                 alert("Bạn chưa gửi được review của mình");
-    //                 //location.reload();
-    //             }
-    //         });
-    //     }
-    // });
 });
 </script>
 @stop

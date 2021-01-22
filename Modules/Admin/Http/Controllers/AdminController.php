@@ -4,67 +4,72 @@ namespace Modules\Admin\Http\Controllers;
 
 use App\Helpers\Account;
 use App\Helpers\Date;
+use App\Repository\CompanyImage\ICompanyImageRepository;
 use App\Repository\Job\IJobRepository;
 use App\Repository\Recruiter\IRecruiterRepository;
 use App\Repository\Review\IReviewRepository;
+use App\Repository\Seeker\ISeekerRepository;
+use App\Repository\SeekerJob\ISeekerJobRepository;
 use App\Repository\Transaction\ITransactionRepository;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class AdminController extends Controller
+class AdminController extends AdminBaseController
 {
-
     public $transactionRepository;
     public $recruiterRepository;
     public $reviewRepository;
     public $jobRepository;
-    public function __construct(ITransactionRepository $transactionRepository,IRecruiterRepository $recruiterRepository,IReviewRepository $reviewRepository,IJobRepository $jobRepository)
+    public $companyImageRepository;
+    public function __construct(ITransactionRepository $transactionRepository,IRecruiterRepository $recruiterRepository,IReviewRepository $reviewRepository,IJobRepository $jobRepository,ISeekerJobRepository $seekerJobRepository,ICompanyImageRepository $companyImageRepository)
     {
+        parent::__construct($transactionRepository,$jobRepository);
         $this->transactionRepository = $transactionRepository;
         $this->recruiterRepository = $recruiterRepository;
         $this->reviewRepository = $reviewRepository;
         $this->jobRepository = $jobRepository;
-
+        $this->companyImageRepository = $companyImageRepository;
     }
 
     public function index()
     {
+        $this->getDataShared();
+
         $listMonth = Date::getListMonthInYear();
-        $revenueTransaction = $this->transactionRepository->getRevenueTransactionMoth();
+        $revenueTransaction = $this->transactionRepository->getRevenueTransactionMonth();
         $arrRevenueTransaction = [];
         foreach ($listMonth as $month){
-            $total = 0;
+            $totalMoney = 0;
+            $totalRecruiter = 0;
             foreach ($revenueTransaction as $key => $revenue){
                 if($revenue['month'] == $month){
-                    $total = $revenue['totalMoney'];
+                    $totalMoney = $revenue['totalMoney'];
+                    $totalRecruiter = $revenue['totalRecruiter'];
                     break;
                 }
             }
-            $arrRevenueTransaction[] = $total;
+            $arrRevenueTransaction[] = $totalMoney;
+            $arrRevenueRecruiter[] = $totalRecruiter;
         }
 
-
-        //Thống kê sử dụng gói dịch vụ
-
-        $listAccount = Account::getListAccontId();
+        $listAccount = Account::getListAccountId();
         $revenueAccountNumber = $this->transactionRepository->getRevenueAccountNumber('array');
         $arrRevenueAccountNumber = [];
-        foreach ($listAccount as $key1 => $account){
-            $count = [];
+        foreach ($listAccount as $account){
+            $count[0] = $account['AccountPackageName'];
+            $count[1] = 0;
+            $count[2] = false;
+            $count[3] = '';
             foreach ($revenueAccountNumber as $key2 => $revenue){
-                if($revenue['accountId'] == $account['AccountPackageId']){
-                    $count[0] = $revenue['accountName'];
+
+                if($revenue['accountName'] == $account['AccountPackageName']){
                     $count[1] = $revenue['accountNumber'];
-                    $count[2] = false;
-                    $count[3] = '';
-                    break;
                 }
             }
             $arrRevenueAccountNumber[] = $count;
         }
-
         //Tổng số giao dịch
         $totalTran = count($this->transactionRepository->getAllTransactions());
         //Tổng số thành viên
@@ -83,6 +88,7 @@ class AdminController extends Controller
             'revenueTransaction' => $revenueTransaction,
             'listMonth' => json_encode($listMonth),
             'arrRevenueTransaction' => json_encode($arrRevenueTransaction),
+            'arrRevenueRecruiter' => json_encode($arrRevenueRecruiter),
             'arrRevenueAccountNumber' => json_encode($arrRevenueAccountNumber),
             'totalTran' => $totalTran,
             'totalMember' => $totalMember,
@@ -99,7 +105,22 @@ class AdminController extends Controller
 
     public function getLogout(){
         Auth::guard('admins')->logout();
-        return redirect()->route('admin.get.login')->route('admin.dashboard')->with(['flash-message'=>'Success ! Đăng xuất thành công !','flash-level'=>'success']);
+        return redirect()->route('admin.get.login')->with(['flash-message'=>'Success ! Đăng xuất thành công !','flash-level'=>'success']);
+    }
+
+    public function getRecruiterByMessage($recruitrerId,$transactionId){
+        $this->getDataShared();
+        $imageCompanies='';
+        $recruiterDetail='';
+        if($this->transactionRepository->changeMessageStatus($transactionId)){
+            $imageCompanies = $this->companyImageRepository->getCompanyImageById($recruitrerId,'');
+            $recruiterDetail = $this->recruiterRepository->getRecruiterById($recruitrerId);
+        }
+        $viewData = [
+            'recruiterDetail' =>$recruiterDetail,
+            'imageCompanies' => $imageCompanies
+        ];
+        return view('admin::recruiter.detail',$viewData);
     }
 
 }

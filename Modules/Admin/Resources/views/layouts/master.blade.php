@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,6 +8,7 @@
     <meta name="author" content="" />
     <title>Admin</title>
     <link href="{{asset('theme-admin/css/styles.css')}}" rel="stylesheet" />
+    <link href="{{asset('theme-admin/css/master.css')}}" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
         crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
@@ -25,9 +25,70 @@
         <a class="navbar-brand" href="{{route('admin.dashboard')}}">Admin</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i
                 class="fas fa-bars"></i></button>
+        <div class="message-menu dropdown">
+            <a href="" class="message-transaction" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i style="color: white; font-size: 25px" class="fa fa-globe-americas "></i>
+                @if(isset($messageNumber))
+                    <div class="message-number">{{$messageNumber}}</div>
+                @endif
+            </a>
+            <div class="dropdown-content-message dropdown-menu">
+                <div style="font-weight: bold; margin: 10px 0 10px 10px;">Thông báo mới nhất</div>
+                <div class="list-message">
+                    @if(isset($messageTransaction))
+                        @foreach($messageTransaction as $message)
+                            <a class="dropdown-item dropdown-item-message @if($message->MessageStatus==1) seen @endif @if($message->MessageStatus==0) notseen @endif"
+                               href="{{route('admin.get.recruiter.by.message',[$message->recruiter->id,$message->TransactionId])}}">
+                                <div class="message-company-logo">
+                                    <img height="40px" width="40px"
+                                         src="{{asset( pare_url_file($message->recruiter->Avatar)) }}"
+                                         style="border-radius: 50%;" class="thumbnail">
+                                </div>
+                                <div class="message-info">
+                                    <div
+                                            class="message-job-content @if($message->MessageStatus==1) text-grey @endif @if($message->MessageStatus==0) text-black @endif">
+                                        <div class="name" style="word-wrap: break-word;">{{$message->recruiter->RecruiterName}}</div> đã thực hiện giao dịch
+                                        <br>
+                                    </div>
+                                    <div
+                                            class="message-date @if($message->MessageStatus==1) text-grey @endif @if($message->MessageStatus==0) text-blue @endif" @if($message->MessageStatus==1) style="font-weight: 400" @endif>
+                                        {{$message->PayDate}}
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    @endif
+                    @if(isset($messagePostJob))
+                        @foreach($messagePostJob as $message)
+                            <a class="dropdown-item dropdown-item-message @if($message->MessageStatus==1) seen @endif @if($message->MessageStatus==0) notseen @endif"
+                               href="{{route('admin.get.recruiter.by.message',[$message->recruiter->id,$message->TransactionId])}}">
+                                <div class="message-company-logo">
+                                    <img height="40px" width="40px"
+                                         src="{{asset( pare_url_file($message->recruiter->Avatar)) }}"
+                                         style="border-radius: 50%;" class="thumbnail">
+                                </div>
+                                <div class="message-info">
+                                    <div
+                                            class="message-job-content @if($message->MessageStatus==1) text-grey @endif @if($message->MessageStatus==0) text-black @endif">
+                                        <div class="name" style="word-wrap: break-word;">{{$message->recruiter->RecruiterName}}</div> đã đăng một công việc
+                                        <br>
+                                    </div>
+                                    <div style="width: 200px; height: auto; font-weight: 600">{{$message->JobName}}</div>
+                                    <div
+                                            class="message-date @if($message->MessageStatus==1) text-grey @endif @if($message->MessageStatus==0) text-blue @endif" @if($message->MessageStatus==1) style="font-weight: 400" @endif>
+                                        {{$message->created_at}}
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    @endif
+                </div>
+
+            </div>
+        </div>
+
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            <div class="input-group">
+            <div class="input-group" style="display: none">
                 <input class="form-control" type="text" placeholder="Search for..." aria-label="Search"
                     aria-describedby="basic-addon2" />
                 <div class="input-group-append">
@@ -62,22 +123,22 @@
                             <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
                             Quản lý nhà tuyển dụng
                         </a>
+
                         <a class="nav-link" href="{{route('admin.get.list.job')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
                             Quản lý thông tin đăng tuyển
                         </a>
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fa fa-file-chart-line"></i></div>
-                            Quản lý báo cáo thống kê
+                            <div class="sb-nav-link-icon"><i class="fa fa-file-word"></i></div>
+                            Quản lý thống kê
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="">Thống kê doanh thu</a>
-                                <a class="nav-link" href="">Thống kê thành viên</a>
-                                <a class="nav-link" href="">Thống kê việc làm</a>
-                                <a class="nav-link" href="">Thống kê đánh giá</a>
-
+                                <a class="nav-link" href="{{route('admin.get.statistical.revenue')}}">Thống kê doanh thu</a>
+                                <a class="nav-link" href="{{route('admin.get.statistical.member')}}">Thống kê thành viên</a>
+                                <a class="nav-link" href="{{route('admin.get.statistical.job')}}">Thống kê việc làm</a>
+                                <a class="nav-link" href="{{route('admin.get.statistical.review')}}">Thống kê đánh giá</a>
                             </nav>
                         </div>
                     </div>
@@ -100,16 +161,7 @@
                 </div>
             </main>
             <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2020</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
+
             </footer>
         </div>
     </div>

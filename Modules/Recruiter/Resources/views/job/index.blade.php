@@ -3,18 +3,23 @@
     <link href="{{asset('/css/common.css')}}" rel="stylesheet" />
     <link href="{{asset('theme-recruiter/css/job.css')}}" rel="stylesheet" />
     <div class="pull-right message-warning" style="position: absolute; right: 22px; margin-top: -10px; z-index: 1;">
-        @if($transactionNew->ExipryDate<now())
-            <div class="alert alert-warning">
-                Warning! Tài khoản của bạn đã hết hạn, yêu cầu đăng ký để tiếp tục sử dụng.
-            </div>
-        @endif
+
+            @if($transactionNew->Status==0)
+                <div class="alert alert-warning">
+                    Warning! Tài khoản của bạn đang chờ xét duyệt, bạn có thể liên lạc để chúng tôi kiểm tra nhanh nhất.
+                </div>
+            @elseif($transactionNew->ExipryDate<now())
+                <div class="alert alert-warning">
+                    Warning! Tài khoản của bạn đã hết hiệu lực, yêu cầu đăng ký để tiếp tục sử dụng.
+                </div>
+            @endif
         @if(\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->PostResidual==0)
                 <div class="alert alert-warning">
                     Warning! Tài khoản của bạn đã hết lượt đăng bài, yêu cầu đăng ký để tiếp tục sử dụng.
                 </div>
         @endif
     </div>
-<h2 class="mt-4">Thông tin đăng tuyển <a href="{{route('recruiter.get.create.job')}}"  class="btn btn-primary @if($transactionNew->ExipryDate<now()) dis @else @endif @if(\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->PostResidual==0) dis @endif" style=" float: right;">Đăng bài</a></h2>
+<h2 class="mt-4">Thông tin đăng tuyển <a href="{{route('recruiter.get.create.job')}}"  class="btn btn-primary @if($transactionNew->ExipryDate<now()||$transactionNew->Status==0) dis @else @endif @if(\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->PostResidual==0) dis @endif" style=" float: right;">Đăng bài</a></h2>
 <ol class="breadcrumb mb-4 ">
     <li class="breadcrumb-item"><a href="{{route('recruiter.home')}}">Trang chủ</a></li>
     <li class="breadcrumb-item active">Thông tin đăng tuyển</li>
@@ -62,17 +67,39 @@
                     <label class="badge {{$job->getStatus($job->Status)['class']}}">{{$job->getStatus($job->Status)['name']}}</label>
                 </td>
                 <td style="width: 100px; text-align: center;">
-                    <a href="{{route('recruiter.get.seeker.by.job',$job->JobId)}}" class="btn btn-primary"
+                    <a href="{{route('recruiter.get.seeker.by.job',$job->JobId)}}" class="btn btn-primary @if($transactionNew->ExipryDate<now()||$transactionNew->Status==0) dis @else @endif @if(\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->PostResidual==0) dis @endif"
                        style="border-radius: 50%; background-color: #567; border: none; width: 37px;">
                         {{$job->seekerNumber}}</a>
                 </td>
                 <td style="width: 200px;">
                     <a href="{{route('recruiter.get.detail.job',$job->JobId)}}" class="btn btn-primary">Xem</a>
-                    <a href="{{route('recruiter.get.edit.job',$job->JobId)}}" class="btn btn-success @if($transactionNew->ExipryDate<now()) dis @else @endif @if(\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->PostResidual==0) dis @endif">Sửa</a>
-                    <a href="{{route('recruiter.get.delete.job',$job->JobId)}}" class="btn btn-danger @if($transactionNew->ExipryDate<now()) dis @else @endif @if(\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->PostResidual==0) dis @endif">Xóa</a>
+                    <a href="{{route('recruiter.get.edit.job',$job->JobId)}}" class="btn btn-success @if($transactionNew->ExipryDate<now()||$transactionNew->Status==0) dis @else @endif @if(\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->PostResidual==0) dis @endif">Sửa</a>
+                    <a href="" class="btn btn-delete btn-danger @if($transactionNew->ExipryDate<now()||$transactionNew->Status==0) dis @else @endif @if(\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->PostResidual==0) dis @endif">Xóa</a>
                 </td>
             </tr>
             <?php $i++ ?>
+            <div class="modal fade"  id="confirmDelete" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                    <div class="modal-content" style="height: auto; width: 500px; margin: auto">
+                        <div class="modal-header">
+                            <h6 style="font-size: 25px; text-align: center;" class="modal-title"><i style="color: #15289d; font-size: 34px;" class="fas fa-question-circle"></i>
+                                <span style="margin-bottom: 20px; margin-left: 5px; font-weight: 700">Thông báo</span></h6>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <div class="modal-body" id="md_content_message" >
+                            <div style="font-size: 17px; font-weight: 400; text-align: center" class="modal-title">Bạn có muốn xóa thông tin đăng tuyển này?</div>
+                            <div style="margin: auto; margin-top: 40px">
+                                <a href="{{route('recruiter.get.delete.job',$job->JobId)}}" style="margin-left: calc(100% - 150px); margin-right: 5px" id="close" class="btn btn-primary btn-ok" >Đồng ý</a>
+                                <button id="close" type="button" class="btn btn-danger btn-cancle" data-dismiss="modal">Hủy</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             @endforeach
             @endif
         </tbody>
@@ -83,4 +110,5 @@
         {!! $jobs->links() !!}
     </nav>
 </div>
+    <script src="{{asset('theme-recruiter/js/job.js')}}"></script>
     @endsection

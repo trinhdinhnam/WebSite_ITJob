@@ -15,8 +15,12 @@
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a href="{{route('recruiter.home')}}">
+                <img height="40px" width="100px" style="margin-left: 10px" src="{{asset('/images/logo10.png')}}"
+                     class="thumbnail logo">
+            </a>
             <a class="navbar-brand" href="{{route('recruiter.home')}}">Recruiter</a>
-            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <button style="margin-left: -120px" class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <div class="job-by-message-menu dropdown">
                 <a href="" class="message-apply" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i style="color: white; font-size: 25px" class="fa fa-globe-americas "></i>
@@ -25,7 +29,8 @@
                     @endif
                 </a>
                 <div class="dropdown-content-message dropdown-menu">
-                    <div style="font-weight: bold; margin: 0 0 5px 5px">Thông báo</div>
+                    <div style="font-weight: bold; margin: 10px 0 10px 10px;">Thông báo mới nhất</div>
+                    <div class="list-message">
                     @if(isset($messageApply))
                         @foreach($messageApply as $message)
                             <a class="dropdown-item dropdown-item-message @if($message->MessageApplyStatus==1) seen @endif @if($message->MessageApplyStatus==0) notseen @endif"
@@ -50,7 +55,7 @@
                             </a>
                         @endforeach
                     @endif
-
+                    </div>
                 </div>
             </div>
 
@@ -66,7 +71,15 @@
             <ul class="navbar-nav ml-auto ml-md-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i>@if(\Illuminate\Support\Facades\Auth::guard('recruiters')->check()){{\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->RecruiterName}}@endif</a>
+                       aria-haspopup="true" aria-expanded="false">
+
+                        @if(\Illuminate\Support\Facades\Auth::guard('recruiters')->check()){{\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->RecruiterName}}@endif
+                        <i class="recruiter-avatar">
+                            <img height="100%" width="100%"
+                                 src="{{asset( pare_url_file(\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->Avatar)) }}"
+                                 class="thumbnail">
+                        </i>
+                    </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="{{route('recruiter.get.change.password',\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->id)}}">Thay đổi mật khẩu</a>
                         <a class="dropdown-item" href="{{route('recruiter.get.change.info',\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->id)}}">Cập nhật thông tin cá nhân</a>
@@ -85,17 +98,20 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Trang chủ
                             </a>
-
                             <a class="nav-link" href="{{route('recruiter.get.list.job')}}">
-                                <div class="sb-nav-link-icon"><i class="fa fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa fa-file-word"></i></div>
                                 Quản lý thông tin đăng tuyển
                             </a>
+                            <a class="nav-link" href="{{route('recruiter.get.seeker')}}">
+                                <div class="sb-nav-link-icon"><i class="fa fa-user"></i></div>
+                                Quản lý ứng viên
+                            </a>
                             <a class="nav-link" href="{{route('recruiter.get.transaction')}}">
-                                <div class="sb-nav-link-icon"><i class="fa fa-chart-area"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fab fa-cc-amazon-pay"></i></div>
                                 Quản lý giao dịch
                             </a>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fa fa-file-word"></i></div>
                                 Quản lý thống kê
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
@@ -105,7 +121,6 @@
                                     <a class="nav-link" href="{{route('recruiter.get.statistical.seeker',\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->id)}}">Thống kê số đơn ứng tuyển</a>
                                     <a class="nav-link" href="{{route('recruiter.get.statistical.review',\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->id)}}">Thống kê số đánh giá</a>
                                     <a class="nav-link" href="{{route('recruiter.get.statistical.job',\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->id)}}">Thống kê số việc làm</a>
-
                                 </nav>
                             </div>
                         </div>

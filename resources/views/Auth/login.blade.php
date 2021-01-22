@@ -50,6 +50,14 @@
                 Đăng nhập bằng Facebook
             </a>
         </div>
+        <div class="form-group">
+            <a class="btn-login-google" type="submit" href="{{route('client.get.login.by.google','google')}}">
+                <img height="35px" width="35px"
+                     src="{{asset('images/logoGoogle2.png')}}"
+                     class="thumbnail" style="background-color: white; border-radius: 50%; margin-right: 5px">
+                Đăng nhập bằng Google
+            </a>
+        </div>
 
         <div class="text-center p-t-90">
             <a class="txt1 btn-signup" href="{{route('seeker.get.register')}}">

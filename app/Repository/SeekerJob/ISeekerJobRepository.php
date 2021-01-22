@@ -8,6 +8,8 @@ interface ISeekerJobRepository
 {
     public function getSeekerByJob($id);
 
+    public function getListSeekerByRecruiter($recruiterId,$request);
+
     public function getSeekerDetail($id);
 
     public function deleteSeekerJobById($id);
@@ -22,9 +24,9 @@ interface ISeekerJobRepository
 
     public function addCVApply($seekerJobInput,$jobId);
 
-    public function getMessageNumber();
+    public function getMessageNumber($seekerId);
 
-    public function getMessageInfo();
+    public function getMessageInfo($seekerId);
 
     public function getSeekerByRecruiter($recruiterId,$recordNumber);
 

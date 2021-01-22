@@ -32,42 +32,56 @@ class TransactionRepository extends BaseRepository implements ITransactionReposi
     {
         // TODO: Implement getListTransactionByRecruierId() method.
         return $this->model->with('accountPackage:AccountPackageId,AccountPackageName,Price,PostNumber')
-            ->where('RecruiterId',$id)->get();
+            ->where('RecruiterId',$id)
+            ->orderBy('PayDate','desc')
+            ->get();
 
     }
 
     public function getTransactionById($id)
     {
         // TODO: Implement getTransactionById() method.
-        return $this->model->find($id);
+        return $this->model
+            ->with('recruiter:id,RecruiterName,CompanyName')
+            ->with('accountPackage:AccountPackageId,AccountPackageName')
+            ->where('TransactionId','=',$id)
+            ->first();
     }
 
     public function changeStatus($id)
     {
         // TODO: Implement changeStatus() method.
-        $tran = $this->getTransactionById($id);
-        $tran->Status = $tran->Status ? 0 : 1;
-        $tran->save();
-        return true;
+        try{
+            $tran = $this->getTransactionById($id);
+            $tran->Status = 1;
+            $tran->ExipryDate = Carbon::now()->addMonth();
+            $tran->ApprovalDate = Carbon::now();
+            $tran->save();
+            return $tran;
+
+        }catch (\Exception $e){
+            return false;
+        }
+
     }
 
     public function getTransactionNew($id)
     {
         // TODO: Implement getExpiryDateCurrent() method.
         return $this->model
-            ->select('ExipryDate')
+            ->select('ExipryDate','Status')
             ->where('RecruiterId',$id)
-            ->orderBy('ExipryDate','desc')
+            ->orderBy('PayDate','desc')
             ->first();
     }
 
-    public function getRevenueTransactionMoth()
+    public function getRevenueTransactionMonth()
     {
         // TODO: Implement getRevenueTransactionMoth() method.
         $revenueTransactionMonth = $this->model
             ->leftJoin('account_packages','transactions.AccountPackageId','=','account_packages.AccountPackageId')
             ->whereYear('transactions.created_at',date('Y')-1)
-            ->select(DB::raw('sum(account_packages.Price) as totalMoney'), DB::raw('month(transactions.created_at) as month'))
+            ->select(DB::raw('sum(account_packages.Price) as totalMoney'),DB::raw('sum(transactions.RecruiterId) as totalRecruiter'), DB::raw('month(transactions.created_at) as month'))
             ->groupBy('month')
             ->get()->toArray();
         return $revenueTransactionMonth;
@@ -78,6 +92,7 @@ class TransactionRepository extends BaseRepository implements ITransactionReposi
         // TODO: Implement getRevenueAccountNumber() method.
         $revenueAccountNumber = $this->model->leftJoin('account_packages','transactions.AccountPackageId','=','account_packages.AccountPackageId')
                                             ->select('account_packages.AccountPackageId as accountId','account_packages.AccountPackageName as accountName','account_packages.Price as Price', DB::raw('count(transactions.TransactionId) as accountNumber'))
+                                            ->whereYear('transactions.created_at',date('Y')-1)
                                             ->groupBy('accountId','accountName','Price')
                                             ->orderBy('accountNumber','desc')
                                             ->get();
@@ -105,19 +120,25 @@ class TransactionRepository extends BaseRepository implements ITransactionReposi
     public function addTransaction($inputTransaction,$recruiterId,$accountId)
     {
         // TODO: Implement addTransaction() method.
-        $transaction = new $this->model;
-        $transaction->RecruiterId = $recruiterId;
-        $transaction->AccountPackageId = $accountId;
-        $transaction->PayDate = Carbon::now();
-        $transaction->ExipryDate = Carbon::now()->addMonth();
-        $transaction->Total = $inputTransaction->totalMoney;
-        $transaction->Note = $inputTransaction->note;
-        $transaction->Phone = $inputTransaction->phone;
-        $transaction->Email = $inputTransaction->email;
-        $transaction->Language = $inputTransaction->language;
-        $transaction->created_at = Carbon::now();
-        $transaction->save();
-        return $transaction->TransactionId;
+        try{
+            $transaction = new $this->model;
+            $transaction->RecruiterId = $recruiterId;
+            $transaction->AccountPackageId = $accountId;
+            $transaction->PayDate = Carbon::now();
+            $transaction->Total = $inputTransaction->totalMoney;
+            $transaction->PostNumber = $inputTransaction->postNumber;
+            $transaction->Note = $inputTransaction->note;
+            $transaction->Phone = $inputTransaction->phone;
+            $transaction->Email = $inputTransaction->email;
+            $transaction->Language = $inputTransaction->language;
+            $transaction->BankName = $inputTransaction->bank_code;
+            $transaction->created_at = Carbon::now();
+            $transaction->save();
+            return $transaction->TransactionId;
+        }catch (\Exception $e){
+            return false;
+        }
+
     }
 
     public function getTransactionByPage($recordNumber)
@@ -127,14 +148,40 @@ class TransactionRepository extends BaseRepository implements ITransactionReposi
             ->with('recruiter:id,RecruiterName,CompanyName,Position')
             ->with('accountPackage:AccountPackageId,AccountPackageName')
             ->orderBy('PayDate','desc')
+            ->orderBy('transactions.Status','asc')
             ->paginate($recordNumber);
-
     }
 
     public function getTransactionRecruiterByPage($recruiterId,$recordNumber)
     {
         // TODO: Implement getTransactionRecruiterByPage() method.
         return $this->model->with('accountPackage:AccountPackageId,AccountPackageName,Price,PostNumber')
-            ->where('RecruiterId',$recruiterId)->paginate($recordNumber);
+            ->where('RecruiterId',$recruiterId)
+            ->orderBy('PayDate','desc')
+            ->paginate($recordNumber);
+    }
+
+    public function getMessageTransaction()
+    {
+        // TODO: Implement getMessageTransaction() method.
+        return $this->model->with('recruiter:id,RecruiterName,CompanyName,Position,Avatar')
+            ->orderBy('PayDate','desc')
+            ->paginate(6);
+    }
+
+    public function changeMessageStatus($tranId)
+    {
+        // TODO: Implement changeMessageStatus() method.
+        try{
+            $transaction = $this->model
+                ->where('TransactionId',$tranId)
+                ->first();
+            $transaction->MessageStatus = 1;
+            $transaction->save();
+            return true;
+        }catch(\Exception $exception)
+        {
+            return false;
+        }
     }
 }

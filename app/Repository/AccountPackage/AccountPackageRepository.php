@@ -25,7 +25,8 @@ class AccountPackageRepository extends BaseRepository implements IAccountPackage
     {
         // TODO: Implement getListAccountPackages() method.
 
-        return $this->model->all();
+        $accountPackages =  $this->model->all();
+        return $accountPackages;
     }
 
     public function getAll(array $columns = ['*'])
@@ -36,6 +37,7 @@ class AccountPackageRepository extends BaseRepository implements IAccountPackage
     public function getAccountPackageById($accountId)
     {
         // TODO: Implement getAccountPackageById() method.
-        return $this->model->where('AccountPackageId',$accountId)->first();
+        $accountPackage = $this->model->where('AccountPackageId',$accountId)->first();
+        return $accountPackage;
     }
 }

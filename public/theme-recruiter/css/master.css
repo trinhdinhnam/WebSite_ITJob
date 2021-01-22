@@ -2,7 +2,7 @@
 .message-apply{
     float: right;
     position: absolute;
-    left: 780px;
+    left: 760px;
     top: -13px;
 }
 .fa-globe-americas{
@@ -24,9 +24,22 @@
 .dropdown-content-message.dropdown-menu{
     left: 670px;
     top: 15px;
-    width: 364px;
+    width: auto;
     height: auto;
+    padding: 0px;
+    background-color: #1d68a7;
+    color: white;
+}
+.dropdown-content-message.dropdown-menu .list-message{
+    overflow: auto;
+    height: 500px;
+    width: 364px;
     background-color: white;
+}
+
+.dropdown-content-message.dropdown-menu .list-message::-webkit-scrollbar{
+    background-color: #ddd;
+    width: 0px;
 }
 .seen{
     background-color: white;
@@ -77,4 +90,18 @@
 
 .message-info .message-date{
     font-weight: 700;
+}
+ .recruiter-avatar{
+     float: right;
+     position: absolute;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background-color: white;
+     left: -30px;
+     top: 4px;
+}
+
+ .recruiter-avatar img{
+    border-radius: 50%;
 }

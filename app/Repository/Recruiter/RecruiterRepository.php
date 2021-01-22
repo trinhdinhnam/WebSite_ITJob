@@ -33,9 +33,8 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
             ->leftJoin('jobs','recruiters.id','=','jobs.RecruiterId')
             ->leftJoin('cities','recruiters.CityId','=','cities.CityId')
             ->where('jobs.IsDelete','=',1)
-            ->where('jobs.EndDateApply','>=',now())
+            ->where('jobs.Status','=',1)
             ->groupBy('recruiters.id','CompanyLogo','CompanyName','cities.CityName');
-
             if($recordNumber){
                 $recruiters = $recruiters->paginate($recordNumber);
             }
@@ -143,7 +142,9 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
     public function changInfoRecruiter($inputRecruiter, $recruiterId)
     {
         // TODO: Implement changInfoRecruiter() method.
-        $recruiter = $this->model->find($recruiterId);
+        try{
+
+            $recruiter = $this->model->find($recruiterId);
         $recruiter->RecruiterName = $inputRecruiter->RecruiterName;
         $recruiter->Position = $inputRecruiter->Position;
         $recruiter->Email = $inputRecruiter->Email;
@@ -157,7 +158,14 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
         $recruiter->TimeWork = $inputRecruiter->TimeWork;
         $recruiter->CompanySize = $inputRecruiter->CompanySize;
         $recruiter->TypeBusiness = $inputRecruiter->TypeBusiness;
-
+        if($inputRecruiter->hasFile('Avatar'))
+        {
+            $fileAvatar = $inputRecruiter->file('Avatar');
+            $file = upload_image($fileAvatar,$fileAvatar->getClientOriginalName());
+            if(isset($file['name'])){
+                $recruiter->Avatar = $file['name'];
+            }
+        }
         if($inputRecruiter->hasFile('CompanyLogo'))
         {
             $fileCompanyLogo = $inputRecruiter->file('CompanyLogo');
@@ -167,7 +175,11 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
             }
         }
         $recruiter->save();
-        return true;
+            return true;
+        }catch(\Exception $exception)
+        {
+            return false;
+        }
     }
 
     public function changePassRecruiter($input, $recruiterId)
@@ -181,13 +193,16 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
     public function getRecruiterByPage($request,$recordNumber)
     {
         // TODO: Implement getRecruiterByPage() method.
-        $recruiter = $this->model->where('IsDelete',1);
+        $recruiter = $this->model
+            ->where('IsDelete',1);
         if($request)
         {
             if($request->RecruiterName) $recruiter->where('RecruiterName', 'like', '%'.$request->RecruiterName.'%');
             if($request->Company) $recruiter->where('id',$request->Company);
         }
-        $recruiter = $recruiter->paginate($recordNumber);
+        $recruiter = $recruiter
+            ->orderBy(DB::raw('recruiters.ScoreReview/recruiters.ReviewNumber'),'desc')
+            ->paginate($recordNumber);
         return $recruiter;
     }
 
@@ -205,5 +220,42 @@ class RecruiterRepository extends BaseRepository implements IRecruiterRepository
             $code=0;
             return $code;
         }
+    }
+
+    public function getReviewHot()
+    {
+        // TODO: Implement getReviewHot() method.
+        $review = $this->model
+                  ->leftJoin('reviews','recruiters.id','=','reviews.RecruiterId')
+                  ->orderBy('reviews.ScoreReview','desc')
+                  ->get();
+        return $review;
+    }
+
+    public function updatePostNumber($recruiterId, $postNumber)
+    {
+        // TODO: Implement updatePostNumber() method.
+        try{
+            $recruiter = $this->model->find($recruiterId);
+            $recruiter->PostResidual = $postNumber;
+            $recruiter->save();
+            return true;
+        }catch (\Exception $e){
+            return false;
+        }
+    }
+
+    public function getJobNumberByRecruiter()
+    {
+        // TODO: Implement getJobNumberByRecruiter() method.
+        $jobNumber = $this->model
+            ->select(DB::raw('count(JobId) as jobNumber','recruiters.id as RecruiterId'))
+            ->leftJoin('jobs','recruiters.id','=','jobs.RecruiterId')
+            ->where('jobs.Status','=',1)
+            ->where('jobs.IsDelete','=',1)
+            ->where('jobs.EndDateApply','>=',now())
+            ->groupBy('recruiters.id')
+            ->get();
+        return $jobNumber;
     }
 }

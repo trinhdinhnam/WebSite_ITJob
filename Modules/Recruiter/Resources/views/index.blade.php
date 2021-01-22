@@ -102,13 +102,16 @@
             <i class="fas fa-table mr-1"></i>
             Danh sách việc làm hot nhất
         </div>
-        <div class="card-body">
+        <div class="card-body row">
             @if(isset($jobHots))
                 @foreach($jobHots as $job)
-            <div class="job-item">
+            <div class="job-item col-lg-10">
                 <div class="job-name">{{$job->JobName}}</div>
                 <div class="badge badge-warning apply-number">{{$job->seekerNumber}} lượt ứng tuyển</div>
             </div>
+                    <div class="col-lg-2">
+                        <label class="badge @if(new DateTime($job->EndDateApply) > getdate()) badge-success @else badge-danger @endif">@if(new DateTime($job->EndDateApply) > getdate()) Còn hạn @else Hết hạn @endif</label>
+                    </div>
                 @endforeach
             @endif
         </div>

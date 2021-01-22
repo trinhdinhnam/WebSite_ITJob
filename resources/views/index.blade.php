@@ -33,7 +33,9 @@
             @foreach($positions as $position)
             <a href="{{route('client.get.job.by.position',$position->PositionId)}}" type="button" class=" btn btn-dark"
                 id="position">{{$position->PositionName}}</a>
-            @endforeach
+                    <div class="line"></div>
+
+                @endforeach
             @endif
         </div>
     </div>
@@ -57,6 +59,7 @@
                         <div class="job-number">
                             <a href="{{route('client.get.job.by.company', $company->RecruiterId)}}"
                                 class="btn-job-number">{{$company->jobNumber}} việc làm - </a>
+
                         </div>
                         <div class="company-address">
                             {{$company->City}}

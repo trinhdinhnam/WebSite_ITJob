@@ -8,7 +8,7 @@ body{
 
 .list-seeker .seeker-item{
     width: 100%;
-    height: 200px;
+    height: 215px;
     border-radius: 5px;
     border: 1px solid #ddd;
     padding: 15px;
@@ -16,40 +16,48 @@ body{
     margin-bottom: 20px;
     margin-left: 0px;
 }
+.job-name{
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 18px;
+    color: red;
+}
 .seeker-name{
     display: flex;
+
 }
 .fa-user-tie{
-    margin-right: 20px;
+    margin-right: 5px;
 }
 .seeker-gender{
     color: #555;
-    margin-top: 20px;
+    margin-top: 5px;
     font-size: 14px;
+    margin-left: 5px;
 }
 .fa-transgender{
-    margin-right: 12px;
+    margin-right: 15px;
     margin-left: 15px;
     font-size: 15px;
 }
 .seeker-email{
     color: #555;
     font-size: 14px;
+    margin-left: 5px;
 
 }
 .fa-envelope{
-    margin-right: 9px;
+    margin-right: 14px;
     margin-left: 15px;
 }
 .seeker-phone{
     color: #555;
-    font-size: 14px;
-
+    font-size: 14px
 
 }
 .fa-phone-volume{
     margin-right: 18px;
-    margin-left: 15px;
+    margin-left: 20px;
 }
 
 .seeker-education{
@@ -60,7 +68,7 @@ body{
 }
 .fa-graduation-cap{
     margin-right: 11px;
-    margin-left: 15px;
+    margin-left: 18px;
 }
 
 .date-apply{
@@ -72,7 +80,7 @@ body{
 
 .fa-calendar-alt{
     margin-right: 15px;
-    margin-left: 15px;
+    margin-left: 18px;
 }
 
 /* button */
@@ -85,4 +93,29 @@ body{
 
 .breadcrumb.mb-4 .active{
     color: #fff;
+}
+.form-inline{
+    margin-left: 65%;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #22f;
+
+}
+.btn-search-seeker{
+    border: none;
+    float: right;
+    height: 40px;
+    width: 40px;
+    border-radius: 5px;
+}
+.btn-search-seeker:hover{
+    background-color: #1d68a7;
+    color: white;
+}
+.input-seekername{
+    height: 40px;
+    width: 320px;
+    border: none;
+    float: right;
+    background-color: #eeeeee;
+    border-inline: none;
 }

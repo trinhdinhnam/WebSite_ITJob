@@ -15,7 +15,7 @@
                         <form method="POST" action="" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
-                                <label for="name" class="col-md-3 col-form-label text-md-right">Họ và tên</label>
+                                <label for="name" class="col-md-3 col-form-label text-md-right">Họ và tên<span style="color: red">*</span></label>
                                 <div class="col-md-8">
                                     <input id="name"  type="text" class="form-control @error('SeekerName') is-invalid @enderror" name="SeekerName" value="{{ \Illuminate\Support\Facades\Auth::guard('seekers')->user()->SeekerName }}" required autocomplete="name" autofocus>
                                     @if($errors->has('SeekerName'))
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="name" class="col-md-3 col-form-label text-md-right">Học vấn</label>
+                                <label for="name" class="col-md-3 col-form-label text-md-right">Học vấn<span style="color: red">*</span></label>
                                 <div class="col-md-8">
                                     <select name="Education" class="form-control" id="">
                                         <option value="1" @if(\Illuminate\Support\Facades\Auth::guard('seekers')->user()->Education==1) selected @endif >Tiến sĩ</option>
@@ -36,13 +36,13 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="name" class="col-md-3 col-form-label text-md-right">Ngày sinh</label>
+                                <label for="name" class="col-md-3 col-form-label text-md-right">Ngày sinh<span style="color: red">*</span></label>
                                 <div class="col-md-8">
                                     <input id="dateofbirth" name="DateOfBirth"  type="date" class="form-control" value="{{ \Illuminate\Support\Facades\Auth::guard('seekers')->user()->DateOfBirth }}" required autocomplete="name" autofocus>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="email" class="col-md-3 col-form-label text-md-right">Email</label>
+                                <label for="email" class="col-md-3 col-form-label text-md-right">Email<span style="color: red">*</span></label>
                                 <div class="col-md-8">
                                     <input id="email" type="email" class="form-control @error('Email') is-invalid @enderror" name="Email" value="{{\Illuminate\Support\Facades\Auth::guard('seekers')->user()->email }}" required autocomplete="email">
                                     @if($errors->has('Email'))
@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="phone" class="col-md-3 col-form-label text-md-right">Số điện thoại</label>
+                                <label for="phone" class="col-md-3 col-form-label text-md-right">Số điện thoại<span style="color: red">*</span></label>
                                 <div class="col-md-8 ">
                                     <input id="phone" type="text" class="form-control " name="Phone" value="{{\Illuminate\Support\Facades\Auth::guard('seekers')->user()->Phone}}" required autocomplete="phone">
 
@@ -60,7 +60,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="address" class="col-md-3 col-form-label text-md-right">Địa chỉ</label>
+                                <label for="address" class="col-md-3 col-form-label text-md-right">Địa chỉ thường trú<span style="color: red">*</span></label>
 
                                 <div class="col-md-8">
                                     <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="Address" value="{{\Illuminate\Support\Facades\Auth::guard('seekers')->user()->Address}}" required autocomplete="address">
@@ -71,9 +71,21 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="address" class="col-md-3 col-form-label text-md-right">Địa chỉ tạm trú<span style="color: red">*</span></label>
+
+                                <div class="col-md-8">
+                                    <input id="temporaryaddress" type="text" class="form-control @error('address') is-invalid @enderror" name="TemporaryAddress" value="{{\Illuminate\Support\Facades\Auth::guard('seekers')->user()->TemporaryAddress}}" required autocomplete="address">
+                                    @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="form-group row">
-                                <label for="address" class="col-md-3 col-form-label text-md-right" style="margin-top: 120px;">Avatar</label>
+                                <label for="address" class="col-md-3 col-form-label text-md-right" style="margin-top: 120px;">Avatar<span style="color: red">*</span></label>
                                 <div class="col-md-8" style="display: flex;">
                                     <input id="uploadImg" style="height: 45px; margin-top: 120px" type="file" class="form-control col-8" name="Avatar" autocomplete="avatar" onchange="ImageFileAsURL()">
                                     <img id="avatarSeeker" height="170px" width="120px" style="margin-left: 15px" src="{{asset( pare_url_file(\Illuminate\Support\Facades\Auth::guard('seekers')->user()->Avatar)) }}"

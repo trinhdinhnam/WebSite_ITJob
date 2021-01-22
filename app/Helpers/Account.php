@@ -8,8 +8,8 @@ use App\Models\AccountPackage;
 
 class Account
 {
-    public static function getListAccontId(){
-        $array = AccountPackage::select('AccountPackageId')->orderBy('AccountPackageId','asc')->get()->toArray();
+    public static function getListAccountId(){
+        $array = AccountPackage::select('AccountPackageId','AccountPackageName')->orderBy('AccountPackageId','asc')->get()->toArray();
         return $array;
     }
 

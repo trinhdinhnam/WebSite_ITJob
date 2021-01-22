@@ -5,6 +5,8 @@ namespace Modules\Admin\Http\Controllers;
 use App\Repository\CompanyImage\ICompanyImageRepository;
 use App\Repository\Job\IJobRepository;
 use App\Repository\Recruiter\IRecruiterRepository;
+use App\Repository\SeekerJob\ISeekerJobRepository;
+use App\Repository\Transaction\ITransactionRepository;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -13,13 +15,14 @@ use App\Models\Recruiter;
 use App\Models\CompanyImage;
 
 
-class AdminJobController extends Controller
+class AdminJobController extends AdminBaseController
 {
     public $recruiterRepository;
     public $jobRepository;
     public $companyImageRepository;
-    public function __construct(IRecruiterRepository $recruiterRepository,IJobRepository $jobRepository,ICompanyImageRepository $companyImageRepository)
+    public function __construct(IRecruiterRepository $recruiterRepository,IJobRepository $jobRepository,ICompanyImageRepository $companyImageRepository, ITransactionRepository $transactionRepository)
     {
+        parent::__construct($transactionRepository,$jobRepository);
         $this->recruiterRepository = $recruiterRepository;
         $this->jobRepository = $jobRepository;
         $this->companyImageRepository = $companyImageRepository;
@@ -31,6 +34,8 @@ class AdminJobController extends Controller
      */
     public function index(Request $request)
     {
+        $this->getDataShared();
+
         $recruiters = $this->recruiterRepository->getListRecruiters();
 
         $jobs = $this->jobRepository->getJobByPage($request,5);
@@ -46,6 +51,8 @@ class AdminJobController extends Controller
 
     public function action($action,$id)
     {
+        $this->getDataShared();
+
         try{
             if($action){
                 switch($action)
@@ -63,6 +70,8 @@ class AdminJobController extends Controller
     }
 
     public function getDetailJob($id){
+        $this->getDataShared();
+
         $jobDetail = $this->jobRepository->getJobById($id);
                     $imageCompanies = $this->companyImageRepository->getCompanyImageById($jobDetail->recruiter->id,'');
                     $viewData = [

@@ -33,7 +33,8 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
     public function getSeekerByJob($jobId)
     {
         // TODO: Implement getSeekerByJob() method.
-        $seekerByJob = $this->model->with('seeker:id,SeekerName,Education,Email,Phone,Gender,Avatar')
+        $seekerByJob = $this->model
+            ->with('seeker:id,SeekerName,Education,Email,Phone,Gender,Avatar')
             ->where('JobId',$jobId)
             ->where('IsDelete',1)
             ->get();
@@ -71,6 +72,7 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
         // TODO: Implement changeStatusById() method.
         $seekerJobById = $this->getSeekerJobById($id);
         $seekerJobById->Status = $seekerJobById->Status ? 0 : 1;
+        $seekerJobById->MessageStatus = 1;
         $seekerJobById->save();
     }
 
@@ -82,8 +84,23 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
             $seekerJob->SeekerId = Auth::guard('seekers')->user()->id;
             $seekerJob->JobId = $jobId;
             $seekerJob->Introduce = $seekerJobInput->Introduce;
-            if ($seekerJobInput->hasFile('CVLink')) {
-                $fileCV = $seekerJobInput->file('CVLink');
+            $seekerJob->SeekerName = $seekerJobInput->SeekerName;
+            $seekerJob->SeekerEmail = $seekerJobInput->SeekerEmail;
+            $seekerJob->SeekerPhone = $seekerJobInput->SeekerPhone;
+            $seekerJob->SeekerAddress = $seekerJobInput->SeekerAddress;
+            if($seekerJobInput->hasFile('SeekerAvatar'))
+            {
+                $fileAvatar = $seekerJobInput->file('SeekerAvatar');
+                $file = upload_image($fileAvatar,$fileAvatar->getClientOriginalName());
+                if(isset($file['name'])){
+                    $seekerJob->SeekerAvatar = $file['name'];
+                }
+            }
+            else{
+                $seekerJob->SeekerAvatar = Auth::guard('seekers')->user()->Avatar;
+            }
+            if ($seekerJobInput->hasFile('SeekerCVLink')) {
+                $fileCV = $seekerJobInput->file('SeekerCVLink');
                 $fileCVLink = upload_cv($fileCV, $fileCV->getClientOriginalName());
                 if (isset($fileCVLink['name'])) {
                     $seekerJob->CVLink = $fileCVLink['name'];
@@ -91,34 +108,31 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
             }
             $seekerJob->created_at = Carbon::now('Asia/Ho_Chi_Minh');
             $seekerJob->save();
-            return true;
+            return $seekerJob;
         }catch (\Exception $e){
             return false;
         }
 
     }
 
-    public function getMessageNumber()
+    public function getMessageNumber($seekerId)
     {
         // TODO: Implement getMessageNumber() method.
-
-        $message = $this->model;
-
-            $message = $message
-                ->where('SeekerId', 1)
+        $message = $this->model
+                ->where('SeekerId', $seekerId)
                 ->where('MessageStatus',1)
                 ->get();
         return count($message);
 
     }
 
-    public function getMessageInfo()
+    public function getMessageInfo($seekerId)
     {
         // TODO: Implement getMessageInfo() method.
         $messageInfo = $this->model->select(DB::raw('jobs.JobName as JobName, seeker_jobs.updated_at as MessageDate, seeker_jobs.JobId as JobId, recruiters.CompanyLogo as CompanyLogo, recruiters.CompanyName as CompanyName, seeker_jobs.MessageStatus as MessageStatus'))
             ->leftJoin('jobs','seeker_jobs.JobId','=','jobs.JobId')
             ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
-            ->where('SeekerId', 1)
+            ->where('SeekerId', $seekerId)
             ->where('seeker_jobs.Status',1)
             ->paginate(10);
         return $messageInfo;
@@ -150,6 +164,8 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
                               ->leftJoin('seekers','seeker_jobs.SeekerId','=','seekers.id')
                               ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
                               ->where('recruiters.id','=',$recruiterId)
+                              ->orderBy('jobs.created_at','desc')
+                              ->orderBy('seeker_jobs.Status','asc')
                               ->orderBy('seeker_jobs.created_at','desc');
 
         if($recordNumber){
@@ -182,7 +198,7 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
             ->leftJoin('jobs','seeker_jobs.JobId','=','jobs.JobId')
             ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
             ->where('recruiters.id','=',$recruiterId)
-            ->whereYear('seeker_jobs.created_at',date('Y')-1)
+            ->whereYear('seeker_jobs.created_at',date('Y'))
             ->select(DB::raw('count(seeker_jobs.SeekerJobId) as profileNumber'), 'jobs.JobId as JobId','jobs.JobName as JobName')
             ->groupBy('JobId','JobName')
             ->get()->toArray();
@@ -204,5 +220,19 @@ class SeekerJobRepository extends BaseRepository implements ISeekerJobRepository
         {
             return false;
         }
+    }
+
+    public function getListSeekerByRecruiter($recruiterId,$request)
+    {
+        // TODO: Implement getListSeekerByRecruiter() method.
+        $seekerByJob = $this->model
+            ->with('seeker:id,SeekerName,Education,Email,Phone,Gender,Avatar')
+            ->leftJoin('jobs','seeker_jobs.JobId','=','jobs.JobId')
+            ->with('job:JobId,JobName,RecruiterId');
+             if($request->seekername) $seekerByJob->where('SeekerName', 'like', '%'.$request->seekername.'%');
+            $seekerByJob = $seekerByJob->where('jobs.RecruiterId',$recruiterId)
+            ->where('jobs.IsDelete',1)
+            ->paginate(5);
+        return $seekerByJob;
     }
 }

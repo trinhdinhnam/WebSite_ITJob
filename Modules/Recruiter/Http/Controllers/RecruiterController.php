@@ -43,7 +43,7 @@ class RecruiterController extends RecruiterBaseController
     {
         $this->getDataShared();
         $listMonth = Date::getListMonthInYear();
-        $revenueTransaction = $this->transactionRepository->getRevenueTransactionMoth();
+        $revenueTransaction = $this->transactionRepository->getRevenueTransactionMonth();
 
         $revenueProfile = $this->seekerJobRepository->getRevenueProfile(Auth::guard('recruiters')->user()->id);
 
@@ -63,18 +63,17 @@ class RecruiterController extends RecruiterBaseController
         $listJob = Job::getListJobId(Auth::guard('recruiters')->user()->id);
         $revenueProfileByJob = $this->seekerJobRepository->getRevenueProfileByJob(Auth::guard('recruiters')->user()->id);
         $arrRevenueProfileByJob = [];
-        foreach ($listJob as $key1 => $account){
-            $count = [];
+        foreach ($listJob as $account){
+            $object[0] =  $account['JobName'];
+            $object[1] = 0;
+            $object[2] = false;
+            $object[3] = '';
             foreach ($revenueProfileByJob as $key2 => $revenue){
                 if($revenue['JobId'] == $account['JobId']){
-                    $count[0] = $revenue['JobName'];
-                    $count[1] = $revenue['profileNumber'];
-                    $count[2] = false;
-                    $count[3] = '';
-                    break;
+                    $object[1] = $revenue['profileNumber'];
                 }
             }
-            $arrRevenueProfileByJob[] = $count;
+            $arrRevenueProfileByJob[] = $object;
         }
 
         //Tổng số giao dịch
@@ -118,7 +117,7 @@ class RecruiterController extends RecruiterBaseController
         $viewData = [
             'seekerByJobs' => $seekerByJob
         ];
-        return view('recruiter::seeker.index',$viewData);
+        return view('recruiter::seeker.seeker-by-job',$viewData);
     }
 
 }

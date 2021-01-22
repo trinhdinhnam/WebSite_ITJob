@@ -8,6 +8,7 @@ use App\Models\Review;
 use App\Repository\BaseRepository;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReviewRepository extends BaseRepository implements IReviewRepository
 {

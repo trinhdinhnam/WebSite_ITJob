@@ -29,6 +29,7 @@ class CityRepository extends BaseRepository implements ICityRepository
     public function getListCities()
     {
         // TODO: Implement getListCities() method.
-        return $this->model->all();
+        $cities =  $this->model->all();
+        return $cities;
     }
 }

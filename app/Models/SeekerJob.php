@@ -22,13 +22,16 @@ class SeekerJob extends Model
     }
 
     protected $status = [
+        0 => [
+            'name' => 'Đang chờ',
+            'class' => 'badge-danger'
+        ],
         1 => [
             'name' => 'Đã duyệt',
             'class' => 'badge-success'
         ],
-        0 => [
-            'name' => 'Đang chờ',
-            'class' => 'badge-danger'
+        null => [
+            'name' => ''
         ]
     ];
     public function getStatus(){

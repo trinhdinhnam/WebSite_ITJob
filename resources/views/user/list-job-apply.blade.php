@@ -66,7 +66,7 @@
                             <label class="badge {{$job->getStatus($job->Status)['class']}} status-apply" >{{$job->getStatus($job->Status)['name']}}</label>
                             <embed class="cv" src="{{asset( pare_url_file($job->CVLink)) }}" width="130" height="158" type="application/pdf">
                             <br>
-                            <a href="" class="btn btn-success btn-seen-cv">Xem</a>
+                            <a href="{{route('client.get.profile.detail',$job->SeekerJobId)}}" class="btn btn-success btn-seen-cv">Xem</a>
                             <br>
                             <p class="date-apply">Ngày ứng tuyển: {{date("d/m/Y", strtotime($job->ApplyDate))}}</p>
                         </div>

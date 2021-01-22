@@ -2,23 +2,27 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\Job;
 use App\Repository\Job\IJobRepository;
 use App\Repository\Recruiter\IRecruiterRepository;
 use App\Repository\Review\IReviewRepository;
+use App\Repository\SeekerJob\ISeekerJobRepository;
 use App\Repository\Transaction\ITransactionRepository;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class AdminStatisticalController extends Controller
+class AdminStatisticalController extends AdminBaseController
 {
 
     public $transactionRepository;
     public $jobRepository;
     public $recruiterRepository;
     public $reviewRepository;
-    public function __construct(ITransactionRepository $transactionRepository,IJobRepository $jobRepository,IRecruiterRepository $recruiterRepository,IReviewRepository $reviewRepository)
+    public function __construct(ITransactionRepository $transactionRepository,IJobRepository $jobRepository,IRecruiterRepository $recruiterRepository,IReviewRepository $reviewRepository, ISeekerJobRepository $seekerJobRepository)
     {
+        parent::__construct($transactionRepository,$jobRepository);
         $this->transactionRepository = $transactionRepository;
         $this->jobRepository = $jobRepository;
         $this->recruiterRepository = $recruiterRepository;
@@ -26,6 +30,8 @@ class AdminStatisticalController extends Controller
     }
 
     public function getRevenue(){
+        $this->getDataShared();
+
         $transactions = $this->transactionRepository->getTransactionByPage(10);
         $viewData = [
             'transactions' => $transactions,
@@ -35,6 +41,8 @@ class AdminStatisticalController extends Controller
 
 
    public function getJob(){
+       $this->getDataShared();
+
        $jobs = $this->jobRepository->getJobByPage('',10);
        $viewData = [
            'jobs' => $jobs,
@@ -43,6 +51,8 @@ class AdminStatisticalController extends Controller
    }
 
    public function getMember(){
+       $this->getDataShared();
+
        $recruiters = $this->recruiterRepository->getRecruiterByPage('',10);
        $viewData = [
            'recruiters' => $recruiters,
@@ -51,6 +61,8 @@ class AdminStatisticalController extends Controller
    }
 
    public function getReview(){
+       $this->getDataShared();
+
        $reviews = $this->reviewRepository->getReviewByPage(10);
        $viewData = [
            'reviews' => $reviews,

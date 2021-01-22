@@ -37,7 +37,8 @@ Highcharts.chart('container1', {
 let listRevenue2 = $("#container2").attr("data-list-revenue");
 
 listRevenueProfileNumber = JSON.parse(listRevenue2);
-
+let d = new Date();
+let yearNow = d.getFullYear() ;
 Highcharts.chart('container2', {
 
     chart: {
@@ -45,7 +46,7 @@ Highcharts.chart('container2', {
     },
 
     title: {
-        text: 'Biểu đồ thống kê đơn ứng tuyển theo việc làm'
+        text: 'Biểu đồ thống kê đơn ứng tuyển theo việc làm năm '+yearNow
     },
 
     xAxis: {

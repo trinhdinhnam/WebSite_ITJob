@@ -30,7 +30,9 @@ class RequestChangeInfoRecruiter extends FormRequest
             'Phone'=>'required',
             'Password'=>'required',
             'CompanyName'=>'required',
-            'Address'=>'required'
+            'Address'=>'required',
+            'Avatar'=>'required'
+
         ];
     }
     public function messages()
@@ -41,7 +43,9 @@ class RequestChangeInfoRecruiter extends FormRequest
             'Phone.required'=>'Bạn phải nhập số điện thoại!',
             'Password.required'=>'Bạn phải nhập mật khẩu!',
             'CompanyName.required'=>'Bạn phải nhập tên công ty!',
-            'Address.required'=>'Bạn phải nhập địa chỉ công ty!'
+            'Address.required'=>'Bạn phải nhập địa chỉ công ty!',
+            'Avatar.required'=>'Bạn phải chọn ảnh đại diện!'
+
         ];
     }
 }

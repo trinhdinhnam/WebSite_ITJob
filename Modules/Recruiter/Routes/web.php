@@ -37,6 +37,7 @@ Route::prefix('recruiters')->middleware('CheckLoginRecruiter')->group(function()
     });
 
     Route::group(['prefix' => 'seeker'], function(){
+        Route::get('/','RecruiterSeekerController@getSeekers')->name('recruiter.get.seeker');
         Route::get('/seeker-by-job/{id}','RecruiterSeekerController@getSeekerByJob')->name('recruiter.get.seeker.by.job');
         Route::get('/seeker-by-job/detail/{id}','RecruiterSeekerController@getSeekerDetail')->name('recruiter.get.seeker.detail');
         Route::get('/{action}/{id}','RecruiterSeekerController@action')->name('recruiter.get.action.seeker.by.job');
@@ -44,6 +45,7 @@ Route::prefix('recruiters')->middleware('CheckLoginRecruiter')->group(function()
 
     Route::group(['prefix' => 'transaction'], function(){
         Route::get('/','RecruiterTransactionController@getTransactions')->name('recruiter.get.transaction');
+        Route::get('detail/{transactionId}','RecruiterTransactionController@getDetailTransaction')->name('recruiter.get.detail.transaction');
         Route::get('bill','RecruiterTransactionController@getBill')->name('recruiter.get.bill');
         Route::get('/register-account-package','RecruiterTransactionController@getRegisterAccountPackage')->name('recruiter.get.register.account.package');
         Route::get('/pay/order/accountId={accountId}','RecruiterTransactionController@getPay')->name('get.pay.order');

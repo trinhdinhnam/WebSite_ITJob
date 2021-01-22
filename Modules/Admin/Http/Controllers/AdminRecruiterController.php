@@ -5,21 +5,25 @@ namespace Modules\Admin\Http\Controllers;
 use App\Models\CompanyImage;
 use App\Models\Job;
 use App\Repository\CompanyImage\ICompanyImageRepository;
+use App\Repository\Job\IJobRepository;
 use App\Repository\Recruiter\IRecruiterRepository;
+use App\Repository\SeekerJob\ISeekerJobRepository;
+use App\Repository\Transaction\ITransactionRepository;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Recruiter;
 use App\Models\Transaction;
 
-class AdminRecruiterController extends Controller
+class AdminRecruiterController extends AdminBaseController
 {
 
 
     public $recruiterRepository;
     public $companyImageRepository;
-    public function __construct(IRecruiterRepository $recruiterRepository, ICompanyImageRepository $companyImageRepository)
+    public function __construct(IRecruiterRepository $recruiterRepository, ICompanyImageRepository $companyImageRepository, IJobRepository $jobRepository,ITransactionRepository $transactionRepository)
     {
+        parent::__construct($transactionRepository,$jobRepository);
         $this->recruiterRepository = $recruiterRepository;
         $this->companyImageRepository = $companyImageRepository;
 
@@ -31,6 +35,8 @@ class AdminRecruiterController extends Controller
      */
     public function index(Request $request)
     {
+        $this->getDataShared();
+
         $recruiters = $this->recruiterRepository->getRecruiterByPage($request,5);
         $viewData = [
              'recruiters' => $recruiters
@@ -39,6 +45,7 @@ class AdminRecruiterController extends Controller
     }
 
     public function getDetailRecruiter($id){
+        $this->getDataShared();
 
         $imageCompanies = $this->companyImageRepository->getCompanyImageById($id,'');
         $recruiterDetail = $this->recruiterRepository->getRecruiterById($id);
@@ -51,6 +58,7 @@ class AdminRecruiterController extends Controller
     
     public function action($action,$id)
     {
+        $this->getDataShared();
 
         if($action){
             switch($action)

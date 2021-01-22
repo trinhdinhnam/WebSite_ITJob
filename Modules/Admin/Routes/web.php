@@ -19,13 +19,15 @@ Route::prefix('authenticate')->group(function(){
 Route::prefix('admin-manager')->middleware('CheckLoginAdmin')->group(function (){
         Route::get('/', 'AdminController@index')->name('admin.dashboard');
         Route::get('/logout','AdminController@getLogout')->name('get.logout.admin');
+    Route::get('/message/recruiter/recruiterId={recruiterId}+tranId={transactionId}','AdminController@getRecruiterByMessage')->name('admin.get.recruiter.by.message');
+
 
     Route::group(['prefix' => 'job'], function(){
             Route::get('/','AdminJobController@index')->name('admin.get.list.job');
             Route::get('/detail/{id}','AdminJobController@getDetailJob')->name('admin.get.detail.job');
             Route::get('/{action}/{id}','AdminJobController@action')->name('admin.get.action.job');
 
-        });
+    });
         Route::group(['prefix' => 'recruiter'], function(){
             Route::get('/','AdminRecruiterController@index')->name('admin.get.list.recruiter');
             Route::get('/detail/{id}','AdminRecruiterController@getDetailRecruiter')->name('admin.get.detail.recruiter');
@@ -35,7 +37,7 @@ Route::prefix('admin-manager')->middleware('CheckLoginAdmin')->group(function ()
         Route::group(['prefix' => 'transaction'], function(){
             Route::get('/recruiter/{id}','AdminTransactionController@getTransactions')->name('admin.get.transaction');
             Route::get('/{action}/{id}','AdminTransactionController@actionTransaction')->name('admin.get.action.transaction');
-
+            Route::get('/{transactionId}','AdminTransactionController@getDetailTransaction')->name('admin.get.detail.transaction');
         });
 
     Route::group(['prefix' => 'statistical'], function(){

@@ -30,18 +30,24 @@ class CompanyImageRepository extends BaseRepository implements ICompanyImageRepo
     public function addCompanyImage($input, $recruiterId)
     {
         // TODO: Implement addCompanyImage() method.
-        if ($input->hasFile('Image')){
-            $arrayImage = $input->file('Image');
-            foreach ($arrayImage as $file){
-                $fileImage = upload_image($file,$file->getClientOriginalName());
-                $company_img = new $this->model;
-                if(isset($fileImage['name'])){
-                    $company_img->Image = $fileImage['name'];
-                    $company_img->RecruiterId = $recruiterId;
-                    $company_img->save();
+        try{
+            if ($input->hasFile('Image')){
+                $arrayImage = $input->file('Image');
+                foreach ($arrayImage as $file){
+                    $fileImage = upload_image($file,$file->getClientOriginalName());
+                    $company_img = new $this->model;
+                    if(isset($fileImage['name'])){
+                        $company_img->Image = $fileImage['name'];
+                        $company_img->RecruiterId = $recruiterId;
+                        $company_img->save();
+                    }
                 }
             }
+            return true;
+        }catch (\Exception $e){
+            return false;
         }
+
     }
 
     public function getCompanyImageById($recruiterId,$limit)
@@ -61,17 +67,22 @@ class CompanyImageRepository extends BaseRepository implements ICompanyImageRepo
     public function changeImageCompany($inputImage, $recruiterId)
     {
         // TODO: Implement changeImageCompany() method.
-        if ($inputImage->hasFile('Image')){
-            $arrayImage = $inputImage->file('Image');
-            $company_img = $this->model->where('RecruiterId',$recruiterId);
-            foreach ($arrayImage as $file){
-                $fileImage = upload_image($file,$file->getClientOriginalName());
-                if(isset($fileImage['name'])){
-                    $company_img->Image = $fileImage['name'];
-                    $company_img->save();
-                    return true;
+        try{
+            if ($inputImage->hasFile('Image')){
+                $arrayImage = $inputImage->file('Image');
+                $company_img = $this->model->where('RecruiterId',$recruiterId);
+                foreach ($arrayImage as $file){
+                    $fileImage = upload_image($file,$file->getClientOriginalName());
+                    if(isset($fileImage['name'])){
+                        $company_img->Image = $fileImage['name'];
+                        $company_img->save();
+                    }
                 }
             }
+            return true;
+        }catch (\Exception $e){
+            return false;
         }
+
     }
 }

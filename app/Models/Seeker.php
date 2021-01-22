@@ -18,19 +18,30 @@ class Seeker extends Authenticatable implements HasMedia
     protected $fillable = [
         'SeekerName', 'email', 'password','provider','provider_id'
     ];
+
     protected $gender = [
-        1 => [
-            'name' => 'Nam',
-        ],
         0 => [
             'name' => 'Nữ',
         ],
+        1 => [
+            'name' => 'Nam',
+        ],
         2 => [
             'name' => 'Giới tính khác'
+        ],
+        null => [
+            'name' => ''
         ]
     ];
 
+    public function getGender(){
+        return array_get($this->gender,$this->Gender,'[N\A]');
+    }
+
     protected $education = [
+        0 => [
+            'name' => ''
+        ],
         1 => [
             'name' => 'Tiến sĩ',
         ],
@@ -45,13 +56,10 @@ class Seeker extends Authenticatable implements HasMedia
         ],
         5 => [
             'name' => 'Tốt nghiệp phổ thông'
-        ],
+        ]
 
     ];
 
-    public function getGender(){
-        return array_get($this->gender,$this->Gender,'[N\A]');
-    }
 
     public function getEducation(){
         return array_get($this->education,$this->Education,'[N\A]');

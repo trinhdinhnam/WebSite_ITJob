@@ -72,36 +72,45 @@ class SeekerRepository extends BaseRepository implements ISeekerRepository
     {
         // TODO: Implement changeInfoSeeker() method.
 
-        $seekerEdit = $this->model->find($seekerId);
-        $seekerEdit->SeekerName = $seekerInput->SeekerName;
-        $seekerEdit->Education = $seekerInput->Education;
-        $seekerEdit->email = $seekerInput->Email;
-        $seekerEdit->Address = $seekerInput->Address;
-        $seekerEdit->Phone = $seekerInput->Phone;
-        $seekerEdit->DateOfBirth = $seekerInput->DateOfBirth;
+        try {
+            $seekerEdit = $this->model->find($seekerId);
+            $seekerEdit->SeekerName = $seekerInput->SeekerName;
+            $seekerEdit->Education = $seekerInput->Education;
+            $seekerEdit->email = $seekerInput->Email;
+            $seekerEdit->Address = $seekerInput->Address;
+            $seekerEdit->Phone = $seekerInput->Phone;
+            $seekerEdit->DateOfBirth = $seekerInput->DateOfBirth;
 
-        if(isset($seekerInput->Avatar)){
-            if($seekerInput->hasFile('Avatar'))
-            {
-                $fileAvatar = $seekerInput->file('Avatar');
-                $file = upload_image($fileAvatar,$fileAvatar->getClientOriginalName());
-                if(isset($file['name'])){
-                    $seekerEdit->Avatar = $file['name'];
+            if (isset($seekerInput->Avatar)) {
+                if ($seekerInput->hasFile('Avatar')) {
+                    $fileAvatar = $seekerInput->file('Avatar');
+                    $file = upload_image($fileAvatar, $fileAvatar->getClientOriginalName());
+                    if (isset($file['name'])) {
+                        $seekerEdit->Avatar = $file['name'];
+                    }
                 }
             }
-        }
-        $seekerEdit->save();
+            $seekerEdit->save();
 
-        return true;
+            return true;
+         }catch (\Exception $e){
+            return false;
+
+        }
     }
 
     public function changPasswordSeeker($seekerInput, $seekerId)
     {
         // TODO: Implement changPasswordSeeker() method.
+        try {
         $seekerChangePass = $this->model->find($seekerId);
         $seekerChangePass->password = bcrypt($seekerInput->pass_new);
         $seekerChangePass->save();
         return $seekerChangePass;
+        }catch (\Exception $e){
+            return false;
+
+        }
     }
 
 

@@ -150,8 +150,8 @@
     height: 75px;
     width: 75px;
     margin: auto;
-    background-color: yellow;
     margin-top: 40px;
+    background-color: white;
 }
 /* job info */
 .job-list .job-item .job-info{

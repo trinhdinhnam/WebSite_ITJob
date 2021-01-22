@@ -10,9 +10,7 @@ class Job
 {
 
     public static function getListJobId($recruiterId){
-        $array = \App\Models\Job::select('JobId','JobName')
-                 ->where('jobs.RecruiterId',$recruiterId)
-                 ->get()->toArray();
+        $array = \App\Models\Job::select('JobId','JobName')->where('jobs.RecruiterId',$recruiterId)->get()->toArray();
         return $array;
     }
 }

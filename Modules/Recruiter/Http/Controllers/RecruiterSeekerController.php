@@ -28,7 +28,7 @@ class RecruiterSeekerController extends RecruiterBaseController
         $viewData = [
             'seekerByJobs' => $seekerByJob
         ];
-        return view('recruiter::seeker.index',$viewData);
+        return view('recruiter::seeker.seeker-by-job',$viewData);
     }
 
     public function getSeekerDetail($id){
@@ -71,5 +71,16 @@ class RecruiterSeekerController extends RecruiterBaseController
             }
         }
         return redirect()->back();
+    }
+
+    public function getSeekers(Request $request){
+        $this->getDataShared();
+        $seekers = $this->seekerJobRepository->getListSeekerByRecruiter(get_data_user('recruiters','id'),$request);
+        $viewData = [
+            'seekers' => $seekers
+        ];
+
+        return view('recruiter::seeker.index',$viewData);
+
     }
 }

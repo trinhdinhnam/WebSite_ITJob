@@ -16,10 +16,9 @@ class Recruiter extends Authenticatable
     protected $primaryKey = 'id';
     protected $guarded=[''];
 
-    public function recruiterLevel(){
-        return $this->belongsTo(RecruiterLevel::class,'RecruiterLevelId');
+    public function review(){
+        return $this->hasMany(Review::class,'RecruiterId');
     }
-
     protected $active = [
         1 => [
             'name' => 'Đang hoạt động',

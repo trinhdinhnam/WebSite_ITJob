@@ -27,7 +27,9 @@ class ReviewController extends BaseController
     }
 
     public function saveReview(Request $request,$id){
-         if($request)
+        $this->share();
+
+        if($request)
            {
               $this->reviewRepository->addReview($request,$id,Auth::guard('seekers')->user()->id);
               $this->recruiterRepository->updateReview($id,$request->score_review);

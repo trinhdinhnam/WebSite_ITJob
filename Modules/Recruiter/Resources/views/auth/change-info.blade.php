@@ -44,7 +44,18 @@
                                         <span class="text-danger">{{ $errors->first('Phone') }}</span>
                                     @endif
                                 </div>
+                                <div class="form-group">
+                                    <label><h6>Ảnh đại diện<span>*</span></h6></label>
+                                    <div>
+                                        <input  type="file" name="Avatar" id="AvatarUpload" class="form-control col-9" value="" onchange="ImageFileAsURL()" style="float: left; margin-top: 30px;" />
+                                        <img id="RecruiterAvatar" height="100px" width="80px" style="margin-left: 5px; float: left; margin-top: -31px;border: 1px solid #ddd;" src="{{asset( pare_url_file(\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->Avatar)) }}"
+                                             class="RecruiterAvatar">
+                                    </div>
 
+                                    @if($errors->has('Avatar'))
+                                        <span class="text-danger">{{ $errors->first('Avatar') }}</span>
+                                    @endif
+                                </div>
 
                             </div>
                             <div class="col-md-6">
@@ -88,7 +99,7 @@
                                 <div class="form-group">
                                     <label><h6>Logo công ty<span>*</span></h6></label>
                                     <div>
-                                        <input  type="file" name="CompanyLogo" class="form-control col-9" value="" style="float: left; margin-top: 30px;" />
+                                        <input  type="file" id="CompanyLogoUpload" name="CompanyLogo" class="form-control col-9" value="" onchange="CompanylogoFileAsURL()" style="float: left; margin-top: 30px;" />
                                         <img id="CompanyLogo" height="100px" width="80px" style="margin-left: 5px; float: left; margin-top: -31px;border: 1px solid #ddd;" src="{{asset( pare_url_file(\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->CompanyLogo)) }}"
                                              class="CompanyLogoData">
                                     </div>
@@ -105,7 +116,7 @@
                                             <div class="col-4" style="margin-top: 30px">
                                                 <img height="80px" width="120px" style="margin: -31px 0 5px 3px; float: left;border: 1px solid #ddd;" src="{{asset( pare_url_file($image->Image)) }}"
                                                      class="ImageData">
-                                                <input  type="file" name="Image[]" class="form-control" value="" multiple="multiple" />
+                                                <input  placeholder="Chọn" type="file" name="Image[]" class="form-control" value="" multiple="multiple" />
                                             </div>
                                             @endforeach
                                         @endif
@@ -135,5 +146,5 @@
             </div>
         </div>
     </div>
-
+    <script src="{{asset('theme-recruiter/js/change-info.js')}}"></script>
 @endsection

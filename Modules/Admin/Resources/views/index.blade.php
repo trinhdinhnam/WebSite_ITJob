@@ -40,7 +40,7 @@
 <div class="row">
     <div class="col-xl-7">
         <figure class="highcharts-figure">
-            <div id="container1" data-list-month="{{$listMonth}}" data-list-revenue="{{$arrRevenueTransaction}}"></div>
+            <div id="container1" data-list-month="{{$listMonth}}" data-list-revenue="{{$arrRevenueTransaction}}" data-list-total-recruiter="{{$arrRevenueRecruiter}}"></div>
             <p class="highcharts-description">
             </p>
         </figure>
@@ -100,7 +100,7 @@
 
             <div class="card-header" style="font-weight: bold">
                 <i class="fas fa-table mr-1"></i>
-                Danh sách gói dịch vụ hot nhất
+                Danh sách gói dịch vụ hot nhất năm {{getdate()['year']-1}}
             </div>
             <div class="card-body">
                 @if(isset($accountPackageHot))

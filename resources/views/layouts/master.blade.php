@@ -20,8 +20,9 @@
     <div class="toolbar">
         <div class="toolbar-content">
             <a href="{{route('client.get.home.page')}}">
-                <div class="logo" style="background-image: url({{asset('/images/logowebsite.png')}})">
-                </div>
+                <img height="60px" width="80px" src="{{asset('/images/logo10.png')}}"
+                     class="thumbnail logo">
+
             </a>
             <div class="nav-item dropdown dropdown-job">
                 <a href="{{route('client.get.list.job')}}" type="button" id="navbarDropdown"
@@ -77,11 +78,14 @@
                     </div>
                 </div>
             </div>
-            <a href="" type="button" class="btn-company btn btn-dark">Công ty IT</a>
+            <div class="line1"></div>
+            <a href="{{route('client.get.list.company')}}" type="button" class="btn-company btn btn-dark">Công ty IT</a>
 
             @if(!\Illuminate\Support\Facades\Auth::guard('seekers')->check())
             <a href="{{route('seeker.get.login')}}" type="button" class="btn-login btn btn-dark">Đăng nhập</a>
-            <a href="{{route('client.confirm.recruiter')}}" type="button" class="btn-recruiter btn btn-dark">Nhà tuyển
+                <div class="line2"></div>
+
+                <a href="{{route('client.confirm.recruiter')}}" type="button" class="btn-recruiter btn btn-dark">Nhà tuyển
                 dụng</a>
             @else
             <div class="job-by-message-menu dropdown">
@@ -92,7 +96,8 @@
                     @endif
                 </a>
                 <div class="dropdown-content-message dropdown-menu">
-                
+                    <div style="font-weight: bold; margin: 10px 0 10px 10px;">Thông báo mới nhất</div>
+                    <div class="list-message">
                     @if(isset($messageInfos))
                     @foreach($messageInfos as $messageInfo)
                         <a class="dropdown-item dropdown-item-message @if($messageInfo->MessageStatus==0) seen @endif @if($messageInfo->MessageStatus==1) notseen @endif"
@@ -114,7 +119,8 @@
                             </div>
                          </a>
                      @endforeach
-                    @endif 
+                    @endif
+                    </div>
 
                 </div>
             </div>
@@ -147,7 +153,7 @@
         </div>
     </div>
     <div class="main">
-        <div class="pull-right message-flash" style="position: absolute; right: 220px; margin-top: 65px;">
+        <div class="pull-right message-flash" style="position: absolute; z-index: 1; right: 220px; margin-top: 65px;">
             @if(\Illuminate\Support\Facades\Session::has('flash-message'))
             <div class="alert alert-{!! \Illuminate\Support\Facades\Session::get('flash-level') !!}">
                 {!! \Illuminate\Support\Facades\Session::get('flash-message') !!}
@@ -231,9 +237,13 @@
         $('#myModalLogin').on('hidden.bs.modal', function(e) {
             location.reload();
         });
-
-
     })
+    $(".message-flash").ready(function(){
+        setTimeout(function(){
+            $(".message-flash").remove();
+        }, 5000 ); // 5 secs
+
+    });
     </script>
 </body>
 

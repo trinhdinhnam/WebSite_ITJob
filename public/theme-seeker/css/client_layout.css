@@ -16,13 +16,17 @@
 }
 
 .toolbar-content .logo{
-    height: 40px;
-    width: 140px;
+    height: 50px;
+    width: 145px;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     margin-right: 20px;
     position: absolute;
+    margin-top: -7px;
+}
+.toolbar-content a:hover{
+    background-color: #a1aaa5;
 }
 
 .toolbar-content .btn-alljob{
@@ -30,6 +34,16 @@
     width: 110px;
     left: 160px;
     position: absolute;
+    background-color:#222;
+    border: none;
+
+}
+.toolbar-content .line1{
+    height: 30px;
+    left: 425px;
+    position: absolute;
+    border-left: 1px solid #ddd;
+    top: 15px;
 
 }
 .toolbar-content .btn-company{
@@ -37,13 +51,28 @@
     width: 120px;
     left: 430px;
     position: absolute;
+    background-color:#222;
+    border: none;
+
 
 }
+
 .toolbar-content .btn-login{
     height: 40px;
     width: 100px;
     left: 890px;
     position: absolute;
+    background-color:#222;
+    border: none;
+
+
+}
+.toolbar-content .line2{
+    height: 30px;
+    left: 995px;
+    position: absolute;
+    border-left: 1px solid #ddd;
+    top: 15px;
 
 }
 .toolbar-content .btn-recruiter{
@@ -51,6 +80,8 @@
     width: 135px;
     left: 1000px;
     position: absolute;
+    background-color:#222;
+    border: none;
 
 
 }
@@ -256,9 +287,19 @@
 .dropdown-content-message.dropdown-menu{
     left: 892px;
     top: 40px;
-    width: 360px;
-    height: auto;
+    background-color: #1d68a7;
+    color: white;
+}
+.dropdown-content-message.dropdown-menu .list-message{
+    overflow-x: auto;
+    height: 300px;
+    width: 380px;
     background-color: white;
+    margin-bottom: 0px;
+}
+
+.dropdown-content-message.dropdown-menu .list-message::-webkit-scrollbar{
+    background-color: #ddd;
 }
 .seen{
     background-color: white;
@@ -280,8 +321,6 @@
     height: auto;
     border-bottom: 1px solid #aaa;
     font-size: 13px;
-    width: 358px;
-    margin-left: 0px;
     padding-left: 10px;
     padding-right: 5px;
     display: flex;

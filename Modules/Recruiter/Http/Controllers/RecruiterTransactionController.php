@@ -150,4 +150,13 @@ class RecruiterTransactionController extends RecruiterBaseController
         $this->getDataShared();
         return view('recruiter::transaction.complete');
     }
+
+    public function getDetailTransaction($transactionId){
+        $this->getDataShared();
+        $transactionDetail = $this->transactionRepository->getTransactionById($transactionId);
+        $viewData = [
+            'transactionDetail' => $transactionDetail,
+        ];
+        return view('recruiter::transaction.detail',$viewData);
+    }
 }

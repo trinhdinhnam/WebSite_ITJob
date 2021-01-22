@@ -21,23 +21,37 @@ class BaseController extends Controller
     //
 
 
+    public $positionRepository;
+    public $jobRepository;
+    public $cityRepository;
+    public $recruiterRepository;
+    public $seekerJobRepository;
+    public $skillRepository;
     public function __construct(ISeekerJobRepository $seekerJobRepository,IPositionRepository $positionRepository, IJobRepository $jobRepository,
                                 ICityRepository $cityRepository,IRecruiterRepository $recruiterRepository,ISkillRepository $skillRepository)
-    {
 
-        $positions = $positionRepository->getListPositions();
+    {
+        $this->positionRepository = $positionRepository;
+        $this->seekerJobRepository = $seekerJobRepository;
+        $this->jobRepository = $jobRepository;
+        $this->recruiterRepository = $recruiterRepository;
+        $this->cityRepository = $cityRepository;
+        $this->skillRepository = $skillRepository;
+        $this->share();
+    }
+    public function share(){
+        $positions = $this->positionRepository->getListPositions();
         View::share('positions',$positions);
-        $jobNumber = count($jobRepository->getAllJob());
-        View::share('jobNumber',$jobNumber);
-        $cities = $cityRepository->getListCities();
+        $cities = $this->cityRepository->getListCities();
         View::share('cities',$cities);
-        $companies = $recruiterRepository->getAllRecruiter($request='');
+        $companies = $this->recruiterRepository->getAllRecruiter($request='');
         View::share('companyList',$companies);
-        $messageNumber = $seekerJobRepository->getMessageNumber();
+        $messageNumber = $this->seekerJobRepository->getMessageNumber(get_data_user('seekers'));
         View::share('messageNumber',$messageNumber);
-        $messageInfos = $seekerJobRepository->getMessageInfo();
+        $messageInfos = $this->seekerJobRepository->getMessageInfo(get_data_user('seekers'));
         View::share('messageInfos',$messageInfos);
-        $skills = $skillRepository->getListSkills();
+        $skills = $this->skillRepository->getListSkills();
         View::share('skills',$skills);
     }
+
 }

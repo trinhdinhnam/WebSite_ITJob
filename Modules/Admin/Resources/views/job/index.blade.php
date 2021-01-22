@@ -13,11 +13,11 @@
     <form class="form-inline">
         <div class="form-group">
             <input type="text" class="input-jobname" id="jobname" name="jobname" placeholder="Nhập tên việc làm..." value="{{ \Request::get('jobname')}}">
-            <select name="recruiter" id="recruiter-name" class="select-company" style="width: 150px">
+            <select name="Company" id="recruiter-name" class="select-company" style="width: 150px">
                 <option value="" selected>TÊN CÔNG TY</option>
                 @if(isset($recruiters))
                     @foreach($recruiters as $recruiter)
-                        <option value="{{$recruiter->id}}" {{ \Request::get('recruiter') == $recruiter->id ? "selected='selected'" : ""}}>{{$recruiter->CompanyName}}</option>
+                        <option value="{{$recruiter->id}}" {{ \Request::get('Company') == $recruiter->id ? "selected='selected'" : ""}}>{{$recruiter->CompanyName}}</option>
                     @endforeach
                 @endif
             </select>
@@ -48,8 +48,13 @@
                 <td>{{$job->Skill}}</td>
                 <td>{{$job->Address}}</td>
                 <td>
+                    @if($job->Status==0)
                     <a href="{{route('admin.get.action.job',['active',$job->JobId])}}"
                         class="badge {{$job->getStatus($job->Status)['class']}}">{{$job->getStatus($job->Status)['name']}}</a>
+                    @else
+                        <label
+                           class="badge {{$job->getStatus($job->Status)['class']}}">{{$job->getStatus($job->Status)['name']}}</label>
+                    @endif
                 </td>
                 <td>
                     <a href="{{route('admin.get.detail.job',$job->JobId)}}" class="btn btn-primary">Xem</a>

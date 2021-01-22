@@ -66,6 +66,7 @@ class JobRepository extends BaseRepository implements IJobRepository
         $job->AdminID = 1;
         $job->RecruiterId = Auth::guard('recruiters')->user()->id;
         $job->save();
+        return $job;
     }
 
     public function deleteJobById($id)
@@ -104,7 +105,7 @@ class JobRepository extends BaseRepository implements IJobRepository
                 ->leftJoin('cities','jobs.CityId','=','cities.CityId')
                 ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id');
             if($request->skillname) $jobs->where('Skill', 'like', '%'.$request->skillname.'%');
-            if($request->City) $jobs->where('CityId',$request->City);
+            if($request->City) $jobs->where('jobs.CityId',$request->City);
             $jobs = $jobs->groupBy('JobId','JobName','PositionName', 'Skill','jobs.Status','Address', 'jobs.created_at','CompanyLogo','Salary','Benifit','City','Description','EndDateApply')
                          ->where('jobs.IsDelete','=',1)
                          -> orderByDesc('JobId')
@@ -132,7 +133,12 @@ class JobRepository extends BaseRepository implements IJobRepository
     {
         // TODO: Implement getAllJob() method.
 
-        return $this->model->with('recruiter:id,CompanyName')->with('position:PositionId,PositionName')->get();
+        $jobs = $this->model->with('recruiter:id,CompanyName')
+            ->with('position:PositionId,PositionName')
+            ->where('jobs.Status','=',1)
+            ->where('jobs.EndDateApply','>=',now())
+            ->get();
+        return $jobs;
     }
 
     public function getJobsByCompanyHot($recruiterId, $limit)
@@ -159,12 +165,12 @@ class JobRepository extends BaseRepository implements IJobRepository
                 'PositionName', 'Skill', 'seeker_jobs.Status as Status', 'jobs.created_at as CreatedDate',
                 'recruiters.CompanyLogo as CompanyLogo', 'recruiters.Address as Address','jobs.Benifit as Benifit',
                 'jobs.Salary as Salary','cities.CityName as City','seeker_jobs.CVLink as CVLink',
-                'seeker_jobs.created_at as ApplyDate','jobs.Description as Description')
+                'seeker_jobs.created_at as ApplyDate','jobs.Description as Description','seeker_jobs.SeekerJobId as SeekerJobId')
             ->join('seeker_jobs','jobs.JobId','=','seeker_jobs.JobId')
             ->leftJoin('positions','jobs.PositionId','=','positions.PositionId')
             ->leftJoin('cities','jobs.CityId','=','cities.CityId')
             ->leftJoin('recruiters','jobs.RecruiterId','=','recruiters.id')
-            ->groupBy('JobId','JobName','PositionName', 'Skill','Status','Address', 'jobs.created_at','CompanyLogo','Salary','Benifit','City','Description','CVLink','ApplyDate')
+            ->groupBy('JobId','JobName','PositionName', 'Skill','Status','Address', 'jobs.created_at','CompanyLogo','Salary','Benifit','City','Description','CVLink','ApplyDate','SeekerJobId')
             ->where('jobs.IsDelete','=',1)
             ->where('seeker_jobs.SeekerId',$seekerId)
             ->orderByDesc('seeker_jobs.created_at')
@@ -236,7 +242,7 @@ class JobRepository extends BaseRepository implements IJobRepository
         $jobs = $this->model->with('position:PositionId,PositionName');
         if($request){
             if($request->jobname) $jobs->where('JobName', 'like', '%'.$request->jobname.'%');
-            if($request->recruiter) $jobs->where('RecruiterId',$request->recruiter);
+            if($request->Company) $jobs->where('jobs.RecruiterId',$request->Company);
         }
         $jobs = $jobs->orderByDesc('JobId')->paginate($recordNumber);
         return $jobs;
@@ -326,6 +332,13 @@ class JobRepository extends BaseRepository implements IJobRepository
             $code=0;
             return $code;
         }
+    }
 
+    public function getMessagePostJob()
+    {
+        // TODO: Implement getMessageTransaction() method.
+        return $this->model->with('recruiter:id,RecruiterName,CompanyName,Position,Avatar')
+            ->orderBy('jobs.created_at','desc')
+            ->paginate(5);
     }
 }

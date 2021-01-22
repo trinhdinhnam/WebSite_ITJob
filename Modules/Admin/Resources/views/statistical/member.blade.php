@@ -1,5 +1,7 @@
 @extends('admin::layouts.master')
 @section('content')
+    <link href="{{asset('/css/common.css')}}" rel="stylesheet" />
+
     <h2 class="mt-4">Danh sách nhà tuyển dụng</h2>
     <ol class="breadcrumb mb-4 ">
         <li class="breadcrumb-item">Trang chủ</li>
@@ -9,7 +11,7 @@
 
     <div class="card mb-4">
         <table class="table">
-            <thead class="thead-light">
+            <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Tên nhà tuyển dụng</th>

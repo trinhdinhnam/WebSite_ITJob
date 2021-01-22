@@ -48,17 +48,21 @@
                 </div>
                 <div class="form-group">
                     <h6 for="name">Họ và tên:</h6>
-                    <input disabled required type="text" class="form-control" id="name" name="name"
+                    <input required type="text" class="form-control dis" id="name" name="name"
                            value="@if(\Illuminate\Support\Facades\Auth::guard('recruiters')->check()) {{\Illuminate\Support\Facades\Auth::guard('recruiters')->user()->RecruiterName}}  @endif">
                 </div>
                 <div class="form-group">
                     <h6 for="amount">Loại dịch vụ</h6>
-                    <input disabled class="form-control" name="service" value="{{$accountPackage->AccountPackageName}}" />
+                    <input class="form-control dis" name="service" value="{{$accountPackage->AccountPackageName}}" />
                 </div>
                 <div class="form-group">
                     <h6 for="amount">Tổng tiền:</h6>
-                    <input class="form-control" name="totalMoney" value="{{$accountPackage->Price}}" />
+                    <input class="form-control dis" name="totalMoney" value="{{$accountPackage->Price}}" />
                     <input style="display: none" class="form-control" name="id" id="accountId" value="{{$accountPackage->AccountPackageId}}" />
+                </div>
+                <div class="form-group">
+                    <h6 for="amount">Số lượt đăng tuyển:</h6>
+                    <input class="form-control dis" name="postNumber" value="{{$accountPackage->PostNumber}}" />
                 </div>
                 <div class="form-group">
                     <h6 for="email">Email:</h6>
