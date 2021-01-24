@@ -20,13 +20,17 @@ Route::prefix('admin-manager')->middleware('CheckLoginAdmin')->group(function ()
         Route::get('/', 'AdminController@index')->name('admin.dashboard');
         Route::get('/logout','AdminController@getLogout')->name('get.logout.admin');
     Route::get('/message/recruiter/recruiterId={recruiterId}+tranId={transactionId}','AdminController@getRecruiterByMessage')->name('admin.get.recruiter.by.message');
-
-
+    Route::get('/message/job/jobId={jobId}','AdminController@getJobByMessage')->name('admin.get.job.by.message');
     Route::group(['prefix' => 'job'], function(){
             Route::get('/','AdminJobController@index')->name('admin.get.list.job');
             Route::get('/detail/{id}','AdminJobController@getDetailJob')->name('admin.get.detail.job');
             Route::get('/{action}/{id}','AdminJobController@action')->name('admin.get.action.job');
 
+    });
+    Route::group(['prefix' => 'seeker'], function(){
+        Route::get('/','AdminSeekerController@getSeeker')->name('admin.get.list.seeker');
+        Route::get('/detail/{id}','AdminSeekerController@getDetailSeeker')->name('admin.get.detail.seeker');
+        Route::get('/{action}/{id}','AdminSeekerController@action')->name('admin.get.action.seeker');
     });
         Route::group(['prefix' => 'recruiter'], function(){
             Route::get('/','AdminRecruiterController@index')->name('admin.get.list.recruiter');
@@ -45,6 +49,7 @@ Route::prefix('admin-manager')->middleware('CheckLoginAdmin')->group(function ()
         Route::get('/job','AdminStatisticalController@getJob')->name('admin.get.statistical.job');
         Route::get('/member','AdminStatisticalController@getMember')->name('admin.get.statistical.member');
         Route::get('/review','AdminStatisticalController@getReview')->name('admin.get.statistical.review');
+        Route::get('/seeker','AdminStatisticalController@getSeeker')->name('admin.get.statistical.seeker');
 
     });
 

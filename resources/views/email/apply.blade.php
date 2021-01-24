@@ -1,7 +1,7 @@
 <link href="{{asset('theme-seeker/css/email-apply.css')}}" rel="stylesheet" />
 <div class="container" style="width: 70%; margin: auto;">
     <div class="header" style="width: 100%; height: 100px; padding: 20px; background-color: rgb(43, 41, 41);">
-        <img height="80px" width="240px" src="{{asset('/images/logo10.png')}}" class="thumbnail logo">
+        <h1 style="color: white">PhuongNamRecruiment</h1>
     </div>
     <div class="main" style="width: calc(100% - 8px); height: auto; padding: 20px; border: 4px solid #333;">
         <span class="title" style="font-size: 30px;font-weight: 600;color: red;margin-top: 80px;">THÔNG BÁO ỨNG TUYỂN THÀNH CÔNG</span>
@@ -24,7 +24,6 @@
                     <p>Người ứng tuyển: <span style="font-weight: 600;"> {{$seekerName}} - {{$seekerPhone}} - {{$seekerAddress}}</span> </p>
                     <p>CV ứng tuyển: <span style="font-weight: 600;"> {{$CV}} </span></p>
                     <p>Trạng thái: <span style="font-weight: 600;"> @if($Status==0) Đang chờ xác nhận @endif</span></p>
-
 
                 </div>
             </div>

@@ -7,6 +7,7 @@ use App\Models\Job;
 use App\Repository\Job\IJobRepository;
 use App\Repository\Recruiter\IRecruiterRepository;
 use App\Repository\Review\IReviewRepository;
+use App\Repository\Seeker\ISeekerRepository;
 use App\Repository\SeekerJob\ISeekerJobRepository;
 use App\Repository\Transaction\ITransactionRepository;
 use Illuminate\Contracts\Support\Renderable;
@@ -20,13 +21,15 @@ class AdminStatisticalController extends AdminBaseController
     public $jobRepository;
     public $recruiterRepository;
     public $reviewRepository;
-    public function __construct(ITransactionRepository $transactionRepository,IJobRepository $jobRepository,IRecruiterRepository $recruiterRepository,IReviewRepository $reviewRepository, ISeekerJobRepository $seekerJobRepository)
+    public $seekerRepository;
+    public function __construct(ITransactionRepository $transactionRepository,IJobRepository $jobRepository,IRecruiterRepository $recruiterRepository,IReviewRepository $reviewRepository, ISeekerRepository $seekerRepository)
     {
         parent::__construct($transactionRepository,$jobRepository);
         $this->transactionRepository = $transactionRepository;
         $this->jobRepository = $jobRepository;
         $this->recruiterRepository = $recruiterRepository;
         $this->reviewRepository = $reviewRepository;
+        $this->seekerRepository = $seekerRepository;
     }
 
     public function getRevenue(){
@@ -68,5 +71,15 @@ class AdminStatisticalController extends AdminBaseController
            'reviews' => $reviews,
        ];
        return view('admin::statistical.review',$viewData);
+   }
+
+   public function getSeeker(){
+       $this->getDataShared();
+       $seekers = $this->seekerRepository->getSeekerByPage(5);
+       $viewData = [
+           'seekers' => $seekers,
+       ];
+       return view('admin::statistical.seeker',$viewData);
+
    }
 }

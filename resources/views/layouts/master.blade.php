@@ -88,6 +88,9 @@
                 <a href="{{route('client.confirm.recruiter')}}" type="button" class="btn-recruiter btn btn-dark">Nhà tuyển
                 dụng</a>
             @else
+                @if(\Illuminate\Support\Facades\Auth::guard('seekers')->user()->Active==0)
+                    {{\Illuminate\Support\Facades\Auth::guard('seekers')->logout()}}
+                @else
             <div class="job-by-message-menu dropdown">
                 <a href="" class="message-apply" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i style="color: white;"
                         class="fa fa-globe-americas"></i>
@@ -149,6 +152,7 @@
                             style="margin-right: 8px;"></i> Đăng xuất</a>
                 </div>
             </div>
+                @endif
             @endif
         </div>
     </div>

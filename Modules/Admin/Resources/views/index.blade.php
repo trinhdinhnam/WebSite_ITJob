@@ -32,8 +32,8 @@
     <div class="col-xl-3 col-md-6 total-review" style="display: flex">
         <div class="total-review-label"><i class="fas fa-star-half-alt fa-3x"></i></div>
         <div class="total-review-content">
-            <div class="title">Đánh giá</div>
-            <div class="value">{{$totalReview}} <a href="{{route('admin.get.statistical.review')}}">(Chi tiết)</a></div>
+            <div class="title">Người tìm việc</div>
+            <div class="value">{{$totalReview}} <a href="{{route('admin.get.statistical.seeker')}}">(Chi tiết)</a></div>
         </div>
     </div>
 </div>

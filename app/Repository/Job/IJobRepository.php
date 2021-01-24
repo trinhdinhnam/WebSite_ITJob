@@ -132,7 +132,7 @@ interface IJobRepository
 
     /**
      * Hàm cập nhật thông tin đăng tuyển
-     * Created_By: TDNAM(0
+     * Created_By: TDNAM()
      * @param $inputJob: Thông tin đầu vào thông tin đăng tuyển
      * @param $jobId: Mã thông tin đăng tuyển
      * @return mixed
@@ -141,8 +141,18 @@ interface IJobRepository
 
     /**
      * Hàm lấy thông báo khi nhà tuyển dụng đăng thông tin đăng tuyển
+     * Created_By: TDNAM()
      * @return mixed
      */
     public function getMessagePostJob();
+
+    /**
+     * Hàm thay đổi trang thái đã xem của thông báo đăng thông tin đăng tuyển
+     * @param $jobId
+     * @return mixed
+     */
+    public function changeMessageStatus($jobId);
+
+
 
 }

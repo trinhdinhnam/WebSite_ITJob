@@ -43,6 +43,7 @@ class LoginController extends Controller
                 ];
                 return redirect()->route('client.get.home.page', $viewData)->with(['flash-message' => 'Success ! Đăng nhập thành công !', 'flash-level' => 'success']);
             } else {
+                Auth::guard('seekers')->logout();
                 return redirect()->route('client.get.home.page')->with(['flash-message' => 'Error ! Tài khoản của bạn đã hết hiệu lực !', 'flash-level' => 'danger']);
             }
         }

@@ -114,4 +114,37 @@ class SeekerRepository extends BaseRepository implements ISeekerRepository
     }
 
 
+    public function getAllSeeker()
+    {
+        // TODO: Implement getAllSeeker() method.
+        $seekers = $this->model->all();
+        return $seekers;
+    }
+
+    public function getSeekerByPage($recordNumber)
+    {
+        // TODO: Implement getSeekerByPage() method.
+        $seekers = $this->model::paginate($recordNumber);
+        return $seekers;
+    }
+
+    public function getSeekerById($seekerId)
+    {
+        // TODO: Implement getSeekerById() method.
+        $seeker = $this->model::find($seekerId);
+        return $seeker;
+    }
+
+    public function changeStatus($seekerId)
+    {
+        // TODO: Implement changeStatus() method.
+        try{
+            $seeker = $this->getSeekerById($seekerId);
+            $seeker->Active = $seeker->Active ? 0 : 1;
+            $seeker->save();
+            return true;
+        }catch (\Exception $e){
+            return false;
+        }
+    }
 }

@@ -23,7 +23,8 @@ class AdminController extends AdminBaseController
     public $reviewRepository;
     public $jobRepository;
     public $companyImageRepository;
-    public function __construct(ITransactionRepository $transactionRepository,IRecruiterRepository $recruiterRepository,IReviewRepository $reviewRepository,IJobRepository $jobRepository,ISeekerJobRepository $seekerJobRepository,ICompanyImageRepository $companyImageRepository)
+    public $seekerRepository;
+    public function __construct(ITransactionRepository $transactionRepository,IRecruiterRepository $recruiterRepository,IReviewRepository $reviewRepository,IJobRepository $jobRepository,ISeekerJobRepository $seekerJobRepository,ICompanyImageRepository $companyImageRepository, ISeekerRepository $seekerRepository)
     {
         parent::__construct($transactionRepository,$jobRepository);
         $this->transactionRepository = $transactionRepository;
@@ -31,6 +32,7 @@ class AdminController extends AdminBaseController
         $this->reviewRepository = $reviewRepository;
         $this->jobRepository = $jobRepository;
         $this->companyImageRepository = $companyImageRepository;
+        $this->seekerRepository = $seekerRepository;
     }
 
     public function index()
@@ -79,6 +81,9 @@ class AdminController extends AdminBaseController
         //Tổng review
         $totalReview = count($this->reviewRepository->getAllReview());
 
+        //Tổng số người tìm việc
+        $totalSeeker = count($this->seekerRepository->getAllSeeker());
+
         //Thống kê danh sách giao dịch mới nhất
         $transactions = $this->transactionRepository->getTransactionByPage(5);
 
@@ -121,6 +126,21 @@ class AdminController extends AdminBaseController
             'imageCompanies' => $imageCompanies
         ];
         return view('admin::recruiter.detail',$viewData);
+    }
+
+    public function getJobByMessage($jobId){
+        $this->getDataShared();
+        $jobDetail='';
+        $imageCompanies='';
+        if($this->jobRepository->changeMessageStatus($jobId)){
+            $jobDetail = $this->jobRepository->getJobById($jobId);
+            $imageCompanies = $this->companyImageRepository->getCompanyImageById($jobDetail->recruiter->id,'');
+        }
+        $viewData = [
+            'jobDetail' =>$jobDetail,
+            'imageCompanies' => $imageCompanies
+        ];
+        return view('admin::job.job_detail',$viewData);
     }
 
 }

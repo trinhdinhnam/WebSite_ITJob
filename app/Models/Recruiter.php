@@ -28,7 +28,7 @@ class Recruiter extends Authenticatable
             'name' => 'Dừng hoạt động',
             'class' => 'badge-danger'
         ]
-        ];
+    ];
         protected $gender = [
             1 => [
                 'name' => 'Nam',

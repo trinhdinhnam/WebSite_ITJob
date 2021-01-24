@@ -271,9 +271,15 @@ class JobRepository extends BaseRepository implements IJobRepository
     public function changeStatus($jobId)
     {
         // TODO: Implement changeStatus() method.
-        $job = $this->getJobById($jobId);
-        $job->Status = $job->Status = 1;
-        $job->save();
+        try{
+            $job = $this->getJobById($jobId);
+            $job->Status = $job->Status = 1;
+            $job->save();
+            return true;
+        }catch (\Exception $e){
+            return false;
+        }
+
     }
 
     public function createJob($inputJob)
@@ -340,5 +346,23 @@ class JobRepository extends BaseRepository implements IJobRepository
         return $this->model->with('recruiter:id,RecruiterName,CompanyName,Position,Avatar')
             ->orderBy('jobs.created_at','desc')
             ->paginate(5);
+    }
+
+    /**
+     * Hàm thay đổi trang thái đã xem của thông báo đăng thông tin đăng tuyển
+     * @param $jobId
+     * @return mixed
+     */
+    public function changeMessageStatus($jobId)
+    {
+        // TODO: Implement changeMessageStatus() method.
+        try{
+            $job = $this->getJobById($jobId);
+            $job->MessageStatus = 1;
+            $job->save();
+            return true;
+        }catch (\Exception $e){
+            return false;
+        }
     }
 }

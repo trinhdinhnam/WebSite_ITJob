@@ -16,5 +16,13 @@ interface ISeekerRepository
 
     public function changPasswordSeeker($seekerInput,$seekerId);
 
+    public function getAllSeeker();
+
+    public function getSeekerByPage($recordNumber);
+
+    public function getSeekerById($seekerId);
+
+    public function changeStatus($seekerId);
+
 
 }

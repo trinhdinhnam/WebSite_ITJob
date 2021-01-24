@@ -60,7 +60,7 @@
                     @if(isset($messagePostJob))
                         @foreach($messagePostJob as $message)
                             <a class="dropdown-item dropdown-item-message @if($message->MessageStatus==1) seen @endif @if($message->MessageStatus==0) notseen @endif"
-                               href="{{route('admin.get.recruiter.by.message',[$message->recruiter->id,$message->TransactionId])}}">
+                               href="{{route('admin.get.job.by.message',[$message->JobId])}}">
                                 <div class="message-company-logo">
                                     <img height="40px" width="40px"
                                          src="{{asset( pare_url_file($message->recruiter->Avatar)) }}"
@@ -72,7 +72,7 @@
                                         <div class="name" style="word-wrap: break-word;">{{$message->recruiter->RecruiterName}}</div> đã đăng một công việc
                                         <br>
                                     </div>
-                                    <div style="width: 200px; height: auto; font-weight: 600">{{$message->JobName}}</div>
+                                    <div style="width: 200px; height: auto; font-weight: 700">{{$message->JobName}}</div>
                                     <div
                                             class="message-date @if($message->MessageStatus==1) text-grey @endif @if($message->MessageStatus==0) text-blue @endif" @if($message->MessageStatus==1) style="font-weight: 400" @endif>
                                         {{$message->created_at}}
@@ -124,6 +124,11 @@
                             Quản lý nhà tuyển dụng
                         </a>
 
+                        <a class="nav-link" href="{{route('admin.get.list.seeker')}}">
+                            <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
+                            Quản lý người tìm việc
+                        </a>
+
                         <a class="nav-link" href="{{route('admin.get.list.job')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-file-invoice"></i></div>
                             Quản lý thông tin đăng tuyển
@@ -138,7 +143,7 @@
                                 <a class="nav-link" href="{{route('admin.get.statistical.revenue')}}">Thống kê doanh thu</a>
                                 <a class="nav-link" href="{{route('admin.get.statistical.member')}}">Thống kê thành viên</a>
                                 <a class="nav-link" href="{{route('admin.get.statistical.job')}}">Thống kê việc làm</a>
-                                <a class="nav-link" href="{{route('admin.get.statistical.review')}}">Thống kê đánh giá</a>
+                                <a class="nav-link" href="{{route('admin.get.statistical.seeker')}}">Thống kê người tìm việc</a>
                             </nav>
                         </div>
                     </div>

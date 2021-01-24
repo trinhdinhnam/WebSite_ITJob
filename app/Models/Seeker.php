@@ -34,8 +34,21 @@ class Seeker extends Authenticatable implements HasMedia
         ]
     ];
 
+    protected $active = [
+        1 => [
+            'name' => 'Đang hoạt động',
+            'class' => 'badge-success'
+        ],
+        0 => [
+            'name' => 'Dừng hoạt động',
+            'class' => 'badge-danger'
+        ]
+    ];
     public function getGender(){
         return array_get($this->gender,$this->Gender,'[N\A]');
+    }
+    public function getActive(){
+        return array_get($this->active,$this->Active,'[N\A]');
     }
 
     protected $education = [

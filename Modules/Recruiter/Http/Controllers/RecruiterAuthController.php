@@ -56,7 +56,12 @@ class RecruiterAuthController extends Controller
     public function postLogin(Request $request){
         $credentials = $request->only('email','password');
         if(Auth::guard('recruiters')->attempt($credentials)){
-            return redirect()->route('recruiter.home')->with(['flash-message'=>'Success ! Đăng nhập thành công !','flash-level'=>'success']);
+            if(Auth::guard('recruiters')->user()->Active == 1 && Auth::guard('recruiters')->user()->IsDelete==1){
+                return redirect()->route('recruiter.home')->with(['flash-message'=>'Success ! Đăng nhập thành công !','flash-level'=>'success']);
+            }else{
+                Auth::guard('recruiters')->logout();
+                return redirect()->back()->with(['flash-message'=>'Error ! Tài khoản của bạn đã hết hiệu lực !', 'flash-level' => 'danger']);
+            }
         }else{
             return redirect()->back()->with(['flash-message'=>'Error ! Đăng nhập thất bại !','flash-level'=>'danger']);
 
@@ -99,6 +104,5 @@ class RecruiterAuthController extends Controller
         Auth::guard('recruiters')->logout();
         return redirect()->route('client.get.home.page');
     }
-
 
 }
